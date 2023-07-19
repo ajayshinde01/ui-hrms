@@ -1,0 +1,82 @@
+<aside id="sidebar-wrapper">
+
+    <a class="navbar-brand" (click)="sidebarTogle()" id="sidebar-toggle"> 
+        <img src="../../../assets/avisys.png" class="img-fluid logo-img">
+        <div class="toggle-sidebar">
+        <svg
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-align-left status_toggle middle sidebar-toggle sidebartoggle"
+            _ngcontent-ng-c2633940909="">
+            <line x1="17" y1="10" x2="3" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="17" y1="18" x2="3" y2="18"></line>
+        </svg></div></a>
+        <ul class="sidebar-nav" >
+            <li class="pointer" *ngFor="let menu of sideBarList;let i=index">
+                <ng-container *ngIf="menu.submenu; else noSubmenu">
+                    <a class="text-uppercase"  (click)="onMenuWithSubmenuClick(menu);toggleResult(i)">
+                        <i [class]="menu.icon"></i> {{menu.name}}
+                        <span><i class="fa-solid" [ngClass]="menu.arrow ?  'fa-angle-down':'fa-angle-right'"></i></span>
+                    </a>
+                    <ul [hidden]="!menu.showSubmenu" class="list-unstyled ms-5 ps-1">
+                        <li *ngFor="let submenu of menu.submenu">
+                            <a (click)="collapseSideBar()" class=""  [routerLink]="submenu.routerLink">
+                                <i class="me-1" [class]="submenu.icon" style="color: #66598f;"></i> {{submenu.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </ng-container>
+                <ng-template #noSubmenu>
+                    <a (click)="collapseSideBar()" class="text-uppercase" [routerLink]="menu.routerLink">
+                        <i [class]="menu.icon"></i> {{menu.name}}
+                    </a>
+                </ng-template>
+            </li>
+        </ul>
+    <!-- <ul class="sidebar-nav">
+        <li class="pointer" *ngFor="let menu of sideBarList ;let i=index">
+            <ng-container *ngIf="menu.submenu; else noSubmenu">
+                <a class="" (click)="onMenuWithSubmenuClick(menu);toggleResult(i)">
+                    <i [class]="menu.icon"></i> {{menu.name}}
+                 <span><i class="fa-solid" [ngClass]="menu.arrow ?  'fa-angle-down':'fa-angle-right'"></i></span>
+                
+                </a>
+                <ul [hidden]="!menu.showSubmenu" class="list-unstyled ms-5 ps-1">
+                    <li *ngFor="let submenu of menu.submenu">
+                        <a (click)="collapseSideBar()" class="" [routerLink]="submenu.routerLink">
+                            <i class="me-1" [class]="submenu.icon" style="color: #66598f;"></i> {{submenu.name}}
+                        </a>
+                    </li>
+                </ul>
+            </ng-container>
+            <ng-template #noSubmenu>
+                <a (click)="collapseSideBar()" class="" [routerLink]="menu.routerLink">
+                    <i [class]="menu.icon"></i> {{menu.name}}
+                </a>
+            </ng-template>
+        </li>
+        <li class="pointer" *ngFor="let menu of masterList ;let i=index">
+            <ng-container *ngIf="menu.submenu; else noSubmenu">
+                <a class="" (click)="onMenuWithSubmenuClick1(menu);toggleResult1(i)">
+                    <span [class]="menu.icon"></span><span >{{menu.name}}</span>
+                    <span><i class="fa-solid" [ngClass]="menu.arrowMaster ?  'fa-angle-down':'fa-angle-right'"></i></span>
+                    
+                </a>
+                <ul [hidden]="!menu.showSubmenu" class="list-unstyled ms-5 ps-1">
+                    <li *ngFor="let submenu of menu.submenu">
+                        <a (click)="collapseSideBar1()" class="" [routerLink]="submenu.routerLink">
+                            <i class="me-1" [class]="submenu.icon" >{{submenu.name}}</i> 
+                        </a>
+                    </li>
+                </ul>
+            </ng-container>
+            <ng-template #noSubmenu>
+                <a (click)="collapseSideBar()" class="" [routerLink]="menu.routerLink">
+                    <i [class]="menu.icon"></i> {{menu.name}}
+                </a>
+            </ng-template>
+        </li>
+    </ul> -->
+</aside>
