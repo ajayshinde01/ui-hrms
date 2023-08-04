@@ -1,0 +1,7 @@
+<app-datatable
+  (buttonFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="gradeMetaData.content"
+  [headers]="gradesHeaders.columnsMetadata"
+  [totalRecord]="gradeMetaData.totalElements"
+></app-datatable>

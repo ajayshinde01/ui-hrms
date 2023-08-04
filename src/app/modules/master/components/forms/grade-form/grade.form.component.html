@@ -1,0 +1,220 @@
+<form [formGroup]="gradeForm">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <h2 class="card-title">GRADE INFO</h2>
+          <div class="row mm">
+            <div class="col-lg-6">
+              <mat-label class="dd">Grade Id</mat-label>
+              <div class="">
+                <mat-form-field appearance="outline" color="primary">
+                  <input
+                    matInput
+                    placeholder="GR001"
+                    formControlName="gradeId"
+                    class=""
+                  />
+                  <div
+                    *ngIf="
+                      gradeForm.controls['gradeId']?.invalid &&
+                      gradeForm.controls['gradeId']?.touched &&
+                      gradeForm.controls['gradeId']?.errors
+                    "
+                  >
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeId']?.errors?.['required']"
+                      >Please enter Grade Id</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeId'].errors?.['pattern']"
+                      >Please enter valid Grade Id
+                    </span>
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeId']?.errors?.['leadingSpace'] && !gradeForm.controls['gradeId'].errors?.['pattern'] && !gradeForm.controls['gradeId']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeId']?.errors?.['whitespace']"
+                      >Field can not be empty.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeId']?.errors?.['trailingSpace'] && !gradeForm.controls['gradeId'].errors?.['pattern'] && !gradeForm.controls['gradeId']?.errors?.['leadingSpace']"
+                      >Trailing space not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeId']?.errors?.['trailingSpace'] && !gradeForm.controls['gradeId'].errors?.['pattern'] && gradeForm.controls['gradeId']?.errors?.['leadingSpace']"
+                      >Trailing,Leading spaces not allowed.</span
+                    >
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <mat-label class="dd">Grade Name</mat-label>
+              <div class="">
+                <mat-form-field appearance="outline" color="primary">
+                  <input
+                    matInput
+                    placeholder="Grade-Name"
+                    class=""
+                    formControlName="gradeName"
+                  />
+                  <div
+                    *ngIf="
+                      gradeForm.controls['gradeName']?.invalid &&
+                      gradeForm.controls['gradeName']?.touched &&
+                      gradeForm.controls['gradeName']?.errors
+                    "
+                  >
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeName']?.errors?.['required']"
+                      >Please enter Grade Name</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeName'].errors?.['pattern']"
+                      >Please enter valid Grade Name
+                    </span>
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeName']?.errors?.['leadingSpace'] && !gradeForm.controls['gradeName'].errors?.['pattern'] && !gradeForm.controls['gradeName']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeName']?.errors?.['whitespace']"
+                      >Field can not be empty.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeName']?.errors?.['trailingSpace'] && !gradeForm.controls['gradeName'].errors?.['pattern'] && !gradeForm.controls['gradeName']?.errors?.['leadingSpace']"
+                      >Trailing space not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['gradeName']?.errors?.['trailingSpace'] && !gradeForm.controls['gradeName'].errors?.['pattern'] && gradeForm.controls['gradeName']?.errors?.['leadingSpace']"
+                      >Trailing,Leading spaces not allowed.</span
+                    >
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <mat-label class="dd">Grade Type</mat-label>
+              <div class="">
+                <select
+                  id="selectGrade"
+                  formControlName="gradeType"
+                  class="select-tag"
+                >
+                  <option value="">Please select Grade</option>
+                  <option value="grade1">GRADE1</option>
+                  <option value="grade2">GRADE2</option>
+                  <option value="grade3">GRADE3</option>
+                </select>
+                <div
+                  *ngIf="
+                    gradeForm.controls['gradeType']?.invalid &&
+                    gradeForm.controls['gradeType']?.touched &&
+                    gradeForm.controls['gradeType']?.errors
+                  "
+                >
+                  <span
+                    class="validate-text"
+                    *ngIf="gradeForm.controls['gradeType']?.errors?.['required']"
+                    >Please Select Grade
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <mat-label class="dd">Organization Code</mat-label>
+              <div class="">
+                <mat-form-field appearance="outline" color="primary">
+                  <input
+                    matInput
+                    placeholder="IND_KOL"
+                    formControlName="orgCode"
+                  />
+                  <div
+                    *ngIf="
+                      gradeForm.controls['orgCode']?.invalid &&
+                      gradeForm.controls['orgCode']?.touched &&
+                      gradeForm.controls['orgCode']?.errors
+                    "
+                  >
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['orgCode']?.errors?.['required']"
+                      >Please enter Organization</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['orgCode'].errors?.['pattern']"
+                      >Please enter valid Organization Code
+                    </span>
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['orgCode']?.errors?.['leadingSpace'] && !gradeForm.controls['orgCode'].errors?.['pattern'] && !gradeForm.controls['orgCode']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['orgCode']?.errors?.['whitespace']"
+                      >Field can not be empty.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['orgCode']?.errors?.['trailingSpace'] && !gradeForm.controls['orgCode'].errors?.['pattern'] && !gradeForm.controls['orgCode']?.errors?.['leadingSpace']"
+                      >Trailing space not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="gradeForm.controls['orgCode']?.errors?.['trailingSpace'] && !gradeForm.controls['orgCode'].errors?.['pattern'] && gradeForm.controls['orgCode']?.errors?.['leadingSpace']"
+                      >Trailing,Leading spaces not allowed.</span
+                    >
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div _ngcontent-ng-c812429062="" class="form-footer">
+            <button
+              _ngcontent-ng-c812429062=""
+              class="profile-save-btn"
+              (click)="onSumbit()"
+            >
+              {{ actionLabel }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

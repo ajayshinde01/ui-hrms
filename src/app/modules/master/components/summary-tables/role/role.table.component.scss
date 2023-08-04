@@ -1,0 +1,306 @@
+.card {
+  // margin-bottom: 30px;
+  border: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #0815420d;
+}
+.card .card-header {
+  border-bottom: none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: relative;
+  background-color: transparent;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #534686;
+}
+.dd {
+  display: inline-block;
+  color: black;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  // border:1px solid red !important;
+  width: 256px !important;
+  height: 35px !important;
+  font-size: 14px;
+  border-radius: 8px;
+}
+::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mat-mdc-form-field-infix {
+  padding-top: 6px !important;
+}
+// ::ng-deep.mdc-text-field--outlined {
+// border:1px solid red;
+// }
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//     border-radius: 50% !important;
+//     border: none;
+//     border-left: none;
+// }
+// ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+//     color: red;
+//   }
+// ::ng-deep form-field-appearance-outline .mat-form-field-outline {
+//     color: red !important;
+//   }/* Font color */::ng-deep input.mat-input-element {
+//     color: red !important;
+//   }
+
+::ng-deep.mat-mdc-option {
+  min-height: 30px !important;
+}
+::ng-deep.mat-mdc-select-value {
+  font-size: 14px;
+  font-weight: 400;
+}
+/* Border */
+// ::ng-deep.mat-form-field-appearance-outline.mat-form-field-outline {
+//     border:1px solid green!important;
+// }
+// ::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--leading,
+// ::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--notch,
+// ::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--trailing
+// {
+//     border-color:red;
+// }
+// ::ng-deep.mat-form-field.mat-focused .mat-form-field-ripple{
+//     background-color: red !important;
+// }
+::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
+  width: 40px;
+  height: 40px;
+  /* padding: 12px; */
+  top: -13px;
+}
+::ng-deep.mat-mdc-icon-button {
+  --mat-mdc-button-persistent-ripple-color: #fff !important;
+  --mat-mdc-button-ripple-color: rgba(0, 0, 0, 0.1) !important;
+}
+.card-title {
+  color: #534686;
+}
+.right-img {
+  height: 100px;
+  width: 100px;
+}
+.camera-image {
+  position: absolute;
+  top: 112px;
+  right: 48px;
+  font-size: 25px;
+  cursor: pointer;
+  color: #1e2120;
+}
+.card-img {
+  border: 1px solid #5346861a;
+  padding-top: 20px;
+}
+.card-title {
+  font-weight: 550;
+}
+.profile-img {
+  height: 70px;
+  width: 70px;
+}
+.profile-section {
+  flex-direction: column;
+  border-bottom: 1px solid rgba(83, 70, 134, 0.1019607843);
+  margin-bottom: 15px;
+}
+.profile-name {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile-desg {
+  font-size: 12px;
+}
+.form-control,
+.form-select {
+  border-color: #5346861a;
+  font-size: 14px;
+  padding: 12px 15px;
+  border-radius: 8px;
+}
+.h4,
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.profile-save-btn {
+  padding: 0.6rem 1.75rem;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #534686;
+  border: 1px solid #534686;
+  color: white;
+}
+// ::ng-deep.area{
+// height:80px;
+// }
+// ::ng-deep.profile-email-box{
+// width:180px;
+// }
+.mm {
+  margin-top: -6px;
+}
+::ng-deep.mat-form-field-outline {
+  color: red !important;
+}
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+th {
+  text-align: left;
+}
+// .content {
+//     background-color: #f9f9f9;
+//     border-radius: 30px;
+
+//     padding: 20px;
+// }
+
+.form-control.search {
+  width: 220px;
+  height: 35px;
+  margin-left: 10px;
+  // background-color: #f9f9f9;
+  color: #cbbdc2;
+  border: 1px solid #f9f9f9;
+  box-shadow: none !important;
+  margin-right: 20px;
+}
+label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cardtoolbar {
+  padding: 4px;
+}
+
+.card-header1 {
+  background-color: #fff !important;
+  border-radius: 10px;
+}
+
+.svg-icon {
+  color: #534686;
+}
+
+.btn.btn-light-primary {
+  color: #534686;
+  background-color: #f1faff;
+  box-shadow: none !important;
+}
+
+.pagination-box {
+  background-color: #534686;
+  color: white !important;
+  border-radius: 5px;
+  margin-right: 10px;
+  height: 30px;
+  font-size: 13px !important;
+  font-weight: 400;
+  // padding: 2px 7px 3px;
+  //-webkit-appearance: menulist;
+}
+
+.icon-class {
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 32px;
+  background-color: #534686;
+  color: white;
+  border-radius: 5px;
+}
+
+select {
+  color: #534686 !important;
+  box-shadow: none !important;
+}
+
+/* select:hover{
+color:white !important;
+background-color: #00a3ff;  
+} */
+/* option:hover{
+  color:white !important;
+background-color: #00a3ff; 
+} */
+// .heading {
+//     margin-left: 10px;
+//     padding: 10px;
+
+// }
+.thead-name {
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  color: #2b2b2b;
+  font-weight: 500;
+}
+.data-cellname {
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  color: #2b2b2b;
+  font-weight: 400;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #534686;
+  border-color: #534686;
+  height: 35px;
+}
+.pagination a {
+  border-radius: 5px !important;
+  border: 1px solid white !important;
+  color: black;
+}
+.search-icon {
+  position: relative;
+}
+.search-box {
+  background-color: #eff3f9;
+  height: 50px;
+  width: 350px;
+  padding: 5px 20px;
+  border-radius: 8px;
+  border: 1px solid #eff3f9;
+}
+.search-bar {
+  position: absolute;
+  left: 307px;
+  top: 14px;
+  font-size: 19px;
+}
+.table > :not(caption) > * > * {
+  padding: 5px;
+}
+.form-check {
+  margin-bottom: 0px;
+}
+.action-btn {
+  border: none;
+  border-color: white;
+}
