@@ -4,7 +4,7 @@ import { SidebarService } from '../../services/sidebar.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
   isHide: boolean = false;
@@ -81,6 +81,24 @@ export class SidebarComponent {
             routerLink: ['/master/designation'],
             arrowMaster: false,
           },
+          {
+                name: "Department",
+                icon: "fa-solid fa-ellipsis",
+                routerLink: ['/master/department-table'],
+                arrowMaster: false
+              },
+              {
+                name: "Division",
+                icon: "fa-solid fa-ellipsis",
+                routerLink: ['/master/division-table'],
+                arrowMaster: false
+              },
+              {
+                name: "Employee Type",
+                icon: "fa-solid fa-ellipsis",
+                routerLink: ['/master/employee-table'],
+                arrowMaster: false
+              }
         ],
       },
     ];
@@ -92,17 +110,17 @@ export class SidebarComponent {
 
   toggleResult1(i: any) {
     this.masterList[i].arrowMaster = !this.masterList[i].arrowMaster;
-  }
 
+  }
   // FIXME: Bad code ported from header.component.ts.
   protected collapseSideBar(): void {
     const $wrapper = document.querySelector('#wrapper')!;
     //   $wrapper.classList.add('toggled');
     this.sidebarService.toggle.next($wrapper.classList.toString());
   }
-  protected collapseSideBar1(): void {
-    const $wrapper = document.querySelector('#wrapper')!;
-    // $wrapper.classList.add('toggled');
-    this.sidebarService.toggle.next($wrapper.classList.toString());
-  }
+  // protected collapseSideBar1(): void {
+  //   const $wrapper = document.querySelector('#wrapper')!;
+  //   // $wrapper.classList.add('toggled');
+  //   this.sidebarService.toggle.next($wrapper.classList.toString());
+  // }
 }

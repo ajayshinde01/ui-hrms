@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { RoleService } from '../../../services/role.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({

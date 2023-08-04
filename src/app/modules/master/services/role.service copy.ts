@@ -13,13 +13,13 @@ export class RoleService {
 
   getRoles(): Observable<Array<Role>> {
     return this.http.get<Array<Role>>(
-      'http://localhost:8080/employee/role/all-roles'
+      'http://192.168.1.16:7000/employee/role/all-roles'
     );
   }
 
   getRolesHeaders(): Observable<{ columnsMetadata: Array<ColumnsMetadata> }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8080/data-table-metadata/role'
+      'http://192.168.1.16:7000/data-table-metadata/role'
     );
   }
 
@@ -27,21 +27,21 @@ export class RoleService {
     console.log('in create service', data);
 
     return this.http.post<Array<Role>>(
-      'http://localhost:8080/employee/role/create',
+      'http://192.168.1.16:7000/employee/role/create',
       data
     );
   }
 
   updateRole(data: Role): Observable<Array<Role>> {
     return this.http.put<Array<Role>>(
-      'http://localhost:8080/employee/role/update',
+      'http://192.168.1.16:7000/employee/role/update',
       data
     );
   }
 
   deleteRole(roleId: string): Observable<string> {
     return this.http.delete<string>(
-      'http://localhost:8080/employee/role/delete/' + roleId
+      'http://192.168.1.16:7000/employee/role/delete/' + roleId
     );
   }
 }

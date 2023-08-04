@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
@@ -11,6 +10,12 @@ import {
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { Pagination } from 'src/app/modules/master/models/pageable';
 import { RoleService } from 'src/app/modules/master/services/role.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
+// import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { debounceTime } from 'rxjs';
+import { Role } from 'src/app/modules/master/models/role.model';
+import { EmployeeTypeService } from 'src/app/modules/master/services/employee-type.service';
 
 @Component({
   selector: 'app-datatable',
@@ -38,7 +43,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.searchFunction();
   }
-
   getValue(rowObj: any, mappedBy: String) {
     const myArray = mappedBy.split('.');
 
@@ -66,7 +70,6 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   buttonEvent(event: string) {
     let data = { event: event, data: {} };
-
     switch (event) {
       case 'add':
         return this.buttonFunction.emit(data);

@@ -7,6 +7,14 @@ import { RoleFormComponent } from './components/forms/role-form/role.form.compon
 import { GradeComponent } from './components/summary-tables/grade/grade.component';
 import { DesignationFormComponent } from './components/forms/designation-form/designation.form.component';
 import { GradeFormComponent } from './components/forms/grade-form/grade.form.component';
+import { EmployeeTypeComponent } from './components/forms/employee-type-form/employee-type.component';
+import { EmployeeTypeTableComponent } from './components/summary-tables/employee-type-table/employee-type-table.component';
+import { DivisionComponent } from './components/forms/division-form/division.component';
+import { DivisionTableComponent } from './components/summary-tables/division-table/division-table.component';
+import { DepartmentComponent } from './components/forms/department-form/department.component';
+import { DepartmentTableComponent } from './components/summary-tables/department-table/department-table.component';
+
+
 
 const routes: Routes = [
   {
@@ -18,6 +26,12 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [{ path: 'role', component: RoleComponent }],
+
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'employee-type', component: EmployeeTypeComponent }],
   },
   {
     path: '',
@@ -27,12 +41,27 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    children: [{ path: 'employee-table', component: EmployeeTypeTableComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
     children: [{ path: 'roleForm', component: RoleFormComponent }],
   },
   {
     path: '',
     component: LayoutComponent,
+    children: [{ path: 'division', component: DivisionComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
     children: [{ path: 'grade', component: GradeComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'division-table', component: DivisionTableComponent }],
   },
   {
     path: '',
@@ -44,8 +73,21 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+
+    children: [{ path: 'department', component: DepartmentComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    
     children: [{ path: 'gradeForm', component: GradeFormComponent }],
   },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'department-table', component: DepartmentTableComponent }],
+  },
+
 ];
 
 @NgModule({

@@ -16,7 +16,7 @@ export class DesignationService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8080/data-table-metadata/designation'
+      'http://192.168.1.16:7000/employee/data-table-metadata/designation'
     );
   }
 
@@ -24,28 +24,28 @@ export class DesignationService {
     console.log('in create service', data);
 
     return this.http.post<Array<Designation>>(
-      'http://localhost:8080/employee/designation/create',
+      'http://192.168.1.16:7000/employee/designation/create',
       data
     );
   }
 
   searchDesignationById(id: string): Observable<Designation> {
     return this.http.get<Designation>(
-      'http://localhost:8080/employee/designation/' + id
+      'http://192.168.1.16:7000/employee/designation/' + id
     );
   }
 
   updateDesignation(data: Designation): Observable<Array<Designation>> {
     console.log(data);
     return this.http.put<Array<Designation>>(
-      'http://localhost:8080/employee/designation/update',
+      'http://192.168.1.16:7000/employee/designation/update',
       data
     );
   }
 
   deleteDesignation(designationId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://localhost:8080/employee/designation/' + designationId
+      'http://192.168.1.16:7000/employee/designation/' + designationId
     );
   }
 
@@ -55,7 +55,7 @@ export class DesignationService {
     return this.http.get<{
       content: Array<Designation>;
       totalElements: number;
-    }>('http://localhost:8080/employee/designation/search', {
+    }>('http://192.168.1.16:7000/employee/designation/search', {
       params: params,
     });
   }

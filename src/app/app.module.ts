@@ -9,12 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { ToastrModule } from 'ngx-toastr';
-import { config } from 'rxjs';
 import { PopupComponent } from './modules/master/components/helper/popup/popup.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { config } from 'rxjs';	
+import { ToastrModule } from 'ngx-toastr';
+
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({

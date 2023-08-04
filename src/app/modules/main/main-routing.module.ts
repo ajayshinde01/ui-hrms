@@ -4,13 +4,14 @@ import { TestComponent } from './components/test/test.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { LayoutComponent } from '../core/components/layout/layout.component';
 
+
+
 const routes: Routes = [
   {
     path: "",
     redirectTo: "test",
     pathMatch: "full"
-  },
-  {path: "",component: LayoutComponent,
+  },{path: "",component: LayoutComponent,
   children: [
   {path:"test",component:TestComponent},
   {path:"demo",component:DemoComponent}

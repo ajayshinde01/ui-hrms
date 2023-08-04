@@ -10,20 +10,18 @@ import { Data } from '@angular/router';
 @Injectable()
 export class RoleService {
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
-  private dataSubject = new BehaviorSubject<string>('');
-  public data$ = this.dataSubject.asObservable();
 
   ngOnInit(): void {}
 
   getRoles(): Observable<Array<Role>> {
     return this.http.get<Array<Role>>(
-      'http://localhost:8080/employee/role/all-roles'
+      'http://192.168.1.16:7000/employee/role/all-roles'
     );
   }
 
   getRolesHeaders(): Observable<{ columnsMetadata: Array<ColumnsMetadata> }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8080/data-table-metadata/role'
+      'http://192.168.1.16:7000/employee/data-table-metadata/role'
     );
   }
 
@@ -31,28 +29,28 @@ export class RoleService {
     console.log('in create service', data);
 
     return this.http.post<Array<Role>>(
-      'http://localhost:8080/employee/role/create',
+      'http://192.168.1.16:7000/employee/role/create',
       data
     );
   }
 
   searchRoleById(id: string): Observable<Role> {
     return this.http.get<Role>(
-      'http://localhost:8080/employee/role/search/' + id
+      'http://192.168.1.16:7000/employee/role/search/' + id
     );
   }
 
   updateRole(data: Role): Observable<Array<Role>> {
     console.log(data);
     return this.http.put<Array<Role>>(
-      'http://localhost:8080/employee/role/update',
+      'http://192.168.1.16:7000/employee/role/update',
       data
     );
   }
 
   deleteRole(roleId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://localhost:8080/employee/role/delete/' + roleId
+      'http://192.168.1.16:7000/employee/role/delete/' + roleId
     );
   }
 
@@ -60,7 +58,7 @@ export class RoleService {
     params: HttpParams
   ): Observable<{ content: Array<Role>; totalElements: number }> {
     return this.http.get<{ content: Array<Role>; totalElements: number }>(
-      'http://localhost:8080/employee/role/search',
+      'http://192.168.1.16:7000/employee/role/search',
       {
         params: params,
       }
@@ -73,10 +71,5 @@ export class RoleService {
 
   warn(message: string) {
     this.toastrService.warning(message);
-  }
-
-  sendData(data: string) {
-    console.log(data);
-    this.dataSubject.next(data);
   }
 }
