@@ -1,0 +1,7 @@
+<app-datatable  
+(paginationParams)="searchFunction($event)"
+ (buttonFunction)="action($event)"
+[dataSource]="employeeTypeMetaData.content"
+[headers]="employeeTypeHeaders.columnsMetadata"
+[totalRecord]="employeeTypeMetaData.totalElements">
+</app-datatable>

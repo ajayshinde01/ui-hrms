@@ -1,0 +1,232 @@
+body{
+
+}
+#navbar-wrapper .navbar{
+    padding: 3px 30px;  
+}
+input::placeholder {
+    color: #898989;
+    font-size: 14px;
+    font-weight: 400;
+    
+    // opacity: 1;
+  }
+ul.dropdown-menu.show{
+    left:-109px;
+    width:156px;
+    padding-left:0px !important;
+    font-size: 13px;
+}
+.bars-icon{
+    margin-top:11px;
+
+}
+.search-icon{
+    position: relative;
+
+}
+.search-bar{
+    position: absolute;
+    left: 307px;
+    top: 8px;
+    font-size: 19px;
+}
+
+.search-box{
+    background-color: #eff3f9;
+    height:35px;
+    width:350px;
+    padding:5px 20px;
+    border-radius: 8px;
+    border:1px solid #eff3f9;
+
+}
+.form-control:focus {
+    box-shadow: none;
+}
+// dropdown-css
+.img-flg{
+    height:21px;
+    width:21px;
+}
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: -39px;
+  top: 44px;
+}
+.dropdown-content1 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: -39px;
+    top: 44px;
+    // padding:20px;
+  }
+  
+  .dropdown-content1 a {
+    color:black;
+      padding: 8px 16px;
+      text-decoration: none;
+      display: block;
+    //   padding:20px;
+    }
+.dropdown-content a {
+color:black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover{
+    color:#fff;
+}
+.dropdown-content1 a:hover{
+    color:#fff;
+}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content1 {display: block;}
+span.language{
+    display: inline-flex;
+    margin-left: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: black;
+    margin-right:5px;
+}
+
+// .language1{
+//     display: inline-flex;
+//     margin-left: 8px;
+//     font-weight: 500;
+// }
+
+// .language1:hover{
+//     display: inline-flex;
+//     margin-left: 8px;
+//     font-weight: 500;
+//     color:white;
+// }
+.map{display: inline-flex;
+margin-left: 8px;
+font-weight: 500;
+font-size: 15px;
+}
+.map:hover{
+    color:white;
+   
+}
+.more-lang{
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    top: 10px;
+    right:40px;
+    box-shadow: 0 0 20px #59667a1a;
+}
+ .more-lang:before {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid white;
+    content: "";
+    top: 37px;
+    position: absolute;
+    right: -18px;
+  
+    z-index: 2;
+}
+.us-name{
+    padding: 10px 15px;
+    color:black;
+    border-bottom: 1px solid #eaeaea;
+}
+.us-name:hover{
+    color:white;
+    padding: 10px 15px;
+    background-color: #534686;
+    border-bottom: 1px solid #eaeaea;
+}
+.logout-icon{
+    width: 35px;
+    height: 35px;
+    position: relative;
+    background-color: #eff3f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.black-theme{
+    cursor: pointer;
+    width: 20px;
+    text-align: center;
+}
+.badge{
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    padding: 2px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: work-Sans, sans-serif;
+    color: white;
+    z-index: 2;
+    background-color: #534686;
+
+}
+
+.delivery-content{
+    font-size: 13px;
+}
+.pull-right{
+    font-size: 15px;
+    color: #1b315599;
+}
+.notification-submenu{
+padding: 10px 20px 0px 20px;
+display: flex;
+height:35px;
+justify-content: space-between;
+border-top:1px solid rgba(83,70,134,.1019607843);
+}
+.circle-icon{
+    margin-top:3px;
+    font-size: 12px;
+}
+.h3, h3 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    color: #534686;
+}
+.notification-icon{
+    opacity: .05;
+    font-size: 40px;
+    margin-top:-12px;
+}
+.noti-section{
+    padding:20px 20px 0px 20px;
+}
+.btn-primary {
+    background-color: #534686!important;
+    border-color: #534686!important;
+    color:white;
+    margin: 10px 40px;
+    height: 40px;
+}
