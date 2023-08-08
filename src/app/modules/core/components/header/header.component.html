@@ -9,6 +9,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div
         class="collapse navbar-collapse justify-content-between"
         id="navbarCollapse"
@@ -19,7 +20,9 @@
             type="search."
             placeholder="Search.."
             aria-label="Search"
+            [disabled]="true"
           />
+
           <div class="search-bar">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -35,42 +38,49 @@
               _ngcontent-ng-c1348964962=""
             >
               <circle cx="11" cy="11" r="8"></circle>
+
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </div>
         </form>
+
         <div class="navbar-nav">
-          <div class="dropdown">
-            <img
-              src="../../../assets/american-flag-background_23-2147815553.avif"
+          <div class="#">
+            <!-- <img
+              src="assets/american-flag-background_23-2147815553.avif"
               class="img-flg"
-            />
-            <span class="language">EN</span>
+            /> -->
+            <div>
+              <span class="language">EN</span>
+            </div>
             <div class="more-lang">
               <div class="dropdown-content">
-                <div class="d-flex us-name">
-                  <img
-                    src="../../../assets/american-flag-background_23-2147815553.avif"
-                    class="img-flg"
-                  />
+                <div class="d-flex us-name disabled">
+                  <img src="#" class="img-flg" />
+
                   <div class="map d-flex">
                     <div class="language1">English</div>
+
                     <div class="ss" style="margin-left: 5px; color: #999">
                       (US)
                     </div>
                   </div>
                 </div>
+
                 <div class="d-flex us-name">
                   <img src="../../../assets/French.jpg" class="img-flg" />
+
                   <div class="d-flex map">
                     <div class="language1">Français</div>
                   </div>
                 </div>
+
                 <div class="d-flex us-name">
                   <img
                     src="../../../assets/india-flag-icon.jpg"
                     class="img-flg"
                   />
+
                   <div class="d-flex map">
                     <div class="language1">Hindi</div>
                   </div>
@@ -78,87 +88,127 @@
               </div>
             </div>
           </div>
-          <a href="#" class="nav-item nav-link active">
-            <i class="far fa-moon logout-icon"></i>
+
+          <a href="#" class="nav-item nav-link disabled">
+            <i class="far fa-moon logout-icon disabled"></i>
           </a>
-          <div class="dropdown">
-            <a href="#" class="nav-item nav-link active">
-              <span class="badge rounded-pill badge-primary">4 </span>
-              <i class="fa-regular fa-bell logout-icon"></i>
+
+          <div class="#">
+            <a href="#" class="nav-item nav-link disabled">
+              <span class="badge rounded-pill badge-primary disabled">4 </span>
+
+              <i class="fa-regular fa-bell logout-icon disabled"></i>
             </a>
-            <div class="dropdown-content1">
-              <div class="d-flex justify-content-between noti-section">
+
+            <div class="dropdown-content1 disabled">
+              <div class="d-flex justify-content-between noti-section disabled">
                 <h3 class="">Notification</h3>
-                <i class="fa-regular fa-bell notification-icon"></i>
+
+                <i class="# disabled"></i>
               </div>
 
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
-                ><span class="delivery-content">Delivery Processing</span>
-                <span class="pull-right">3 hr</span>
+              <li a href="#" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
+                ><span class="delivery-content disabled"
+                  >Delivery Processing</span
+                >
+
+                <span class="pull-right disabled">3 hr</span>
               </li>
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
+
+              <li a href="" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
                 ><span class="delivery-content">Order Generated</span>
+
                 <span class="pull-right">3 hr</span>
               </li>
-              <li a href="" class="notification-submenu">
+
+              <li a href="" class="notification-submenu disabled">
                 <i class="fa-regular fa-circle-dot circle-icon"></i
                 ><span class="delivery-content">Tickets Generated</span>
+
                 <span class="pull-right">3 hr</span>
               </li>
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
-                ><span class="delivery-content">Delivery Completed</span>
-                <span class="pull-right">6 hr</span>
+
+              <li a href="" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
+                ><span class="delivery-content disabled"
+                  >Delivery Completed</span
+                >
+
+                <span class="pull-right disabled">6 hr</span>
               </li>
+
               <li>
-                <a href="" class="btn btn-primary">Check all notification</a>
+                <a href="" class="btn btn-primary disabled"
+                  >Check all notification</a
+                >
               </li>
             </div>
           </div>
 
-          <div class="dropdown">
-            <a href="#" class="nav-item nav-link active">
-              <i class="fa-regular fa-message logout-icon"></i>
+          <div class="dropdown disabled">
+            <a href="#" class="nav-item nav-link disabled">
+              <i class="fa-regular fa-message logout-icon disabled"></i>
             </a>
-            <div class="dropdown-content1">
-              <div class="d-flex justify-content-between noti-section">
+
+            <div class="dropdown-content1 disabled">
+              <div class="d-flex justify-content-between noti-section disabled">
                 <h3 class="">Message Box</h3>
-                <i class="fa-regular fa-bell notification-icon"></i>
+
+                <i class="fa-regular fa-bell notification-icon disabled"></i>
               </div>
 
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
-                ><span class="delivery-content">Delivery Processing</span>
-                <span class="pull-right">3 hr</span>
+              <li a href="" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
+                ><span class="delivery-content disabled"
+                  >Delivery Processing</span
+                >
+
+                <span class="pull-right disabled">3 hr</span>
               </li>
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
-                ><span class="delivery-content">Order Generated</span>
-                <span class="pull-right">3 hr</span>
+
+              <li a href="" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
+                ><span class="delivery-content disabled">Order Generated</span>
+
+                <span class="pull-right disabled">3 hr</span>
               </li>
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
-                ><span class="delivery-content">Tickets Generated</span>
-                <span class="pull-right">3 hr</span>
+
+              <li a href="" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
+                ><span class="delivery-content disabled"
+                  >Tickets Generated</span
+                >
+
+                <span class="pull-right disabled">3 hr</span>
               </li>
-              <li a href="" class="notification-submenu">
-                <i class="fa-regular fa-circle-dot circle-icon"></i
-                ><span class="delivery-content">Delivery Completed</span>
-                <span class="pull-right">6 hr</span>
+
+              <li a href="" class="notification-submenu disabled">
+                <i class="fa-regular fa-circle-dot circle-icon disabled"></i
+                ><span class="delivery-content disabled"
+                  >Delivery Completed</span
+                >
+
+                <span class="pull-right disabled">6 hr</span>
               </li>
+
               <li>
-                <a href="" class="btn btn-primary">Check all notification</a>
+                <a href="" class="btn btn-primary disabled"
+                  >Check all notification</a
+                >
               </li>
             </div>
           </div>
 
           <!-- <a href="#" class="nav-item nav-link active">
+
                         <i class="fa-regular fa-message logout-icon"></i>
+
                     </a> -->
-          <a href="#" class="nav-item nav-link active">
-            <i class="fas fa-vector-square logout-icon"></i>
+
+          <a href="#" class="nav-item nav-link disabled">
+            <i class="fas fa-vector-square logout-icon disabled"></i>
           </a>
         </div>
       </div>

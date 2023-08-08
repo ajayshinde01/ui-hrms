@@ -22,6 +22,7 @@ export class EmployeeTypeTableComponent {
   employeeTypeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+  params: HttpParams = new HttpParams();
 
   constructor(
     private employeeTypeService: EmployeeTypeService,
@@ -59,13 +60,10 @@ export class EmployeeTypeTableComponent {
           .deleteEmployee(event['data'].employeeTypeId)
           .subscribe(
             (response: ApiResponse) => {
-              this.employeeTypeService.notify('Record Delete Successfully...');
-              let params = new HttpParams();
-
-              params = params.set('page', 0);
-
-              params = params.set('size', 10);
-              this.searchFunction(params);
+              this.employeeTypeService.notify(
+                'Employee Type Deleted Successfully...'
+              );
+              this.searchFunction(this.params);
             },
             (error: any) => {
               console.error('DELETE-Employee Type Request failed', error);
@@ -86,17 +84,10 @@ export class EmployeeTypeTableComponent {
     }
   }
 
-  openPopup(message: string) {
-    this.dialog.open(PopupComponent, {
-      width: '600px',
-      height: '200px',
-      data: { message: message },
-    });
-  }
-
-  searchFunction(event: HttpParams) {
+  searchFunction(params: HttpParams) {
+    this.params = params;
     this.employeeTypeService
-      .search(event)
+      .search(params)
       .subscribe(
         (data: { content: Array<Employee>; totalElements: number }) => {
           console.log(data.content);

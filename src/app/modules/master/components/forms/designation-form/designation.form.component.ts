@@ -13,6 +13,9 @@ import { Designation } from '../../../models/designation.model';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { descMaxLength } from '../Validations/descMaxLength.validator';
+import { idMaxLength } from '../Validations/idMaxLength.validator';
+import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 
 @Component({
   selector: 'designation-role',
@@ -49,6 +52,9 @@ export class DesignationFormComponent {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/master/designation']);
+  }
   initForm() {
     this.designationForm = this.formBuilder.group({
       id: [''],
@@ -58,8 +64,8 @@ export class DesignationFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z0-9]{1,50}$'),
+          idMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
         ],
       ],
       designationName: [
@@ -68,8 +74,8 @@ export class DesignationFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_ ]{1,100}$'),
+          nameMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
       designationDesc: [
@@ -78,7 +84,8 @@ export class DesignationFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          Validators.pattern('^[a-zA-Z0-9 ]{1,250}$'),
+          descMaxLength,
+          Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
       orgCode: [
@@ -87,8 +94,7 @@ export class DesignationFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_]{1,10}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
         ],
       ],
       createdBy: ['Admin'],
@@ -123,7 +129,7 @@ export class DesignationFormComponent {
             this.designationService.notify('Designation Added successfully..!');
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.designationService.warn('Credentials already present');
             }
             console.error('POST Request failed', error);
@@ -134,11 +140,13 @@ export class DesignationFormComponent {
         this.designationService.updateDesignation(formData).subscribe(
           (response: Array<Designation>) => {
             console.log('PUT-ROLE Request successful', response);
-            this.designationService.notify('Role Updated successfully..!');
+            this.designationService.notify(
+              'Designation Updated successfully..!'
+            );
             this.router.navigate(['/master/designation']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.designationService.warn('Credentials already present');
             }
             console.error('PUT Request failed', error);

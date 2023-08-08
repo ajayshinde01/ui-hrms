@@ -23,6 +23,7 @@ export class GradeComponent {
   gradesHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+  params: HttpParams = new HttpParams();
 
   constructor(
     private gradeService: GradeService,
@@ -62,11 +63,9 @@ export class GradeComponent {
         this.gradeService.deleteGrade(event['data'].gradeId).subscribe(
           (response: ApiResponse) => {
             console.log('DELETE-Grade Request successful', response);
+            this.searchFunction(this.params);
+
             this.gradeService.notify('Grade Deleted successfully..!');
-            let params = new HttpParams();
-            params = params.set('page', 0);
-            params = params.set('size', 10);
-            this.searchFunction(params);
           },
           (error: any) => {
             console.error('DELETE-GRADE Request failed', error);
@@ -86,17 +85,10 @@ export class GradeComponent {
     }
   }
 
-  openPopup(message: string) {
-    this.dialog.open(PopupComponent, {
-      width: '600px',
-      height: '200px',
-      data: { message: message },
-    });
-  }
-
-  searchFunction(event: HttpParams) {
+  searchFunction(params: HttpParams) {
+    this.params = params;
     this.gradeService
-      .search(event)
+      .search(params)
       .subscribe((data: { content: Array<Grade>; totalElements: number }) => {
         console.log(data.content);
         console.log(data.totalElements);

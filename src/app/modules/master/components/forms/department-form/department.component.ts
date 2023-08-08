@@ -17,6 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { descMaxLength } from '../Validations/descMaxLength.validator';
+import { idMaxLength } from '../Validations/idMaxLength.validator';
+import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 
 @Component({
   selector: 'app-department',
@@ -49,6 +52,9 @@ export class DepartmentComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/master/department-table']);
+  }
   initForm() {
     this.departmentForm = this.formBuilder.group({
       id: [''],
@@ -58,8 +64,8 @@ export class DepartmentComponent implements OnInit {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^(?!.*s)[A-Za-z]{1,50}$'),
+          idMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
         ],
       ],
       departmentName: [
@@ -68,8 +74,8 @@ export class DepartmentComponent implements OnInit {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_ ]{1,100}$'),
+          nameMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
       departmentDescription: [
@@ -78,8 +84,8 @@ export class DepartmentComponent implements OnInit {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z0-9 ]{1,250}$'),
+          descMaxLength,
+          Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
       orgCode: [
@@ -89,7 +95,7 @@ export class DepartmentComponent implements OnInit {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_]{1,10}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
         ],
       ],
       createdBy: ['Admin'],
@@ -109,7 +115,7 @@ export class DepartmentComponent implements OnInit {
             this.router.navigate(['/master/department-table']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.departmentService.warn('Credentials already present');
             }
           }
@@ -122,7 +128,7 @@ export class DepartmentComponent implements OnInit {
             this.router.navigate(['/master/department-table']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.departmentService.warn('Credentials already present');
             }
           }

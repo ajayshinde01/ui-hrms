@@ -12,14 +12,14 @@
               <span class="position-absolute ms-4">
                 <!-- <i class="fa fa-search search-icon" aria-hidden="true"></i> -->
               </span>
-              <!--end::Svg Icon--><label>Search:</label>
+              <!--end::Svg Icon-->
               <input
                 type="text"
                 data-kt-user-table-filter="search"
                 [(ngModel)]="searchTerm"
                 (input)="searchFunction()"
-                class="form-control form-control-solid search"
-                placeholder="search here"
+                class="form-control search-box"
+                placeholder="Search "
               />
             </div>
             <div class="cardtoolbar d-flex">
@@ -54,7 +54,7 @@
     </div>
     <!--                                                  -->
     <div class="card-body p-0">
-      <div class="table-responsive">
+      <div class="table-responsive1">
         <table
           class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
           id="kt_table_users"
@@ -90,7 +90,14 @@
             </th>
           </thead>
           <tbody class="tbody">
-            <tr *ngFor="let row of dataSource" let i="index" class="data-row">
+            <tr
+              *ngFor="let row of dataSource"
+              let
+              i="index"
+              class="data-row"
+              [class.selected]="row === selectedValue"
+              (click)="selectRow(row)"
+            >
               <td *ngFor="let column of headers">
                 <div *ngIf="column.type === 'radio'">
                   <td>
@@ -103,6 +110,8 @@
                         id="radio"
                         name="radio_btn"
                         (click)="radioButtonEvent(row)"
+                        [checked]="row === selectedValue"
+                        (click)="selectRow(row)"
                       />
                     </div>
                   </td>
@@ -143,7 +152,7 @@
               aria-controls="kt_table_users"
               data-dt-idx="1"
               tabindex="0"
-              class="page-link"
+              class="page-link pagination-number"
               (click)="changePage(page)"
               >{{ page + 1 }}</a
             >
@@ -165,6 +174,67 @@
             </a>
           </li>
         </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Button trigger modal -->
+
+  <button
+    type="button"
+    hidden
+    #confrimationmodel
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title " id="exampleModalLabel"></h5> -->
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="are-you text-center">Are you sure?</div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-dismiss="modal"
+            (click)="delete()"
+          >
+            Yes
+          </button>
+
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -50,7 +50,9 @@ export class RoleService {
 
   deleteRole(roleId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/role/delete/' + roleId
+      'http://192.168.1.16:7000/employee/role/delete/' +
+        roleId +
+        '?updatedBy=Admin'
     );
   }
 
@@ -66,7 +68,7 @@ export class RoleService {
   }
 
   notify(message: string) {
-    this.toastrService.success(message, 'Role Master');
+    this.toastrService.success(message);
   }
 
   warn(message: string) {

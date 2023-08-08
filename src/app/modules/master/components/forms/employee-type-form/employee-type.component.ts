@@ -17,6 +17,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { idMaxLength } from '../Validations/idMaxLength.validator';
+import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 
 @Component({
   selector: 'app-employee-type',
@@ -49,7 +51,9 @@ export class EmployeeTypeComponent {
       }
     });
   }
-
+  goBack() {
+    this.router.navigate(['/master/employee-table']);
+  }
   initForm() {
     this.employeeTypeForm = this.formBuilder.group({
       id: [''],
@@ -60,8 +64,8 @@ export class EmployeeTypeComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[A-Za-z]{1,50}$'),
+          idMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
         ],
       ],
 
@@ -71,8 +75,7 @@ export class EmployeeTypeComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[A-Za-z _ -]{1,50}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
 
@@ -83,7 +86,7 @@ export class EmployeeTypeComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_]{1,10}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
         ],
       ],
 
@@ -102,11 +105,13 @@ export class EmployeeTypeComponent {
         this.employeeTypeService.createEmployee(formData).subscribe(
           (response: Employee) => {
             console.log('POST-EmployeeType Request successful', response);
-            this.employeeTypeService.notify(' Record Save Successfully...');
+            this.employeeTypeService.notify(
+              ' Employee Type Added Successfully...'
+            );
             this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.employeeTypeService.warn('Credentials already present');
             }
           }
@@ -119,7 +124,7 @@ export class EmployeeTypeComponent {
             this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.employeeTypeService.warn('Credentials already present');
             }
             console.error('PUT Request failed', error);

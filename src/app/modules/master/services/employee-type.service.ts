@@ -49,7 +49,9 @@ export class EmployeeTypeService {
 
   deleteEmployee(employeeTypeId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/employee-type/delete/' + employeeTypeId
+      'http://192.168.1.16:7000/employee/employee-type/delete/' +
+        employeeTypeId +
+        '?updatedBy=Admin'
     );
   }
 
@@ -65,7 +67,7 @@ export class EmployeeTypeService {
   }
 
   notify(message: string) {
-    this.toastrService.success(message, 'Employee Type');
+    this.toastrService.success(message);
   }
 
   warn(message: string) {

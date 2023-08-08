@@ -1,11 +1,13 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { Pagination } from 'src/app/modules/master/models/pageable';
@@ -26,13 +28,17 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Input() dataSource!: Array<Object>;
   @Input() headers!: Array<ColumnsMetadata>;
   @Input() totalRecord: number = 0;
+  @Output() deleteFunction: EventEmitter<Object> = new EventEmitter();
   @Output() buttonFunction: EventEmitter<Object> = new EventEmitter();
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
+
+  @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
   paginationList: Array<number> = [];
   selectedValue!: Object;
   searchTerm!: string;
   key: string = 'id';
   reverse: boolean = false;
+  // data: any;
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
   constructor(private roleService: RoleService) {}
 
@@ -68,24 +74,45 @@ export class DatatableComponent implements OnInit, OnChanges {
     console.log(this.selectedValue.valueOf());
   }
 
+  delete() {
+    console.log('delete?');
+    let data = { event: 'delete', data: {} };
+    data.data = this.selectedValue;
+    return this.deleteFunction.emit(data);
+  }
+
   buttonEvent(event: string) {
     let data = { event: event, data: {} };
     switch (event) {
       case 'add':
         return this.buttonFunction.emit(data);
         break;
+
       case 'edit':
         data.data = this.selectedValue;
-
-        return this.buttonFunction.emit(data);
+        if (data.data == undefined)
+          this.roleService.warn('Please select record to edit');
+        else return this.buttonFunction.emit(data);
         break;
+
       case 'delete':
         data.data = this.selectedValue;
-        return this.buttonFunction.emit(data);
+        if (data.data == undefined)
+          this.roleService.warn('Please select record to delete');
+        if (data.data != undefined) {
+          this.confrimationmodel.nativeElement.click();
+        }
+
         break;
     }
   }
-
+  selectRow(rowData: any) {
+    if (this.selectedValue === rowData) {
+      this.selectedValue = '';
+    } else {
+      this.selectedValue = rowData;
+    }
+  }
   setHttpParams() {
     let params = new HttpParams();
     params = params.append('page', this.pagination.pageNumber);

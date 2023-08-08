@@ -8,6 +8,8 @@ import { GradeService } from '../../../services/grade.service';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { idMaxLength } from '../Validations/idMaxLength.validator';
+import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 
 @Component({
   selector: 'app-grade-form',
@@ -20,6 +22,7 @@ export class GradeFormComponent {
   submitted: boolean = false;
   queryParams?: Params;
   actionLabel: string = 'Save';
+  button: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private designationService: DesignationService,
@@ -44,7 +47,9 @@ export class GradeFormComponent {
       }
     });
   }
-
+  goBack() {
+    this.router.navigate(['/master/grade']);
+  }
   initForm() {
     this.gradeForm = this.formBuilder.group({
       id: [''],
@@ -54,8 +59,8 @@ export class GradeFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z0-9]{1,50}$'),
+          idMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
         ],
       ],
       gradeName: [
@@ -64,8 +69,8 @@ export class GradeFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_ ]{1,100}$'),
+          nameMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
       gradeType: ['', Validators.required],
@@ -76,9 +81,10 @@ export class GradeFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_]{1,10}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
         ],
       ],
+      createdBy: ['Admin'],
     });
   }
 
@@ -117,7 +123,7 @@ export class GradeFormComponent {
         this.gradeService.updateGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);
-            this.designationService.notify('GRADE Updated successfully..!');
+            this.designationService.notify('Grade Updated successfully..!');
             this.router.navigate(['/master/grade']);
           },
           (error: any) => {

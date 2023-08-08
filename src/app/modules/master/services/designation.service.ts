@@ -45,7 +45,9 @@ export class DesignationService {
 
   deleteDesignation(designationId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/designation/' + designationId
+      'http://192.168.1.16:7000/employee/designation/' +
+        designationId +
+        '?updatedBy=Admin'
     );
   }
 
@@ -61,7 +63,7 @@ export class DesignationService {
   }
 
   notify(message: string) {
-    this.toastrService.success(message, 'Designation Master');
+    this.toastrService.success(message);
   }
 
   warn(message: string) {

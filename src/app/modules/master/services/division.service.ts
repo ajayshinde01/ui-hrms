@@ -50,7 +50,9 @@ export class DivisionService {
 
   deleteDivision(divisionId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/division/' + divisionId
+      'http://192.168.1.16:7000/employee/division/' +
+        divisionId +
+        '?updatedBy=Admin'
     );
   }
   search(
@@ -64,7 +66,7 @@ export class DivisionService {
     );
   }
   notify(message: string) {
-    this.toastrService.success(message, 'Division');
+    this.toastrService.success(message);
   }
 
   warn(message: string) {

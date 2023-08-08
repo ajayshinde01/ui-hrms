@@ -13,9 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from './modules/master/components/helper/popup/popup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
-import { config } from 'rxjs';	
+import { config } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
-
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({
@@ -37,7 +36,9 @@ export const CONFIG = new InjectionToken<typeof config>('CONFIG');
     MatDialogModule,
     FormsModule,
 
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-center', // Set the position class to center
+    }),
   ],
   exports: [MatDialogModule],
 })

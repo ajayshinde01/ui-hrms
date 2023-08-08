@@ -23,6 +23,7 @@ export class DivisionTableComponent {
     columnsMetadata: [],
   };
 
+  params: HttpParams = new HttpParams();
   constructor(
     private divisionService: DivisionService,
     private router: Router,
@@ -58,13 +59,8 @@ export class DivisionTableComponent {
           (response: ApiResponse) => {
             console.log('DELETE-Division Request successful', response);
 
-            this.divisionService.notify('Division Delete successfully..!');
-            let params = new HttpParams();
-
-            params = params.set('page', 0);
-
-            params = params.set('size', 10);
-            this.searchFunction(params);
+            this.divisionService.notify('Division Deleted successfully..!');
+            this.searchFunction(this.params);
           },
           (error: any) => {
             console.error('DELETE-Division Request failed', error);
@@ -83,16 +79,10 @@ export class DivisionTableComponent {
     }
   }
 
-  openPopup(message: string) {
-    this.dialog.open(PopupComponent, {
-      width: '600px',
-      height: '200px',
-      data: { message: message },
-    });
-  }
-  searchFunction(event: HttpParams) {
+  searchFunction(params: HttpParams) {
+    this.params = params;
     this.divisionService
-      .search(event)
+      .search(params)
       .subscribe(
         (data: { content: Array<Division>; totalElements: number }) => {
           console.log(data.content);

@@ -2,9 +2,30 @@
   align-items: center;
   justify-content: center;
 }
-.profile-save-btn {
-  display: block;
-  margin: 0 auto;
+.go-back {
+  margin: 5px;
+  padding: 3px;
+  width: 50px;
+  margin-bottom: 8px;
+  background-color: skyblue;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
+}
+.col-lg-6 {
+  margin-top: 18px;
+}
+// .form-header {
+//   display: inline;
+// }
+.validate-text {
+  font-size: 9px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
 }
 .card {
   // margin-bottom: 30px;
@@ -116,9 +137,7 @@ h3 {
   border: 1px solid #5346861a;
   padding-top: 20px;
 }
-.card-title {
-  font-weight: 550;
-}
+
 .profile-img {
   height: 70px;
   width: 70px;

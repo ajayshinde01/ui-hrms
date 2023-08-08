@@ -11,6 +11,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { idMaxLength } from '../Validations/idMaxLength.validator';
+import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 
 @Component({
   selector: 'role-form',
@@ -45,6 +47,9 @@ export class RoleFormComponent {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/master/role']);
+  }
   initForm() {
     this.roleForm = this.formBuilder.group({
       id: [''],
@@ -54,8 +59,8 @@ export class RoleFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^(?!.*s)[A-Za-z0-9]{1,50}$'),
+          idMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
         ],
       ],
       roleName: [
@@ -64,8 +69,8 @@ export class RoleFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_ ]{1,100}$'),
+          nameMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
       orgCode: [
@@ -75,7 +80,7 @@ export class RoleFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_]{1,10}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
         ],
       ],
       createdBy: ['Admin'],

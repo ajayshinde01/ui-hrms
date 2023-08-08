@@ -1,23 +1,66 @@
+<div>
+  <button class="btn btn-warrning go-back" (click)="goBack()">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  </button>
+</div>
 <form [formGroup]="employeeTypeForm">
   <div class="page-title">
     <div class="row">
       <div class="col-lg-8">
         <div class="card">
-          <h2 class="card-title">EMPLOYEE TYPE INFO</h2>
+          <h2 class="card-title">EMPLOYEE TYPE</h2>
           <div class="row mm">
             <div class="col-lg-6">
-              <mat-label class="dd">Employee Type Code</mat-label>
+              <mat-label class="dd">Employee Type Id </mat-label>
               <div class="">
                 <mat-form-field appearance="outline" color="primary">
-
-                  <input matInput placeholder="PER" formControlName="employeeTypeId">
-                  <div *ngIf=" employeeTypeForm.controls['employeeTypeId']?.invalid && employeeTypeForm.controls['employeeTypeId']?.touched && employeeTypeForm.controls['employeeTypeId']?.errors">
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['required']">Please enter Employee Type Id</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['employeeTypeId'].errors?.['pattern']">Please enter valid Employee Type Id</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace']">Leading space not allowed.</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['whitespace']">Field can not be empty.</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace']">Trailing space not allowed.</span>
-                  <span class="validate-text" *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace']">Trailing,Leading spaces not allowed.</span>
+                  <input
+                    matInput
+                    placeholder="PER"
+                    formControlName="employeeTypeId"
+                  />
+                  <div
+                    *ngIf="
+                      employeeTypeForm.controls['employeeTypeId']?.invalid &&
+                      employeeTypeForm.controls['employeeTypeId']?.touched &&
+                      employeeTypeForm.controls['employeeTypeId']?.errors
+                    "
+                  >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['required']"
+                      >Please enter Employee Type Id</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId'].errors?.['pattern']"
+                      >Special Characters & extra spaces not allowed</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['whitespace']"
+                      >Field can not be empty.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace']"
+                      >Trailing space not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace']"
+                      >Trailing,Leading spaces not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['idMaxLength'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace']"
+                      >Maximum 50 characters are allowed.</span
+                    >
                   </div>
                 </mat-form-field>
               </div>
@@ -26,14 +69,54 @@
               <mat-label class="dd">Type</mat-label>
               <div class="">
                 <mat-form-field appearance="outline" color="primary">
-                  <input matInput placeholder="PERMANANT" formControlName="type">
-                  <div *ngIf=" employeeTypeForm.controls['type']?.invalid && employeeTypeForm.controls['type']?.touched && employeeTypeForm.controls['type']?.errors">
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['type']?.errors?.['required']">Please enter Employee Type </span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['type'].errors?.['pattern']">Please Enter Valid Employee Type</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['type']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && !employeeTypeForm.controls['type']?.errors?.['trailingSpace']">Leading space not allowed.</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['type']?.errors?.['whitespace']">Field can not be empty.</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['type']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && !employeeTypeForm.controls['type']?.errors?.['leadingSpace']">Trailing space not allowed.</span>
-                  <span class="validate-text" *ngIf="employeeTypeForm.controls['type']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && employeeTypeForm.controls['type']?.errors?.['leadingSpace']">Trailing,Leading spaces not allowed.</span>
+                  <input
+                    matInput
+                    placeholder="PERMANANT"
+                    formControlName="type"
+                  />
+                  <div
+                    *ngIf="
+                      employeeTypeForm.controls['type']?.invalid &&
+                      employeeTypeForm.controls['type']?.touched &&
+                      employeeTypeForm.controls['type']?.errors
+                    "
+                  >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type']?.errors?.['required']"
+                      >Please enter Employee Type
+                    </span>
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type'].errors?.['pattern']"
+                      >Special Characters are not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && !employeeTypeForm.controls['type']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type']?.errors?.['whitespace']"
+                      >Field can not be empty.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && !employeeTypeForm.controls['type']?.errors?.['leadingSpace']"
+                      >Trailing space not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && employeeTypeForm.controls['type']?.errors?.['leadingSpace']"
+                      >Trailing,Leading spaces not allowed.</span
+                    >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['type']?.errors?.['idMaxLength'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && !employeeTypeForm.controls['type']?.errors?.['leadingSpace']"
+                      >Maximum 50 characters are allowed.</span
+                    >
                   </div>
                 </mat-form-field>
               </div>
@@ -42,14 +125,49 @@
               <mat-label class="dd">Organization Code</mat-label>
               <div class="">
                 <mat-form-field appearance="outline" color="primary">
-                  <input matInput placeholder="AVISYS" class="" formControlName="orgCode" />
-                  <div *ngIf=" employeeTypeForm.controls['orgCode']?.invalid && employeeTypeForm.controls['orgCode']?.touched && employeeTypeForm.controls['orgCode']?.errors">
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['required']">Please enter Organization Code </span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['orgCode'].errors?.['pattern']">Please Enter Valid Organization Code</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && !employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace']">Leading space not allowed.</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['whitespace']">Field can not be empty.</span>
-                    <span class="validate-text" *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && !employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace']">Trailing space not allowed.</span>
-                  <span class="validate-text" *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace']">Trailing,Leading spaces not allowed.</span>
+                  <input
+                    matInput
+                    placeholder="AVISYS"
+                    class=""
+                    formControlName="orgCode"
+                  />
+                  <div
+                    *ngIf="
+                      employeeTypeForm.controls['orgCode']?.invalid &&
+                      employeeTypeForm.controls['orgCode']?.touched &&
+                      employeeTypeForm.controls['orgCode']?.errors
+                    "
+                  >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['required']"
+                      >Please enter Organization Code
+                    </span>
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['orgCode'].errors?.['pattern']"
+                      >Special Characters are not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && !employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['whitespace']"
+                      >Field can not be empty.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && !employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace']"
+                      >Trailing space not allowed.</span
+                    >
+                    <span
+                      class="validate-text"
+                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace']"
+                      >Trailing,Leading spaces not allowed.</span
+                    >
                   </div>
                 </mat-form-field>
               </div>
@@ -57,12 +175,16 @@
           </div>
 
           <div _ngcontent-ng-c812429062="" class="form-footer">
-            <button _ngcontent-ng-c812429062="" class="profile-save-btn" (click)="onSubmit()"> {{ actionLabel }}</button>
+            <button
+              _ngcontent-ng-c812429062=""
+              class="profile-save-btn"
+              (click)="onSubmit()"
+            >
+              {{ actionLabel }}
+            </button>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
 </form>

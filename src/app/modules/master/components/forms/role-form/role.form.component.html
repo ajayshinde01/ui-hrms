@@ -1,10 +1,21 @@
+<div>
+  <button class="btn btn-warrning go-back" (click)="goBack()">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  </button>
+</div>
 <div class="form">
   <form [formGroup]="roleForm">
     <div class="page-title">
       <div class="row">
         <div class="col-lg-8">
           <div class="card">
-            <h2 class="card-title">ROLE INFO</h2>
+            <div>
+              <h2 class="card-title form-header">ROLE</h2>
+              <button class="btn btn-warrning go-back" (click)="goBack()">
+                <!-- <i class="fa fa-arrow-left" aria-hidden="true"></i> -->
+                Back
+              </button>
+            </div>
             <div class="row mm">
               <div class="col-lg-6">
                 <mat-label class="dd">Role Id</mat-label>
@@ -31,7 +42,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['roleId'].errors?.['pattern']"
-                        >Please enter valid Role Id
+                        >Special Characters & extra spaces not allowed
                       </span>
 
                       <span
@@ -56,6 +67,12 @@
                         class="validate-text"
                         *ngIf="roleForm.controls['roleId']?.errors?.['trailingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && roleForm.controls['roleId']?.errors?.['leadingSpace']"
                         >Trailing,Leading spaces not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['idMaxLength'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['leadingSpace']"
+                        >Maximum 50 characters are allowed.</span
                       >
                     </div>
                   </mat-form-field>
@@ -88,7 +105,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['roleName'].errors?.['pattern']"
-                        >Please enter valid First Name
+                        >Special Characters are not allowed
                       </span>
 
                       <span
@@ -113,6 +130,12 @@
                         class="validate-text"
                         *ngIf="roleForm.controls['roleName']?.errors?.['trailingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && roleForm.controls['roleName']?.errors?.['leadingSpace']"
                         >Trailing,Leading spaces not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['nameMaxLength'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['leadingSpace']"
+                        >Maximum 100 characters are allowed.</span
                       >
                     </div>
                   </mat-form-field>
@@ -144,7 +167,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['orgCode'].errors?.['pattern']"
-                        >Please enter valid Org Code
+                        >Special Characters are not allowed.
                       </span>
 
                       <span

@@ -50,7 +50,9 @@ export class DepartmentService {
 
   deleteDepartment(departmentId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/departments/' + departmentId
+      'http://192.168.1.16:7000/employee/departments/' +
+        departmentId +
+        '?updatedBy=Admin'
     );
   }
   search(
@@ -64,7 +66,7 @@ export class DepartmentService {
     );
   }
   notify(message: string) {
-    this.toastrService.success(message, 'DEPARTMENT');
+    this.toastrService.success(message);
   }
 
   warn(message: string) {

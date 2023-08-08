@@ -23,6 +23,7 @@ export class DepartmentTableComponent {
     totalElements: 0,
   };
 
+  params: HttpParams = new HttpParams();
   constructor(
     private departmentService: DepartmentService,
     private router: Router,
@@ -31,10 +32,10 @@ export class DepartmentTableComponent {
 
   ngOnInit(): void {
     this.getHeaders();
-    let params = new HttpParams();
-    params = params.set('page', 0);
-    params = params.set('size', 10);
-    this.searchFunction(params);
+
+    this.params = this.params.set('page', 0);
+    this.params = this.params.set('size', 10);
+    this.searchFunction(this.params);
   }
 
   getHeaders() {
@@ -62,10 +63,8 @@ export class DepartmentTableComponent {
               this.departmentService.notify(
                 'Department Deleted successfully..!'
               );
-              let params = new HttpParams();
-              params = params.set('page', 0);
-              params = params.set('size', 10);
-              this.searchFunction(params);
+
+              this.searchFunction(this.params);
             },
             (error: any) => {
               console.error('DELETE-Department Request failed', error);
@@ -77,8 +76,6 @@ export class DepartmentTableComponent {
         break;
 
       case 'edit':
-        if (event['data'].roleId == undefined)
-          this.departmentService.warn('Please select Id for the operation');
         this.router.navigate(['/master/department'], {
           queryParams: queryParam,
         });
@@ -86,16 +83,10 @@ export class DepartmentTableComponent {
     }
   }
 
-  openPopup(message: string) {
-    this.dialog.open(PopupComponent, {
-      width: '600px',
-      height: '200px',
-      data: { message: message },
-    });
-  }
-  searchFunction(event: HttpParams) {
+  searchFunction(params: HttpParams) {
+    this.params = params;
     this.departmentService
-      .search(event)
+      .search(params)
       .subscribe(
         (data: { content: Array<Department>; totalElements: number }) => {
           console.log(data.content);

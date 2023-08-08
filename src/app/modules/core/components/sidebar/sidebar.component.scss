@@ -1,28 +1,28 @@
-a{
-    display: flex;
-    justify-content: space-between;
+a {
+  display: flex;
+  justify-content: space-between;
 }
-.navbar-brand{
-    padding:10px 30px;
-    box-shadow: -9px 0 20px #59667a1a;
+.navbar-brand {
+  padding: 10px 30px;
+  box-shadow: -9px 0 20px #59667a1a;
 }
 .toggle-sidebar svg {
-    width: 26px;
-    height: auto;
+  width: 26px;
+  height: auto;
 }
-.toggle-sidebar{
-    position: absolute;
-    top: 33px;
-    right: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.toggle-sidebar {
+  position: absolute;
+  top: 33px;
+  right: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.logo-img{
-    height:50px;
-    width:70px;
-    background-size: cover;
+.logo-img {
+  height: 50px;
+  width: 70px;
+  background-size: cover;
 }
 // .sidebar-nav>li a {
 //     display: block;
@@ -35,8 +35,9 @@ a{
 
 // }
 .sidebar-icon {
-    width: 60px;
-    font-size: 20px;
-    color: #66598f;
-    font-size: 16px;
+  width: 60px;
+  font-size: 20px;
+  color: #66598f;
+  font-size: 16px;
+  margin-left: -10px;
 }

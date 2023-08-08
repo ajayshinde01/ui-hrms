@@ -24,7 +24,7 @@ export class DesignationComponent {
   designationHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
-
+  params: HttpParams = new HttpParams();
   constructor(
     private designationService: DesignationService,
     private router: Router,
@@ -64,14 +64,10 @@ export class DesignationComponent {
           .subscribe(
             (response: ApiResponse) => {
               console.log('DELETE-DESIGNATION Request successful', response);
-
-              let params = new HttpParams();
-              params = params.set('page', 0);
-              params = params.set('size', 10);
-              this.searchFunction(params);
               this.designationService.notify(
                 'Designation Deleted successfully..!'
               );
+              this.searchFunction(this.params);
             },
             (error: any) => {
               console.error('DELETE-DESIGNATION Request failed', error);
@@ -92,18 +88,10 @@ export class DesignationComponent {
     }
   }
 
-  openPopup(message: string) {
-    this.dialog.open(PopupComponent, {
-      width: '600px',
-      height: '200px',
-      data: { message: message },
-    });
-  }
-
-  searchFunction(event: HttpParams) {
-    console.log('hi search ');
+  searchFunction(params: HttpParams) {
+    this.params = params;
     this.designationService
-      .search(event)
+      .search(params)
       .subscribe(
         (data: { content: Array<Designation>; totalElements: number }) => {
           console.log(data.content);

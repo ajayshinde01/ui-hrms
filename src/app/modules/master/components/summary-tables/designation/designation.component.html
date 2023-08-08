@@ -1,5 +1,6 @@
 <app-datatable
   (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
   (paginationParams)="searchFunction($event)"
   [dataSource]="designationMetaData.content"
   [headers]="designationHeaders.columnsMetadata"

@@ -18,6 +18,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { descMaxLength } from '../Validations/descMaxLength.validator';
+import { idMaxLength } from '../Validations/idMaxLength.validator';
+import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 
 @Component({
   selector: 'app-division',
@@ -49,7 +52,9 @@ export class DivisionComponent {
       }
     });
   }
-
+  goBack() {
+    this.router.navigate(['/master/division-table']);
+  }
   initForm() {
     this.divisionForm = this.formBuilder.group({
       id: [''],
@@ -59,8 +64,8 @@ export class DivisionComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^(?!.*s)[A-Za-z]{1,50}$'),
+          idMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
         ],
       ],
       divisionName: [
@@ -69,8 +74,8 @@ export class DivisionComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_ ]{1,100}$'),
+          nameMaxLength,
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
       divisionDescription: [
@@ -79,8 +84,8 @@ export class DivisionComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z0-9 ]{1,250}$'),
+          descMaxLength,
+          Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
       orgCode: [
@@ -89,8 +94,7 @@ export class DivisionComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern('^[a-zA-Z-_]{1,10}$'),
+          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
         ],
       ],
       createdBy: ['Admin'],
@@ -105,7 +109,7 @@ export class DivisionComponent {
       if (this.actionLabel === 'Save') {
         this.divisionService.createDivision(formData).subscribe(
           (response: Division) => {
-            this.divisionService.notify('Save Successfully...');
+            this.divisionService.notify('Division Added Successfully...');
             this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
@@ -118,7 +122,7 @@ export class DivisionComponent {
       if (this.actionLabel === 'Update') {
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
-            this.divisionService.notify('Update Successfully...');
+            this.divisionService.notify('Division Updated  Successfully...');
             this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
