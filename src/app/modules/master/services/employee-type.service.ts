@@ -15,14 +15,14 @@ export class EmployeeTypeService {
 
   createEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(
-      'http://192.168.1.16:7000/employee/employee-type/save',
+      'http://192.168.1.16:7000/employee/employee-type/create',
       employee
     );
   }
 
   getEmployeeTypes(): Observable<Array<Employee>> {
     return this.http.get<Array<Employee>>(
-      'http://192.168.1.16:7000/employee/employee-type/show-all'
+      'http://192.168.1.16:7000/employee/employee-type/get-all'
     );
   }
 

@@ -6,13 +6,26 @@
   border-radius: 20px;
   box-shadow: 0 0 20px #0815420d;
 }
+
+.container {
+  overflow: auto;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
+  // display: inline-block;
+  float: left;
+  width: 85%;
+}
 .go-back {
-  margin: 5px;
-  padding: 3px;
-  width: 40px;
-  margin-bottom: 8px;
-  background-color: white;
-  color: black;
+  width: 60px;
+  background-color: #534686;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  float: left;
 }
 .col-lg-6 {
   margin-top: 18px;
@@ -32,11 +45,7 @@
   position: relative;
   background-color: transparent;
 }
-.card-title {
-  font-size: 16px;
-  font-weight: 550;
-  letter-spacing: 0.5px;
-}
+
 h2 {
   font-size: 24px;
   font-weight: 700;

@@ -65,7 +65,7 @@ export class EmployeeTypeComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
         ],
       ],
 
@@ -75,7 +75,8 @@ export class EmployeeTypeComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
+          nameMaxLength,
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
 
@@ -86,7 +87,7 @@ export class EmployeeTypeComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
         ],
       ],
 

@@ -60,7 +60,7 @@ export class GradeFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
         ],
       ],
       gradeName: [
@@ -70,7 +70,7 @@ export class GradeFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
       gradeType: ['', Validators.required],
@@ -81,10 +81,11 @@ export class GradeFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
         ],
       ],
       createdBy: ['Admin'],
+      updatedBy: ['Admin'],
     });
   }
 
@@ -112,7 +113,7 @@ export class GradeFormComponent {
             this.designationService.notify('Grade Added successfully..!');
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.gradeService.warn('Credentials already present');
             }
             console.error('POST Request failed', error);
@@ -127,7 +128,7 @@ export class GradeFormComponent {
             this.router.navigate(['/master/grade']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.gradeService.warn('Credentials already present');
             }
             console.error('PUT Request failed', error);

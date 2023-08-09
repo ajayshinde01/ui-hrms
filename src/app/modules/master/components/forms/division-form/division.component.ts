@@ -65,7 +65,7 @@ export class DivisionComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
         ],
       ],
       divisionName: [
@@ -75,7 +75,7 @@ export class DivisionComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
       divisionDescription: [
@@ -94,7 +94,7 @@ export class DivisionComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
         ],
       ],
       createdBy: ['Admin'],
@@ -113,7 +113,7 @@ export class DivisionComponent {
             this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.divisionService.warn('Credentials already present');
             }
           }
@@ -126,7 +126,7 @@ export class DivisionComponent {
             this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.divisionService.warn('Credentials already present');
             }
           }

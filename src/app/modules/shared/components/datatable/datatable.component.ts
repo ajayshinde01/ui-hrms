@@ -33,6 +33,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
+  @ViewChild('addFormModel') addFormModel!: ElementRef;
   paginationList: Array<number> = [];
   selectedValue!: Object;
   searchTerm!: string;

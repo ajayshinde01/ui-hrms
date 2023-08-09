@@ -65,7 +65,7 @@ export class DepartmentComponent implements OnInit {
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
         ],
       ],
       departmentName: [
@@ -75,7 +75,7 @@ export class DepartmentComponent implements OnInit {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
       departmentDescription: [
@@ -95,7 +95,7 @@ export class DepartmentComponent implements OnInit {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
         ],
       ],
       createdBy: ['Admin'],

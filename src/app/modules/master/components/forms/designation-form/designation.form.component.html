@@ -1,14 +1,16 @@
-<div>
-  <button class="btn btn-warrning go-back" (click)="goBack()">
-    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-  </button>
-</div>
 <form [formGroup]="designationForm">
   <div class="page-title">
     <div class="row">
       <div class="col-lg-8">
         <div class="card">
-          <h2 class="card-title">DESIGNATION</h2>
+          <div class="container">
+            <div class="card-title">DESIGNATION</div>
+            <div>
+              <button class="btn btn-warrning go-back" (click)="goBack()">
+                Back
+              </button>
+            </div>
+          </div>
           <div class="row mm">
             <div class="col-lg-6">
               <mat-label class="dd">Designation Id </mat-label>
@@ -58,21 +60,21 @@
 
                     <span
                       class="validate-text"
-                      *ngIf="designationForm.controls['designationId']?.errors?.['idMaxLength'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['leadingSpace']"
-                      >Maximum 50 characters are allowed.</span
-                    >
+                      *ngIf="designationForm.controls['designationId'].errors?.['pattern']"
+                      >Please enter valid Id
+                    </span>
 
                     <span
                       class="validate-text"
-                      *ngIf="designationForm.controls['designationId'].errors?.['pattern']"
-                      >Special Characters & extra spaces not allowed
-                    </span>
+                      *ngIf="designationForm.controls['designationId']?.errors?.['idMaxLength'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['leadingSpace']"
+                      >Maximum 50 characters are allowed.</span
+                    >
                   </div>
                 </mat-form-field>
               </div>
             </div>
             <div class="col-lg-6">
-              <mat-label class="dd">Designation Name</mat-label>
+              <mat-label class="dd">Designation Name </mat-label>
               <div class="">
                 <mat-form-field appearance="outline" color="primary">
                   <input
@@ -90,13 +92,8 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationName']?.errors?.['required']"
-                      >Please enter Designation Name</span
-                    >
-
-                    <span
-                      class="validate-text"
-                      *ngIf="designationForm.controls['designationName'].errors?.['pattern']"
-                      >Special Characters are not allowed
+                      >Please enter Designation Name
+                      {{designationForm.controls['designationName'].errors?.['pattern']}}
                     </span>
 
                     <span
@@ -107,8 +104,8 @@
 
                     <span
                       class="validate-text"
-                      *ngIf="designationForm.controls['designationName']?.errors?.['whitespace']"
-                      >Field can not be empty.</span
+                      *ngIf="designationForm.controls['designationName']?.errors?.['whitespace'] && !designationForm.controls['designationName'].errors?.['pattern']"
+                      >White Space not allowed</span
                     >
 
                     <span
@@ -122,6 +119,12 @@
                       *ngIf="designationForm.controls['designationName']?.errors?.['trailingSpace'] && !designationForm.controls['designationName'].errors?.['pattern'] && designationForm.controls['designationName']?.errors?.['leadingSpace']"
                       >Trailing,Leading spaces not allowed.</span
                     >
+
+                    <span
+                      class="validate-text"
+                      *ngIf="designationForm.controls['designationName'].errors?.['pattern']"
+                      >Please enter valid Name
+                    </span>
 
                     <span
                       class="validate-text"
@@ -157,7 +160,7 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationDesc'].errors?.['pattern']"
-                      >Special Characters are not allowed.
+                      >Please enter valid Org Code
                     </span>
 
                     <span
@@ -255,6 +258,7 @@
               _ngcontent-ng-c812429062=""
               class="profile-save-btn"
               (click)="onSumbit()"
+              [disabled]="!designationForm.valid"
             >
               {{ actionLabel }}
             </button>

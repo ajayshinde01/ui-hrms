@@ -60,7 +60,7 @@ export class RoleFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
         ],
       ],
       roleName: [
@@ -70,7 +70,7 @@ export class RoleFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
       orgCode: [
@@ -80,10 +80,11 @@ export class RoleFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           whitespaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
         ],
       ],
       createdBy: ['Admin'],
+      updatedBy: ['Admin'],
     });
   }
 
@@ -108,7 +109,7 @@ export class RoleFormComponent {
             this.roleService.notify('Role Added successfully..!');
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.roleService.warn('Credentials already present');
             }
             console.error('POST Request failed', error);
@@ -123,7 +124,7 @@ export class RoleFormComponent {
             this.router.navigate(['/master/role']);
           },
           (error: any) => {
-            if (error.status == 400) {
+            if (error.status == 400 || error.status == 404) {
               this.roleService.warn('Credentials already present');
             }
             console.error('PUT Request failed', error);

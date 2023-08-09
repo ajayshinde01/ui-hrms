@@ -6,16 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { DesignationService } from '../../../services/designation.service';
-import { Role } from '../../../models/role.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Designation } from '../../../models/designation.model';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
-import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { descMaxLength } from '../Validations/descMaxLength.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
+import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 
 @Component({
   selector: 'designation-role',
@@ -64,8 +63,9 @@ export class DesignationFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
+          whitespaceValidator,
           idMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
         ],
       ],
       designationName: [
@@ -75,7 +75,7 @@ export class DesignationFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
       designationDesc: [
@@ -94,7 +94,7 @@ export class DesignationFormComponent {
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          Validators.pattern('^[A-Za-z\\d][A-Za-z\\d-_]*[A-Za-z\\d]$'),
+          Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
         ],
       ],
       createdBy: ['Admin'],

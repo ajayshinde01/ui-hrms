@@ -175,7 +175,10 @@ th {
 
 //     padding: 20px;
 // }
-
+.toast-success {
+  background-color: black; /* Change to your desired color */
+  color: #fff; /* Change text color if needed */
+}
 .form-control.search {
   width: 220px;
   height: 35px;

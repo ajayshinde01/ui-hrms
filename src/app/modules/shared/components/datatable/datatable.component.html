@@ -75,10 +75,9 @@
               (click)="sort(header.sortBy)"
             >
               {{ header.name | uppercase }}
-              <span
-                *ngIf="header.sortBy != pagination.sortKey; else other_content"
-                ><i class="fa fa-sort" aria-hidden="true"></i
-              ></span>
+              <span *ngIf="header.sortBy != 'id'">
+                <i class="fa fa-sort" aria-hidden="true"></i>
+              </span>
               <ng-template #other_content>
                 <span *ngIf="pagination.sortType == 'DESC'"
                   ><i class="fa fa-sort-desc" aria-hidden="true"></i
@@ -217,7 +216,11 @@
 
         <div class="modal-body">
           <div class="text-center">
+            <i class="fa fa-exclamation modal-icon" aria-hidden="true"></i>
+          </div>
+          <div class="text-center">
             <div class="are-you text-center">Are you sure?</div>
+            <div class="you-want text-center">You want to delete the data</div>
           </div>
         </div>
 
@@ -239,3 +242,5 @@
     </div>
   </div>
 </div>
+
+///////////////////////////////////////////////////////////////////

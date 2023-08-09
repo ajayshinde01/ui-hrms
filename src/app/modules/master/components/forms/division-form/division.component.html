@@ -1,14 +1,17 @@
-<div>
-  <button class="btn btn-warrning go-back" (click)="goBack()">
-    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-  </button>
-</div>
 <form [formGroup]="divisionForm">
   <div class="page-title">
     <div class="row">
       <div class="col-lg-8">
         <div class="card">
-          <h2 class="card-title">DIVISION</h2>
+          <div class="container">
+            <div class="card-title">DIVISION</div>
+            <div>
+              <button class="btn btn-warrning go-back" (click)="goBack()">
+                Back
+              </button>
+            </div>
+          </div>
+
           <div class="row mm">
             <div class="col-lg-6">
               <mat-label class="dd">Division Code</mat-label>
@@ -16,7 +19,7 @@
                 <mat-form-field appearance="outline" color="primary">
                   <input
                     matInput
-                    placeholder="AVISYS IND"
+                    placeholder="Avisys-IND"
                     formControlName="divisionId"
                   />
                   <div
@@ -34,7 +37,7 @@
                     <span
                       class="validate-text"
                       *ngIf="divisionForm.controls['divisionId'].errors?.['pattern']"
-                      >Special Characters & extra spaces not allowed</span
+                      >Please enter Valid Id</span
                     >
                     <span
                       class="validate-text"
@@ -72,7 +75,7 @@
                 <mat-form-field appearance="outline" color="primary">
                   <input
                     matInput
-                    placeholder="AVISYS SERVICE PVT LTD"
+                    placeholder="Division"
                     formControlName="divisionName"
                   />
                   <div
@@ -90,7 +93,7 @@
                     <span
                       class="validate-text"
                       *ngIf="divisionForm.controls['divisionName'].errors?.['pattern']"
-                      >Special Characters are not allowed</span
+                      >Please enter valid name</span
                     >
                     <span
                       class="validate-text"
@@ -131,7 +134,7 @@
                 <mat-form-field appearance="outline" color="primary">
                   <input
                     matInput
-                    placeholder="AVISYS SERVICES"
+                    placeholder="Avisys Services"
                     formControlName="divisionDescription"
                   />
                   <div
@@ -149,7 +152,7 @@
                     <span
                       class="validate-text"
                       *ngIf="divisionForm.controls['divisionDescription'].errors?.['pattern']"
-                      >Special Characters are not allowed.</span
+                      >Please enter valid Description</span
                     >
                     <span
                       class="validate-text"
@@ -187,7 +190,7 @@
                 <mat-form-field appearance="outline" color="primary">
                   <input
                     matInput
-                    placeholder="AVISYS"
+                    placeholder="AVI-BH"
                     class=""
                     formControlName="orgCode"
                   />
@@ -206,7 +209,7 @@
                     <span
                       class="validate-text"
                       *ngIf="divisionForm.controls['orgCode'].errors?.['pattern']"
-                      >Special Characters are not allowed.</span
+                      >Please enter valid Org-Code.</span
                     >
                     <span
                       class="validate-text"
@@ -239,6 +242,7 @@
               _ngcontent-ng-c812429062=""
               class="profile-save-btn"
               (click)="onSubmit()"
+              [disabled]="!divisionForm.valid"
             >
               {{ actionLabel }}
             </button>
