@@ -20,6 +20,7 @@
                     matInput
                     placeholder="FIN"
                     formControlName="departmentId"
+                    [disabled]="isDisabled"
                   />
                   <div
                     *ngIf="
@@ -36,7 +37,7 @@
                     <span
                       class="validate-text"
                       *ngIf="departmentForm.controls['departmentId'].errors?.['pattern']"
-                      >Please eneter Valid name</span
+                      >Please eneter Valid Department Id</span
                     >
                     <span
                       class="validate-text"
@@ -56,7 +57,7 @@
                     <span
                       class="validate-text"
                       *ngIf="departmentForm.controls['departmentId']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span
@@ -173,7 +174,7 @@
                     <span
                       class="validate-text"
                       *ngIf="departmentForm.controls['departmentDescription']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentDescription'].errors?.['pattern'] && departmentForm.controls['departmentDescription']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span
@@ -230,7 +231,7 @@
                     <span
                       class="validate-text"
                       *ngIf="departmentForm.controls['orgCode']?.errors?.['trailingSpace'] && !departmentForm.controls['orgCode'].errors?.['pattern'] && departmentForm.controls['orgCode']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
                   </div>
                 </mat-form-field>

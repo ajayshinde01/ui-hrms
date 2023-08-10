@@ -33,6 +33,8 @@ export class DivisionComponent {
   submitted: boolean = false;
   queryParams?: Params;
   actionLabel: string = 'Save';
+  isDisabled: boolean = false;
+
   constructor(
     public divisionService: DivisionService,
     private formBuilder: FormBuilder,
@@ -41,16 +43,17 @@ export class DivisionComponent {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.initForm();
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
       if (this.queryParams['id'] != undefined) {
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }
     });
+    this.initForm();
   }
   goBack() {
     this.router.navigate(['/master/division-table']);
@@ -59,13 +62,14 @@ export class DivisionComponent {
     this.divisionForm = this.formBuilder.group({
       id: [''],
       divisionId: [
-        '',
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
           Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
+          whitespaceValidator,
         ],
       ],
       divisionName: [
@@ -95,6 +99,7 @@ export class DivisionComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
+          whitespaceValidator,
         ],
       ],
       createdBy: ['Admin'],
@@ -120,6 +125,7 @@ export class DivisionComponent {
         );
       }
       if (this.actionLabel === 'Update') {
+        debugger;
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
             this.divisionService.notify('Division Updated  Successfully...');

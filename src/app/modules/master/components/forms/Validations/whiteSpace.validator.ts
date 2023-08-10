@@ -3,7 +3,7 @@ import { FormControl, ValidationErrors } from '@angular/forms';
 export function whitespaceValidator(
   control: FormControl
 ): ValidationErrors | null {
-  const isWhitespace = control.value && control.value.trim().length === 0;
-  const isValid = !isWhitespace;
-  return isValid ? null : { whitespace: true };
+  const value = control.value as string;
+  console.log(value);
+  return value.includes(' ') ? { whitespace: true } : null;
 }

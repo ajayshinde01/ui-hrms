@@ -21,6 +21,7 @@
                       matInput
                       placeholder="AVI-123"
                       formControlName="roleId"
+                      [disabled]="isDisabled"
                     />
                     <div
                       *ngIf="
@@ -38,7 +39,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['roleId'].errors?.['pattern']"
-                        >Please eneter valid id
+                        >Please eneter valid Role Id
                       </span>
 
                       <span
@@ -49,8 +50,8 @@
 
                       <span
                         class="validate-text"
-                        *ngIf="roleForm.controls['roleId']?.errors?.['whitespace']"
-                        >Field can not be empty.</span
+                        *ngIf="roleForm.controls['roleId']?.errors?.['whitespace'] && !roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId']?.errors?.['trailingSpace'] "
+                        >No whitespaces are allowed.</span
                       >
 
                       <span
@@ -62,7 +63,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['roleId']?.errors?.['trailingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && roleForm.controls['roleId']?.errors?.['leadingSpace']"
-                        >Trailing,Leading spaces not allowed.</span
+                        >Trailing, Leading spaces not allowed.</span
                       >
 
                       <span
@@ -101,7 +102,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['roleName'].errors?.['pattern']"
-                        >Please enter valid name
+                        >Please enter valid Role Name
                       </span>
 
                       <span
@@ -125,7 +126,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['roleName']?.errors?.['trailingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && roleForm.controls['roleName']?.errors?.['leadingSpace']"
-                        >Trailing,Leading spaces not allowed.</span
+                        >Trailing, Leading spaces not allowed.</span
                       >
 
                       <span
@@ -174,8 +175,8 @@
 
                       <span
                         class="validate-text"
-                        *ngIf="roleForm.controls['orgCode']?.errors?.['whitespace']"
-                        >Field can not be empty.</span
+                        *ngIf="roleForm.controls['orgCode']?.errors?.['whitespace'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace'] "
+                        >No whitespaces are allowed.</span
                       >
 
                       <span
@@ -187,7 +188,7 @@
                       <span
                         class="validate-text"
                         *ngIf="roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && roleForm.controls['orgCode']?.errors?.['leadingSpace']"
-                        >Trailing,Leading spaces not allowed.</span
+                        >Trailing, Leading spaces not allowed.</span
                       >
                     </div>
                   </mat-form-field>

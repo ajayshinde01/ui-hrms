@@ -40,6 +40,5 @@ export const CONFIG = new InjectionToken<typeof config>('CONFIG');
       positionClass: 'toast-center', // Set the position class to center
     }),
   ],
-  exports: [MatDialogModule],
 })
 export class AppModule {}

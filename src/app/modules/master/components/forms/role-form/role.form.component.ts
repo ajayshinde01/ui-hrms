@@ -25,6 +25,7 @@ export class RoleFormComponent {
   submitted: boolean = false;
   queryParams?: Params;
   actionLabel: string = 'Save';
+  isDisabled: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private roleService: RoleService,
@@ -32,19 +33,21 @@ export class RoleFormComponent {
     private route: ActivatedRoute
   ) {}
 
+  ngOnChnages() {}
   ngOnInit(): void {
-    this.initForm();
-
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
       if (this.queryParams['id'] != undefined) {
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
+        this.isDisabled = false;
       }
     });
+    this.initForm();
   }
 
   goBack() {
@@ -54,15 +57,17 @@ export class RoleFormComponent {
     this.roleForm = this.formBuilder.group({
       id: [''],
       roleId: [
-        '',
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
           Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
+          whitespaceValidator,
         ],
       ],
+
       roleName: [
         '',
         [
@@ -81,6 +86,7 @@ export class RoleFormComponent {
           trailingSpaceValidator,
           whitespaceValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
+          whitespaceValidator,
         ],
       ],
       createdBy: ['Admin'],

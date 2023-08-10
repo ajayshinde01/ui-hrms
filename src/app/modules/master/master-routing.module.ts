@@ -14,8 +14,6 @@ import { DivisionTableComponent } from './components/summary-tables/division-tab
 import { DepartmentComponent } from './components/forms/department-form/department.component';
 import { DepartmentTableComponent } from './components/summary-tables/department-table/department-table.component';
 
-
-
 const routes: Routes = [
   {
     path: '',
@@ -25,8 +23,12 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    children: [{ path: '', component: RoleComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
     children: [{ path: 'role', component: RoleComponent }],
-
   },
   {
     path: '',
@@ -41,7 +43,9 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [{ path: 'employee-table', component: EmployeeTypeTableComponent }],
+    children: [
+      { path: 'employee-table', component: EmployeeTypeTableComponent },
+    ],
   },
   {
     path: '',
@@ -79,15 +83,16 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    
+
     children: [{ path: 'gradeForm', component: GradeFormComponent }],
   },
   {
     path: '',
     component: LayoutComponent,
-    children: [{ path: 'department-table', component: DepartmentTableComponent }],
+    children: [
+      { path: 'department-table', component: DepartmentTableComponent },
+    ],
   },
-
 ];
 
 @NgModule({

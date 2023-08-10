@@ -13,13 +13,17 @@
           </div>
           <div class="row mm">
             <div class="col-lg-6">
-              <mat-label class="dd">Designation Id </mat-label>
+              <mat-label class="dd"
+                >Designation Id
+                {{designationForm.controls['designationId']?.errors?.['whitespace'] && !designationForm.controls['designationId']?.errors?.['leadingSpace']}}</mat-label
+              >
               <div class="">
                 <mat-form-field appearance="outline" color="primary">
                   <input
                     matInput
-                    placeholder="DES001"
+                    placeholder="DES-001"
                     formControlName="designationId"
+                    [disabled]="isDisabled"
                   />
                   <div
                     *ngIf="
@@ -36,14 +40,14 @@
 
                     <span
                       class="validate-text"
-                      *ngIf="designationForm.controls['designationId']?.errors?.['leadingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['trailingSpace']"
-                      >Leading space not allowed.</span
+                      *ngIf="designationForm.controls['designationId']?.errors?.['whitespace'] && !designationForm.controls['designationId']?.errors?.['leadingSpace'] && !designationForm.controls['designationId']?.errors?.['trailingSpace'] "
+                      >No whitespaces are allowed.</span
                     >
 
                     <span
                       class="validate-text"
-                      *ngIf="designationForm.controls['designationId']?.errors?.['whitespace']"
-                      >Field can not be empty.</span
+                      *ngIf="designationForm.controls['designationId']?.errors?.['leadingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['trailingSpace']"
+                      >Leading space not allowed.</span
                     >
 
                     <span
@@ -55,13 +59,13 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationId']?.errors?.['trailingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] && designationForm.controls['designationId']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationId'].errors?.['pattern']"
-                      >Please enter valid Id
+                      >Please enter valid Designation Id
                     </span>
 
                     <span
@@ -117,7 +121,7 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationName']?.errors?.['trailingSpace'] && !designationForm.controls['designationName'].errors?.['pattern'] && designationForm.controls['designationName']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span
@@ -160,7 +164,7 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationDesc'].errors?.['pattern']"
-                      >Please enter valid Org Code
+                      >Please enter valid Designation Description.
                     </span>
 
                     <span
@@ -184,7 +188,7 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['designationDesc']?.errors?.['trailingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span
@@ -227,7 +231,7 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['orgCode']?.errors?.['whitespace']"
-                      >Field can not be empty.</span
+                      >No whitespaces are allowed.</span
                     >
 
                     <span
@@ -239,7 +243,7 @@
                     <span
                       class="validate-text"
                       *ngIf="designationForm.controls['orgCode']?.errors?.['trailingSpace'] && !designationForm.controls['orgCode'].errors?.['pattern'] && designationForm.controls['orgCode']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span

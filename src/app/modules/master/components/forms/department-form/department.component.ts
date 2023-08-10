@@ -31,6 +31,8 @@ export class DepartmentComponent implements OnInit {
   department: Department;
   submitted: boolean = false;
   queryParams?: Params;
+  isDisabled: boolean = false;
+
   actionLabel: string = 'Save';
   constructor(
     public departmentService: DepartmentService,
@@ -40,16 +42,17 @@ export class DepartmentComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.initForm();
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
       if (this.queryParams['id'] != undefined) {
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }
     });
+    this.initForm();
   }
 
   goBack() {
@@ -59,7 +62,7 @@ export class DepartmentComponent implements OnInit {
     this.departmentForm = this.formBuilder.group({
       id: [''],
       departmentId: [
-        '',
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,

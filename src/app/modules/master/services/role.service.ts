@@ -1,17 +1,14 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Role } from '../models/role.model';
 import { ColumnsMetadata } from '../models/columnMetaData';
 import { ApiResponse } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
-import { Data } from '@angular/router';
 
 @Injectable()
 export class RoleService {
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
-
-  ngOnInit(): void {}
 
   getRoles(): Observable<Array<Role>> {
     return this.http.get<Array<Role>>(

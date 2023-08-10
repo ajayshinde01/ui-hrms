@@ -26,6 +26,7 @@ import { DivisionService } from './services/division.service';
 import { DepartmentService } from './services/department.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DepartmentComponent } from './components/forms/department-form/department.component';
+import { DashboardComponent } from './components/summary-tables/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     DesignationComponent,
@@ -42,6 +43,7 @@ import { DepartmentComponent } from './components/forms/department-form/departme
     DivisionComponent,
     DivisionTableComponent,
     PopupComponent,
+    DashboardComponent,
   ],
   entryComponents: [PopupComponent],
   imports: [

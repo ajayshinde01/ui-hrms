@@ -11,13 +11,9 @@ import {
 } from '@angular/core';
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { Pagination } from 'src/app/modules/master/models/pageable';
-import { RoleService } from 'src/app/modules/master/services/role.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { DataTableService } from './dataTable.service';
 // import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import { debounceTime } from 'rxjs';
-import { Role } from 'src/app/modules/master/models/role.model';
-import { EmployeeTypeService } from 'src/app/modules/master/services/employee-type.service';
 
 @Component({
   selector: 'app-datatable',
@@ -33,7 +29,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
-  @ViewChild('addFormModel') addFormModel!: ElementRef;
+  // @ViewChild('addFormModel') addFormModel!: ElementRef;
   paginationList: Array<number> = [];
   selectedValue!: Object;
   searchTerm!: string;
@@ -41,7 +37,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   reverse: boolean = false;
   // data: any;
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
-  constructor(private roleService: RoleService) {}
+  constructor(private dataTableService: DataTableService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setPagination();
@@ -92,14 +88,14 @@ export class DatatableComponent implements OnInit, OnChanges {
       case 'edit':
         data.data = this.selectedValue;
         if (data.data == undefined)
-          this.roleService.warn('Please select record to edit');
-        else return this.buttonFunction.emit(data);
+          this.dataTableService.notify('Please select record to edit');
+        return this.buttonFunction.emit(data);
         break;
 
       case 'delete':
         data.data = this.selectedValue;
         if (data.data == undefined)
-          this.roleService.warn('Please select record to delete');
+          this.dataTableService.notify('Please select record to delete');
         if (data.data != undefined) {
           this.confrimationmodel.nativeElement.click();
         }

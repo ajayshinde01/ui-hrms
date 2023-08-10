@@ -23,6 +23,7 @@ export class GradeFormComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   button: boolean = false;
+  isDisabled: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private designationService: DesignationService,
@@ -33,8 +34,6 @@ export class GradeFormComponent {
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
-
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
@@ -42,10 +41,12 @@ export class GradeFormComponent {
         console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }
     });
+    this.initForm();
   }
   goBack() {
     this.router.navigate(['/master/grade']);
@@ -54,13 +55,14 @@ export class GradeFormComponent {
     this.gradeForm = this.formBuilder.group({
       id: [''],
       gradeId: [
-        '',
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
           Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
+          whitespaceValidator,
         ],
       ],
       gradeName: [
@@ -82,10 +84,11 @@ export class GradeFormComponent {
           trailingSpaceValidator,
           whitespaceValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
+          whitespaceValidator,
         ],
       ],
       createdBy: ['Admin'],
-      updatedBy: ['Admin'],
+      updatedBy: ['Super Admin'],
     });
   }
 
@@ -101,6 +104,7 @@ export class GradeFormComponent {
   get orgControl() {
     return this.gradeForm.get('orgCode');
   }
+
   onSumbit() {
     if (this.gradeForm.valid) {
       const formData = this.gradeForm.value;
@@ -121,6 +125,7 @@ export class GradeFormComponent {
         );
       }
       if (this.actionLabel === 'Update') {
+        console.log(formData);
         this.gradeService.updateGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);

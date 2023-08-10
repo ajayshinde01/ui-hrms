@@ -20,6 +20,7 @@
                     matInput
                     placeholder="PER"
                     formControlName="employeeTypeId"
+                    [disabled]="isDisabled"
                   />
                   <div
                     *ngIf="
@@ -45,8 +46,8 @@
                     >
                     <span
                       class="validate-text"
-                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['whitespace']"
-                      >Field can not be empty.</span
+                      *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['whitespace'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace'] "
+                      >No whitespaces are allowed.</span
                     >
                     <span
                       class="validate-text"
@@ -56,7 +57,7 @@
                     <span
                       class="validate-text"
                       *ngIf="employeeTypeForm.controls['employeeTypeId']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['employeeTypeId'].errors?.['pattern'] && employeeTypeForm.controls['employeeTypeId']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
                     <span
                       class="validate-text"
@@ -86,7 +87,7 @@
                     <span
                       class="validate-text"
                       *ngIf="employeeTypeForm.controls['type']?.errors?.['required']"
-                      >Please enter Organization Code</span
+                      >Please enter Employee Type</span
                     >
 
                     <span
@@ -116,7 +117,7 @@
                     <span
                       class="validate-text"
                       *ngIf="employeeTypeForm.controls['type']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['type'].errors?.['pattern'] && employeeTypeForm.controls['type']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span
@@ -159,8 +160,8 @@
 
                     <span
                       class="validate-text"
-                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['whitespace']"
-                      >Field can not be empty.</span
+                      *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['whitespace'] && !employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace'] && !employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace'] "
+                      >No whitespaces are allowed.</span
                     >
 
                     <span
@@ -172,7 +173,7 @@
                     <span
                       class="validate-text"
                       *ngIf="employeeTypeForm.controls['orgCode']?.errors?.['trailingSpace'] && !employeeTypeForm.controls['orgCode'].errors?.['pattern'] && employeeTypeForm.controls['orgCode']?.errors?.['leadingSpace']"
-                      >Trailing,Leading spaces not allowed.</span
+                      >Trailing, Leading spaces not allowed.</span
                     >
 
                     <span

@@ -31,6 +31,8 @@ export class EmployeeTypeComponent {
   submitted: boolean = false;
   queryParams?: Params;
   actionLabel: string = 'Save';
+  isDisabled: boolean = false;
+
   constructor(
     public employeeTypeService: EmployeeTypeService,
     private formBuilder: FormBuilder,
@@ -39,17 +41,17 @@ export class EmployeeTypeComponent {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.initForm();
-
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
       if (this.queryParams['id'] != undefined) {
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }
     });
+    this.initForm();
   }
   goBack() {
     this.router.navigate(['/master/employee-table']);
@@ -59,13 +61,14 @@ export class EmployeeTypeComponent {
       id: [''],
 
       employeeTypeId: [
-        '',
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
           idMaxLength,
           Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
+          whitespaceValidator,
         ],
       ],
 
@@ -88,6 +91,7 @@ export class EmployeeTypeComponent {
           trailingSpaceValidator,
           whitespaceValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
+          whitespaceValidator,
         ],
       ],
 

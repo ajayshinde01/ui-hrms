@@ -26,6 +26,8 @@ export class DesignationFormComponent {
   designation!: Designation;
   submitted: boolean = false;
   queryParams?: Params;
+  isDisabled: boolean = false;
+
   actionLabel: string = 'Save';
   constructor(
     private formBuilder: FormBuilder,
@@ -36,8 +38,6 @@ export class DesignationFormComponent {
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
-
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
@@ -45,27 +45,32 @@ export class DesignationFormComponent {
         console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }
     });
+    this.initForm();
   }
 
   goBack() {
     this.router.navigate(['/master/designation']);
   }
+  nonWhitespaceRegExp: RegExp = new RegExp('\\S');
+
   initForm() {
     this.designationForm = this.formBuilder.group({
       id: [''],
       designationId: [
-        '',
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,
           trailingSpaceValidator,
-          whitespaceValidator,
+
           idMaxLength,
           Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
+          whitespaceValidator,
         ],
       ],
       designationName: [
@@ -95,6 +100,7 @@ export class DesignationFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-_]+$'),
+          whitespaceValidator,
         ],
       ],
       createdBy: ['Admin'],
