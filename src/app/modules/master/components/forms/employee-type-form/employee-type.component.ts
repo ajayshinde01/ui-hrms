@@ -53,6 +53,11 @@ export class EmployeeTypeComponent {
     });
     this.initForm();
   }
+
+  get employeeTypeIdControl() {
+    return this.employeeTypeForm.get('employeeTypeId');
+  }
+
   goBack() {
     this.router.navigate(['/master/employee-table']);
   }
@@ -104,6 +109,7 @@ export class EmployeeTypeComponent {
 
   onSubmit() {
     if (this.employeeTypeForm.valid) {
+      this.employeeTypeForm.get('employeeTypeId')?.enable();
       const formData = this.employeeTypeForm.value;
 
       if (this.actionLabel === 'Save') {
@@ -123,6 +129,7 @@ export class EmployeeTypeComponent {
         );
       }
       if (this.actionLabel === 'Update') {
+        formData.updatedBy = 'Admin';
         this.employeeTypeService.updateEmployee(formData).subscribe(
           (response: Employee) => {
             this.employeeTypeService.notify('Record Update Successfully...');

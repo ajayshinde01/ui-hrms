@@ -60,6 +60,15 @@ export class DivisionTableComponent {
             console.log('DELETE-Division Request successful', response);
 
             this.divisionService.notify('Division Deleted successfully..!');
+            const currentPage = Number(this.params.get('page'));
+
+            if (this.divisionMetaData.content.length === 1 && currentPage > 0) {
+              const newPage = currentPage - 1;
+
+              this.params = this.params.set('page', newPage.toString());
+
+              this.searchFunction(this.params);
+            }
             this.searchFunction(this.params);
           },
           (error: any) => {

@@ -63,6 +63,18 @@ export class EmployeeTypeTableComponent {
               this.employeeTypeService.notify(
                 'Employee Type Deleted Successfully...'
               );
+              const currentPage = Number(this.params.get('page'));
+
+              if (
+                this.employeeTypeMetaData.content.length === 1 &&
+                currentPage > 0
+              ) {
+                const newPage = currentPage - 1;
+
+                this.params = this.params.set('page', newPage.toString());
+
+                this.searchFunction(this.params);
+              }
               this.searchFunction(this.params);
             },
             (error: any) => {

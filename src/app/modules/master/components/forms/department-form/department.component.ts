@@ -110,6 +110,8 @@ export class DepartmentComponent implements OnInit {
 
   onSubmit() {
     if (this.departmentForm.valid) {
+      this.departmentForm.get('departmentId')?.enable();
+
       const formData = this.departmentForm.value;
       if (this.actionLabel === 'Save') {
         this.departmentService.createDepartment(formData).subscribe(
@@ -125,6 +127,7 @@ export class DepartmentComponent implements OnInit {
         );
       }
       if (this.actionLabel === 'Update') {
+        formData.updatedBy = 'Admin';
         this.departmentService.updateDepartment(formData).subscribe(
           (response: Department) => {
             this.departmentService.notify('Update Successfully...');

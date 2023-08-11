@@ -22,6 +22,8 @@ import { RoleFormComponent } from '../../forms/role-form/role.form.component';
 export class RoleComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
 
+  matDialogRef: MatDialogRef<RoleFormComponent>;
+
   roleMetaData: { content: Array<Role>; totalElements: number } = {
     content: [],
     totalElements: 0,
@@ -34,7 +36,7 @@ export class RoleComponent {
   constructor(
     private roleService: RoleService,
     private router: Router,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +73,16 @@ export class RoleComponent {
 
             this.roleService.notify('Role Deleted successfully..!');
             console.log(this.params);
+
+            const currentPage = Number(this.params.get('page'));
+
+            if (this.roleMetaData.content.length === 1 && currentPage > 0) {
+              const newPage = currentPage - 1;
+
+              this.params = this.params.set('page', newPage.toString());
+
+              this.searchFunction(this.params);
+            }
             this.searchFunction(this.params);
           },
           (error: any) => {
@@ -81,8 +93,8 @@ export class RoleComponent {
         break;
 
       case 'add':
-        // this.onAdd();
-        this.router.navigate(['/master/roleForm']);
+        this.openModal();
+        //this.router.navigate(['/master/roleForm']);
         break;
 
       case 'edit':
@@ -102,11 +114,14 @@ export class RoleComponent {
       });
   }
 
-  onAdd() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
-    this.dialog.open(RoleFormComponent, dialogConfig);
+  openModal() {
+    this.matDialogRef = this.matDialog.open(RoleFormComponent, {
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res) => {
+      if (res == true) {
+      }
+    });
   }
 }

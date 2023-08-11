@@ -110,6 +110,7 @@ export class DivisionComponent {
   }
   onSubmit() {
     if (this.divisionForm.valid) {
+      this.divisionForm.get('divisionId')?.enable();
       const formData = this.divisionForm.value;
       if (this.actionLabel === 'Save') {
         this.divisionService.createDivision(formData).subscribe(
@@ -125,7 +126,7 @@ export class DivisionComponent {
         );
       }
       if (this.actionLabel === 'Update') {
-        debugger;
+        formData.updatedBy = 'Admin';
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
             this.divisionService.notify('Division Updated  Successfully...');

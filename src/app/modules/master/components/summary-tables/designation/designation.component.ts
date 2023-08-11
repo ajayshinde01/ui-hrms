@@ -4,9 +4,10 @@ import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { DesignationService } from 'src/app/modules/master/services/designation.service';
 import { Data, Router } from '@angular/router';
 import { ApiResponse } from 'src/app/modules/master/models/response';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpParams } from '@angular/common/http';
 import { PopupComponent } from '../../helper/popup/popup.component';
+import { DesignationFormComponent } from '../../forms/designation-form/designation.form.component';
 
 @Component({
   selector: 'app-designation',
@@ -15,6 +16,7 @@ import { PopupComponent } from '../../helper/popup/popup.component';
 })
 export class DesignationComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  matDialogRef: MatDialogRef<DesignationFormComponent>;
 
   designationMetaData: { content: Array<Designation>; totalElements: number } =
     {
@@ -25,10 +27,11 @@ export class DesignationComponent {
     columnsMetadata: [],
   };
   params: HttpParams = new HttpParams();
+
   constructor(
     private designationService: DesignationService,
     private router: Router,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +70,18 @@ export class DesignationComponent {
               this.designationService.notify(
                 'Designation Deleted successfully..!'
               );
+              const currentPage = Number(this.params.get('page'));
+
+              if (
+                this.designationMetaData.content.length === 1 &&
+                currentPage > 0
+              ) {
+                const newPage = currentPage - 1;
+
+                this.params = this.params.set('page', newPage.toString());
+
+                this.searchFunction(this.params);
+              }
               this.searchFunction(this.params);
             },
             (error: any) => {
@@ -76,10 +91,15 @@ export class DesignationComponent {
         break;
 
       case 'add':
-        this.router.navigate(['/master/designationForm']);
+        this.OpenModal();
+        //this.router.navigate(['/master/designationForm']);
         break;
 
       case 'edit':
+        data: {
+          id: queryParam;
+        }
+        this.OpenModalForEdit(id);
         this.router.navigate(['/master/designationForm'], {
           queryParams: queryParam,
         });
@@ -99,5 +119,27 @@ export class DesignationComponent {
           this.designationMetaData = data;
         }
       );
+  }
+
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(DesignationFormComponent, {
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
+  }
+  OpenModalForEdit(data: string) {
+    this.matDialogRef = this.matDialog.open(DesignationFormComponent, {
+      data: { id: data },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
   }
 }

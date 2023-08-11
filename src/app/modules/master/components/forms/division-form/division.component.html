@@ -217,11 +217,7 @@
                       *ngIf="divisionForm.controls['orgCode']?.errors?.['whitespace'] && !divisionForm.controls['orgCode']?.errors?.['leadingSpace'] && !divisionForm.controls['orgCode']?.errors?.['trailingSpace'] "
                       >No whitespaces are allowed.</span
                     >
-                    <span
-                      class="validate-text"
-                      *ngIf="divisionForm.controls['orgCode']?.errors?.['whitespace']"
-                      >Field can not be empty.</span
-                    >
+
                     <span
                       class="validate-text"
                       *ngIf="divisionForm.controls['orgCode']?.errors?.['trailingSpace'] && !divisionForm.controls['orgCode'].errors?.['pattern'] && !divisionForm.controls['orgCode']?.errors?.['leadingSpace']"

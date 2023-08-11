@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldControl,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MasterRoutingModule } from './master-routing.module';
@@ -27,6 +30,9 @@ import { DepartmentService } from './services/department.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DepartmentComponent } from './components/forms/department-form/department.component';
 import { DashboardComponent } from './components/summary-tables/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     DesignationComponent,
@@ -45,19 +51,31 @@ import { DashboardComponent } from './components/summary-tables/dashboard/dashbo
     PopupComponent,
     DashboardComponent,
   ],
-  entryComponents: [PopupComponent],
+  entryComponents: [RoleFormComponent],
   imports: [
     CommonModule,
     MasterRoutingModule,
     SharedModule,
     MatFormFieldModule,
-    MatFormFieldModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatButtonModule,
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
     FormsModule,
     ToastrModule,
+    MatFormFieldModule,
+    HttpClientModule,
   ],
-  providers: [ DesignationService, GradeService,RoleService,EmployeeTypeService,DivisionService,DepartmentService],
+
+  providers: [
+    DesignationService,
+    GradeService,
+    RoleService,
+    EmployeeTypeService,
+    DivisionService,
+    DepartmentService,
+  ],
 })
 export class MasterModule {}

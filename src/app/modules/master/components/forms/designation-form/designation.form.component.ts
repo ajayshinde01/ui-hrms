@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,7 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { DesignationService } from '../../../services/designation.service';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Designation } from '../../../models/designation.model';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
@@ -27,15 +31,20 @@ export class DesignationFormComponent {
   submitted: boolean = false;
   queryParams?: Params;
   isDisabled: boolean = false;
-
+  idForUpdate: string;
   actionLabel: string = 'Save';
   constructor(
+    private _mdr: MatDialogRef<DesignationFormComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     private formBuilder: FormBuilder,
     private designationService: DesignationService,
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.idForUpdate = data;
+    console.log(this.idForUpdate);
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -125,12 +134,15 @@ export class DesignationFormComponent {
   }
   onSumbit() {
     if (this.designationForm.valid) {
+      this.designationForm.get('designationId')?.enable();
       const formData = this.designationForm.value;
 
       if (this.actionLabel === 'Save') {
         this.designationService.createDesignation(formData).subscribe(
           (response: Array<Designation>) => {
             console.log('POST-ROLE Request successful', response);
+
+            this.CloseDialog();
             this.router.navigate(['/master/designation']);
             this.designationService.notify('Designation Added successfully..!');
           },
@@ -143,9 +155,11 @@ export class DesignationFormComponent {
         );
       }
       if (this.actionLabel === 'Update') {
+        formData.updatedBy = 'Admin';
         this.designationService.updateDesignation(formData).subscribe(
           (response: Array<Designation>) => {
             console.log('PUT-ROLE Request successful', response);
+            this.CloseDialog();
             this.designationService.notify(
               'Designation Updated successfully..!'
             );
@@ -163,7 +177,7 @@ export class DesignationFormComponent {
   }
 
   getById(id: string) {
-    console.log('get by id');
+    console.log('search by id');
     this.designationService
       .searchDesignationById(id)
       .subscribe((response: Designation) => {
@@ -172,5 +186,15 @@ export class DesignationFormComponent {
         console.log(this.designationForm.value);
         this.designation = response;
       });
+  }
+
+  CloseDialog() {
+    console.log('inside close dialogue');
+    this._mdr.close(false);
+    this.router.navigate(['/master/designation']);
+  }
+
+  resetForm() {
+    this.designationForm.reset();
   }
 }

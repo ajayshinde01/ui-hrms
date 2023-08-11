@@ -106,15 +106,18 @@ export class GradeFormComponent {
   }
 
   onSumbit() {
+    this.isDisabled = false;
     if (this.gradeForm.valid) {
+      this.gradeForm.get('gradeId')?.enable();
       const formData = this.gradeForm.value;
+      formData.updatedBy = 'Admin';
 
       if (this.actionLabel === 'Save') {
         this.gradeService.createGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('POST-GRADE Request successful', response);
             this.router.navigate(['/master/grade']);
-            this.designationService.notify('Grade Added successfully..!');
+            this.gradeService.notify('Grade Added successfully..!');
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -125,11 +128,11 @@ export class GradeFormComponent {
         );
       }
       if (this.actionLabel === 'Update') {
-        console.log(formData);
+        console.log(formData.gradeId);
         this.gradeService.updateGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);
-            this.designationService.notify('Grade Updated successfully..!');
+            this.gradeService.notify('Grade Updated successfully..!');
             this.router.navigate(['/master/grade']);
           },
           (error: any) => {

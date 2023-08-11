@@ -13,6 +13,7 @@ import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'role-form',
@@ -20,6 +21,7 @@ import { nameMaxLength } from '../Validations/nameMaxLength.validator';
   styleUrls: ['./role.form.component.scss'],
 })
 export class RoleFormComponent {
+  private _mdr: MatDialogRef<RoleFormComponent>;
   roleForm!: FormGroup;
   role!: Role;
   submitted: boolean = false;
@@ -105,12 +107,15 @@ export class RoleFormComponent {
   }
   onSumbit() {
     if (this.roleForm.valid) {
+      this.roleForm.get('roleId')?.enable();
       const formData = this.roleForm.value;
 
       if (this.actionLabel === 'Save') {
         this.roleService.createRole(formData).subscribe(
           (response: Array<Role>) => {
             console.log('POST-ROLE Request successful', response);
+            console.log('inside submit and ready to close dialogue');
+            this.CloseDialog();
             this.router.navigate(['/master/role']);
             this.roleService.notify('Role Added successfully..!');
           },
@@ -146,5 +151,10 @@ export class RoleFormComponent {
       this.roleForm.patchValue(response);
       this.role = response;
     });
+  }
+
+  CloseDialog() {
+    console.log('inside close dialogue');
+    this._mdr.close(false);
   }
 }

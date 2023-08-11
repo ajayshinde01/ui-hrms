@@ -1,198 +1,58 @@
-.form-footer {
-  align-items: center;
-  justify-content: center;
+.form-controls {
+  width: 130%;
+  height: 40px;
 }
-.card-title {
-  font-size: 16px;
-  font-weight: 550;
-  letter-spacing: 0.5px;
-  // display: inline-block;
-  float: left;
-  width: 92%;
-  margin-left: -10px;
+.mat-mdc-dialog-container .mdc-dialog__title {
+  color: var(--mdc-dialog-subhead-color, black);
+  margin-left: -14px;
 }
-.go-back {
-  width: 60px;
-  background-color: #534686;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 8px;
-  float: left;
+::ng-deep.mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding-top: 0px !important;
+  width: 250px !important;
+}
+.justify-content-end {
+  justify-content: flex-end !important;
+  width: 97%;
 }
 
-.col-lg-6 {
-  margin-top: 18px;
+.justify-content-between {
+  justify-content: space-between !important;
+  height: 50px;
+  width: 95%;
 }
-// .form-header {
-//   display: inline;
+.name-field {
+  width: 260px;
+  border-radius: 5px;
+  height: 35px;
+  padding-left: 5px;
+}
+// ::ng-deep.mat-mdc-dialog-container .mdc-dialog__content {
+//   overflow-y: hidden !important;
 // }
+// ::ng-deep.mat-mdc-dialog-container .mdc-dialog__surface {
+//   overflow-y: hidden !important;
+// }
+.action-btn {
+  margin: 3px;
+  height: 30px;
+  background-color: gray;
+}
+.close-btn {
+  width: 25px;
+  height: 20px;
+  font-size: 8px;
+  margin-top: 19px;
+  border-radius: 7px;
+  border: none;
+}
 .validate-text {
   font-size: 9px;
   text-align: left;
   color: red;
   position: relative; /* Or absolute or fixed depending on your layout */
-  left: -15px;
+  //left: -15px;
 }
-.card {
-  // margin-bottom: 30px;
-  border: none;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px #0815420d;
-  margin: 0 auto;
-}
-.card .card-header {
-  border-bottom: none;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  position: relative;
-  background-color: transparent;
-}
-h2 {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-h3 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #534686;
-}
-.dd {
-  display: inline-block;
-  color: black;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-::ng-deep .mat-mdc-text-field-wrapper {
-  // border:1px solid red !important;
-  width: 256px !important;
-  height: 35px !important;
-  font-size: 14px;
-  border-radius: 8px;
-}
-::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
-  .mat-mdc-form-field-infix {
-  padding-top: 6px !important;
-}
-// ::ng-deep.mdc-text-field--outlined {
-// border:1px solid red;
-// }
-// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
-//     border-radius: 50% !important;
-//     border: none;
-//     border-left: none;
-// }
-// ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
-//     color: red;
-//   }
-// ::ng-deep form-field-appearance-outline .mat-form-field-outline {
-//     color: red !important;
-//   }/* Font color */::ng-deep input.mat-input-element {
-//     color: red !important;
-//   }
-
-::ng-deep.mat-mdc-option {
-  min-height: 30px !important;
-}
-::ng-deep.mat-mdc-select-value {
-  font-size: 14px;
-  font-weight: 400;
-}
-/* Border */
-// ::ng-deep.mat-form-field-appearance-outline.mat-form-field-outline {
-//     border:1px solid green!important;
-// }
-// ::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--leading,
-// ::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--notch,
-// ::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--trailing
-// {
-//     border-color:red;
-// }
-// ::ng-deep.mat-form-field.mat-focused .mat-form-field-ripple{
-//     background-color: red !important;
-// }
-::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
-  width: 40px;
-  height: 40px;
-  /* padding: 12px; */
-  top: -13px;
-}
-::ng-deep.mat-mdc-icon-button {
-  --mat-mdc-button-persistent-ripple-color: #fff !important;
-  --mat-mdc-button-ripple-color: rgba(0, 0, 0, 0.1) !important;
-}
-.card-title {
-  color: #534686;
-}
-.right-img {
-  height: 100px;
-  width: 100px;
-}
-.camera-image {
-  position: absolute;
-  top: 112px;
-  right: 48px;
-  font-size: 25px;
-  cursor: pointer;
-  color: #1e2120;
-}
-.card-img {
-  border: 1px solid #5346861a;
-  padding-top: 20px;
-}
-
-.profile-img {
-  height: 70px;
-  width: 70px;
-}
-.profile-section {
-  flex-direction: column;
-  border-bottom: 1px solid rgba(83, 70, 134, 0.1019607843);
-  margin-bottom: 15px;
-}
-.profile-name {
-  margin-top: 10px;
-  font-size: 20px;
-  font-weight: 500;
-}
-.profile-desg {
-  font-size: 12px;
-}
-.form-control,
-.form-select {
-  border-color: #5346861a;
-  font-size: 14px;
-  padding: 12px 15px;
-  border-radius: 8px;
-}
-.h4,
-h4 {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-.profile-save-btn {
-  padding: 0.6rem 1.75rem;
-  font-weight: 500;
-  border-radius: 8px;
-  font-size: 14px;
-  background-color: #534686;
-  border: 1px solid #534686;
-  color: white;
-}
-// ::ng-deep.area{
-// height:80px;
-// }
-// ::ng-deep.profile-email-box{
-// width:180px;
-// }
-.mm {
-  margin-top: -6px;
-}
-::ng-deep.mat-form-field-outline {
-  color: red !important;
+.row-section {
+  margin-bottom: -16px;
 }
