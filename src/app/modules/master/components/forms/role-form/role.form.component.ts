@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -13,7 +13,7 @@ import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'role-form',
@@ -21,7 +21,6 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./role.form.component.scss'],
 })
 export class RoleFormComponent {
-  private _mdr: MatDialogRef<RoleFormComponent>;
   roleForm!: FormGroup;
   role!: Role;
   submitted: boolean = false;
@@ -29,6 +28,8 @@ export class RoleFormComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   constructor(
+    private _mdr: MatDialogRef<RoleFormComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     private formBuilder: FormBuilder,
     private roleService: RoleService,
     private router: Router,
@@ -131,6 +132,8 @@ export class RoleFormComponent {
         this.roleService.updateRole(formData).subscribe(
           (response: Array<Role>) => {
             console.log('PUT-ROLE Request successful', response);
+            this.CloseDialog();
+
             this.roleService.notify('Role Updated successfully..!');
             this.router.navigate(['/master/role']);
           },
@@ -154,7 +157,11 @@ export class RoleFormComponent {
   }
 
   CloseDialog() {
-    console.log('inside close dialogue');
     this._mdr.close(false);
+    this.router.navigate(['/master/grade']);
+  }
+
+  resetForm() {
+    this.roleForm.reset();
   }
 }

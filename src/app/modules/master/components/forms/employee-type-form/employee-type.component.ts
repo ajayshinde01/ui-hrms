@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,11 @@ import { EmployeeTypeService } from '../../../services/employee-type.service';
 import { Observable } from 'rxjs';
 import { Employee } from '../../../models/employee.model';
 import { PopupComponent } from '../../helper/popup/popup.component';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
@@ -34,6 +38,8 @@ export class EmployeeTypeComponent {
   isDisabled: boolean = false;
 
   constructor(
+    private _mdr: MatDialogRef<EmployeeTypeComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     public employeeTypeService: EmployeeTypeService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -116,6 +122,7 @@ export class EmployeeTypeComponent {
         this.employeeTypeService.createEmployee(formData).subscribe(
           (response: Employee) => {
             console.log('POST-EmployeeType Request successful', response);
+            this.CloseDialog();
             this.employeeTypeService.notify(
               ' Employee Type Added Successfully...'
             );
@@ -132,6 +139,7 @@ export class EmployeeTypeComponent {
         formData.updatedBy = 'Admin';
         this.employeeTypeService.updateEmployee(formData).subscribe(
           (response: Employee) => {
+            this.CloseDialog();
             this.employeeTypeService.notify('Record Update Successfully...');
             this.router.navigate(['/master/employee-table']);
           },
@@ -153,5 +161,14 @@ export class EmployeeTypeComponent {
         this.employeeTypeForm.patchValue(response);
         this.employee = response;
       });
+  }
+
+  CloseDialog() {
+    this._mdr.close(false);
+    this.router.navigate(['/master/employee-table']);
+  }
+
+  resetForm() {
+    this.employeeTypeForm.reset();
   }
 }

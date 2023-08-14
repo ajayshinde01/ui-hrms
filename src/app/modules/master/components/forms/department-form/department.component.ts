@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +13,11 @@ import { Department } from '../../../models/department.model';
 import { DepartmentService } from '../../../services/department.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PopupComponent } from '../../helper/popup/popup.component';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
@@ -35,6 +39,8 @@ export class DepartmentComponent implements OnInit {
 
   actionLabel: string = 'Save';
   constructor(
+    private _mdr: MatDialogRef<DepartmentComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     public departmentService: DepartmentService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -149,5 +155,14 @@ export class DepartmentComponent implements OnInit {
         this.departmentForm.patchValue(response);
         this.department = response;
       });
+  }
+
+  CloseDialog() {
+    this._mdr.close(false);
+    this.router.navigate(['/master/department-table']);
+  }
+
+  resetForm() {
+    this.departmentForm.reset();
   }
 }

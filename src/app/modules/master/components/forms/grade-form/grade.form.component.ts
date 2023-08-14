@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Grade } from '../../../models/grade.model';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { DesignationService } from '../../../services/designation.service';
 import { GradeService } from '../../../services/grade.service';
@@ -25,6 +29,8 @@ export class GradeFormComponent {
   button: boolean = false;
   isDisabled: boolean = false;
   constructor(
+    private _mdr: MatDialogRef<GradeFormComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     private formBuilder: FormBuilder,
     private designationService: DesignationService,
     private dialog: MatDialog,
@@ -116,6 +122,7 @@ export class GradeFormComponent {
         this.gradeService.createGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('POST-GRADE Request successful', response);
+            this.CloseDialog();
             this.router.navigate(['/master/grade']);
             this.gradeService.notify('Grade Added successfully..!');
           },
@@ -132,6 +139,7 @@ export class GradeFormComponent {
         this.gradeService.updateGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);
+            this.CloseDialog();
             this.gradeService.notify('Grade Updated successfully..!');
             this.router.navigate(['/master/grade']);
           },
@@ -154,5 +162,14 @@ export class GradeFormComponent {
       console.log(this.gradeForm.value);
       this.grade = response;
     });
+  }
+
+  CloseDialog() {
+    this._mdr.close(false);
+    this.router.navigate(['/master/grade']);
+  }
+
+  resetForm() {
+    this.gradeForm.reset();
   }
 }

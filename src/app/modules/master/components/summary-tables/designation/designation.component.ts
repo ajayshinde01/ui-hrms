@@ -103,7 +103,6 @@ export class DesignationComponent {
         this.router.navigate(['/master/designationForm'], {
           queryParams: queryParam,
         });
-        console.log(queryParam);
         break;
     }
   }

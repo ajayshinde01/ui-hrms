@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +14,11 @@ import { Division } from '../../../models/division.model';
 import { DivisionService } from '../../../services/division.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PopupComponent } from '../../helper/popup/popup.component';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
@@ -36,6 +40,8 @@ export class DivisionComponent {
   isDisabled: boolean = false;
 
   constructor(
+    private _mdr: MatDialogRef<DivisionComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     public divisionService: DivisionService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -115,6 +121,7 @@ export class DivisionComponent {
       if (this.actionLabel === 'Save') {
         this.divisionService.createDivision(formData).subscribe(
           (response: Division) => {
+            this.CloseDialog();
             this.divisionService.notify('Division Added Successfully...');
             this.router.navigate(['/master/division-table']);
           },
@@ -129,6 +136,7 @@ export class DivisionComponent {
         formData.updatedBy = 'Admin';
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
+            this.CloseDialog();
             this.divisionService.notify('Division Updated  Successfully...');
             this.router.navigate(['/master/division-table']);
           },
@@ -149,5 +157,15 @@ export class DivisionComponent {
         this.divisionForm.patchValue(response);
         this.division = response;
       });
+  }
+
+  CloseDialog() {
+    console.log('inside close dialogue');
+    this._mdr.close(false);
+    this.router.navigate(['/master/division-table']);
+  }
+
+  resetForm() {
+    this.divisionForm.reset();
   }
 }

@@ -2,11 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Department } from '../../../models/department.model';
 import { ColumnsMetadata } from '../../../models/columnMetaData';
 import { DepartmentService } from '../../../services/department.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Data, Router } from '@angular/router';
 import { ApiResponse } from '../../../models/response';
 import { PopupComponent } from '../../helper/popup/popup.component';
 import { HttpParams } from '@angular/common/http';
+import { DepartmentComponent } from '../../forms/department-form/department.component';
 
 @Component({
   selector: 'app-department-table',
@@ -15,6 +16,7 @@ import { HttpParams } from '@angular/common/http';
 })
 export class DepartmentTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  matDialogRef: MatDialogRef<DepartmentComponent>;
   departmentHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
@@ -27,7 +29,7 @@ export class DepartmentTableComponent {
   constructor(
     private departmentService: DepartmentService,
     private router: Router,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -84,10 +86,12 @@ export class DepartmentTableComponent {
           );
         break;
       case 'add':
-        this.router.navigate(['/master/department']);
+        this.OpenModal();
+        //this.router.navigate(['/master/department']);
         break;
 
       case 'edit':
+        this.OpenModalForEdit(id);
         this.router.navigate(['/master/department'], {
           queryParams: queryParam,
         });
@@ -106,5 +110,27 @@ export class DepartmentTableComponent {
           this.departmentMetaData = data;
         }
       );
+  }
+
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(DepartmentComponent, {
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
+  }
+  OpenModalForEdit(data: string) {
+    this.matDialogRef = this.matDialog.open(DepartmentComponent, {
+      data: { id: data },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
   }
 }

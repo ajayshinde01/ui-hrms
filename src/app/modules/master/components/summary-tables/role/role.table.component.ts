@@ -93,11 +93,12 @@ export class RoleComponent {
         break;
 
       case 'add':
-        this.openModal();
+        this.OpenModal();
         //this.router.navigate(['/master/roleForm']);
         break;
 
       case 'edit':
+        this.OpenModalForEdit(id);
         this.router.navigate(['/master/roleForm'], { queryParams: queryParam });
         break;
     }
@@ -114,12 +115,24 @@ export class RoleComponent {
       });
   }
 
-  openModal() {
+  OpenModal() {
     this.matDialogRef = this.matDialog.open(RoleFormComponent, {
       disableClose: true,
     });
 
-    this.matDialogRef.afterClosed().subscribe((res) => {
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
+  }
+
+  OpenModalForEdit(data: string) {
+    this.matDialogRef = this.matDialog.open(RoleFormComponent, {
+      data: { id: data },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
       if (res == true) {
       }
     });

@@ -132,6 +132,7 @@ export class DesignationFormComponent {
   get orgControl() {
     return this.designationForm.get('orgCode');
   }
+
   onSumbit() {
     if (this.designationForm.valid) {
       this.designationForm.get('designationId')?.enable();
@@ -195,6 +196,6 @@ export class DesignationFormComponent {
   }
 
   resetForm() {
-    this.designationForm.reset();
+    this.initForm();
   }
 }

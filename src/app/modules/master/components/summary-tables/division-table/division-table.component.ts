@@ -2,11 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Division } from '../../../models/division.model';
 import { ColumnsMetadata } from '../../../models/columnMetaData';
 import { DivisionService } from '../../../services/division.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Data, Router } from '@angular/router';
 import { PopupComponent } from '../../helper/popup/popup.component';
 import { ApiResponse } from '../../../models/response';
 import { HttpParams } from '@angular/common/http';
+import { DivisionComponent } from '../../forms/division-form/division.component';
 
 @Component({
   selector: 'app-division-table',
@@ -15,6 +16,7 @@ import { HttpParams } from '@angular/common/http';
 })
 export class DivisionTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  matDialogRef: MatDialogRef<DivisionComponent>;
   divisionMetaData: { content: Array<Division>; totalElements: number } = {
     content: [],
     totalElements: 0,
@@ -27,7 +29,7 @@ export class DivisionTableComponent {
   constructor(
     private divisionService: DivisionService,
     private router: Router,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -77,12 +79,12 @@ export class DivisionTableComponent {
         );
         break;
       case 'add':
-        this.router.navigate(['/master/division']);
+        this.OpenModal();
+        //this.router.navigate(['/master/division']);
         break;
 
       case 'edit':
-        if (event['data'].divisionId == undefined)
-          this.divisionService.warn('Please select Id for the operation');
+        this.OpenModalForEdit(id);
         this.router.navigate(['/master/division'], { queryParams: queryParam });
         break;
     }
@@ -99,5 +101,27 @@ export class DivisionTableComponent {
           this.divisionMetaData = data;
         }
       );
+  }
+
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(DivisionComponent, {
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
+  }
+  OpenModalForEdit(data: string) {
+    this.matDialogRef = this.matDialog.open(DivisionComponent, {
+      data: { id: data },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
   }
 }
