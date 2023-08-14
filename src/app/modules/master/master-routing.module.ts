@@ -13,6 +13,7 @@ import { DivisionComponent } from './components/forms/division-form/division.com
 import { DivisionTableComponent } from './components/summary-tables/division-table/division-table.component';
 import { DepartmentComponent } from './components/forms/department-form/department.component';
 import { DepartmentTableComponent } from './components/summary-tables/department-table/department-table.component';
+import { DashboardComponent } from './components/summary-tables/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [{ path: '', component: RoleComponent }],
+    children: [{ path: '', component: DashboardComponent }],
   },
   {
     path: '',

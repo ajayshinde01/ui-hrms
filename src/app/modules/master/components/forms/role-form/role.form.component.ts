@@ -38,24 +38,25 @@ export class RoleFormComponent {
 
   ngOnChnages() {}
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
         this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
-        this.isDisabled = false;
       }
     });
-    this.initForm();
   }
 
-  goBack() {
-    this.router.navigate(['/master/role']);
-  }
   initForm() {
     this.roleForm = this.formBuilder.group({
       id: [''],
@@ -110,6 +111,7 @@ export class RoleFormComponent {
     if (this.roleForm.valid) {
       this.roleForm.get('roleId')?.enable();
       const formData = this.roleForm.value;
+      formData.updatedBy = 'Admin';
 
       if (this.actionLabel === 'Save') {
         this.roleService.createRole(formData).subscribe(
@@ -158,10 +160,11 @@ export class RoleFormComponent {
 
   CloseDialog() {
     this._mdr.close(false);
-    this.router.navigate(['/master/grade']);
+    this.router.navigate(['/master/role']);
   }
 
   resetForm() {
-    this.roleForm.reset();
+    this.collectQueryParams();
+    this.initForm();
   }
 }

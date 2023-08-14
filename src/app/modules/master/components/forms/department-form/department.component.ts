@@ -48,9 +48,16 @@ export class DepartmentComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
+
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
         this.isDisabled = true;
@@ -58,7 +65,6 @@ export class DepartmentComponent implements OnInit {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
 
   goBack() {
@@ -117,11 +123,13 @@ export class DepartmentComponent implements OnInit {
   onSubmit() {
     if (this.departmentForm.valid) {
       this.departmentForm.get('departmentId')?.enable();
-
       const formData = this.departmentForm.value;
+      formData.updatedBy = 'Admin';
+
       if (this.actionLabel === 'Save') {
         this.departmentService.createDepartment(formData).subscribe(
           (response: Department) => {
+            this.CloseDialog();
             this.departmentService.notify('Save Successfully...');
             this.router.navigate(['/master/department-table']);
           },
@@ -136,6 +144,8 @@ export class DepartmentComponent implements OnInit {
         formData.updatedBy = 'Admin';
         this.departmentService.updateDepartment(formData).subscribe(
           (response: Department) => {
+            this.CloseDialog();
+
             this.departmentService.notify('Update Successfully...');
             this.router.navigate(['/master/department-table']);
           },
@@ -163,6 +173,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   resetForm() {
-    this.departmentForm.reset();
+    this.collectQueryParams();
+    this.initForm();
   }
 }

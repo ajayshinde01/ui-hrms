@@ -47,6 +47,11 @@ export class DesignationFormComponent {
   }
 
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
@@ -59,13 +64,7 @@ export class DesignationFormComponent {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
-
-  goBack() {
-    this.router.navigate(['/master/designation']);
-  }
-  nonWhitespaceRegExp: RegExp = new RegExp('\\S');
 
   initForm() {
     this.designationForm = this.formBuilder.group({
@@ -137,6 +136,7 @@ export class DesignationFormComponent {
     if (this.designationForm.valid) {
       this.designationForm.get('designationId')?.enable();
       const formData = this.designationForm.value;
+      formData.updatedBy = 'Admin';
 
       if (this.actionLabel === 'Save') {
         this.designationService.createDesignation(formData).subscribe(
@@ -190,12 +190,12 @@ export class DesignationFormComponent {
   }
 
   CloseDialog() {
-    console.log('inside close dialogue');
     this._mdr.close(false);
     this.router.navigate(['/master/designation']);
   }
 
   resetForm() {
+    this.collectQueryParams();
     this.initForm();
   }
 }

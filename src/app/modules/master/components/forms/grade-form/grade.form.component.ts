@@ -40,6 +40,11 @@ export class GradeFormComponent {
   ) {}
 
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
@@ -52,11 +57,8 @@ export class GradeFormComponent {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
-  goBack() {
-    this.router.navigate(['/master/grade']);
-  }
+
   initForm() {
     this.gradeForm = this.formBuilder.group({
       id: [''],
@@ -170,6 +172,7 @@ export class GradeFormComponent {
   }
 
   resetForm() {
-    this.gradeForm.reset();
+    this.collectQueryParams();
+    this.initForm();
   }
 }

@@ -42,7 +42,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['required']"
-                  >Please enter Designation Id</span
+                  >Please enter Designation Id.</span
                 >
 
                 <span
@@ -72,7 +72,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId'].errors?.['pattern']"
-                  >Please enter valid Designation Id
+                  >Please enter valid Designation Id.
                 </span>
 
                 <span
@@ -110,7 +110,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['required']"
-                  >Please enter Designation Name
+                  >Please enter Designation Name.
                   {{designationForm.controls['designationName'].errors?.['pattern']}}
                 </span>
 
@@ -123,7 +123,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['whitespace'] && !designationForm.controls['designationName'].errors?.['pattern']"
-                  >White Space not allowed</span
+                  >White Space not allowed.</span
                 >
 
                 <span
@@ -141,7 +141,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName'].errors?.['pattern']"
-                  >Please enter valid Name
+                  >Please enter valid Designation Name.
                 </span>
 
                 <span
@@ -179,7 +179,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['required']"
-                  >Please enter Designation Description</span
+                  >Please enter Designation Description.</span
                 >
 
                 <span
@@ -243,12 +243,12 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['required']"
-                  >Please enter Organization Code</span
+                  >Please enter Org-Code</span
                 >
 
                 <span
                   class="validate-text"
-                  *ngIf="designationForm.controls['orgCode']?.errors?.['whitespace'] && !designationForm.controls['orgCode']?.errors?.['leadingSpace'] && !designationForm.controls['orgCode']?.errors?.['trailingSpace'] "
+                  *ngIf="designationForm.controls['orgCode']?.errors?.['whitespace'] && !designationForm.controls['orgCode']?.errors?.['leadingSpace'] && !designationForm.controls['orgCode']?.errors?.['trailingSpace'] && !designationForm.controls['orgCode']?.errors?.['pattern']"
                   >No whitespaces are allowed.</span
                 >
 
@@ -273,7 +273,7 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode'].errors?.['pattern']"
-                  >Please enter Organization Code
+                  >Please enter Valid Org-Code.
                 </span>
 
                 <span

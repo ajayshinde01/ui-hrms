@@ -49,9 +49,16 @@ export class DivisionComponent {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
+
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
         this.isDisabled = true;
@@ -59,11 +66,8 @@ export class DivisionComponent {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
-  goBack() {
-    this.router.navigate(['/master/division-table']);
-  }
+
   initForm() {
     this.divisionForm = this.formBuilder.group({
       id: [''],
@@ -118,6 +122,7 @@ export class DivisionComponent {
     if (this.divisionForm.valid) {
       this.divisionForm.get('divisionId')?.enable();
       const formData = this.divisionForm.value;
+      formData.updatedBy = 'Admin';
       if (this.actionLabel === 'Save') {
         this.divisionService.createDivision(formData).subscribe(
           (response: Division) => {
@@ -166,6 +171,7 @@ export class DivisionComponent {
   }
 
   resetForm() {
-    this.divisionForm.reset();
+    this.collectQueryParams();
+    this.initForm();
   }
 }

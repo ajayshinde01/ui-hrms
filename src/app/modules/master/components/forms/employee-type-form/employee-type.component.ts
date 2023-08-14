@@ -47,9 +47,16 @@ export class EmployeeTypeComponent {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
+
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
         this.isDisabled = true;
@@ -57,7 +64,6 @@ export class EmployeeTypeComponent {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
 
   get employeeTypeIdControl() {
@@ -117,6 +123,7 @@ export class EmployeeTypeComponent {
     if (this.employeeTypeForm.valid) {
       this.employeeTypeForm.get('employeeTypeId')?.enable();
       const formData = this.employeeTypeForm.value;
+      formData.updatedBy = 'Admin';
 
       if (this.actionLabel === 'Save') {
         this.employeeTypeService.createEmployee(formData).subscribe(
@@ -169,6 +176,7 @@ export class EmployeeTypeComponent {
   }
 
   resetForm() {
-    this.employeeTypeForm.reset();
+    this.collectQueryParams();
+    this.initForm();
   }
 }
