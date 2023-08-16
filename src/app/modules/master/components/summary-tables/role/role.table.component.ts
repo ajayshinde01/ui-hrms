@@ -74,6 +74,8 @@ export class RoleComponent {
             this.roleService.notify('Role Deleted successfully..!');
             console.log(this.params);
 
+            this.searchFunction(this.params);
+
             const currentPage = Number(this.params.get('page'));
 
             if (this.roleMetaData.content.length === 1 && currentPage > 0) {
@@ -83,7 +85,6 @@ export class RoleComponent {
 
               this.searchFunction(this.params);
             }
-            this.searchFunction(this.params);
           },
           (error: any) => {
             console.error('DELETE-ROLE Request failed', error);
@@ -99,7 +100,7 @@ export class RoleComponent {
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/roleForm'], { queryParams: queryParam });
+        this.router.navigate(['/master/role'], { queryParams: queryParam });
         break;
     }
   }

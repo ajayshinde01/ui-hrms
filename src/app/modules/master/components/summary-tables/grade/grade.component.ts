@@ -64,6 +64,8 @@ export class GradeComponent {
         this.gradeService.deleteGrade(event['data'].gradeId).subscribe(
           (response: ApiResponse) => {
             console.log('DELETE-Grade Request successful', response);
+            this.searchFunction(this.params);
+
             const currentPage = Number(this.params.get('page'));
 
             if (this.gradeMetaData.content.length === 1 && currentPage > 0) {
@@ -73,8 +75,6 @@ export class GradeComponent {
 
               this.searchFunction(this.params);
             }
-
-            this.searchFunction(this.params);
 
             this.gradeService.notify('Grade Deleted successfully..!');
           },
@@ -91,7 +91,7 @@ export class GradeComponent {
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/gradeForm'], {
+        this.router.navigate(['/master/grade'], {
           queryParams: queryParam,
         });
         break;

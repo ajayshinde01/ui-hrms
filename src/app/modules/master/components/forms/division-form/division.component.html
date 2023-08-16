@@ -16,11 +16,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label
-            >Division Id
-            {{divisionForm.controls['divisionId']?.errors?.['whitespace'] &&
-        !divisionForm.controls['divisionId']?.errors?.['leadingSpace']}}</mat-label
-          >
+          <mat-label>Division Id </mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -55,7 +51,7 @@
                 >
                 <span
                   class="validate-text"
-                  *ngIf="divisionForm.controls['divisionId']?.errors?.['whitespace'] && !divisionForm.controls['divisionId']?.errors?.['leadingSpace'] && !divisionForm.controls['divisionId']?.errors?.['trailingSpace'] "
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['whitespace'] && !divisionForm.controls['divisionId']?.errors?.['leadingSpace'] && !divisionForm.controls['divisionId']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionId'].errors?.['pattern'] "
                   >No whitespaces are allowed.</span
                 >
                 <span
@@ -91,7 +87,7 @@
             <div class="form-controls">
               <input
                 matInput
-                placeholder="Division"
+                placeholder="Avisys India"
                 formControlName="divisionName"
               />
               <div

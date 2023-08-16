@@ -62,6 +62,8 @@ export class DivisionTableComponent {
             console.log('DELETE-Division Request successful', response);
 
             this.divisionService.notify('Division Deleted successfully..!');
+            this.searchFunction(this.params);
+
             const currentPage = Number(this.params.get('page'));
 
             if (this.divisionMetaData.content.length === 1 && currentPage > 0) {
@@ -71,7 +73,6 @@ export class DivisionTableComponent {
 
               this.searchFunction(this.params);
             }
-            this.searchFunction(this.params);
           },
           (error: any) => {
             console.error('DELETE-Division Request failed', error);
@@ -85,7 +86,9 @@ export class DivisionTableComponent {
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/division'], { queryParams: queryParam });
+        this.router.navigate(['/master/division-table'], {
+          queryParams: queryParam,
+        });
         break;
     }
   }

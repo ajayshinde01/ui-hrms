@@ -146,8 +146,8 @@ export class DivisionComponent {
             this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.divisionService.warn('Credentials already present');
+            if (error.status == 400) {
+              this.divisionService.warn('Division Id already present');
             }
           }
         );

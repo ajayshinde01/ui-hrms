@@ -136,8 +136,8 @@ export class EmployeeTypeComponent {
             this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.employeeTypeService.warn('Credentials already present');
+            if (error.status == 400) {
+              this.employeeTypeService.warn('Employee Type Id already present');
             }
           }
         );

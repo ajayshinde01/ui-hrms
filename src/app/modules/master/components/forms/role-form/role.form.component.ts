@@ -123,8 +123,9 @@ export class RoleFormComponent {
             this.roleService.notify('Role Added successfully..!');
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.roleService.warn('Credentials already present');
+            if (error.status == 400) {
+              console.log(error.message);
+              this.roleService.warn('Role Id already present');
             }
             console.error('POST Request failed', error);
           }

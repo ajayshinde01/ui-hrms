@@ -69,6 +69,8 @@ export class EmployeeTypeTableComponent {
               this.employeeTypeService.notify(
                 'Employee Type Deleted Successfully...'
               );
+              this.searchFunction(this.params);
+
               const currentPage = Number(this.params.get('page'));
 
               if (
@@ -81,7 +83,6 @@ export class EmployeeTypeTableComponent {
 
                 this.searchFunction(this.params);
               }
-              this.searchFunction(this.params);
             },
             (error: any) => {
               console.error('DELETE-Employee Type Request failed', error);
@@ -97,7 +98,7 @@ export class EmployeeTypeTableComponent {
         // if (event['data'].employeeTypeId == undefined)
         //   this.employeeTypeService.warn('Please select Id for the operation');
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/employee-type'], {
+        this.router.navigate(['/master/employee-table'], {
           queryParams: queryParam,
         });
         break;

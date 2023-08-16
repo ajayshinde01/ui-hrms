@@ -130,12 +130,12 @@ export class DepartmentComponent implements OnInit {
         this.departmentService.createDepartment(formData).subscribe(
           (response: Department) => {
             this.CloseDialog();
-            this.departmentService.notify('Save Successfully...');
+            this.departmentService.notify('Department added Successfully...');
             this.router.navigate(['/master/department-table']);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.departmentService.warn('Credentials already present');
+              this.departmentService.warn('Department Id already present');
             }
           }
         );

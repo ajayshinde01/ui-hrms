@@ -16,18 +16,14 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label
-            >Department Id
-            {{departmentForm.controls['designationId']?.errors?.['whitespace'] &&
-            !departmentForm.controls['designationId']?.errors?.['leadingSpace']}}</mat-label
-          >
+          <mat-label>Department Id </mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <input
                 matInput
-                placeholder="FIN"
+                placeholder="DID-90"
                 formControlName="departmentId"
                 [disabled]="isDisabled"
               />
@@ -55,25 +51,25 @@
                 >
                 <span
                   class="validate-text"
-                  *ngIf="departmentForm.controls['departmentId']?.errors?.['whitespace']"
-                  >Field can not be empty.</span
-                >
-                <span
-                  class="validate-text"
-                  *ngIf="departmentForm.controls['departmentId']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && !departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
-                >
-                <span
-                  class="validate-text"
-                  *ngIf="departmentForm.controls['departmentId']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
-                >
+                  *ngIf="departmentForm.controls['departmentId']?.errors?.['whitespace'] && !departmentForm.controls['departmentId']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentId']?.errors?.['leadingSpace'] && !departmentForm.controls['departmentId'].errors?.['pattern']"
+                  >No whitespace allowed./span >
+                  <span
+                    class="validate-text"
+                    *ngIf="departmentForm.controls['departmentId']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && !departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
+                    >Trailing space not allowed.</span
+                  >
+                  <span
+                    class="validate-text"
+                    *ngIf="departmentForm.controls['departmentId']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
+                    >Trailing, Leading spaces not allowed.</span
+                  >
 
-                <span
-                  class="validate-text"
-                  *ngIf="departmentForm.controls['departmentId']?.errors?.['idMaxLength'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && !departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed.</span
-                >
+                  <span
+                    class="validate-text"
+                    *ngIf="departmentForm.controls['departmentId']?.errors?.['idMaxLength'] && !departmentForm.controls['departmentId'].errors?.['pattern'] && !departmentForm.controls['departmentId']?.errors?.['leadingSpace']"
+                    >Maximum 50 characters are allowed.</span
+                  >
+                </span>
               </div>
             </div>
           </mat-form-field>
@@ -91,7 +87,7 @@
             <div class="form-controls">
               <input
                 matInput
-                placeholder="FINANCE"
+                placeholder="Finance"
                 formControlName="departmentName"
               />
               <div
@@ -109,7 +105,7 @@
                 <span
                   class="validate-text"
                   *ngIf="departmentForm.controls['departmentName'].errors?.['pattern']"
-                  >Please enter valid name</span
+                  >Please enter valid Department Name</span
                 >
                 <span
                   class="validate-text"
@@ -154,7 +150,7 @@
             <div class="form-controls">
               <input
                 matInput
-                placeholder="FINANCE DEPARTMENT"
+                placeholder="Sample Description"
                 formControlName="departmentDescription"
               />
               <div

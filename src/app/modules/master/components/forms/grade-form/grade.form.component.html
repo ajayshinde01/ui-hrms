@@ -16,11 +16,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label
-            >Grade Id
-            {{gradeForm.controls['gradeId']?.errors?.['whitespace'] &&
-        !gradeForm.controls['gradeId']?.errors?.['leadingSpace']}}</mat-label
-          >
+          <mat-label>Grade Id </mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -58,7 +54,7 @@
 
                 <span
                   class="validate-text"
-                  *ngIf="gradeForm.controls['gradeId']?.errors?.['whitespace'] && !gradeForm.controls['gradeId']?.errors?.['leadingSpace'] && !gradeForm.controls['gradeId']?.errors?.['trailingSpace'] "
+                  *ngIf="gradeForm.controls['gradeId']?.errors?.['whitespace'] && !gradeForm.controls['gradeId']?.errors?.['leadingSpace'] && !gradeForm.controls['gradeId']?.errors?.['trailingSpace'] && !gradeForm.controls['gradeId']?.errors?.['pattern'] "
                   >No whitespaces are allowed.</span
                 >
 

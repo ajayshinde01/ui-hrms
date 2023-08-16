@@ -70,6 +70,8 @@ export class DesignationComponent {
               this.designationService.notify(
                 'Designation Deleted successfully..!'
               );
+              this.searchFunction(this.params);
+
               const currentPage = Number(this.params.get('page'));
 
               if (
@@ -82,7 +84,6 @@ export class DesignationComponent {
 
                 this.searchFunction(this.params);
               }
-              this.searchFunction(this.params);
             },
             (error: any) => {
               console.error('DELETE-DESIGNATION Request failed', error);
@@ -99,8 +100,10 @@ export class DesignationComponent {
         data: {
           id: queryParam;
         }
+        // this.router.navigate(['/master/designation']);
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/designationForm'], {
+
+        this.router.navigate(['/master/designation'], {
           queryParams: queryParam,
         });
         break;

@@ -149,7 +149,7 @@ export class DesignationFormComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.designationService.warn('Credentials already present');
+              this.designationService.warn('Designation Id already present');
             }
             console.error('POST Request failed', error);
           }

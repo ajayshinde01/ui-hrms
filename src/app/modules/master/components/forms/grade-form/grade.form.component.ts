@@ -129,8 +129,8 @@ export class GradeFormComponent {
             this.gradeService.notify('Grade Added successfully..!');
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.gradeService.warn('Credentials already present');
+            if (error.status == 400) {
+              this.gradeService.warn('Grade Id already present');
             }
             console.error('POST Request failed', error);
           }
