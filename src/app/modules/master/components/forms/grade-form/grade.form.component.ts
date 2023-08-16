@@ -125,7 +125,8 @@ export class GradeFormComponent {
           (response: Array<Grade>) => {
             console.log('POST-GRADE Request successful', response);
             this.CloseDialog();
-            this.router.navigate(['/master/grade']);
+            this.autoRefresh();
+            // this.router.navigate(['/master/grade']);
             this.gradeService.notify('Grade Added successfully..!');
           },
           (error: any) => {
@@ -136,6 +137,7 @@ export class GradeFormComponent {
           }
         );
       }
+      this.router.navigate(['/master/grade']);
       if (this.actionLabel === 'Update') {
         console.log(formData.gradeId);
         this.gradeService.updateGrade(formData).subscribe(
@@ -174,5 +176,9 @@ export class GradeFormComponent {
   resetForm() {
     this.collectQueryParams();
     this.initForm();
+  }
+
+  autoRefresh() {
+    this.router.navigate(['/master/grade']);
   }
 }

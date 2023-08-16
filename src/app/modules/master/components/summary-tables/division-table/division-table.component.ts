@@ -81,12 +81,12 @@ export class DivisionTableComponent {
         break;
       case 'add':
         this.OpenModal();
-        //this.router.navigate(['/master/division']);
+        this.router.navigate(['/master/division']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/division-table'], {
+        this.router.navigate(['/master/division'], {
           queryParams: queryParam,
         });
         break;

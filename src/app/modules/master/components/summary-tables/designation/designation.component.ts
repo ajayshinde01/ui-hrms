@@ -93,14 +93,14 @@ export class DesignationComponent {
 
       case 'add':
         this.OpenModal();
-        //this.router.navigate(['/master/designationForm']);
+        this.router.navigate(['/master/designationForm']);
         break;
 
       case 'edit':
         data: {
           id: queryParam;
         }
-        // this.router.navigate(['/master/designation']);
+        // this.router.navigate(['/master/designationForm']);
         this.OpenModalForEdit(id);
 
         this.router.navigate(['/master/designation'], {

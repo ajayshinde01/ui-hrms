@@ -86,14 +86,15 @@ export class GradeComponent {
 
       case 'add':
         this.OpenModal();
-        // this.router.navigate(['/master/gradeForm']);
+        this.router.navigate(['/master/gradeForm']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/grade'], {
+        this.router.navigate(['/master/gradeForm'], {
           queryParams: queryParam,
         });
+
         break;
     }
   }

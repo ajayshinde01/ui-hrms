@@ -214,12 +214,12 @@ export class DatatableComponent implements OnInit, OnChanges {
   nextPage(page: number) {
     let totalPages = Math.ceil(this.totalRecord / this.pagination.pageSize);
     console.log('total pages ' + totalPages);
-    // if (totalPages == page + 1) {
-    //   console.log('Hi');
-    //   this.pagination.pageNumber = page - 1;
-    // }
-
-    this.pagination.pageNumber = page + 1;
+    if (totalPages == page + 1) {
+      console.log('Hi');
+      this.pagination.pageNumber = page;
+    } else {
+      this.pagination.pageNumber = page + 1;
+    }
 
     this.setHttpParams();
   }

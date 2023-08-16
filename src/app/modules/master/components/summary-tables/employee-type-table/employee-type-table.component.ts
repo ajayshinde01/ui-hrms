@@ -91,14 +91,14 @@ export class EmployeeTypeTableComponent {
         break;
       case 'add':
         this.OpenModal();
-        // this.router.navigate(['/master/employee-type']);
+        this.router.navigate(['/master/employee-type']);
         break;
 
       case 'edit':
         // if (event['data'].employeeTypeId == undefined)
         //   this.employeeTypeService.warn('Please select Id for the operation');
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/employee-table'], {
+        this.router.navigate(['/master/employee-type'], {
           queryParams: queryParam,
         });
         break;

@@ -119,14 +119,14 @@ export class DepartmentTableComponent {
       case 'add':
         this.OpenModal();
 
-        //this.router.navigate(['/master/department']);
+        this.router.navigate(['/master/department']);
 
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
 
-        this.router.navigate(['/master/department-table'], {
+        this.router.navigate(['/master/department'], {
           queryParams: queryParam,
         });
 

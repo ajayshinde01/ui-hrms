@@ -132,7 +132,7 @@ export class DivisionComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.divisionService.warn('Credentials already present');
+              this.divisionService.warn('Division Id already present');
             }
           }
         );
