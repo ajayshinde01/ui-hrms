@@ -1,12 +1,13 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Data, Router } from '@angular/router';
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { Grade } from 'src/app/modules/master/models/grade.model';
 import { ApiResponse } from 'src/app/modules/master/models/response';
 import { GradeService } from 'src/app/modules/master/services/grade.service';
 import { PopupComponent } from '../../helper/popup/popup.component';
+import { GradeFormComponent } from '../../forms/grade-form/grade.form.component';
 
 @Component({
   selector: 'app-grade',
@@ -15,7 +16,7 @@ import { PopupComponent } from '../../helper/popup/popup.component';
 })
 export class GradeComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  matDialogRef: MatDialogRef<GradeFormComponent>;
   gradeMetaData: { content: Array<Grade>; totalElements: number } = {
     content: [],
     totalElements: 0,
@@ -28,7 +29,7 @@ export class GradeComponent {
   constructor(
     private gradeService: GradeService,
     private router: Router,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +64,8 @@ export class GradeComponent {
         this.gradeService.deleteGrade(event['data'].gradeId).subscribe(
           (response: ApiResponse) => {
             console.log('DELETE-Grade Request successful', response);
+            this.searchFunction(this.params);
+
             const currentPage = Number(this.params.get('page'));
 
             if (this.gradeMetaData.content.length === 1 && currentPage > 0) {
@@ -73,8 +76,6 @@ export class GradeComponent {
               this.searchFunction(this.params);
             }
 
-            this.searchFunction(this.params);
-
             this.gradeService.notify('Grade Deleted successfully..!');
           },
           (error: any) => {
@@ -84,13 +85,16 @@ export class GradeComponent {
         break;
 
       case 'add':
+        this.OpenModal();
         this.router.navigate(['/master/gradeForm']);
         break;
 
       case 'edit':
+        this.OpenModalForEdit(id);
         this.router.navigate(['/master/gradeForm'], {
           queryParams: queryParam,
         });
+
         break;
     }
   }
@@ -104,5 +108,28 @@ export class GradeComponent {
         console.log(data.totalElements);
         this.gradeMetaData = data;
       });
+  }
+
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(GradeFormComponent, {
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
+  }
+
+  OpenModalForEdit(data: string) {
+    this.matDialogRef = this.matDialog.open(GradeFormComponent, {
+      data: { id: data },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
   }
 }

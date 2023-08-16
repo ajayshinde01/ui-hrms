@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +13,11 @@ import { Department } from '../../../models/department.model';
 import { DepartmentService } from '../../../services/department.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PopupComponent } from '../../helper/popup/popup.component';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
@@ -35,6 +39,8 @@ export class DepartmentComponent implements OnInit {
 
   actionLabel: string = 'Save';
   constructor(
+    private _mdr: MatDialogRef<DepartmentComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     public departmentService: DepartmentService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -42,9 +48,16 @@ export class DepartmentComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
+
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
         this.isDisabled = true;
@@ -52,7 +65,6 @@ export class DepartmentComponent implements OnInit {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
 
   goBack() {
@@ -111,17 +123,19 @@ export class DepartmentComponent implements OnInit {
   onSubmit() {
     if (this.departmentForm.valid) {
       this.departmentForm.get('departmentId')?.enable();
-
       const formData = this.departmentForm.value;
+      formData.updatedBy = 'Admin';
+
       if (this.actionLabel === 'Save') {
         this.departmentService.createDepartment(formData).subscribe(
           (response: Department) => {
-            this.departmentService.notify('Save Successfully...');
+            this.CloseDialog();
+            this.departmentService.notify('Department added Successfully...');
             this.router.navigate(['/master/department-table']);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.departmentService.warn('Credentials already present');
+              this.departmentService.warn('Department Id already present');
             }
           }
         );
@@ -130,6 +144,8 @@ export class DepartmentComponent implements OnInit {
         formData.updatedBy = 'Admin';
         this.departmentService.updateDepartment(formData).subscribe(
           (response: Department) => {
+            this.CloseDialog();
+
             this.departmentService.notify('Update Successfully...');
             this.router.navigate(['/master/department-table']);
           },
@@ -149,5 +165,15 @@ export class DepartmentComponent implements OnInit {
         this.departmentForm.patchValue(response);
         this.department = response;
       });
+  }
+
+  CloseDialog() {
+    this._mdr.close(false);
+    this.router.navigate(['/master/department-table']);
+  }
+
+  resetForm() {
+    this.collectQueryParams();
+    this.initForm();
   }
 }

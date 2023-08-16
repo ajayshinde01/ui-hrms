@@ -1,37 +1,22 @@
-<div class="container" style="width: 550px; height: 330px">
-  <div div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="d-flex justify-content-between">
-          <h2 mat-dialog-title>ROLE</h2>
-
-          <button class="close-btn" (click)="CloseDialog()">
-            <i style="font-size: 12px" class="fa">&#xf00d;</i>
-          </button>
+<form [formGroup]="roleForm">
+  <div class="container" style="width: 490px; height: 320px">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>Role</h2>
+            <button class="close-btn" (click)="CloseDialog()">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
+          </div>
+          <div class="line"></div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- <button class="close-btn">
-    <i class="fa fa-times" aria-hidden="true"></i>
-  </button> -->
-
-  <mat-dialog-content [formGroup]="roleForm">
-    <!-- <div>
-                      <button
-                        class="btn btn-warrning go-back"
-                        (click)="goBack()"
-                      >
-                        Back
-                      </button>
-                    </div> -->
-
-    <!-- <div class="form-row"> -->
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Role Id</mat-label>
+          <mat-label>Role Id </mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -41,6 +26,7 @@
                 class="form-Control name-field"
                 placeholder="AVI-123"
                 formControlName="roleId"
+                [disabled]="isDisabled"
               />
               <div
                 *ngIf="
@@ -58,7 +44,7 @@
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId'].errors?.['pattern']"
-                  >Please eneter valid id
+                  >Please eneter valid Role Id
                 </span>
 
                 <span
@@ -69,7 +55,7 @@
 
                 <span
                   class="validate-text"
-                  *ngIf="roleForm.controls['roleId']?.errors?.['whitespace'] && !roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId']?.errors?.['trailingSpace'] "
+                  *ngIf="roleForm.controls['roleId']?.errors?.['whitespace'] && !roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId']?.errors?.['trailingSpace']  && !roleForm.controls['roleId'].errors?.['pattern']"
                   >No whitespaces are allowed.</span
                 >
 
@@ -165,6 +151,7 @@
         </div>
       </div>
     </div>
+
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
@@ -173,12 +160,7 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                class="form-Control name-field"
-                placeholder="AVI-BHR"
-                formControlName="orgCode"
-              />
+              <input matInput placeholder="IND_KOL" formControlName="orgCode" />
               <div
                 *ngIf="
                   roleForm.controls['orgCode']?.invalid &&
@@ -189,25 +171,19 @@
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['required']"
-                  >Please enter Org-Code
-                </span>
+                  >Please enter Organization Code</span
+                >
 
                 <span
                   class="validate-text"
-                  *ngIf="roleForm.controls['orgCode'].errors?.['pattern']"
-                  >Please eneter valid Org-Code
-                </span>
+                  *ngIf="roleForm.controls['orgCode']?.errors?.['whitespace'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode']?.errors?.['pattern']"
+                  >No whitespaces are allowed.</span
+                >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace']"
                   >Leading space not allowed.</span
-                >
-
-                <span
-                  class="validate-text"
-                  *ngIf="roleForm.controls['orgCode']?.errors?.['whitespace'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace'] "
-                  >No whitespaces are allowed.</span
                 >
 
                 <span
@@ -224,6 +200,12 @@
 
                 <span
                   class="validate-text"
+                  *ngIf="roleForm.controls['orgCode'].errors?.['pattern']"
+                  >Please enter Organization Code
+                </span>
+
+                <span
+                  class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['idMaxLength'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace']"
                   >Maximum 50 characters are allowed.</span
                 >
@@ -233,39 +215,32 @@
         </div>
       </div>
     </div>
-    <mat-dialog-actions>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex justify-content-end">
-              <button
-                class="btn btn-success action-btn"
-                (click)="onSumbit()"
-                [disabled]="!roleForm.valid"
-              >
-                Save
-              </button>
-              <button
-                class="btn btn-success action-btn"
-                (click)="CloseDialog()"
-              >
-                Reset
-              </button>
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSumbit()"
+                  [disabled]="!roleForm.valid"
+                >
+                  {{ actionLabel }}
+                </button>
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </mat-dialog-actions>
-
-    <!-- <div _ngcontent-ng-c812429062="" class="form-footer">
-                    <button
-                      _ngcontent-ng-c812429062=""
-                      class="profile-save-btn"
-                      (click)="onSumbit()"
-                      [disabled]="!roleForm.valid"
-                    >
-                      {{ actionLabel }}
-                    </button>
-                  </div> -->
-  </mat-dialog-content>
-</div>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</form>

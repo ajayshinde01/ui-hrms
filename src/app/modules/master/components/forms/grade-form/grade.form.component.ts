@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Grade } from '../../../models/grade.model';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { DesignationService } from '../../../services/designation.service';
 import { GradeService } from '../../../services/grade.service';
@@ -25,6 +29,8 @@ export class GradeFormComponent {
   button: boolean = false;
   isDisabled: boolean = false;
   constructor(
+    private _mdr: MatDialogRef<GradeFormComponent>,
+    @Inject(MAT_DIALOG_DATA) data: string,
     private formBuilder: FormBuilder,
     private designationService: DesignationService,
     private dialog: MatDialog,
@@ -34,6 +40,11 @@ export class GradeFormComponent {
   ) {}
 
   ngOnInit(): void {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
@@ -46,11 +57,8 @@ export class GradeFormComponent {
         this.actionLabel = 'Save';
       }
     });
-    this.initForm();
   }
-  goBack() {
-    this.router.navigate(['/master/grade']);
-  }
+
   initForm() {
     this.gradeForm = this.formBuilder.group({
       id: [''],
@@ -116,22 +124,26 @@ export class GradeFormComponent {
         this.gradeService.createGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('POST-GRADE Request successful', response);
-            this.router.navigate(['/master/grade']);
+            this.CloseDialog();
+            this.autoRefresh();
+            // this.router.navigate(['/master/grade']);
             this.gradeService.notify('Grade Added successfully..!');
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.gradeService.warn('Credentials already present');
+            if (error.status == 400) {
+              this.gradeService.warn('Grade Id already present');
             }
             console.error('POST Request failed', error);
           }
         );
       }
+      this.router.navigate(['/master/grade']);
       if (this.actionLabel === 'Update') {
         console.log(formData.gradeId);
         this.gradeService.updateGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);
+            this.CloseDialog();
             this.gradeService.notify('Grade Updated successfully..!');
             this.router.navigate(['/master/grade']);
           },
@@ -154,5 +166,19 @@ export class GradeFormComponent {
       console.log(this.gradeForm.value);
       this.grade = response;
     });
+  }
+
+  CloseDialog() {
+    this._mdr.close(false);
+    this.router.navigate(['/master/grade']);
+  }
+
+  resetForm() {
+    this.collectQueryParams();
+    this.initForm();
+  }
+
+  autoRefresh() {
+    this.router.navigate(['/master/grade']);
   }
 }

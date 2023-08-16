@@ -5,8 +5,13 @@ import { EmployeeTypeService } from '../../../services/employee-type.service';
 import { Data, Router } from '@angular/router';
 import { ApiResponse } from '../../../models/response';
 import { PopupComponent } from '../../helper/popup/popup.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { HttpParams } from '@angular/common/http';
+import { EmployeeTypeComponent } from '../../forms/employee-type-form/employee-type.component';
 
 @Component({
   selector: 'app-employee-type-table',
@@ -23,11 +28,12 @@ export class EmployeeTypeTableComponent {
     columnsMetadata: [],
   };
   params: HttpParams = new HttpParams();
+  matDialogRef: MatDialogRef<EmployeeTypeComponent>;
 
   constructor(
     private employeeTypeService: EmployeeTypeService,
     private router: Router,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +69,8 @@ export class EmployeeTypeTableComponent {
               this.employeeTypeService.notify(
                 'Employee Type Deleted Successfully...'
               );
+              this.searchFunction(this.params);
+
               const currentPage = Number(this.params.get('page'));
 
               if (
@@ -75,7 +83,6 @@ export class EmployeeTypeTableComponent {
 
                 this.searchFunction(this.params);
               }
-              this.searchFunction(this.params);
             },
             (error: any) => {
               console.error('DELETE-Employee Type Request failed', error);
@@ -83,12 +90,14 @@ export class EmployeeTypeTableComponent {
           );
         break;
       case 'add':
+        this.OpenModal();
         this.router.navigate(['/master/employee-type']);
         break;
 
       case 'edit':
-        if (event['data'].employeeTypeId == undefined)
-          this.employeeTypeService.warn('Please select Id for the operation');
+        // if (event['data'].employeeTypeId == undefined)
+        //   this.employeeTypeService.warn('Please select Id for the operation');
+        this.OpenModalForEdit(id);
         this.router.navigate(['/master/employee-type'], {
           queryParams: queryParam,
         });
@@ -108,5 +117,28 @@ export class EmployeeTypeTableComponent {
           this.employeeTypeMetaData = data;
         }
       );
+  }
+
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(EmployeeTypeComponent, {
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
+  }
+
+  OpenModalForEdit(data: string) {
+    this.matDialogRef = this.matDialog.open(EmployeeTypeComponent, {
+      data: { id: data },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+      }
+    });
   }
 }

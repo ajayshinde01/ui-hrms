@@ -32,13 +32,13 @@
 // .col-lg-6 {
 //   margin-top: 18px;
 // }
-// .validate-text {
-//   font-size: 9px;
-//   text-align: left;
-//   color: red;
-//   position: relative; /* Or absolute or fixed depending on your layout */
-//   left: -15px;
-// }
+.validate-text {
+  font-size: 9px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
+}
 
 // .card .card-header {
 //   border-bottom: none;
@@ -194,27 +194,87 @@
 // ::ng-deep.mat-form-field-outline {
 //   color: red !important;
 // }
-
+// .form-controls {
+//   //margin-left: 60px;
+// }
+.col-md-4 mt-2 {
+  margin-right: 50px;
+}
+.input {
+  width: 140%;
+}
+.mat-mdc-dialog-surface mdc-dialog__surface {
+  overflow: hidden;
+}
+.row-section {
+  margin-left: 15px;
+  //margin-top: 5px;
+}
+.title {
+  margin-left: -11px;
+  margin-top: 10px;
+}
 .close-btn {
   width: 25px;
   height: 20px;
   font-size: 8px;
-  margin-top: 19px;
+  margin-top: 8%;
   border-radius: 7px;
   border: none;
+  margin-right: -30px;
+}
+.line {
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .justify-content-between {
   justify-content: space-between !important;
   height: 50px;
   width: 95%;
   margin-top: -10px;
+  // border-bottom: 1px solid black;
+  // margin-bottom: 30px;
+  // padding-bottom: 10px;
 }
 .justify-content-end {
   justify-content: flex-end !important;
-  width: 97%;
+  width: 99%;
 }
 .action-btn {
   margin: 3px;
   height: 30px;
   //background-color: gray;
+}
+.desc-label {
+  margin-top: -20px !important;
+}
+
+.field-one {
+  margin-top: 1px;
+}
+.profile-save-btn {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+  margin-right: 3px;
+}
+
+.save-btn {
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #534686;
+  color: white;
+  margin-right: 4px;
+}
+.dark {
+  width: 50px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
 }
