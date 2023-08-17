@@ -61,7 +61,7 @@ export class DivisionTableComponent {
           (response: ApiResponse) => {
             console.log('DELETE-Division Request successful', response);
 
-            this.divisionService.notify('Division Deleted successfully..!');
+            this.divisionService.notify('Division Deleted successfully');
             this.searchFunction(this.params);
 
             const currentPage = Number(this.params.get('page'));
@@ -81,12 +81,12 @@ export class DivisionTableComponent {
         break;
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/division']);
+        this.router.navigate(['/master/division-table']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/division'], {
+        this.router.navigate(['/master/division-table'], {
           queryParams: queryParam,
         });
         break;

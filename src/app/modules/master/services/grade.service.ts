@@ -5,6 +5,7 @@ import { ColumnsMetadata } from '../models/columnMetaData';
 import { Grade } from '../models/grade.model';
 import { ToastrService } from 'ngx-toastr';
 import { ApiResponse } from '../models/response';
+import { GradeType } from '../models/gradeType';
 @Injectable()
 export class GradeService {
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
@@ -45,6 +46,12 @@ export class GradeService {
       'http://192.168.1.16:7000/employee/grade/delete/' +
         gradeId +
         '?updatedBy=Admin'
+    );
+  }
+
+  gradeTypeFromCommonMaster(): Observable<{ gradeType: Array<GradeType> }> {
+    return this.http.get<{ gradeType: Array<GradeType> }>(
+      'http://192.168.1.16:8000/utility/masters/commonMaster/Grade Type'
     );
   }
 

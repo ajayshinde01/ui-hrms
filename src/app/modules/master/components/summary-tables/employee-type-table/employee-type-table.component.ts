@@ -67,7 +67,7 @@ export class EmployeeTypeTableComponent {
           .subscribe(
             (response: ApiResponse) => {
               this.employeeTypeService.notify(
-                'Employee Type Deleted Successfully...'
+                'Employee Type Deleted Successfully'
               );
               this.searchFunction(this.params);
 
@@ -91,14 +91,12 @@ export class EmployeeTypeTableComponent {
         break;
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/employee-type']);
+        this.router.navigate(['/master/employee-table']);
         break;
 
       case 'edit':
-        // if (event['data'].employeeTypeId == undefined)
-        //   this.employeeTypeService.warn('Please select Id for the operation');
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/employee-type'], {
+        this.router.navigate(['/master/employee-table'], {
           queryParams: queryParam,
         });
         break;

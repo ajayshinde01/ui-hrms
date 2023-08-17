@@ -36,6 +36,7 @@ export class EmployeeTypeComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private _mdr: MatDialogRef<EmployeeTypeComponent>,
@@ -129,15 +130,17 @@ export class EmployeeTypeComponent {
         this.employeeTypeService.createEmployee(formData).subscribe(
           (response: Employee) => {
             console.log('POST-EmployeeType Request successful', response);
-            this.CloseDialog();
             this.employeeTypeService.notify(
-              ' Employee Type Added Successfully...'
+              ' Employee Type added Successfully'
             );
-            this.router.navigate(['/master/employee-table']);
+            this.CloseDialog();
+
+            //this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
             if (error.status == 400) {
-              this.employeeTypeService.warn('Employee Type Id already present');
+              this.errorMessage = error.error.message;
+              this.employeeTypeService.warn(this.errorMessage);
             }
           }
         );
@@ -146,9 +149,12 @@ export class EmployeeTypeComponent {
         formData.updatedBy = 'Admin';
         this.employeeTypeService.updateEmployee(formData).subscribe(
           (response: Employee) => {
+            this.employeeTypeService.notify(
+              'Employee Type updated Successfully'
+            );
             this.CloseDialog();
-            this.employeeTypeService.notify('Record Update Successfully...');
-            this.router.navigate(['/master/employee-table']);
+
+            // this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -172,7 +178,9 @@ export class EmployeeTypeComponent {
 
   CloseDialog() {
     this._mdr.close(false);
-    this.router.navigate(['/master/employee-table']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   resetForm() {

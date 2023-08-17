@@ -76,7 +76,7 @@ export class GradeComponent {
               this.searchFunction(this.params);
             }
 
-            this.gradeService.notify('Grade Deleted successfully..!');
+            this.gradeService.notify('Grade Deleted successfully');
           },
           (error: any) => {
             console.error('DELETE-GRADE Request failed', error);
@@ -86,12 +86,12 @@ export class GradeComponent {
 
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/gradeForm']);
+        this.router.navigate(['/master/grade']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/gradeForm'], {
+        this.router.navigate(['/master/grade'], {
           queryParams: queryParam,
         });
 

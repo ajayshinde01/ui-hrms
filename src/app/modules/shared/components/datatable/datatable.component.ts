@@ -42,8 +42,6 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
 
-  // @ViewChild('addFormModel') addFormModel!: ElementRef;
-
   paginationList: Array<number> = [];
 
   selectedValue!: Object;
@@ -53,8 +51,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   key: string = 'id';
 
   reverse: boolean = false;
-
-  // data: any;
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 

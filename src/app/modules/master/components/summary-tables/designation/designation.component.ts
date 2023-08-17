@@ -40,6 +40,7 @@ export class DesignationComponent {
     params = params.set('page', 0);
     params = params.set('size', 10);
     this.searchFunction(params);
+    console.log('inside ngonit of table');
   }
 
   getHeaders() {
@@ -68,7 +69,7 @@ export class DesignationComponent {
             (response: ApiResponse) => {
               console.log('DELETE-DESIGNATION Request successful', response);
               this.designationService.notify(
-                'Designation Deleted successfully..!'
+                'Designation Deleted successfully'
               );
               this.searchFunction(this.params);
 
@@ -93,19 +94,19 @@ export class DesignationComponent {
 
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/designationForm']);
+        this.router.navigate(['/master/designation']);
         break;
 
       case 'edit':
         data: {
           id: queryParam;
         }
-        // this.router.navigate(['/master/designationForm']);
         this.OpenModalForEdit(id);
 
         this.router.navigate(['/master/designation'], {
           queryParams: queryParam,
         });
+
         break;
     }
   }

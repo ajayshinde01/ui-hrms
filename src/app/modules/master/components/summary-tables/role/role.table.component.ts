@@ -71,7 +71,7 @@ export class RoleComponent {
           (response: ApiResponse) => {
             console.log('DELETE-ROLE Request successful', response);
 
-            this.roleService.notify('Role Deleted successfully..!');
+            this.roleService.notify('Role Deleted successfully');
             console.log(this.params);
 
             this.searchFunction(this.params);
@@ -95,12 +95,12 @@ export class RoleComponent {
 
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/roleForm']);
+        this.router.navigate(['/master/role']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/roleForm'], { queryParams: queryParam });
+        this.router.navigate(['/master/role'], { queryParams: queryParam });
         break;
     }
   }

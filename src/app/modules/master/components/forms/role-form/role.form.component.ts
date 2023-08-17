@@ -27,6 +27,7 @@ export class RoleFormComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
+  errorMessage: string = '';
   constructor(
     private _mdr: MatDialogRef<RoleFormComponent>,
     @Inject(MAT_DIALOG_DATA) data: string,
@@ -117,15 +118,13 @@ export class RoleFormComponent {
         this.roleService.createRole(formData).subscribe(
           (response: Array<Role>) => {
             console.log('POST-ROLE Request successful', response);
-            console.log('inside submit and ready to close dialogue');
+            this.roleService.notify('Role added successfully');
             this.CloseDialog();
-            this.router.navigate(['/master/role']);
-            this.roleService.notify('Role Added successfully..!');
           },
           (error: any) => {
             if (error.status == 400) {
-              console.log(error.message);
-              this.roleService.warn('Role Id already present');
+              this.errorMessage = error.error.message;
+              this.roleService.warn(this.errorMessage);
             }
             console.error('POST Request failed', error);
           }
@@ -135,10 +134,8 @@ export class RoleFormComponent {
         this.roleService.updateRole(formData).subscribe(
           (response: Array<Role>) => {
             console.log('PUT-ROLE Request successful', response);
+            this.roleService.notify('Role updated successfully');
             this.CloseDialog();
-
-            this.roleService.notify('Role Updated successfully..!');
-            this.router.navigate(['/master/role']);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -161,7 +158,9 @@ export class RoleFormComponent {
 
   CloseDialog() {
     this._mdr.close(false);
-    this.router.navigate(['/master/role']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   resetForm() {

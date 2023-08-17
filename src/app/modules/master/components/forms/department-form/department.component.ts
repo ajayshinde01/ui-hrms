@@ -36,6 +36,7 @@ export class DepartmentComponent implements OnInit {
   submitted: boolean = false;
   queryParams?: Params;
   isDisabled: boolean = false;
+  errorMessage: string = '';
 
   actionLabel: string = 'Save';
   constructor(
@@ -129,13 +130,14 @@ export class DepartmentComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.departmentService.createDepartment(formData).subscribe(
           (response: Department) => {
+            this.departmentService.notify('Department added Successfully');
+
             this.CloseDialog();
-            this.departmentService.notify('Department added Successfully...');
-            this.router.navigate(['/master/department-table']);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.departmentService.warn('Department Id already present');
+              this.errorMessage = error.error.message;
+              this.departmentService.warn(this.errorMessage);
             }
           }
         );
@@ -144,10 +146,9 @@ export class DepartmentComponent implements OnInit {
         formData.updatedBy = 'Admin';
         this.departmentService.updateDepartment(formData).subscribe(
           (response: Department) => {
-            this.CloseDialog();
+            this.departmentService.notify('Department updated Successfully');
 
-            this.departmentService.notify('Update Successfully...');
-            this.router.navigate(['/master/department-table']);
+            this.CloseDialog();
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -169,7 +170,9 @@ export class DepartmentComponent implements OnInit {
 
   CloseDialog() {
     this._mdr.close(false);
-    this.router.navigate(['/master/department-table']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   resetForm() {

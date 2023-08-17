@@ -89,9 +89,7 @@ export class DepartmentTableComponent {
 
           .subscribe(
             (response: ApiResponse) => {
-              this.departmentService.notify(
-                'Department Deleted successfully..!'
-              );
+              this.departmentService.notify('Department Deleted successfully');
 
               this.searchFunction(this.params);
 
@@ -119,14 +117,14 @@ export class DepartmentTableComponent {
       case 'add':
         this.OpenModal();
 
-        this.router.navigate(['/master/department']);
+        this.router.navigate(['/master/department-table']);
 
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
 
-        this.router.navigate(['/master/department'], {
+        this.router.navigate(['/master/department-table'], {
           queryParams: queryParam,
         });
 

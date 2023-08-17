@@ -16,7 +16,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Role Id </mat-label>
+          <mat-label>Role ID </mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -38,43 +38,43 @@
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId']?.errors?.['required']"
-                  >Please enter Role Id</span
+                  >Please enter Role ID</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId'].errors?.['pattern']"
-                  >Please eneter valid Role Id
+                  >Please enter valid Role ID
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId']?.errors?.['whitespace'] && !roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId']?.errors?.['trailingSpace']  && !roleForm.controls['roleId'].errors?.['pattern']"
-                  >No whitespaces are allowed.</span
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId']?.errors?.['trailingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId']?.errors?.['trailingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && roleForm.controls['roleId']?.errors?.['leadingSpace']"
-                  >Trailing,Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleId']?.errors?.['idMaxLength'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed.</span
+                  >Maximum 50 characters are allowed</span
                 >
               </div>
             </div>
@@ -107,43 +107,43 @@
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName']?.errors?.['required']"
-                  >Please enter Role Name.</span
+                  >Please enter Role Name</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName'].errors?.['pattern']"
-                  >Please eneter valid Role Name.
+                  >Please enter valid Role Name
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName']?.errors?.['leadingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName']?.errors?.['whitespace'] && !roleForm.controls['roleName']?.errors?.['leadingSpace'] && !roleForm.controls['roleName']?.errors?.['trailingSpace'] "
-                  >No whitespaces are allowed.</span
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName']?.errors?.['trailingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName']?.errors?.['trailingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && roleForm.controls['roleName']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['roleName']?.errors?.['nameMaxLength'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['leadingSpace']"
-                  >Maximum 100 characters are allowed.</span
+                  >Maximum 100 characters are allowed</span
                 >
               </div>
             </div>
@@ -177,37 +177,37 @@
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['whitespace'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode']?.errors?.['pattern']"
-                  >No whitespaces are allowed.</span
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && roleForm.controls['orgCode']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode'].errors?.['pattern']"
-                  >Please enter Organization Code
+                  >Please enter valid Organization Code
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="roleForm.controls['orgCode']?.errors?.['idMaxLength'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed.</span
+                  >Maximum 50 characters are allowed</span
                 >
               </div>
             </div>

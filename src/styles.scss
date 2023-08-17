@@ -10,12 +10,17 @@ body {
 .mm {
   margin-left: 11%;
 }
+
+.toast-custom {
+  max-width: 400px; /* Adjust the width as needed */
+}
 ////////////////////////////////////////////////
 .toast-center {
   /* You can adjust the styles here to center the toast */
   top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-width: 400px;
 }
 ///////////////////////////////////////////////////////////
 .test {

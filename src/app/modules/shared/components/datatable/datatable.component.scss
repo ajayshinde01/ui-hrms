@@ -387,6 +387,18 @@ label {
   background-color: #f1faff;
   box-shadow: none !important;
 }
+.confirm {
+  display: inline-block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  margin-right: 4px;
+}
 
 .pagination-box {
   background-color: white;

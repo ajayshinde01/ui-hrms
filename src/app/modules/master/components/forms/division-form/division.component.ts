@@ -38,6 +38,7 @@ export class DivisionComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private _mdr: MatDialogRef<DivisionComponent>,
@@ -126,13 +127,14 @@ export class DivisionComponent {
       if (this.actionLabel === 'Save') {
         this.divisionService.createDivision(formData).subscribe(
           (response: Division) => {
+            this.divisionService.notify('Division added Successfully');
+
             this.CloseDialog();
-            this.divisionService.notify('Division Added Successfully...');
-            this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.divisionService.warn('Division Id already present');
+            if (error.status == 400) {
+              this.errorMessage = error.error.message;
+              this.divisionService.warn(this.errorMessage);
             }
           }
         );
@@ -141,9 +143,8 @@ export class DivisionComponent {
         formData.updatedBy = 'Admin';
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
+            this.divisionService.notify('Division updated  Successfully');
             this.CloseDialog();
-            this.divisionService.notify('Division Updated  Successfully...');
-            this.router.navigate(['/master/division-table']);
           },
           (error: any) => {
             if (error.status == 400) {
@@ -165,9 +166,10 @@ export class DivisionComponent {
   }
 
   CloseDialog() {
-    console.log('inside close dialogue');
     this._mdr.close(false);
-    this.router.navigate(['/master/division-table']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   resetForm() {
