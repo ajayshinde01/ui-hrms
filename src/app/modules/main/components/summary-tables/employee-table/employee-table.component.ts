@@ -57,7 +57,7 @@ export class EmployeeTableComponent {
       case 'delete':
         this.employeeService.deleteEmployee(id).subscribe(
           (response: ApiResponse) => {
-            this.employeeService.notify('Department Deleted successfully..!');
+            this.employeeService.notify('Employee Deleted successfully..!');
             const currentPage = Number(this.params.get('page'));
             if (this.employeeMetaData.content.length === 1 && currentPage > 0) {
               const newPage = currentPage - 1;
