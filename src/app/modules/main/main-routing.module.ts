@@ -5,20 +5,20 @@ import { DemoComponent } from './components/demo/demo.component';
 import { LayoutComponent } from '../core/components/layout/layout.component';
 import { GradeComponent } from '../master/components/summary-tables/grade/grade.component';
 import { LoginComponent } from '../core/components/login/login.component';
+import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'test',
+
+    redirectTo: 'demo',
+
     pathMatch: 'full',
   },
   {
     path: '',
     component: LayoutComponent,
-    children: [
-      { path: 'test', component: TestComponent },
-      { path: 'demo', component: DemoComponent },
-    ],
+    children: [{ path: 'employee', component: EmployeeTableComponent }],
   },
   {
     path: '',

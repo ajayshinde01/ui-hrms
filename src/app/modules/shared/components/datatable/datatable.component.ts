@@ -192,10 +192,22 @@ export class DatatableComponent implements OnInit, OnChanges {
   setPagination() {
     this.paginationList = [];
 
-    let totalPages = Math.ceil(this.totalRecord / this.pagination.pageSize);
+    const totalPages = Math.ceil(this.totalRecord / this.pagination.pageSize);
+    const currentPage = this.pagination.pageNumber;
 
-    for (let i = 0; i < totalPages; i++) {
+    const startPage = Math.max(0, currentPage - 2);
+    const endPage = Math.min(totalPages - 1, currentPage + 2);
+
+    if (currentPage > 2) {
+      this.paginationList.push(0);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
       this.paginationList.push(i);
+    }
+
+    if (currentPage < totalPages - 3) {
+      this.paginationList.push(totalPages - 1);
     }
   }
 
@@ -213,7 +225,6 @@ export class DatatableComponent implements OnInit, OnChanges {
     let totalPages = Math.ceil(this.totalRecord / this.pagination.pageSize);
     console.log('total pages ' + totalPages);
     if (totalPages == page + 1) {
-      console.log('Hi');
       this.pagination.pageNumber = page;
     } else {
       this.pagination.pageNumber = page + 1;

@@ -135,36 +135,37 @@ export class SidebarComponent {
           },
 
           {
-            name: 'Division',
-
-            icon: 'fa-solid fa-ellipsis',
-
-            routerLink: ['/master/division-table'],
-
-            arrowMaster: false,
-          },
-
-          {
-            name: 'Employee Type',
-
-            icon: 'fa-solid fa-ellipsis',
-
-            routerLink: ['/master/employee-table'],
-
-            arrowMaster: false,
-
-            onClick: () => {
-              this.selectedMenuName = 'Employee Type';
-            },
-          },
-
-          {
             name: 'Organization',
 
             icon: 'fa-solid fa-ellipsis',
 
             routerLink: ['/master/organization'],
 
+            arrowMaster: false,
+          },
+          {
+            name: 'Division',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/master/division-table'],
+            arrowMaster: false,
+          },
+          {
+            name: 'Employee Type',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/master/employee-table'],
+            arrowMaster: false,
+          },
+        ],
+      },
+      {
+        name: 'Employee',
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+        showSubmenu: false,
+        submenu: [
+          {
+            name: 'employee-master',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/main/employee'],
             arrowMaster: false,
           },
         ],
