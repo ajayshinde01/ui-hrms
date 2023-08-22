@@ -5,7 +5,7 @@
         <div class="col">
           <div class="d-flex justify-content-between">
             <h2 class="title" mat-dialog-title>Grade</h2>
-            <button class="close-btn" (click)="CloseDialog()">
+            <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
           </div>
@@ -119,6 +119,11 @@
                   *ngIf="gradeForm.controls['gradeName']?.errors?.['leadingSpace'] && !gradeForm.controls['gradeName'].errors?.['pattern'] && !gradeForm.controls['gradeName']?.errors?.['trailingSpace']"
                   >Leading space not allowed</span
                 >
+                <span
+                  class="validate-text"
+                  *ngIf="gradeForm.controls['gradeName']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
 
                 <span
                   class="validate-text"
@@ -184,7 +189,7 @@
                   class="validate-text select-validate"
                   *ngIf="gradeForm.controls['gradeType']?.errors?.['required']"
                 >
-                  Please Select Grade Type
+                  Please select Grade Type
                 </span>
               </div>
             </div>

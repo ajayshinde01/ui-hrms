@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Department } from '../models/department.model';
 import { ColumnsMetadata } from '../models/columnMetaData';
 import { ApiResponse } from '../models/response';
-import { ToastrService } from 'ngx-toastr';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
 })
@@ -66,11 +66,17 @@ export class DepartmentService {
     );
   }
   notify(message: string) {
-    this.toastrService.success(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.success(message, '', toastrConfig);
   }
 
   warn(message: string) {
-    this.toastrService.warning(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.warning(message, '', toastrConfig);
   }
 
   sendData(data: string) {

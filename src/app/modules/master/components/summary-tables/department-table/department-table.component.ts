@@ -42,6 +42,8 @@ export class DepartmentTableComponent {
 
   params: HttpParams = new HttpParams();
 
+  masterName: string = 'Department';
+
   constructor(
     private departmentService: DepartmentService,
 
@@ -89,7 +91,7 @@ export class DepartmentTableComponent {
 
           .subscribe(
             (response: ApiResponse) => {
-              this.departmentService.notify('Department Deleted successfully');
+              this.departmentService.notify('Department deleted successfully');
 
               this.searchFunction(this.params);
 
@@ -156,6 +158,8 @@ export class DepartmentTableComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });
@@ -169,6 +173,8 @@ export class DepartmentTableComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });

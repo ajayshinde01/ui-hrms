@@ -33,6 +33,8 @@ import { DashboardComponent } from './components/summary-tables/dashboard/dashbo
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { OrganizationComponent } from './components/summary-tables/organization/organization.component';
+import { OrganizationFormComponent } from './components/forms/organization-form/organization-form.component';
 @NgModule({
   declarations: [
     DesignationComponent,
@@ -50,6 +52,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     DivisionTableComponent,
     PopupComponent,
     DashboardComponent,
+    OrganizationComponent,
+    OrganizationFormComponent,
   ],
   entryComponents: [RoleFormComponent],
   imports: [

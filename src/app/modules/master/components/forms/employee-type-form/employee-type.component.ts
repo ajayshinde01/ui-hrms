@@ -50,6 +50,37 @@ export class EmployeeTypeComponent {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.employeeTypeForm
+      .get('employeeTypeId')
+      ?.valueChanges.subscribe((value: string) => {
+        this.employeeTypeForm
+          .get('employeeTypeId')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.employeeTypeForm
+      .get('orgCode')
+      ?.valueChanges.subscribe((value: string) => {
+        this.employeeTypeForm
+          .get('orgCode')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.employeeTypeForm
+      .get('type')
+      ?.valueChanges.subscribe((value: string) => {
+        if (value.length > 0) {
+          const firstLetter = value.charAt(0).toUpperCase();
+
+          const restOfValue = value.slice(1);
+
+          const newValue = firstLetter + restOfValue;
+
+          this.employeeTypeForm
+            .get('type')
+            ?.setValue(newValue, { emitEvent: false });
+        }
+      });
   }
 
   collectQueryParams() {
@@ -133,7 +164,7 @@ export class EmployeeTypeComponent {
             this.employeeTypeService.notify(
               ' Employee Type added Successfully'
             );
-            this.CloseDialog();
+            this.Close(true);
 
             //this.router.navigate(['/master/employee-table']);
           },
@@ -152,7 +183,7 @@ export class EmployeeTypeComponent {
             this.employeeTypeService.notify(
               'Employee Type updated Successfully'
             );
-            this.CloseDialog();
+            this.Close(true);
 
             // this.router.navigate(['/master/employee-table']);
           },
@@ -176,11 +207,8 @@ export class EmployeeTypeComponent {
       });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

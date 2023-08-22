@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class DataTableService {
   constructor(private toastrService: ToastrService) {}
   notify(message: string) {
-    this.toastrService.warning(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.warning(message, '', toastrConfig);
   }
 }

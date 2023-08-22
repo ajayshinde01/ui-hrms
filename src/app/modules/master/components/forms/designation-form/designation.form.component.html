@@ -5,7 +5,7 @@
         <div class="col">
           <div class="d-flex justify-content-between">
             <h2 class="title" mat-dialog-title>Designation</h2>
-            <button class="close-btn" (click)="CloseDialog()">
+            <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
           </div>
@@ -107,7 +107,6 @@
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['required']"
                   >Please enter Designation Name.
-                  {{designationForm.controls['designationName'].errors?.['pattern']}}
                 </span>
 
                 <span
@@ -119,7 +118,13 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['whitespace'] && !designationForm.controls['designationName'].errors?.['pattern']"
-                  >White Space not allowed</span
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="designationForm.controls['designationName']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
                 >
 
                 <span
@@ -188,6 +193,12 @@
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['leadingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['trailingSpace']"
                   >Leading space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="designationForm.controls['designationDesc']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
                 >
 
                 <span

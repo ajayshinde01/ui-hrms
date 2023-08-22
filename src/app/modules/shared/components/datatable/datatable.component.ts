@@ -34,6 +34,8 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   @Input() totalRecord: number = 0;
 
+  @Input() masterName: string;
+
   @Output() deleteFunction: EventEmitter<Object> = new EventEmitter();
 
   @Output() buttonFunction: EventEmitter<Object> = new EventEmitter();

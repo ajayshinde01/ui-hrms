@@ -16,6 +16,7 @@ import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { HttpParams } from '@angular/common/http';
 import { GradeType } from '../../../models/gradeType';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'app-grade-form',
@@ -52,6 +53,31 @@ export class GradeFormComponent {
     this.collectQueryParams();
     this.initForm();
     this.getGradeType();
+    this.gradeForm.get('gradeId')?.valueChanges.subscribe((value: string) => {
+      this.gradeForm
+        .get('gradeId')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.gradeForm.get('orgCode')?.valueChanges.subscribe((value: string) => {
+      this.gradeForm
+        .get('orgCode')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.gradeForm.get('gradeName')?.valueChanges.subscribe((value: string) => {
+      if (value.length > 0) {
+        const firstLetter = value.charAt(0).toUpperCase();
+
+        const restOfValue = value.slice(1);
+
+        const newValue = firstLetter + restOfValue;
+
+        this.gradeForm
+          .get('gradeName')
+          ?.setValue(newValue, { emitEvent: false });
+      }
+    });
   }
 
   collectQueryParams() {
@@ -90,6 +116,7 @@ export class GradeFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -134,8 +161,9 @@ export class GradeFormComponent {
         this.gradeService.createGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('POST-GRADE Request successful', response);
+            this.errorMessage = 'Grade added successfully';
             this.gradeService.notify('Grade added successfully');
-            this.CloseDialog();
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400) {
@@ -152,7 +180,7 @@ export class GradeFormComponent {
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);
             this.gradeService.notify('Grade updated successfully');
-            this.CloseDialog();
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -188,11 +216,8 @@ export class GradeFormComponent {
       });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

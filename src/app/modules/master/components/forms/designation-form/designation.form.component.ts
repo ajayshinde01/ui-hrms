@@ -21,6 +21,7 @@ import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { DesignationComponent } from '../../summary-tables/designation/designation.component';
 import { HttpParams } from '@angular/common/http';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'designation-role',
@@ -60,6 +61,37 @@ export class DesignationFormComponent {
 
     this.collectQueryParams();
     this.initForm();
+    this.designationForm
+      .get('designationId')
+      ?.valueChanges.subscribe((value: string) => {
+        this.designationForm
+          .get('designationId')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.designationForm
+      .get('orgCode')
+      ?.valueChanges.subscribe((value: string) => {
+        this.designationForm
+          .get('orgCode')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.designationForm
+      .get('designationName')
+      ?.valueChanges.subscribe((value: string) => {
+        if (value.length > 0) {
+          const firstLetter = value.charAt(0).toUpperCase();
+
+          const restOfValue = value.slice(1);
+
+          const newValue = firstLetter + restOfValue;
+
+          this.designationForm
+            .get('designationName')
+            ?.setValue(newValue, { emitEvent: false });
+        }
+      });
   }
 
   collectQueryParams() {
@@ -99,6 +131,7 @@ export class DesignationFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -109,6 +142,7 @@ export class DesignationFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           descMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
@@ -155,7 +189,7 @@ export class DesignationFormComponent {
             console.log('POST-ROLE Request successful', response);
             this.designationService.notify('Designation added successfully');
 
-            this.CloseDialog();
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400) {
@@ -173,7 +207,7 @@ export class DesignationFormComponent {
             console.log('PUT-ROLE Request successful', response);
             this.designationService.notify('Designation updated successfully');
 
-            this.CloseDialog();
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -198,11 +232,8 @@ export class DesignationFormComponent {
       });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

@@ -14,6 +14,7 @@ import { DivisionTableComponent } from './components/summary-tables/division-tab
 import { DepartmentComponent } from './components/forms/department-form/department.component';
 import { DepartmentTableComponent } from './components/summary-tables/department-table/department-table.component';
 import { DashboardComponent } from './components/summary-tables/dashboard/dashboard.component';
+import { OrganizationComponent } from './components/summary-tables/organization/organization.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [{ path: '', component: DashboardComponent }],
+    children: [{ path: 'dashboard', component: DashboardComponent }],
   },
   {
     path: '',
@@ -93,6 +94,11 @@ const routes: Routes = [
     children: [
       { path: 'department-table', component: DepartmentTableComponent },
     ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'organization', component: OrganizationComponent }],
   },
 ];
 

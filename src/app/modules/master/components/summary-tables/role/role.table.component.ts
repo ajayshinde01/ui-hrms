@@ -33,6 +33,8 @@ export class RoleComponent {
   };
   params: HttpParams = new HttpParams();
 
+  masterName: string = 'Role';
+
   constructor(
     private roleService: RoleService,
     private router: Router,
@@ -71,8 +73,7 @@ export class RoleComponent {
           (response: ApiResponse) => {
             console.log('DELETE-ROLE Request successful', response);
 
-            this.roleService.notify('Role Deleted successfully');
-            console.log(this.params);
+            this.roleService.notify('Role deleted successfully');
 
             this.searchFunction(this.params);
 
@@ -110,8 +111,6 @@ export class RoleComponent {
     this.roleService
       .search(params)
       .subscribe((data: { content: Array<Role>; totalElements: number }) => {
-        console.log(data.content);
-        console.log(data.totalElements);
         this.roleMetaData = data;
       });
   }
@@ -122,6 +121,7 @@ export class RoleComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
       if (res == true) {
       }
     });
@@ -134,6 +134,7 @@ export class RoleComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
       if (res == true) {
       }
     });

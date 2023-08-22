@@ -5,7 +5,7 @@
         <div class="col">
           <div class="d-flex justify-content-between">
             <h2 class="title" mat-dialog-title>Department</h2>
-            <button class="close-btn" (click)="CloseDialog()">
+            <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
           </div>
@@ -107,6 +107,13 @@
                   *ngIf="departmentForm.controls['departmentName'].errors?.['pattern']"
                   >Please enter valid Department Name</span
                 >
+
+                <span
+                  class="validate-text"
+                  *ngIf="departmentForm.controls['departmentName']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
                 <span
                   class="validate-text"
                   *ngIf="departmentForm.controls['departmentName']?.errors?.['leadingSpace'] && !departmentForm.controls['departmentName'].errors?.['pattern'] && !departmentForm.controls['departmentName']?.errors?.['trailingSpace']"
@@ -163,7 +170,7 @@
                 <span
                   class="validate-text"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['required']"
-                  >Please enter Description
+                  >Please enter Department Description
                 </span>
                 <span
                   class="validate-text"
@@ -180,6 +187,12 @@
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['whitespace']"
                   >Field can not be empty</span
                 >
+                <span
+                  class="validate-text"
+                  *ngIf="departmentForm.controls['departmentDescription']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
                 <span
                   class="validate-text"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentDescription'].errors?.['pattern'] && !departmentForm.controls['departmentDescription']?.errors?.['leadingSpace']"

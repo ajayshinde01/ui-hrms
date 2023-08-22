@@ -2,6 +2,7 @@
   <a class="navbar-brand" (click)="sidebarTogle()" id="sidebar-toggle">
     <img src="assets/avisys.png" class="img-fluid logo-img" />
     <div class="toggle-sidebar">
+      <img *ngIf="isHide" class="logo-image" src="favicon.ico" />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -60,6 +61,7 @@
       </ng-template>
     </li>
   </ul>
+  <app-footer></app-footer>
   <!-- <ul class="sidebar-nav">
         <li class="pointer" *ngFor="let menu of sideBarList ;let i=index">
             <ng-container *ngIf="menu.submenu; else noSubmenu">

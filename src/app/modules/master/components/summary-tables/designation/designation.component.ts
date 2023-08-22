@@ -28,6 +28,8 @@ export class DesignationComponent {
   };
   params: HttpParams = new HttpParams();
 
+  masterName: string = 'Designation';
+
   constructor(
     private designationService: DesignationService,
     private router: Router,
@@ -69,7 +71,7 @@ export class DesignationComponent {
             (response: ApiResponse) => {
               console.log('DELETE-DESIGNATION Request successful', response);
               this.designationService.notify(
-                'Designation Deleted successfully'
+                'Designation deleted successfully'
               );
               this.searchFunction(this.params);
 
@@ -130,6 +132,8 @@ export class DesignationComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });
@@ -141,6 +145,8 @@ export class DesignationComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });

@@ -26,6 +26,8 @@ export class GradeComponent {
   };
   params: HttpParams = new HttpParams();
 
+  masterName: string = 'Grade';
+
   constructor(
     private gradeService: GradeService,
     private router: Router,
@@ -76,7 +78,7 @@ export class GradeComponent {
               this.searchFunction(this.params);
             }
 
-            this.gradeService.notify('Grade Deleted successfully');
+            this.gradeService.notify('Grade deleted successfully');
           },
           (error: any) => {
             console.error('DELETE-GRADE Request failed', error);
@@ -116,6 +118,8 @@ export class GradeComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });
@@ -128,6 +132,8 @@ export class GradeComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });

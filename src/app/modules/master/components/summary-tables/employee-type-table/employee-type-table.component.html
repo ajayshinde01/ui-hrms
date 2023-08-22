@@ -3,7 +3,8 @@
   (deleteFunction)="action($event)"
   (buttonFunction)="action($event)"
   [dataSource]="employeeTypeMetaData.content"
-  [headers]="employeeTypeHeaders.columnsMetadata"
+  [headers]="employeeTypeHeaders"
   [totalRecord]="employeeTypeMetaData.totalElements"
+  [masterName]="masterName"
 >
 </app-datatable>

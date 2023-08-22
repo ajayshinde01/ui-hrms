@@ -14,6 +14,8 @@ import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpParams } from '@angular/common/http';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'role-form',
@@ -28,19 +30,49 @@ export class RoleFormComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
+  params: HttpParams = new HttpParams();
+  roleMetaData: { content: Array<Role>; totalElements: number } = {
+    content: [],
+    totalElements: 0,
+  };
+
   constructor(
     private _mdr: MatDialogRef<RoleFormComponent>,
     @Inject(MAT_DIALOG_DATA) data: string,
     private formBuilder: FormBuilder,
     private roleService: RoleService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnChnages() {}
+  ngOnChnages() {
+    //this.searchFunction(this.params);
+  }
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.roleForm.get('roleId')?.valueChanges.subscribe((value: string) => {
+      this.roleForm
+        .get('roleId')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.roleForm.get('orgCode')?.valueChanges.subscribe((value: string) => {
+      this.roleForm
+        .get('orgCode')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.roleForm.get('roleName')?.valueChanges.subscribe((value: string) => {
+      if (value.length > 0) {
+        const firstLetter = value.charAt(0).toUpperCase();
+
+        const restOfValue = value.slice(1);
+
+        const newValue = firstLetter + restOfValue;
+
+        this.roleForm.get('roleName')?.setValue(newValue, { emitEvent: false });
+      }
+    });
   }
 
   collectQueryParams() {
@@ -80,6 +112,7 @@ export class RoleFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -117,9 +150,9 @@ export class RoleFormComponent {
       if (this.actionLabel === 'Save') {
         this.roleService.createRole(formData).subscribe(
           (response: Array<Role>) => {
-            console.log('POST-ROLE Request successful', response);
+            //this._mdr.close(true);
             this.roleService.notify('Role added successfully');
-            this.CloseDialog();
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400) {
@@ -135,7 +168,7 @@ export class RoleFormComponent {
           (response: Array<Role>) => {
             console.log('PUT-ROLE Request successful', response);
             this.roleService.notify('Role updated successfully');
-            this.CloseDialog();
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -156,13 +189,9 @@ export class RoleFormComponent {
     });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
-
   resetForm() {
     this.collectQueryParams();
     this.initForm();
