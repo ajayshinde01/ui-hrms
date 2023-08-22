@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ColumnsMetadata } from '../models/columns-metadata';
 import { Employee } from '../models/employee.model';
 import { ApiResponse } from '../models/response';
+import { Title } from '@angular/platform-browser';
+import { CommonMaster } from '../models/common-master.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,22 @@ export class EmployeeService {
 
   private dataSubject = new BehaviorSubject<string>('');
   public data$ = this.dataSubject.asObservable();
+
+  createEmployee(employee: Employee): Observable<Employee> {
+    console.log(employee);
+    return this.http.post<Employee>(
+      'http://localhost:8090/employee/add',
+      employee
+    );
+  }
+
+  updateEmployee(Id: string): Observable<Employee> {
+    return this.http.put<Employee>('http://localhost:8090/employee/update', Id);
+  }
+
+  searchEmployeeById(Id: string): Observable<Employee> {
+    return this.http.get<Employee>('http://localhost:8090/employee/' + Id);
+  }
 
   getEmployeeHeaders(): Observable<{
     columnsMetadata: Array<ColumnsMetadata>;
@@ -42,7 +60,22 @@ export class EmployeeService {
       'http://localhost:8090/employee/' + employeeId + '?updatedBy=Admin'
     );
   }
+
   notify(message: string) {
     this.toastrService.success(message);
+  }
+
+  warn(message: string) {
+    this.toastrService.warning(message);
+  }
+
+  sendData(data: string) {
+    this.dataSubject.next(data);
+  }
+
+  getTitle(): Observable<Array<CommonMaster>> {
+    return this.http.get<Array<CommonMaster>>(
+      'http://192.168.1.16:8000/utility/masters/commonMaster/Title'
+    );
   }
 }

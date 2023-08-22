@@ -1,0 +1,125 @@
+::ng-deep .mat-mdc-tab-body-content {
+  overflow: hidden !important;
+}
+
+::ng-deep .mat-mdc-form-field {
+  display: flex !important;
+  margin-top: 15px;
+  //  margin-bottom: 15px;
+}
+
+::ng-deep .profile-title {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  padding-top: 10px;
+}
+
+::ng-deep .profile-section img {
+  height: 200px;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  min-height: 50px;
+}
+
+::ng-deep
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mat-mdc-form-field-infix {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+::ng-deep .employee-form-btn-div {
+  margin-top: 20px;
+}
+
+::ng-deep .mat-divider {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.hoverable {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  height: 200px;
+  width: 200px;
+  border: 5px solid #000;
+  border-radius: 50%;
+}
+.hoverable .hover-text {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.hoverable .background {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+.hoverable:hover .hover-text {
+  display: block;
+}
+.hoverable:hover .background {
+  display: block;
+}
+
+#fileInput {
+  display: none;
+}
+
+.employee-form-div {
+  height: 650px;
+  overflow: auto;
+}
+
+#remove-avatar-photo-button {
+  position: absolute;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  top: 5%;
+  right: 5%;
+  z-index: 3;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.57);
+  border-radius: 12px;
+}
+
+#remove-avatar-photo-button:hover {
+  background-color: #e74c3c;
+}
+
+.employee_info_title {
+  width: 50%;
+}
+.employee_info_btn {
+  text-align: right;
+}
+.employee_info_btn .btn {
+  color: white;
+}
+
+.profile-save-btn,
+.go-back {
+  background-color: #534686;
+  border-color: #534686;
+}
