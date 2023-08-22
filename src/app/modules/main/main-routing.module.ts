@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../core/components/layout/layout.component';
-
+import { GradeComponent } from '../master/components/summary-tables/grade/grade.component';
+import { LoginComponent } from '../core/components/login/login.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
 import { EmployeePersonalInfoFormComponent } from './components/forms/employee/employee-personal-info-form/employee-personal-info-form.component';
 
@@ -24,6 +25,11 @@ const routes: Routes = [
     children: [
       { path: 'employee-form', component: EmployeePersonalInfoFormComponent },
     ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'login', component: LoginComponent }],
   },
 ];
 

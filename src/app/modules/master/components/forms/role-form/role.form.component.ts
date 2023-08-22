@@ -14,6 +14,8 @@ import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpParams } from '@angular/common/http';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'role-form',
@@ -27,19 +29,50 @@ export class RoleFormComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
+  errorMessage: string = '';
+  params: HttpParams = new HttpParams();
+  roleMetaData: { content: Array<Role>; totalElements: number } = {
+    content: [],
+    totalElements: 0,
+  };
+
   constructor(
     private _mdr: MatDialogRef<RoleFormComponent>,
     @Inject(MAT_DIALOG_DATA) data: string,
     private formBuilder: FormBuilder,
     private roleService: RoleService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnChnages() {}
+  ngOnChnages() {
+    //this.searchFunction(this.params);
+  }
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.roleForm.get('roleId')?.valueChanges.subscribe((value: string) => {
+      this.roleForm
+        .get('roleId')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.roleForm.get('orgCode')?.valueChanges.subscribe((value: string) => {
+      this.roleForm
+        .get('orgCode')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.roleForm.get('roleName')?.valueChanges.subscribe((value: string) => {
+      if (value.length > 0) {
+        const firstLetter = value.charAt(0).toUpperCase();
+
+        const restOfValue = value.slice(1);
+
+        const newValue = firstLetter + restOfValue;
+
+        this.roleForm.get('roleName')?.setValue(newValue, { emitEvent: false });
+      }
+    });
   }
 
   collectQueryParams() {
@@ -79,6 +112,7 @@ export class RoleFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -116,16 +150,14 @@ export class RoleFormComponent {
       if (this.actionLabel === 'Save') {
         this.roleService.createRole(formData).subscribe(
           (response: Array<Role>) => {
-            console.log('POST-ROLE Request successful', response);
-            console.log('inside submit and ready to close dialogue');
-            this.CloseDialog();
-            this.router.navigate(['/master/role']);
-            this.roleService.notify('Role Added successfully..!');
+            //this._mdr.close(true);
+            this.roleService.notify('Role added successfully');
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400) {
-              console.log(error.message);
-              this.roleService.warn('Role Id already present');
+              this.errorMessage = error.error.message;
+              this.roleService.warn(this.errorMessage);
             }
             console.error('POST Request failed', error);
           }
@@ -135,10 +167,8 @@ export class RoleFormComponent {
         this.roleService.updateRole(formData).subscribe(
           (response: Array<Role>) => {
             console.log('PUT-ROLE Request successful', response);
-            this.CloseDialog();
-
-            this.roleService.notify('Role Updated successfully..!');
-            this.router.navigate(['/master/role']);
+            this.roleService.notify('Role updated successfully');
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -159,11 +189,9 @@ export class RoleFormComponent {
     });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    this.router.navigate(['/master/role']);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
-
   resetForm() {
     this.collectQueryParams();
     this.initForm();

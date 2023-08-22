@@ -36,6 +36,7 @@ export class EmployeeTypeComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private _mdr: MatDialogRef<EmployeeTypeComponent>,
@@ -49,6 +50,37 @@ export class EmployeeTypeComponent {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.employeeTypeForm
+      .get('employeeTypeId')
+      ?.valueChanges.subscribe((value: string) => {
+        this.employeeTypeForm
+          .get('employeeTypeId')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.employeeTypeForm
+      .get('orgCode')
+      ?.valueChanges.subscribe((value: string) => {
+        this.employeeTypeForm
+          .get('orgCode')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.employeeTypeForm
+      .get('type')
+      ?.valueChanges.subscribe((value: string) => {
+        if (value.length > 0) {
+          const firstLetter = value.charAt(0).toUpperCase();
+
+          const restOfValue = value.slice(1);
+
+          const newValue = firstLetter + restOfValue;
+
+          this.employeeTypeForm
+            .get('type')
+            ?.setValue(newValue, { emitEvent: false });
+        }
+      });
   }
 
   collectQueryParams() {
@@ -129,15 +161,17 @@ export class EmployeeTypeComponent {
         this.employeeTypeService.createEmployee(formData).subscribe(
           (response: Employee) => {
             console.log('POST-EmployeeType Request successful', response);
-            this.CloseDialog();
             this.employeeTypeService.notify(
-              ' Employee Type Added Successfully...'
+              ' Employee Type added Successfully'
             );
-            this.router.navigate(['/master/employee-table']);
+            this.Close(true);
+
+            //this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
             if (error.status == 400) {
-              this.employeeTypeService.warn('Employee Type Id already present');
+              this.errorMessage = error.error.message;
+              this.employeeTypeService.warn(this.errorMessage);
             }
           }
         );
@@ -146,9 +180,12 @@ export class EmployeeTypeComponent {
         formData.updatedBy = 'Admin';
         this.employeeTypeService.updateEmployee(formData).subscribe(
           (response: Employee) => {
-            this.CloseDialog();
-            this.employeeTypeService.notify('Record Update Successfully...');
-            this.router.navigate(['/master/employee-table']);
+            this.employeeTypeService.notify(
+              'Employee Type updated Successfully'
+            );
+            this.Close(true);
+
+            // this.router.navigate(['/master/employee-table']);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -170,9 +207,8 @@ export class EmployeeTypeComponent {
       });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    this.router.navigate(['/master/employee-table']);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

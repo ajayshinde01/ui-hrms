@@ -515,10 +515,27 @@
 }
 
 .dark {
-  width: 50px;
+  width: 60px;
   height: 30px;
   border-radius: 5px;
   cursor: pointer;
-  background-color: black;
+  background-color: #534686;
   color: white;
+}
+::ng-deep .mat-mdc-text-field-wrapper {
+  // border:1px solid red !important;
+  width: 256px !important;
+  height: 35px !important;
+  font-size: 14px;
+  border-radius: 8px;
+}
+::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mat-mdc-form-field-infix {
+  padding-top: 6px !important;
+}
+::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
+  width: 40px;
+  height: 40px;
+  /* padding: 12px; */
+  top: -13px;
 }

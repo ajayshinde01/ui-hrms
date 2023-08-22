@@ -26,6 +26,8 @@ export class DivisionTableComponent {
   };
 
   params: HttpParams = new HttpParams();
+
+  masterName: string = 'Division';
   constructor(
     private divisionService: DivisionService,
     private router: Router,
@@ -61,7 +63,7 @@ export class DivisionTableComponent {
           (response: ApiResponse) => {
             console.log('DELETE-Division Request successful', response);
 
-            this.divisionService.notify('Division Deleted successfully..!');
+            this.divisionService.notify('Division deleted successfully');
             this.searchFunction(this.params);
 
             const currentPage = Number(this.params.get('page'));
@@ -81,12 +83,12 @@ export class DivisionTableComponent {
         break;
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/division']);
+        this.router.navigate(['/master/division-table']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/division'], {
+        this.router.navigate(['/master/division-table'], {
           queryParams: queryParam,
         });
         break;
@@ -112,6 +114,8 @@ export class DivisionTableComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });
@@ -123,6 +127,8 @@ export class DivisionTableComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });

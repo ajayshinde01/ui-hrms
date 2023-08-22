@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -19,6 +19,9 @@ import { descMaxLength } from '../Validations/descMaxLength.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { DesignationComponent } from '../../summary-tables/designation/designation.component';
+import { HttpParams } from '@angular/common/http';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'designation-role',
@@ -26,6 +29,8 @@ import { whitespaceValidator } from '../Validations/whiteSpace.validator';
   styleUrls: ['./designation.form.component.scss'],
 })
 export class DesignationFormComponent {
+  @ViewChild(DesignationComponent)
+  sendToDesignationTable!: DesignationComponent;
   designationForm!: FormGroup;
   designation!: Designation;
   submitted: boolean = false;
@@ -33,6 +38,9 @@ export class DesignationFormComponent {
   isDisabled: boolean = false;
   idForUpdate: string;
   actionLabel: string = 'Save';
+  params: HttpParams = new HttpParams();
+  errorMessage: string = '';
+
   constructor(
     private _mdr: MatDialogRef<DesignationFormComponent>,
     @Inject(MAT_DIALOG_DATA) data: string,
@@ -47,8 +55,43 @@ export class DesignationFormComponent {
   }
 
   ngOnInit(): void {
+    let params = new HttpParams();
+    params = params.set('page', 0);
+    params = params.set('size', 10);
+
     this.collectQueryParams();
     this.initForm();
+    this.designationForm
+      .get('designationId')
+      ?.valueChanges.subscribe((value: string) => {
+        this.designationForm
+          .get('designationId')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.designationForm
+      .get('orgCode')
+      ?.valueChanges.subscribe((value: string) => {
+        this.designationForm
+          .get('orgCode')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.designationForm
+      .get('designationName')
+      ?.valueChanges.subscribe((value: string) => {
+        if (value.length > 0) {
+          const firstLetter = value.charAt(0).toUpperCase();
+
+          const restOfValue = value.slice(1);
+
+          const newValue = firstLetter + restOfValue;
+
+          this.designationForm
+            .get('designationName')
+            ?.setValue(newValue, { emitEvent: false });
+        }
+      });
   }
 
   collectQueryParams() {
@@ -88,6 +131,7 @@ export class DesignationFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -98,6 +142,7 @@ export class DesignationFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           descMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
@@ -142,14 +187,14 @@ export class DesignationFormComponent {
         this.designationService.createDesignation(formData).subscribe(
           (response: Array<Designation>) => {
             console.log('POST-ROLE Request successful', response);
+            this.designationService.notify('Designation added successfully');
 
-            this.CloseDialog();
-            this.router.navigate(['/master/designation']);
-            this.designationService.notify('Designation Added successfully..!');
+            this.Close(true);
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.designationService.warn('Designation Id already present');
+            if (error.status == 400) {
+              this.errorMessage = error.error.message;
+              this.designationService.warn(this.errorMessage);
             }
             console.error('POST Request failed', error);
           }
@@ -160,11 +205,9 @@ export class DesignationFormComponent {
         this.designationService.updateDesignation(formData).subscribe(
           (response: Array<Designation>) => {
             console.log('PUT-ROLE Request successful', response);
-            this.CloseDialog();
-            this.designationService.notify(
-              'Designation Updated successfully..!'
-            );
-            this.router.navigate(['/master/designation']);
+            this.designationService.notify('Designation updated successfully');
+
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -189,9 +232,8 @@ export class DesignationFormComponent {
       });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    this.router.navigate(['/master/designation']);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

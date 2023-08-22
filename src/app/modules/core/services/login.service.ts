@@ -1,0 +1,19 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoginResponse } from '../model/loginResponse';
+import { LoginRequest } from '../model/loginRequest';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoginService {
+  constructor(private http: HttpClient) {}
+
+  authenticate(data: LoginRequest): Observable<Array<LoginResponse>> {
+    return this.http.post<Array<LoginResponse>>(
+      'http://192.168.1.62:8090/auth/login',
+      data
+    );
+  }
+}

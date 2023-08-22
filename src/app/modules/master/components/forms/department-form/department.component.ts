@@ -24,6 +24,7 @@ import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { descMaxLength } from '../Validations/descMaxLength.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'app-department',
@@ -36,6 +37,7 @@ export class DepartmentComponent implements OnInit {
   submitted: boolean = false;
   queryParams?: Params;
   isDisabled: boolean = false;
+  errorMessage: string = '';
 
   actionLabel: string = 'Save';
   constructor(
@@ -50,6 +52,37 @@ export class DepartmentComponent implements OnInit {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.departmentForm
+      .get('departmentId')
+      ?.valueChanges.subscribe((value: string) => {
+        this.departmentForm
+          .get('departmentId')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.departmentForm
+      .get('orgCode')
+      ?.valueChanges.subscribe((value: string) => {
+        this.departmentForm
+          .get('orgCode')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.departmentForm
+      .get('departmentName')
+      ?.valueChanges.subscribe((value: string) => {
+        if (value.length > 0) {
+          const firstLetter = value.charAt(0).toUpperCase();
+
+          const restOfValue = value.slice(1);
+
+          const newValue = firstLetter + restOfValue;
+
+          this.departmentForm
+            .get('departmentName')
+            ?.setValue(newValue, { emitEvent: false });
+        }
+      });
   }
 
   collectQueryParams() {
@@ -90,6 +123,7 @@ export class DepartmentComponent implements OnInit {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -100,6 +134,8 @@ export class DepartmentComponent implements OnInit {
           leadingSpaceValidator,
           trailingSpaceValidator,
           descMaxLength,
+          blankValidator,
+
           Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
@@ -129,13 +165,14 @@ export class DepartmentComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.departmentService.createDepartment(formData).subscribe(
           (response: Department) => {
-            this.CloseDialog();
-            this.departmentService.notify('Department added Successfully...');
-            this.router.navigate(['/master/department-table']);
+            this.departmentService.notify('Department added Successfully');
+
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.departmentService.warn('Department Id already present');
+              this.errorMessage = error.error.message;
+              this.departmentService.warn(this.errorMessage);
             }
           }
         );
@@ -144,10 +181,9 @@ export class DepartmentComponent implements OnInit {
         formData.updatedBy = 'Admin';
         this.departmentService.updateDepartment(formData).subscribe(
           (response: Department) => {
-            this.CloseDialog();
+            this.departmentService.notify('Department updated Successfully');
 
-            this.departmentService.notify('Update Successfully...');
-            this.router.navigate(['/master/department-table']);
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -167,9 +203,8 @@ export class DepartmentComponent implements OnInit {
       });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    this.router.navigate(['/master/department-table']);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Role } from '../models/role.model';
 import { ColumnsMetadata } from '../models/columnMetaData';
 import { ApiResponse } from '../models/response';
-import { ToastrService } from 'ngx-toastr';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class RoleService {
@@ -65,10 +65,16 @@ export class RoleService {
   }
 
   notify(message: string) {
-    this.toastrService.success(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.success(message, '', toastrConfig);
   }
 
   warn(message: string) {
-    this.toastrService.warning(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.warning(message, '', toastrConfig);
   }
 }

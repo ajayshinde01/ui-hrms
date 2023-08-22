@@ -4,7 +4,9 @@
       <div class="card-title">
         <div class="d-flex justify-content-between">
           <div class="">
-            <h2 class="card-title mb-0"></h2>
+            <h2 class="card-title mb-0 master-title">
+              <b> {{ masterName | uppercase }}</b>
+            </h2>
           </div>
           <div class="d-flex">
             <div class="d-flex align-items-center position-relative">
@@ -73,8 +75,9 @@
               colspan="1"
               aria-label="User: activate to sort column ascending"
               (click)="sort(header.sortBy)"
+              [style.width.%]="header.width"
             >
-              {{ header.name | uppercase }}
+              {{ header.name }}
               <span *ngIf="header.sortBy != 'id'">
                 <i class="fa fa-sort" aria-hidden="true"></i>
               </span>
@@ -137,7 +140,7 @@
               *ngIf="asFirst"
               data-dt-idx="0"
               tabindex="0"
-              class="page-link"
+              class="page-link1"
               (click)="prevPage(page)"
               ><i class="fa fa-angle-double-left"></i>
             </a>
@@ -178,7 +181,7 @@
               *ngIf="asLast"
               data-dt-idx="4"
               tabindex="0"
-              class="page-link"
+              class="page-link1"
               (click)="nextPage(page)"
               ><i class="fa fa-angle-double-right"></i>
             </a>
@@ -238,14 +241,18 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-success"
+            class="btn btn-success confirm"
             data-bs-dismiss="modal"
             (click)="delete()"
           >
             Yes
           </button>
 
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <button
+            type="button"
+            class="btn btn-danger confirm"
+            data-bs-dismiss="modal"
+          >
             Close
           </button>
         </div>

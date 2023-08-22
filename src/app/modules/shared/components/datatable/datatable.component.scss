@@ -249,10 +249,20 @@
 .noText {
   opacity: 0.5;
 }
-.form-control.search-box {
-  width: 200px; /* Change this value to the desired width */
-  height: 28px; /* Change this value to the desired height */
-  margin-right: 10px;
+
+.master-title {
+  margin-top: 5%;
+  font-size: 16px;
+  font-weight: 300px;
+}
+
+search-box[_ngcontent-hww-c40] {
+  background-color: #eff3f9;
+  height: 30px;
+  width: 170px;
+  padding: 5px 20px;
+  border-radius: 8px;
+  border: 1px solid #eff3f9;
 }
 // .table-responsive1 {
 //   overflow-y: scroll;
@@ -267,7 +277,6 @@
   border: none;
   border-color: white;
   width: 40px;
-  transition: transform 0.3s ease;
   padding: 2px;
   background-color: white;
 }
@@ -281,11 +290,7 @@
   background-color: rgb(142, 135, 173);
   cursor: pointer;
 }
-.form-control.search-box {
-  width: 200px; /* Change this value to the desired width */
-  height: 28px; /* Change this value to the desired height */
-  margin-right: 10px;
-}
+
 thead th {
   border-bottom: 2px solid black; /* Add a thicker bottom border to header cells */
 }
@@ -296,11 +301,6 @@ th {
   text-align: left;
 }
 
-.form-control.search-box {
-  width: 300px; /* Change this value to the desired width */
-  height: 28px; /* Change this value to the desired height */
-  margin-right: 10px;
-}
 ///////////////////////////////////////////////////////////////
 .action-btn {
   border: none;
@@ -354,16 +354,7 @@ th {
   font-weight: 900;
   color: darkblue;
 }
-.form-control.search {
-  width: 180px;
-  height: 35px;
-  margin-left: 10px;
-  // background-color: #f9f9f9;
-  color: #cbbdc2;
-  border: 1px solid #f9f9f9;
-  box-shadow: none !important;
-  margin-right: 20px;
-}
+
 label {
   font-size: 14px;
   font-weight: 400;
@@ -387,35 +378,42 @@ label {
   background-color: #f1faff;
   box-shadow: none !important;
 }
+.confirm {
+  display: inline-block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  margin-right: 4px;
+}
 
 .pagination-box {
   background-color: white;
   color: black !important;
   border-radius: 5px;
   margin-top: 2px;
-  margin-right: 4px;
+  margin-left: 5px;
+  margin-right: 8px;
+  width: 60px;
   height: 30px;
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 400 !important;
   border: solid 1px black;
-  // padding: 2px 7px 3px;
-  -webkit-appearance: menulist;
 }
-
-// .pagination-box option {
-//   background-color: white;
-//   color: black;
-//   font-size: 14px;
-// }
 
 .pagination-box:hover {
   background-color: white;
   color: black !important;
   border-radius: 5px;
   margin-top: 2px;
-  margin-right: 4px;
+  margin-left: 5px;
+  margin-right: 8px;
   height: 30px;
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 400 !important;
   border: solid 1px black;
 
@@ -472,28 +470,20 @@ select {
   border-color: #534686;
   height: 35px;
 }
-.pagination a {
-  border-radius: 5px !important;
-  border: 1px solid white !important;
-  color: black;
-}
+
 .search-icon {
   position: relative;
 }
 .search-box {
   background-color: #eff3f9;
-  height: 50px;
-  width: 350px;
-  padding: 5px 20px;
+  height: 28px !important;
+  width: 200px;
+  margin-right: 10%;
+  padding: 10%;
   border-radius: 8px;
   border: 1px solid #eff3f9;
 }
-.search-bar {
-  position: absolute;
-  left: 307px;
-  top: 14px;
-  font-size: 19px;
-}
+
 .table > :not(caption) > * > * {
   padding: 5px;
 }
@@ -503,3 +493,62 @@ select {
 .container1 {
   height: 100%;
 }
+
+.page-link1 {
+  position: relative;
+
+  display: block;
+
+  color: rgb(0, 0, 0) !important;
+
+  padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+
+  // font-size: var(--bs-pagination-font-size);
+
+  // color: var(--bs-pagination-color);
+
+  // text-decoration: none;
+
+  // background-color: var(--bs-pagination-bg);
+
+  // border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
+}
+
+.page-link2 {
+  position: relative;
+
+  display: block;
+
+  color: rgb(0, 0, 0) !important;
+
+  padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+
+  // font-size: var(--bs-pagination-font-size);
+
+  // color: var(--bs-pagination-color);
+
+  // text-decoration: none;
+
+  // background-color: var(--bs-pagination-bg);
+
+  // border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
+}
+
+.pagination a {
+  border-radius: 5px !important;
+
+  border: 1px solid white !important;
+
+  color: rgb(255, 255, 255);
+}
+
+.pagination-number {
+  border: solid 1px black;
+
+  background-color: rgb(83, 70, 134);
+
+  cursor: pointer;
+}
+// .d-flex {
+//   height: 30px;
+// }

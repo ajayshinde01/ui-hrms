@@ -10,13 +10,27 @@ a {
   width: 26px;
   height: auto;
 }
+
+.logo-image {
+  position: absolute;
+
+  height: 24px;
+
+  top: -24px;
+}
 .toggle-sidebar {
   position: absolute;
+
   top: 33px;
-  right: 30px;
+
+  right: 19px;
+
   cursor: pointer;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 }
 

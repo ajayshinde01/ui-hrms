@@ -24,10 +24,14 @@ export class EmployeeTypeTableComponent {
     content: [],
     totalElements: 0,
   };
-  employeeTypeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
-    columnsMetadata: [],
-  };
+  // employeeTypeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
+  //   columnsMetadata: [],
+  // };
+  employeeTypeHeaders: any;
   params: HttpParams = new HttpParams();
+
+  masterName: string = 'Employee Type';
+
   matDialogRef: MatDialogRef<EmployeeTypeComponent>;
 
   constructor(
@@ -47,7 +51,7 @@ export class EmployeeTypeTableComponent {
   getHeaders() {
     this.employeeTypeService.getEmployeeTypeHeaders().subscribe(
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
-        this.employeeTypeHeaders = response;
+        this.employeeTypeHeaders = response.columnsMetadata;
         console.log(this.employeeTypeHeaders);
       },
       (error: any) => {
@@ -67,7 +71,7 @@ export class EmployeeTypeTableComponent {
           .subscribe(
             (response: ApiResponse) => {
               this.employeeTypeService.notify(
-                'Employee Type Deleted Successfully...'
+                'Employee Type deleted Successfully'
               );
               this.searchFunction(this.params);
 
@@ -91,14 +95,12 @@ export class EmployeeTypeTableComponent {
         break;
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/employee-type']);
+        this.router.navigate(['/master/employee-table']);
         break;
 
       case 'edit':
-        // if (event['data'].employeeTypeId == undefined)
-        //   this.employeeTypeService.warn('Please select Id for the operation');
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/employee-type'], {
+        this.router.navigate(['/master/employee-table'], {
           queryParams: queryParam,
         });
         break;
@@ -125,6 +127,8 @@ export class EmployeeTypeTableComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });
@@ -137,6 +141,8 @@ export class EmployeeTypeTableComponent {
     });
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
       if (res == true) {
       }
     });

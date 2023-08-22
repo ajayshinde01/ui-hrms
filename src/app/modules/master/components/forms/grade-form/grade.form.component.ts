@@ -14,6 +14,9 @@ import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
+import { HttpParams } from '@angular/common/http';
+import { GradeType } from '../../../models/gradeType';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'app-grade-form',
@@ -28,6 +31,13 @@ export class GradeFormComponent {
   actionLabel: string = 'Save';
   button: boolean = false;
   isDisabled: boolean = false;
+  gradeTypeOptions: { gradeType: Array<GradeType> } = {
+    gradeType: [],
+  };
+  params: HttpParams = new HttpParams();
+  datatype: string = '';
+  errorMessage: string = '';
+
   constructor(
     private _mdr: MatDialogRef<GradeFormComponent>,
     @Inject(MAT_DIALOG_DATA) data: string,
@@ -42,6 +52,32 @@ export class GradeFormComponent {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.getGradeType();
+    this.gradeForm.get('gradeId')?.valueChanges.subscribe((value: string) => {
+      this.gradeForm
+        .get('gradeId')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.gradeForm.get('orgCode')?.valueChanges.subscribe((value: string) => {
+      this.gradeForm
+        .get('orgCode')
+        ?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    this.gradeForm.get('gradeName')?.valueChanges.subscribe((value: string) => {
+      if (value.length > 0) {
+        const firstLetter = value.charAt(0).toUpperCase();
+
+        const restOfValue = value.slice(1);
+
+        const newValue = firstLetter + restOfValue;
+
+        this.gradeForm
+          .get('gradeName')
+          ?.setValue(newValue, { emitEvent: false });
+      }
+    });
   }
 
   collectQueryParams() {
@@ -80,6 +116,7 @@ export class GradeFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -124,28 +161,26 @@ export class GradeFormComponent {
         this.gradeService.createGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('POST-GRADE Request successful', response);
-            this.CloseDialog();
-            this.autoRefresh();
-            // this.router.navigate(['/master/grade']);
-            this.gradeService.notify('Grade Added successfully..!');
+            this.errorMessage = 'Grade added successfully';
+            this.gradeService.notify('Grade added successfully');
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400) {
-              this.gradeService.warn('Grade Id already present');
+              this.errorMessage = error.error.message;
+              this.gradeService.warn(this.errorMessage);
             }
             console.error('POST Request failed', error);
           }
         );
       }
-      this.router.navigate(['/master/grade']);
       if (this.actionLabel === 'Update') {
         console.log(formData.gradeId);
         this.gradeService.updateGrade(formData).subscribe(
           (response: Array<Grade>) => {
             console.log('PUT-GRADE Request successful', response);
-            this.CloseDialog();
-            this.gradeService.notify('Grade Updated successfully..!');
-            this.router.navigate(['/master/grade']);
+            this.gradeService.notify('Grade updated successfully');
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -168,17 +203,25 @@ export class GradeFormComponent {
     });
   }
 
-  CloseDialog() {
-    this._mdr.close(false);
-    this.router.navigate(['/master/grade']);
+  getGradeType() {
+    this.gradeService
+      .gradeTypeFromCommonMaster()
+      .subscribe((response: { gradeType: Array<GradeType> }) => {
+        console.log(
+          'GET-GRADE TYPE FROM COMMON MASTER successful',
+          (this.datatype = typeof response)
+        );
+        this.gradeTypeOptions = response;
+        console.log(this.gradeTypeOptions);
+      });
+  }
+
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {
     this.collectQueryParams();
     this.initForm();
-  }
-
-  autoRefresh() {
-    this.router.navigate(['/master/grade']);
   }
 }

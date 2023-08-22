@@ -25,6 +25,7 @@ import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { descMaxLength } from '../Validations/descMaxLength.validator';
 import { idMaxLength } from '../Validations/idMaxLength.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
+import { blankValidator } from '../Validations/blankData.validator';
 
 @Component({
   selector: 'app-division',
@@ -38,6 +39,7 @@ export class DivisionComponent {
   queryParams?: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private _mdr: MatDialogRef<DivisionComponent>,
@@ -51,6 +53,37 @@ export class DivisionComponent {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+    this.divisionForm
+      .get('divisionId')
+      ?.valueChanges.subscribe((value: string) => {
+        this.divisionForm
+          .get('divisionId')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.divisionForm
+      .get('orgCode')
+      ?.valueChanges.subscribe((value: string) => {
+        this.divisionForm
+          .get('orgCode')
+          ?.setValue(value.toUpperCase(), { emitEvent: false });
+      });
+
+    this.divisionForm
+      .get('divisionName')
+      ?.valueChanges.subscribe((value: string) => {
+        if (value.length > 0) {
+          const firstLetter = value.charAt(0).toUpperCase();
+
+          const restOfValue = value.slice(1);
+
+          const newValue = firstLetter + restOfValue;
+
+          this.divisionForm
+            .get('divisionName')
+            ?.setValue(newValue, { emitEvent: false });
+        }
+      });
   }
 
   collectQueryParams() {
@@ -89,6 +122,7 @@ export class DivisionComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
@@ -99,6 +133,7 @@ export class DivisionComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           descMaxLength,
+          blankValidator,
           Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
@@ -126,13 +161,14 @@ export class DivisionComponent {
       if (this.actionLabel === 'Save') {
         this.divisionService.createDivision(formData).subscribe(
           (response: Division) => {
-            this.CloseDialog();
-            this.divisionService.notify('Division Added Successfully...');
-            this.router.navigate(['/master/division-table']);
+            this.divisionService.notify('Division added Successfully');
+
+            this.Close(true);
           },
           (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.divisionService.warn('Division Id already present');
+            if (error.status == 400) {
+              this.errorMessage = error.error.message;
+              this.divisionService.warn(this.errorMessage);
             }
           }
         );
@@ -141,9 +177,8 @@ export class DivisionComponent {
         formData.updatedBy = 'Admin';
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
-            this.CloseDialog();
-            this.divisionService.notify('Division Updated  Successfully...');
-            this.router.navigate(['/master/division-table']);
+            this.divisionService.notify('Division updated  Successfully');
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400) {
@@ -164,10 +199,8 @@ export class DivisionComponent {
       });
   }
 
-  CloseDialog() {
-    console.log('inside close dialogue');
-    this._mdr.close(false);
-    this.router.navigate(['/master/division-table']);
+  Close(isUpdate: boolean) {
+    this._mdr.close(isUpdate);
   }
 
   resetForm() {

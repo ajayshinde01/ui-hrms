@@ -34,6 +34,8 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   @Input() totalRecord: number = 0;
 
+  @Input() masterName: string;
+
   @Output() deleteFunction: EventEmitter<Object> = new EventEmitter();
 
   @Output() buttonFunction: EventEmitter<Object> = new EventEmitter();
@@ -41,8 +43,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
-
-  // @ViewChild('addFormModel') addFormModel!: ElementRef;
 
   paginationList: Array<number> = [];
 
@@ -53,8 +53,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   key: string = 'id';
 
   reverse: boolean = false;
-
-  // data: any;
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 

@@ -5,7 +5,7 @@
         <div class="col">
           <div class="d-flex justify-content-between">
             <h2 class="title" mat-dialog-title>Designation</h2>
-            <button class="close-btn" (click)="CloseDialog()">
+            <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
           </div>
@@ -16,7 +16,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Designation Id </mat-label>
+          <mat-label>Designation ID </mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -38,43 +38,43 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['required']"
-                  >Please enter Designation Id.</span
+                  >Please enter Designation ID</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['whitespace'] && !designationForm.controls['designationId']?.errors?.['leadingSpace'] && !designationForm.controls['designationId']?.errors?.['trailingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] "
-                  >No whitespaces are allowed.</span
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['leadingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['trailingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['trailingSpace'] && !designationForm.controls['designationId'].errors?.['pattern'] && designationForm.controls['designationId']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId'].errors?.['pattern']"
-                  >Please enter valid Designation Id.
+                  >Please enter valid Designation ID
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationId']?.errors?.['idMaxLength'] && !designationForm.controls['designationId'].errors?.['pattern'] && !designationForm.controls['designationId']?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed.</span
+                  >Maximum 50 characters are allowed</span
                 >
               </div>
             </div>
@@ -107,43 +107,48 @@
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['required']"
                   >Please enter Designation Name.
-                  {{designationForm.controls['designationName'].errors?.['pattern']}}
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['leadingSpace'] && !designationForm.controls['designationName'].errors?.['pattern'] && !designationForm.controls['designationName']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['whitespace'] && !designationForm.controls['designationName'].errors?.['pattern']"
-                  >White Space not allowed.</span
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="designationForm.controls['designationName']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['trailingSpace'] && !designationForm.controls['designationName'].errors?.['pattern'] && !designationForm.controls['designationName']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['trailingSpace'] && !designationForm.controls['designationName'].errors?.['pattern'] && designationForm.controls['designationName']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName'].errors?.['pattern']"
-                  >Please enter valid Designation Name.
+                  >Please enter valid Designation Name
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationName']?.errors?.['nameMaxLength'] && !designationForm.controls['designationName'].errors?.['pattern'] && !designationForm.controls['designationName']?.errors?.['leadingSpace']"
-                  >Maximum 100 characters are allowed.</span
+                  >Maximum 100 characters are allowed</span
                 >
               </div>
             </div>
@@ -175,43 +180,49 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['required']"
-                  >Please enter Designation Description.</span
+                  >Please enter Designation Description</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc'].errors?.['pattern']"
-                  >Please enter valid Designation Description.
+                  >Please enter valid Designation Description
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['leadingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="designationForm.controls['designationDesc']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['whitespace']"
-                  >Field can not be empty.</span
+                  >Field can not be empty</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['trailingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['trailingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['descMaxLength'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
-                  >Maximum 250 characters are allowed.</span
+                  >Maximum 250 characters are allowed</span
                 >
               </div>
             </div>
@@ -239,43 +250,43 @@
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['required']"
-                  >Please enter Org-Code</span
+                  >Please enter Organization Code</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['whitespace'] && !designationForm.controls['orgCode']?.errors?.['leadingSpace'] && !designationForm.controls['orgCode']?.errors?.['trailingSpace'] && !designationForm.controls['orgCode']?.errors?.['pattern']"
-                  >No whitespaces are allowed.</span
+                  >No whitespaces are allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['leadingSpace'] && !designationForm.controls['orgCode'].errors?.['pattern'] && !designationForm.controls['orgCode']?.errors?.['trailingSpace']"
-                  >Leading space not allowed.</span
+                  >Leading space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['trailingSpace'] && !designationForm.controls['orgCode'].errors?.['pattern'] && !designationForm.controls['orgCode']?.errors?.['leadingSpace']"
-                  >Trailing space not allowed.</span
+                  >Trailing space not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['trailingSpace'] && !designationForm.controls['orgCode'].errors?.['pattern'] && designationForm.controls['orgCode']?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed.</span
+                  >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode'].errors?.['pattern']"
-                  >Please enter Valid Org-Code.
+                  >Please enter valid Organization Code
                 </span>
 
                 <span
                   class="validate-text"
                   *ngIf="designationForm.controls['orgCode']?.errors?.['idMaxLength'] && !designationForm.controls['orgCode'].errors?.['pattern'] && !designationForm.controls['orgCode']?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed.</span
+                  >Maximum 50 characters are allowed</span
                 >
               </div>
             </div>

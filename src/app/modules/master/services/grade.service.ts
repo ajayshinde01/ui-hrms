@@ -3,8 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ColumnsMetadata } from '../models/columnMetaData';
 import { Grade } from '../models/grade.model';
-import { ToastrService } from 'ngx-toastr';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 import { ApiResponse } from '../models/response';
+import { GradeType } from '../models/gradeType';
 @Injectable()
 export class GradeService {
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
@@ -48,6 +49,12 @@ export class GradeService {
     );
   }
 
+  gradeTypeFromCommonMaster(): Observable<{ gradeType: Array<GradeType> }> {
+    return this.http.get<{ gradeType: Array<GradeType> }>(
+      'http://192.168.1.16:8000/utility/masters/commonMaster/Grade Type'
+    );
+  }
+
   search(
     params: HttpParams
   ): Observable<{ content: Array<Grade>; totalElements: number }> {
@@ -60,10 +67,16 @@ export class GradeService {
   }
 
   notify(message: string) {
-    this.toastrService.success(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.success(message, '', toastrConfig);
   }
 
   warn(message: string) {
-    this.toastrService.warning(message);
+    const toastrConfig: Partial<IndividualConfig> = {
+      timeOut: 2500,
+    };
+    this.toastrService.warning(message, '', toastrConfig);
   }
 }
