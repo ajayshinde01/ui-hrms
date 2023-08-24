@@ -15,6 +15,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/master/master.module').then((m) => m.MasterModule),
   },
+  {
+    path: 'common-master',
+    loadChildren: () =>
+      import('./modules/common-master/common-master.module').then(
+        (m) => m.CommonMasterModule
+      ),
+  },
   { path: 'login', component: LoginComponent },
   { path: 'admin-login', component: LoginComponent },
 ];

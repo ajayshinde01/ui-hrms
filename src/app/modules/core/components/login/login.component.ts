@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  fullUrl: string;
 
   constructor(
     private loginService: LoginService,
@@ -37,11 +38,12 @@ export class LoginComponent implements OnInit {
   onSumbit() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      // this.router.navigate(['/master/grade']);
+
       this.loginService.authenticate(formData).subscribe(
-        (response: Array<LoginResponse>) => {
+        (response: LoginResponse) => {
           // Need to store jwt token in session storage and route it to the landing page.
-          // localStorage.setItem('token', response.jwtToken);
+          sessionStorage.setItem('userRole', response.role);
+          sessionStorage.setItem('jwtToken', response.jwtToken);
           this.router.navigate(['/master/dashboard']);
         },
         (error: any) => {

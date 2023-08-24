@@ -61,7 +61,7 @@
       </ng-template>
     </li>
   </ul>
-  <app-footer></app-footer>
+  <app-footer *ngIf="isFooter"></app-footer>
   <!-- <ul class="sidebar-nav">
         <li class="pointer" *ngFor="let menu of sideBarList ;let i=index">
             <ng-container *ngIf="menu.submenu; else noSubmenu">
