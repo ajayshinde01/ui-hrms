@@ -1,0 +1,193 @@
+<form [formGroup]="employeeForm">
+
+<div class="row mm mt-4">
+    <h2 class="card-title employee_info_title">Personal Details</h2>
+    <div class="col-lg-4">
+        <mat-label>Marital Status</mat-label>
+      <mat-form-field appearance="outline" color="primary">
+       
+        <mat-select formControlName="marital_status" placeholder="Select">
+          <mat-option value="one">Intern</mat-option>
+          <mat-option value="two">Trainee</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+        <mat-label>Blood Group</mat-label>
+      <mat-form-field appearance="outline">
+       
+        <mat-select formControlName="blood_group" placeholder="Select">
+            <mat-option value="one">Intern</mat-option>
+            <mat-option value="two">Trainee</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-label>CPR Number</mat-label>
+      <mat-form-field appearance="outline" color="primary">
+        <input
+          matInput
+          formControlName="cpr_number"
+          placeholder="CPR Number"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mm">
+    <div class="col-lg-4">
+        <mat-label>Family Background</mat-label>
+      <mat-form-field appearance="outline" color="primary">
+        <textarea matInput formControlName="family_background" placeholder="Family Background..."></textarea>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+        <mat-label>Health Details</mat-label>
+      <mat-form-field appearance="outline">
+        
+        <textarea matInput formControlName="health_details" placeholder="Health Details..."></textarea>
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-label>GOSI</mat-label>
+      <mat-form-field appearance="outline">
+        
+        <input
+          matInput
+          formControlName="gosi"
+          placeholder="GOSI"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row mm">
+    <h2 class="card-title employee_info_title">Passport Details</h2>
+    <div class="col-lg-4">
+      <mat-label>Passport Number</mat-label>
+      <mat-form-field appearance="outline">
+        
+        <input
+          matInput
+          formControlName="passport_number"
+          placeholder="Passport Number"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+        <mat-label>Passport Name</mat-label>
+        <mat-form-field appearance="outline">
+          
+          <input
+            matInput
+            formControlName="passport_name"
+            placeholder="Passport Name"
+          />
+        </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+        <mat-label>Date Of Issue</mat-label>
+        <mat-form-field appearance="outline" class="">
+            <input
+              matInput
+              formControlName="dateOfIssue"
+              [matDatepicker]="picker"
+              placeholder="Date Of Issue"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="row mm">
+    <div class="col-lg-4">
+        <mat-label>Valid Upto</mat-label>
+        <mat-form-field appearance="outline" class="">
+            <input
+              matInput
+              formControlName="validUpto"
+              [matDatepicker]="picker"
+              placeholder="Valid Upto"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+    </div>
+
+    <div class="col-lg-4">
+        <mat-label>Place Of Issue</mat-label>
+        <mat-form-field appearance="outline">
+          
+          <input
+            matInput
+            formControlName="placeOfIssue"
+            placeholder="Place Of Issue"
+          />
+        </mat-form-field>
+    </div>
+
+    <div class="col-lg-4">
+       <!--<mat-form-field>  -->
+             <mat-label>File Upload</mat-label>
+        <!--</mat-form-field> -->
+        <div class="passport-file-upload">  
+            <input #passportfileInput type="file" name="passportfileInput" accept="image/png, image/jpeg"
+            >
+        </div>
+        
+    </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="row mm">
+    <h2 class="card-title employee_info_title">Aadhar Details</h2>
+    <div class="col-lg-4">
+      <mat-label>Aadhar Number</mat-label>
+      <mat-form-field appearance="outline">
+        
+        <input
+          matInput
+          formControlName="aadhar_number"
+          placeholder="Aadhar Number"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+        <mat-label>Aadhar Name</mat-label>
+        <mat-form-field appearance="outline">
+          
+          <input
+            matInput
+            formControlName="aadhar_name"
+            placeholder="Aadhar Name"
+          />
+        </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+        <mat-label>File Upload</mat-label>
+        <!--</mat-form-field> -->
+        <div class="aadhar-file-upload">  
+            <input #aadharfileInput type="file" name="aadharfileInput" accept="image/png, image/jpeg"
+            >
+        </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <button  class="btn btn-primary px-4 float-right profile-save-btn"  (click)="onSubmit()">
+      Save
+    </button>
+
+  </div>
+</form>
+<!--<button (click)="nextStep()">click here</button>-->

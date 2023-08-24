@@ -1,0 +1,172 @@
+<div class="page-title">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <h2 class="card-title">EMPLOYEE INFO</h2>
+        <div class="row mm">
+          <div class="col-lg-6">
+            <mat-label class="dd">Employee code</mat-label>
+            <div class="">
+              <mat-form-field appearance="outline" color="primary">
+                <input matInput placeholder="Employee code" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="dd">First Name</mat-label>
+            <div class="">
+              <mat-form-field appearance="outline" color="primary">
+                <input matInput placeholder="First Name" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-6">
+            <mat-label class="dd">Middle Name</mat-label>
+            <div class="">
+              <mat-form-field appearance="outline" color="primary">
+                <input matInput placeholder="Middle Name" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="dd">Last Name</mat-label>
+            <div class="">
+              <mat-form-field appearance="outline" color="primary">
+                <input matInput placeholder="Last Name" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-6">
+            <div class="">
+              <mat-label class="dd">Date Of Birthday</mat-label>
+            </div>
+
+            <mat-form-field appearance="outline" class="">
+              <input matInput [matDatepicker]="picker" placeholder="m/d/yyyy" />
+
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 mm">
+            <mat-label class="dd">Age</mat-label>
+            <div class="">
+              <mat-form-field appearance="outline" color="primary">
+                <input matInput placeholder="Age" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-6">
+            <div class=""><mat-label class="dd">Gender</mat-label></div>
+
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select placeholder="Select">
+                <mat-option value="one">Male</mat-option>
+                <mat-option value="two">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <div class=""><mat-label class="dd">Status</mat-label></div>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select placeholder="Select">
+                <mat-option value="one">Active</mat-option>
+                <mat-option value="two">Inactive</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-6">
+            <div><mat-label class="dd">Date Of Joining</mat-label></div>
+            <mat-form-field appearance="outline" class="">
+              <input
+                matInput
+                [matDatepicker]="picker1"
+                placeholder="m/d/yyyy"
+              />
+
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <div class=""><mat-label class="dd">Division</mat-label></div>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select placeholder="Select">
+                <mat-option value="one">Active</mat-option>
+                <mat-option value="two">Inactive</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div _ngcontent-ng-c812429062="" class="form-footer">
+          <button _ngcontent-ng-c812429062="" class="profile-save-btn">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <h2 class="card-title mb-0">My Profile</h2>
+        <div class="card-body">
+          <form>
+            <div class="row mb-2">
+              <div class="profile-title">
+                <div class="d-flex profile-section">
+                  <div class="text-center">
+                    <img
+                      alt=""
+                      src="../../../assets/profile-img.jpg"
+                      class="profile-img rounded-circle"
+                    />
+                  </div>
+                  <div class="text-center">
+                    <h3 class="mb-1 profile-name txt-primary">MARK JECNO</h3>
+                    <p class="profile-desg">DESIGNER</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-label class="dd">Email Address</mat-label>
+            <div>
+              <mat-form-field
+                appearance="outline"
+                color="primary"
+                class="profile-email-box"
+              >
+                <input matInput placeholder="Email Address" />
+              </mat-form-field>
+            </div>
+
+            <mat-label class="dd">Hobbies</mat-label>
+            <div class="">
+              <mat-form-field appearance="outline" class="">
+                <textarea matInput cdkAutosizeMinRows="5"></textarea>
+              </mat-form-field>
+            </div>
+            <div _ngcontent-ng-c812429062="" class="form-footer mt-2">
+              <button _ngcontent-ng-c812429062="" class="profile-save-btn">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

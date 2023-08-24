@@ -1,0 +1,305 @@
+<form [formGroup]="divisionForm">
+  <div class="container" style="width: 490px; height: 390px">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>Division</h2>
+            <button class="close-btn" (click)="Close(false)">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Division ID </mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder="Avisys-IND"
+                formControlName="divisionId"
+                [disabled]="isDisabled"
+              />
+              <div
+                *ngIf="
+                  divisionForm.controls['divisionId']?.invalid &&
+                  divisionForm.controls['divisionId']?.touched &&
+                  divisionForm.controls['divisionId']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['required']"
+                  >Please enter Division ID
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId'].errors?.['pattern']"
+                  >Please enter valid Division ID</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['leadingSpace'] && !divisionForm.controls['divisionId'].errors?.['pattern'] && !divisionForm.controls['divisionId']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['whitespace'] && !divisionForm.controls['divisionId']?.errors?.['leadingSpace'] && !divisionForm.controls['divisionId']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionId'].errors?.['pattern'] "
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionId'].errors?.['pattern'] && !divisionForm.controls['divisionId']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionId'].errors?.['pattern'] && divisionForm.controls['divisionId']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionId']?.errors?.['idMaxLength'] && !divisionForm.controls['divisionId'].errors?.['pattern'] && !divisionForm.controls['divisionId']?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Division Name</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder="Avisys Services"
+                formControlName="divisionName"
+              />
+              <div
+                *ngIf="
+                  divisionForm.controls['divisionName']?.invalid &&
+                  divisionForm.controls['divisionName']?.touched &&
+                  divisionForm.controls['divisionName']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName']?.errors?.['required']"
+                  >Please enter Division Name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName'].errors?.['pattern']"
+                  >Please enter valid Division Name</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName']?.errors?.['leadingSpace'] && !divisionForm.controls['divisionName'].errors?.['pattern'] && !divisionForm.controls['divisionName']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionName'].errors?.['pattern'] && !divisionForm.controls['divisionName']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionName'].errors?.['pattern'] && divisionForm.controls['divisionName']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionName']?.errors?.['nameMaxLength'] && !divisionForm.controls['divisionName'].errors?.['pattern'] && !divisionForm.controls['divisionName']?.errors?.['leadingSpace']"
+                  >Maximum 100 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 field-one">
+          <mat-label>Division Description</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder="Avisys Services Pvt.Ltd."
+                formControlName="divisionDescription"
+              />
+              <div
+                *ngIf="
+                  divisionForm.controls['divisionDescription']?.invalid &&
+                  divisionForm.controls['divisionDescription']?.touched &&
+                  divisionForm.controls['divisionDescription']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['required']"
+                  >Please enter Division Description
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription'].errors?.['pattern']"
+                  >Please enter valid Division Description</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['leadingSpace'] && !divisionForm.controls['divisionDescription'].errors?.['pattern'] && !divisionForm.controls['divisionDescription']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['whitespace']"
+                  >Field can not be empty</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionDescription'].errors?.['pattern'] && !divisionForm.controls['divisionDescription']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['trailingSpace'] && !divisionForm.controls['divisionName'].errors?.['pattern'] && divisionForm.controls['divisionDescription']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['divisionDescription']?.errors?.['descMaxLength'] && !divisionForm.controls['divisionDescription'].errors?.['pattern'] && !divisionForm.controls['divisionDescription']?.errors?.['leadingSpace']"
+                  >Maximum 250 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Organization Code</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput placeholder="AVI-BHR" formControlName="orgCode" />
+              <div
+                *ngIf="
+                  divisionForm.controls['orgCode']?.invalid &&
+                  divisionForm.controls['orgCode']?.touched &&
+                  divisionForm.controls['orgCode']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode']?.errors?.['required']"
+                  >Please enter Organization Code</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode']?.errors?.['whitespace'] && !divisionForm.controls['orgCode']?.errors?.['leadingSpace'] && !divisionForm.controls['orgCode']?.errors?.['trailingSpace'] && !divisionForm.controls['orgCode']?.errors?.['pattern'] "
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode']?.errors?.['leadingSpace'] && !divisionForm.controls['orgCode'].errors?.['pattern'] && !divisionForm.controls['orgCode']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode']?.errors?.['trailingSpace'] && !divisionForm.controls['orgCode'].errors?.['pattern'] && !divisionForm.controls['orgCode']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode']?.errors?.['trailingSpace'] && !divisionForm.controls['orgCode'].errors?.['pattern'] && divisionForm.controls['orgCode']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode'].errors?.['pattern']"
+                  >Please enter valid Organization Code
+                </span>
+
+                <span
+                  class="validate-text"
+                  *ngIf="divisionForm.controls['orgCode']?.errors?.['idMaxLength'] && !divisionForm.controls['orgCode'].errors?.['pattern'] && !divisionForm.controls['orgCode']?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!divisionForm.valid"
+                >
+                  {{ actionLabel }}
+                </button>
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,9 @@
+<app-datatable
+  (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="gradeMetaData.content"
+  [headers]="gradesHeaders.columnsMetadata"
+  [totalRecord]="gradeMetaData.totalElements"
+  [masterName]="masterName"
+></app-datatable>
