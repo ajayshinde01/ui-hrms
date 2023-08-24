@@ -71,14 +71,14 @@ export class EmployeeTableComponent {
           }
         );
         break;
-      //   case 'add':
-      //     this.router.navigate(['/master/department']);
-      //     break;
-      //   case 'edit':
-      //     this.router.navigate(['/master/department'], {
-      //       queryParams: queryParam,
-      //     });
-      //     break;
+      case 'add':
+        this.router.navigate(['/main/employee-form']);
+        break;
+      case 'edit':
+        this.router.navigate(['/main/employee-form'], {
+          queryParams: queryParam,
+        });
+        break;
     }
   }
 

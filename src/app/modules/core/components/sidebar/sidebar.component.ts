@@ -178,7 +178,7 @@ export class SidebarComponent implements OnInit {
           {
             name: 'employee-master',
             icon: 'fa-solid fa-ellipsis',
-            routerLink: ['/main/employee'],
+            routerLink: ['/main/employee-table'],
             arrowMaster: false,
           },
         ],
