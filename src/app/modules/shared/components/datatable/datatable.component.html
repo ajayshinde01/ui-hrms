@@ -1,5 +1,5 @@
 <div class="container1">
-  <div class="card mb-3">
+  <div class="card mb-3 cardht" [style.--cardHeight.px]="cardDivHeight">
     <div class="card-header1">
       <div class="card-title">
         <div class="d-flex justify-content-between">
@@ -9,12 +9,8 @@
             </h2>
           </div>
           <div class="d-flex">
-            <div class="d-flex align-items-center position-relative">
-              <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-              <span class="position-absolute ms-4">
-                <!-- <i class="fa fa-search search-icon" aria-hidden="true"></i> -->
-              </span>
-              <!--end::Svg Icon-->
+            <div class="align-items-center position-relative">
+              <span class="position-absolute ms-4"> </span>
               <input
                 type="text"
                 data-kt-user-table-filter="search"
@@ -27,7 +23,7 @@
             <div class="cardtoolbar d-flex">
               <div class="d-flex">
                 <select
-                  class="btn ml-1 pagination-box"
+                  class="pagination-box"
                   [(ngModel)]="pagination.pageSize"
                   (change)="changePageSize()"
                 >

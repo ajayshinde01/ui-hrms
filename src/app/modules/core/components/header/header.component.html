@@ -95,7 +95,7 @@
 
           <div class="#">
             <a href="#" class="nav-item nav-link disabled">
-              <span class="badge rounded-pill badge-primary disabled">4 </span>
+              <span class="badge rounded-pill badge-primary disabled"> </span>
 
               <i class="fa-regular fa-bell logout-icon disabled"></i>
             </a>
@@ -201,15 +201,9 @@
             </div>
           </div>
 
-          <!-- <a href="#" class="nav-item nav-link active">
-
-                        <i class="fa-regular fa-message logout-icon"></i>
-
-                    </a> -->
-
-          <a href="#" class="nav-item nav-link disabled">
-            <i class="fas fa-vector-square logout-icon disabled"></i>
-          </a>
+          <button class="logout-button" (click)="onLogout()">
+            <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Logout
+          </button>
         </div>
       </div>
     </div>

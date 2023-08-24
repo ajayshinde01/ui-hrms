@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { SidebarService } from '../../services/sidebar.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,29 +10,49 @@ import { SidebarService } from '../../services/sidebar.service';
 
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isHide: boolean = false;
 
   sideBarList: any = [];
 
   masterList: any = [];
 
+  isFooter: boolean = true;
+
   selectedMenuName: string = '';
 
-  constructor(private sidebarService: SidebarService) {
-    this.populateSidebarMenu();
+  queryParams?: Params;
+
+  constructor(
+    private sidebarService: SidebarService,
+    private route: ActivatedRoute
+  ) {
+    //this.populateSidebarMenuForUser();
+
+    //this.populateSidebarMenuForAdmin();
 
     this.sidebarService.toggle.subscribe((success: string) => {
       if (success && success.includes('toggled')) {
         this.isHide = true;
+        this.isFooter = false;
 
         this.sideBarList.forEach(
           (m: { showSubmenu: boolean }) => (m.showSubmenu = false)
         );
       } else {
         this.isHide = false;
+        this.isFooter = true;
       }
     });
+  }
+  ngOnInit(): void {
+    if (sessionStorage.getItem('userRole') == 'user') {
+      console.log('user');
+      this.populateSidebarMenuForUser();
+    } else if (sessionStorage.getItem('userRole') == 'admin') {
+      console.log('admin');
+      this.populateSidebarMenuForAdmin();
+    }
   }
 
   sidebarTogle() {
@@ -42,8 +63,6 @@ export class SidebarComponent {
     this.sidebarService.toggle.next($wrapper.classList.toString());
 
     this.isHide = $wrapper.classList.contains('toggled');
-
-    //console.log(this.isHide);
   }
 
   sidebarTogle1() {
@@ -52,6 +71,8 @@ export class SidebarComponent {
     $wrapper.classList.toggle('toggled');
 
     this.sidebarService.toggle.next($wrapper.classList.toString());
+
+    this.isFooter = true;
   }
 
   protected onMenuWithSubmenuClick(menu: any): void {
@@ -60,30 +81,22 @@ export class SidebarComponent {
     if (this.isHide) {
       this.sidebarService.toggle.next('');
     }
-
-    // if (menu.tableName) {
-
-    //   this.datatableComponent.setTableName(menu.tableName);
-
-    // }
   }
 
   protected onMenuWithSubmenuClick1(menu: any): void {
-    menu.showSubmenu = !menu.showSubmenu;
-
     if (this.isHide) {
       this.sidebarService.toggle.next('');
     }
   }
 
-  private populateSidebarMenu(): void {
+  private populateSidebarMenuForUser(): void {
     this.sideBarList = [
       {
         name: 'Dashboard',
 
         icon: 'fa-solid fa-house ps-1 sidebar-icon',
 
-        showSubmenu: false,
+        showSubmenu: true,
       },
 
       {
@@ -91,7 +104,7 @@ export class SidebarComponent {
 
         icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
 
-        showSubmenu: false,
+        showSubmenu: true,
 
         submenu: [
           {
@@ -169,6 +182,54 @@ export class SidebarComponent {
             arrowMaster: false,
           },
         ],
+      },
+    ];
+  }
+
+  private populateSidebarMenuForAdmin(): void {
+    this.sideBarList = [
+      {
+        name: 'Dashboard',
+
+        icon: 'fa-solid fa-house ps-1 sidebar-icon',
+
+        showSubmenu: true,
+      },
+
+      {
+        name: 'Common Master',
+
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+        routerLink: ['/common-master/parent'],
+
+        showSubmenu: true,
+      },
+      {
+        name: 'User Management',
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+        showSubmenu: false,
+        submenu: [
+          {
+            name: 'employee-master',
+            icon: 'fa-solid fa-ellipsis',
+            // routerLink: ['/main/employee'],
+            arrowMaster: false,
+          },
+        ],
+      },
+      {
+        name: 'Email',
+
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+
+        showSubmenu: true,
+      },
+      {
+        name: 'Email Template',
+
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+
+        showSubmenu: true,
       },
     ];
   }

@@ -10,9 +10,9 @@ import { LoginRequest } from '../model/loginRequest';
 export class LoginService {
   constructor(private http: HttpClient) {}
 
-  authenticate(data: LoginRequest): Observable<Array<LoginResponse>> {
-    return this.http.post<Array<LoginResponse>>(
-      'http://192.168.1.62:8090/auth/login',
+  authenticate(data: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
+      'http://192.168.1.16:7020/auth/login',
       data
     );
   }

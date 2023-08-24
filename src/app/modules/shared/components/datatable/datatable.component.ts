@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnInit,
@@ -54,6 +55,10 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   reverse: boolean = false;
 
+  cardDivHeight: any = '';
+
+  cardHeights!: number;
+
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 
   constructor(private dataTableService: DataTableService) {}
@@ -64,6 +69,18 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.searchFunction();
+    this.cardHeight();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.cardHeight();
+  }
+
+  cardHeight() {
+    this.cardHeights = window.innerHeight;
+
+    this.cardDivHeight = this.cardHeights - 101;
   }
 
   getValue(rowObj: any, mappedBy: String) {
@@ -100,6 +117,7 @@ export class DatatableComponent implements OnInit, OnChanges {
     let data = { event: 'delete', data: {} };
 
     data.data = this.selectedValue;
+    console.log(data.data);
 
     return this.deleteFunction.emit(data);
   }
