@@ -31,6 +31,8 @@ import { blankValidator } from '../Validations/blankData.validator';
   selector: 'app-division',
   templateUrl: './division.component.html',
   styleUrls: ['./division.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class DivisionComponent {
   divisionForm!: FormGroup;

@@ -13,7 +13,7 @@ import { EmployeeVisaDetailsFormComponent } from '../../forms/employee/employee-
 })
 export class VisaDetailsTableComponent {
   [x: string]: any;
-  employeeHeaders: { columnsMetadata: Array<ColumnsMetadata>; };
+  employeeVisaHeaders: { columnsMetadata: Array<ColumnsMetadata>; };
   // employeeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
    //  columnsMetadata: [],
    //};
@@ -42,8 +42,8 @@ export class VisaDetailsTableComponent {
    getHeaders() {
      this.employeeService.getEmployeeVisaHeaders().subscribe(
        (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
-         this.employeeHeaders = response;
-         console.log(this.employeeHeaders);
+         this.employeeVisaHeaders = response;
+         console.log(this.employeeVisaHeaders);
        },
        (error: any) => {
          console.error('GET Request failed', error);

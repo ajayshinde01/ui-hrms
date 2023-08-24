@@ -14,7 +14,7 @@ import { EmployeePersonalDetails } from 'src/app/modules/main/models/employee-pe
 export class EmployeePersonalDetailsFormComponent {
   employee: EmployeePersonalDetails;
 
-  employeeForm!: FormGroup;
+  employeePersonalDetailsForm!: FormGroup;
   selectedIndex: any;
   clickedTabIndex: any;
   actionLabel: string = 'Save';
@@ -34,7 +34,7 @@ export class EmployeePersonalDetailsFormComponent {
   }
 
   initForm() {
-    this.employeeForm = this.formBuilder.group({
+    this.employeePersonalDetailsForm = this.formBuilder.group({
       id: [''],
       marital_status:[''],
       blood_group:[''],
@@ -51,6 +51,7 @@ export class EmployeePersonalDetailsFormComponent {
         ],
       ],
       health_details:[''],
+      gosi:[''],
       passport_number:[''],
       passport_name:[''],
       dateOfIssue:[''],
@@ -73,8 +74,8 @@ export class EmployeePersonalDetailsFormComponent {
     console.log("dfd",this.inputFromParent);
 
  
-    if (this.employeeForm.valid) {
-      const formData = this.employeeForm.value;
+    if (this.employeePersonalDetailsForm.valid) {
+      const formData = this.employeePersonalDetailsForm.value;
       if (this.actionLabel === 'Save') {
         this.employeeService.AddPersonalDetails(formData).subscribe(
           (response: EmployeePersonalDetails) => {

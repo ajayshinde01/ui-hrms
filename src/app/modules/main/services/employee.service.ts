@@ -33,7 +33,7 @@ export class EmployeeService {
   AddPersonalDetails(employee: EmployeePersonalDetails): Observable<EmployeePersonalDetails> {
     console.log(employee);
     return this.http.post<EmployeePersonalDetails>(
-      'http://192.168.1.16:7000/employee/add',
+      'http://192.168.1.16:7000/employee/personal-details/create',
       employee
     );
   }
