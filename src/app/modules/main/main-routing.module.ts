@@ -5,6 +5,7 @@ import { GradeComponent } from '../master/components/summary-tables/grade/grade.
 import { LoginComponent } from '../core/components/login/login.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
 import { EmployeePersonalInfoFormComponent } from './components/forms/employee/employee-personal-info-form/employee-personal-info-form.component';
+import { EmployeeVisaDetailsFormComponent } from './components/forms/employee/employee-visa-details-form/employee-visa-details-form.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,13 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: 'employee-form', component: EmployeePersonalInfoFormComponent },
+    ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'employee-visa-form', component: EmployeeVisaDetailsFormComponent },
     ],
   },
   {

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Grade } from '../../../models/grade.model';
 import {
@@ -22,6 +22,7 @@ import { blankValidator } from '../Validations/blankData.validator';
   selector: 'app-grade-form',
   templateUrl: './grade.form.component.html',
   styleUrls: ['./grade.form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GradeFormComponent {
   gradeForm!: FormGroup;

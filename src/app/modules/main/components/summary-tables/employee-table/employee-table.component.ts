@@ -41,7 +41,7 @@ export class EmployeeTableComponent {
     this.employeeService.getEmployeeHeaders().subscribe(
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
         this.employeeHeaders = response;
-        console.log(this.employeeHeaders);
+        //console.log(this.employeeHeaders);
       },
       (error: any) => {
         console.error('GET Request failed', error);
@@ -88,8 +88,8 @@ export class EmployeeTableComponent {
       .search(params)
       .subscribe(
         (data: { content: Array<Employee>; totalElements: number }) => {
-          console.log(data.content);
-          console.log(data.totalElements);
+         // console.log(data.content);
+        //  console.log(data.totalElements);
           this.employeeMetaData = data;
         }
       );

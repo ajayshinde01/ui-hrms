@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyDetailsComponent } from './components/forms/company-details/company-details.component';
+import { EmployeePersonalDetailsFormComponent } from './components/forms/employee/employee-personal-details-form/employee-personal-details-form.component';
+import { EmployeeVisaDetailsFormComponent } from './components/forms/employee/employee-visa-details-form/employee-visa-details-form.component';
+import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { CompanyDetailsComponent } from './components/forms/company-details/comp
     EmployeeTableComponent,
     EmployeePersonalInfoFormComponent,
     CompanyDetailsComponent,
+    EmployeePersonalDetailsFormComponent,
+    EmployeeVisaDetailsFormComponent,
+    VisaDetailsTableComponent,
   ],
   imports: [
     CommonModule,

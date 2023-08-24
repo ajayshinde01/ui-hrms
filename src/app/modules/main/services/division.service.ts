@@ -16,14 +16,14 @@ export class DivisionService {
 
   createDivision(division: Division): Observable<Division> {
     return this.http.post<Division>(
-      'http://localhost:8090/employee/division/create',
+      'http://192.168.1.16:7000/employee/division/create',
       division
     );
   }
 
   getDivisions(): Observable<Array<Division>> {
     return this.http.get<Array<Division>>(
-      'http://localhost:8090/employee/division/get-all'
+      'http://192.168.1.16:7000/employee/division/get-all'
     );
   }
 
@@ -31,26 +31,26 @@ export class DivisionService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8090/employee/data-table-metadata/division'
+      'http://192.168.1.16:7000/employee/data-table-metadata/division'
     );
   }
 
   searchDivisionById(divisionId: string): Observable<Division> {
     return this.http.get<Division>(
-      'http://localhost:8090/employee/division/' + divisionId
+      'http://192.168.1.16:7000/employee/division/' + divisionId
     );
   }
 
   updateDivision(divisionId: string): Observable<Division> {
     return this.http.put<Division>(
-      'http://localhost:8090/employee/division/update',
+      'http://192.168.1.16:7000/employee/division/update',
       divisionId
     );
   }
 
   deleteDivision(divisionId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://localhost:8090/employee/division/' +
+      'http://192.168.1.16:7000/employee/division/' +
         divisionId +
         '?updatedBy=Admin'
     );

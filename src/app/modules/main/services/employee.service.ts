@@ -4,9 +4,11 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ColumnsMetadata } from '../models/columns-metadata';
 import { Employee } from '../models/employee.model';
+import { Visa } from 'src/app/modules/main/models/visa.model';
 import { ApiResponse } from '../models/response';
 import { Title } from '@angular/platform-browser';
 import { CommonMaster } from '../models/common-master.model';
+import { EmployeePersonalDetails } from '../models/employee-personal-details';
 
 @Injectable({
   providedIn: 'root',
@@ -23,24 +25,40 @@ export class EmployeeService {
   createEmployee(employee: Employee): Observable<Employee> {
     console.log(employee);
     return this.http.post<Employee>(
-      'http://localhost:8090/employee/add',
+      'http://192.168.1.16:7000/employee/add',
+      employee
+    );
+  }
+
+  AddPersonalDetails(employee: EmployeePersonalDetails): Observable<EmployeePersonalDetails> {
+    console.log(employee);
+    return this.http.post<EmployeePersonalDetails>(
+      'http://192.168.1.16:7000/employee/add',
       employee
     );
   }
 
   updateEmployee(Id: string): Observable<Employee> {
-    return this.http.put<Employee>('http://localhost:8090/employee/update', Id);
+    return this.http.put<Employee>('http://192.168.1.16:7000/employee/update', Id);
   }
 
   searchEmployeeById(Id: string): Observable<Employee> {
-    return this.http.get<Employee>('http://localhost:8090/employee/' + Id);
+    return this.http.get<Employee>('http://192.168.1.16:7000/employee/' + Id);
   }
 
   getEmployeeHeaders(): Observable<{
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8090/employee/data-table-metadata/employee'
+      'http://192.168.1.16:7000/employee/data-table-metadata/employee'
+    );
+  }
+
+  getEmployeeVisaHeaders(): Observable<{
+    columnsMetadata: Array<ColumnsMetadata>;
+  }> {
+    return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
+      'http://192.168.1.45:8090/employee/data-table-metadata/visa'
     );
   }
 
@@ -48,7 +66,18 @@ export class EmployeeService {
     params: HttpParams
   ): Observable<{ content: Array<Employee>; totalElements: number }> {
     return this.http.get<{ content: Array<Employee>; totalElements: number }>(
-      'http://localhost:8090/employee/search',
+      'http://192.168.1.16:7000/employee/search',
+      {
+        params: params,
+      }
+    );
+  }
+
+  searchVisa(
+    params: HttpParams
+  ): Observable<{ content: Array<Visa>; totalElements: number }> {
+    return this.http.get<{ content: Array<Visa>; totalElements: number }>(
+      'http://192.168.1.16:7000/employee/search',
       {
         params: params,
       }
@@ -57,7 +86,7 @@ export class EmployeeService {
 
   deleteEmployee(employeeId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://localhost:8090/employee/' + employeeId + '?updatedBy=Admin'
+      'http://192.168.1.16:7000/employee/' + employeeId + '?updatedBy=Admin'
     );
   }
 
@@ -75,7 +104,27 @@ export class EmployeeService {
 
   getTitle(): Observable<Array<CommonMaster>> {
     return this.http.get<Array<CommonMaster>>(
-      'http://192.168.1.16:8000/utility/masters/commonMaster/Title'
+      'http://192.168.1.16:7000/employee/common-master/Title?sort=priority,code'
     );
+  }
+
+  getGender(): Observable<Array<CommonMaster>> {
+
+    return this.http.get<Array<CommonMaster>>(
+
+      'http://192.168.1.16:7000/employee/common-master/Gender?sort=priority,code'
+
+    );
+
+  }
+
+  getStatus(): Observable<Array<CommonMaster>> {
+
+    return this.http.get<Array<CommonMaster>>(
+
+      'http://192.168.1.16:7000/employee/common-master/Status?sort=priority,code'
+
+    );
+
   }
 }
