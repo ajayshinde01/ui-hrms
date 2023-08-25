@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../core/components/layout/layout.component';
 import { LoginComponent } from '../core/components/login/login.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
-import { EmployeePersonalInfoFormComponent } from './components/forms/employee/employee-personal-info-form/employee-personal-info-form.component';
-import { EmployeeVisaDetailsFormComponent } from './components/forms/employee/employee-visa-details-form/employee-visa-details-form.component';
+import { EmployeeInfoComponent } from './components/forms/employee-info/employee-info.component';
+import { EmployeeComponent } from './components/forms/employee/employee.component';
 
 const routes: Routes = [
   {
@@ -23,14 +23,14 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'employee-form', component: EmployeePersonalInfoFormComponent },
+      { path: 'employee-info', component: EmployeeComponent }
     ],
   },
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'employee-visa-form', component: EmployeeVisaDetailsFormComponent },
+     
     ],
   },
   {

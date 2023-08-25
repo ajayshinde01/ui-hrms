@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, Data } from '@angular/router';
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
-import { Parent } from '../../../models/role.model';
+import { Parent } from '../../../models/parent';
 import { ParentService } from '../../../services/parent.service';
 import { ApiResponse } from '../../../models/response';
 
@@ -87,13 +87,13 @@ export class ParentComponent {
         break;
 
       case 'add':
-        //this.OpenModal();
-        this.router.navigate(['/master/role']);
+        this.router.navigate(['/common-master/parentForm']);
         break;
 
       case 'edit':
-        //this.OpenModalForEdit(id);
-        this.router.navigate(['/master/role'], { queryParams: queryParam });
+        this.router.navigate(['/common-master/parentForm'], {
+          queryParams: queryParam,
+        });
         break;
     }
   }

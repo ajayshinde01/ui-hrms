@@ -6,7 +6,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { CoreModule } from '../core/core.module';
 import { TestComponent } from './components/test/test.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
-import { EmployeePersonalInfoFormComponent } from './components/forms/employee/employee-personal-info-form/employee-personal-info-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -16,19 +15,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyDetailsComponent } from './components/forms/company-details/company-details.component';
-import { EmployeePersonalDetailsFormComponent } from './components/forms/employee/employee-personal-details-form/employee-personal-details-form.component';
-import { EmployeeVisaDetailsFormComponent } from './components/forms/employee/employee-visa-details-form/employee-visa-details-form.component';
-import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
+import { AlphabetOnlyDirective } from './components/forms/directives/alphabet-only.directive';
+import { EmployeeComponent } from './components/forms/employee/employee.component';
+import { EmployeeInfoComponent } from './components/forms/employee-info/employee-info.component';
+import { CompanyDetailsService } from './services/company-details.service';
+import { DesignationService } from '../master/services/designation.service';
+import { RoleService } from '../master/services/role.service';
+import { GradeService } from '../master/services/grade.service';
+import { DivisionService } from './services/division.service';
+import { EmployeeTypeService } from '../master/services/employee-type.service';
+import { DepartmentService } from '../master/services/department.service';
 
 @NgModule({
   declarations: [
     TestComponent,
     EmployeeTableComponent,
-    EmployeePersonalInfoFormComponent,
     CompanyDetailsComponent,
-    EmployeePersonalDetailsFormComponent,
-    EmployeeVisaDetailsFormComponent,
-    VisaDetailsTableComponent,
+    AlphabetOnlyDirective,
+    EmployeeComponent,
+    EmployeeInfoComponent
   ],
   imports: [
     CommonModule,
@@ -45,5 +50,17 @@ import { VisaDetailsTableComponent } from './components/summary-tables/visa-deta
     ReactiveFormsModule,
     FormsModule,
   ],
+  providers: [
+    CompanyDetailsService,
+    DesignationService,
+    RoleService,
+    GradeService,
+    RoleService,
+    EmployeeTypeService,
+    DivisionService,
+    DepartmentService,],
+  exports: [
+    AlphabetOnlyDirective
+  ]
 })
-export class MainModule {}
+export class MainModule { }

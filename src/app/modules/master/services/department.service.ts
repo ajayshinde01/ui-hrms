@@ -5,9 +5,7 @@ import { Department } from '../models/department.model';
 import { ColumnsMetadata } from '../models/columnMetaData';
 import { ApiResponse } from '../models/response';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class DepartmentService {
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 

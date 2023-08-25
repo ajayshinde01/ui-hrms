@@ -12,7 +12,7 @@ export class DivisionService {
   private dataSubject = new BehaviorSubject<string>('');
   public data$ = this.dataSubject.asObservable();
 
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
   createDivision(division: Division): Observable<Division> {
     return this.http.post<Division>(
@@ -20,6 +20,8 @@ export class DivisionService {
       division
     );
   }
+
+
 
   getDivisions(): Observable<Array<Division>> {
     return this.http.get<Array<Division>>(
@@ -51,8 +53,8 @@ export class DivisionService {
   deleteDivision(divisionId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       'http://192.168.1.16:7000/employee/division/' +
-        divisionId +
-        '?updatedBy=Admin'
+      divisionId +
+      '?updatedBy=Admin'
     );
   }
   search(

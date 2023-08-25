@@ -44,6 +44,7 @@ export class CustomValidators {
 
   static getErrorMessage(errorKey: string): string {
     console.log("errorKey"+errorKey);
+   
     const errorMessages: { [key: string]: string } = {
       required: 'This field is required.',
       pattern: 'Invalid pattern',//'No inbetween space allowed',

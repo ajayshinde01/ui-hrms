@@ -8,9 +8,17 @@ import { ApiResponse } from '../models/response';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
 @Injectable()
 export class DesignationService {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  getDesignations(): Observable<Array<Designation>> {
+    return this.http.get<Array<Designation>>(
+      'http://192.168.1.16:7000/employee/designation/get-all'
+
+    );
+
+  }
 
   getDesignationHeaders(): Observable<{
     columnsMetadata: Array<ColumnsMetadata>;
@@ -46,8 +54,8 @@ export class DesignationService {
   deleteDesignation(designationId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       'http://192.168.1.16:7000/employee/designation/' +
-        designationId +
-        '?updatedBy=Admin'
+      designationId +
+      '?updatedBy=Admin'
     );
   }
 

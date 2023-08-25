@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ColumnsMetadata } from '../models/columns-metadata';
-import { Employee } from '../models/employee.model';
+import { Employees } from '../models/employee.model';
 import { Visa } from 'src/app/modules/main/models/visa.model';
 import { ApiResponse } from '../models/response';
 import { Title } from '@angular/platform-browser';
@@ -17,14 +17,14 @@ export class EmployeeService {
   // notify(arg0: string) {
   //   throw new Error('Method not implemented.');
   // }
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
   private dataSubject = new BehaviorSubject<string>('');
   public data$ = this.dataSubject.asObservable();
 
-  createEmployee(employee: Employee): Observable<Employee> {
+  createEmployee(employee: Employees): Observable<Employees> {
     console.log(employee);
-    return this.http.post<Employee>(
+    return this.http.post<Employees>(
       'http://192.168.1.16:7000/employee/add',
       employee
     );
@@ -38,12 +38,12 @@ export class EmployeeService {
     );
   }
 
-  updateEmployee(Id: string): Observable<Employee> {
-    return this.http.put<Employee>('http://192.168.1.16:7000/employee/update', Id);
+  updateEmployee(Id: string): Observable<Employees> {
+    return this.http.put<Employees>('http://192.168.1.16:7000/employee/update', Id);
   }
 
-  searchEmployeeById(Id: string): Observable<Employee> {
-    return this.http.get<Employee>('http://192.168.1.16:7000/employee/' + Id);
+  searchEmployeeById(Id: string): Observable<Employees> {
+    return this.http.get<Employees>('http://192.168.1.16:7000/employee/' + Id);
   }
 
   getEmployeeHeaders(): Observable<{
@@ -64,8 +64,8 @@ export class EmployeeService {
 
   search(
     params: HttpParams
-  ): Observable<{ content: Array<Employee>; totalElements: number }> {
-    return this.http.get<{ content: Array<Employee>; totalElements: number }>(
+  ): Observable<{ content: Array<Employees>; totalElements: number }> {
+    return this.http.get<{ content: Array<Employees>; totalElements: number }>(
       'http://192.168.1.16:7000/employee/search',
       {
         params: params,
@@ -113,6 +113,33 @@ export class EmployeeService {
     return this.http.get<Array<CommonMaster>>(
 
       'http://192.168.1.16:7000/employee/common-master/Gender?sort=priority,code'
+
+    );
+
+  }
+
+  getAllEmployee(): Observable<Array<Employees>> {
+    return this.http.get<Array<Employees>>(
+      'http://192.168.1.16:7000/employee/get-all'
+    );
+
+  }
+
+  getMaritalStatus(): Observable<Array<CommonMaster>> {
+
+    return this.http.get<Array<CommonMaster>>(
+
+      'http://192.168.1.16:7000/employee/common-master/Marital Status?sort=priority,code'
+
+    );
+
+  }
+
+  getBloodGroup(): Observable<Array<CommonMaster>> {
+
+    return this.http.get<Array<CommonMaster>>(
+
+      'http://192.168.1.16:7000/employee/common-master/Blood Group?sort=priority,code'
 
     );
 

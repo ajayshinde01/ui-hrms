@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ColumnsMetadata } from '../../../models/columns-metadata';
 import { HttpParams } from '@angular/common/http';
-import { Employee } from '../../../models/employee.model';
+import { Employees } from '../../../models/employee.model';
 import { Data, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeService } from '../../../services/employee.service';
@@ -17,7 +17,7 @@ export class EmployeeTableComponent {
   employeeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
-  employeeMetaData: { content: Array<Employee>; totalElements: number } = {
+  employeeMetaData: { content: Array<Employees>; totalElements: number } = {
     content: [],
     totalElements: 0,
   };
@@ -72,10 +72,10 @@ export class EmployeeTableComponent {
         );
         break;
       case 'add':
-        this.router.navigate(['/main/employee-form']);
+        this.router.navigate(['/main/employee-info']);
         break;
       case 'edit':
-        this.router.navigate(['/main/employee-form'], {
+        this.router.navigate(['/main/employee-info'], {
           queryParams: queryParam,
         });
         break;
@@ -87,7 +87,7 @@ export class EmployeeTableComponent {
     this.employeeService
       .search(params)
       .subscribe(
-        (data: { content: Array<Employee>; totalElements: number }) => {
+        (data: { content: Array<Employees>; totalElements: number }) => {
          // console.log(data.content);
         //  console.log(data.totalElements);
           this.employeeMetaData = data;

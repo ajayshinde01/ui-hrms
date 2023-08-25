@@ -6,20 +6,42 @@ import { ChildComponent } from './components/summary-tables/child/child.componen
 import { ParentComponent } from './components/summary-tables/parent/parent.component';
 import { ParentService } from './services/parent.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ParentFormComponent } from './components/forms/parent-form/parent-form.component';
 import { ChildFormComponent } from './components/forms/child-form/child-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ChildService } from './services/child.service';
 
 @NgModule({
-  declarations: [ParentComponent, ChildComponent, ParentFormComponent, ChildFormComponent],
+  declarations: [
+    ParentComponent,
+    ChildComponent,
+    ParentFormComponent,
+    ChildFormComponent,
+  ],
   imports: [
     CommonModule,
     CommonMasterRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatIconModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  providers: [ParentService],
+  providers: [ParentService, ChildService],
 })
 export class CommonMasterModule {}

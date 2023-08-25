@@ -1,102 +1,174 @@
-<div class="row mm">
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Designation</mat-label>
-      <mat-select formControlName="designation" placeholder="Select">
-        <mat-option value="one">Intern</mat-option>
-        <mat-option value="two">Trainee</mat-option>
-      </mat-select>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
+<form [formGroup]="companyDetailsForm">
+  <div class="row mt-4">
+    <h2>COMPANY DETAILS</h2>
+    <div class="col-lg-12">
+      <div class="company-details-form-div">
+        <div class="row mm">
+          <div class="col-lg-4" formGroupName="designation">
+            <mat-label class="mat-label">Designation</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="id" placeholder="Select">
+                <mat-option
+                  *ngFor="let designation of designations"
+                  [value]="designation.id"
+                  >{{ designation.designationName }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4" formGroupName="grade">
+            <mat-label class="mat-label">Grade</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="id" placeholder="Select">
+                <mat-option *ngFor="let grade of grades" [value]="grade.id">{{
+                  grade.gradeName
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4" formGroupName="department">
+            <mat-label class="mat-label">Department</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="id" placeholder="Select">
+                <mat-option
+                  *ngFor="let department of departments"
+                  [value]="department.id"
+                  >{{ department.departmentName }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-4" formGroupName="role">
+            <mat-label class="mat-label">Role</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="id" placeholder="Select">
+                <mat-option *ngFor="let role of roles" [value]="role.id">{{
+                  role.roleName
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Reviewer Manager</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select
+                formControlName="reviewerManager"
+                placeholder="Select"
+              >
+                <mat-option
+                  *ngFor="let employee of employees"
+                  [value]="employee.id"
+                >
+                  {{ employee.firstName }} {{ employee.lastName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Reporting Manager</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select
+                formControlName="reportingManager"
+                placeholder="Select"
+              >
+                <mat-option
+                  *ngFor="let employee of employees"
+                  [value]="employee.id"
+                >
+                  {{ employee.firstName }} {{ employee.lastName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-4" formGroupName="employeeType">
+            <mat-label class="mat-label">Employee Type</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="id" placeholder="Select">
+                <mat-option
+                  *ngFor="let employeeType of employeeTypes"
+                  [value]="employeeType.id"
+                  >{{ employeeType.type }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Billable</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="billable" placeholder="Select">
+                <mat-option
+                  *ngFor="let billable of billables"
+                  [value]="billable.code"
+                  >{{ billable.value }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Probation</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="probation" placeholder="Select">
+                <mat-option
+                  *ngFor="let probation of probations"
+                  [value]="probation.code"
+                  >{{ probation.value }} Months</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mm">
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Company Email</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                formControlName="companyEmail"
+                placeholder="e.g akshay.deshmukh@avisys.in"
+              />
+              <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Client Email</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                formControlName="clientEmail"
+                placeholder="e.g akshay.deshmukh@stc.in"
+              />
+              <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-label class="mat-label">Default Shift</mat-label>
+            <mat-form-field appearance="outline" color="primary">
+              <mat-select formControlName="shift" placeholder="Select">
+                <mat-option
+                  *ngFor="let defaultShift of defaultShifts"
+                  [value]="defaultShift.code"
+                  >{{ defaultShift.value }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="form-footer">
+          <button
+            _ngcontent-ng-c812429062=""
+            class="btn btn-primary px-4 float-right company-details-save-btn"
+            (click)="onSubmit()"
+            [disabled]="!companyDetailsForm.valid"
+          >
+            {{ actionLabel }}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline">
-      <mat-label>Employee code</mat-label>
-      <input
-        matInput
-        formControlName="employeeCode"
-        placeholder="Placeholder"
-      />
-      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Grade</mat-label>
-      <mat-select formControlName="grade" placeholder="Select">
-        <mat-option value="one">Technical Grade 0</mat-option>
-        <mat-option value="two">Technical Grade 1</mat-option>
-      </mat-select>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-</div>
-<div class="row mm">
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Reviewer Manager</mat-label>
-      <mat-select formControlName="reviewerManager" placeholder="Select">
-        <mat-option value="one">Yogesh Somvanshi</mat-option>
-        <mat-option value="two">Yogesh Somvanshi</mat-option>
-      </mat-select>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Reporting Manager</mat-label>
-      <mat-select formControlName="reportingManager" placeholder="Select">
-        <mat-option value="one">Yogesh Somvanshi</mat-option>
-        <mat-option value="two">Yogesh Somvanshi</mat-option>
-      </mat-select>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Department</mat-label>
-      <mat-select formControlName="department" placeholder="Select">
-        <mat-option value="one">Product Developement</mat-option>
-        <mat-option value="two">CRM Developement</mat-option>
-      </mat-select>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-</div>
-<div class="row mm">
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Reviewer Manager</mat-label>
-      <mat-select formControlName="reviewerManager" placeholder="Select">
-        <mat-option value="one">Yogesh Somvanshi</mat-option>
-        <mat-option value="two">Yogesh Somvanshi</mat-option>
-      </mat-select>
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline">
-      <mat-label>Employee code</mat-label>
-      <input
-        matInput
-        formControlName="employeeCode"
-        placeholder="Placeholder"
-      />
-      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-lg-4">
-    <mat-form-field appearance="outline">
-      <mat-label>Employee code</mat-label>
-      <input
-        matInput
-        formControlName="employeeCode"
-        placeholder="Placeholder"
-      />
-      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </div>
-</div>
+</form>

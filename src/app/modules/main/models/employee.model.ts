@@ -1,6 +1,6 @@
 import { Division } from '../../master/models/division.model';
 
-export interface Employee {
+export interface Employees {
   id: number;
   employeeCode: String;
   profileImage: String;

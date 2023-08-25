@@ -1,4 +1,3 @@
-import { DemoComponent } from './modules/main/components/demo/demo.component';
 import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({
-  declarations: [AppComponent, DemoComponent],
+  declarations: [AppComponent],
   providers: [{ provide: CONFIG, useValue: config }],
   bootstrap: [AppComponent],
   entryComponents: [PopupComponent],

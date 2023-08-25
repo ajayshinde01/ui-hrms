@@ -8,9 +8,16 @@ import { ApiResponse } from '../models/response';
 import { GradeType } from '../models/gradeType';
 @Injectable()
 export class GradeService {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  getGrades(): Observable<Array<Grade>> {
+    return this.http.get<Array<Grade>>(
+      'http://192.168.1.16:7000/employee/grade/get-all'
+    );
+
+  }
 
   getGradesHeaders(): Observable<{ columnsMetadata: Array<ColumnsMetadata> }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
@@ -44,8 +51,8 @@ export class GradeService {
   deleteGrade(gradeId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       'http://192.168.1.16:7000/employee/grade/delete/' +
-        gradeId +
-        '?updatedBy=Admin'
+      gradeId +
+      '?updatedBy=Admin'
     );
   }
 

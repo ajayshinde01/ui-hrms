@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
-import { Parent } from '../models/role.model';
+import { Parent } from '../models/parent';
 import { ColumnsMetadata } from '../models/columnMetaData';
 import { ApiResponse } from '../models/response';
 
@@ -22,26 +22,18 @@ export class ParentService {
     );
   }
 
-  createParent(data: Parent): Observable<Array<Parent>> {
-    return this.http.post<Array<Parent>>(
-      'http://192.168.1.16:7000/employee/role/create',
+  createParent(data: Parent): Observable<Parent> {
+    return this.http.post<Parent>(
+      'http://192.168.1.16:7000/employee/common-master/create',
       data
     );
   }
   // Needs to modify
   searchParentById(id: string): Observable<Parent> {
     return this.http.get<Parent>(
-      'http://192.168.1.16:7000/employee/role/search/' + id
+      'http://192.168.1.16:7000/employee/common-master/get/' + id
     );
   }
-
-  // updateRole(data: Role): Observable<Array<Role>> {
-  //   console.log(data);
-  //   return this.http.put<Array<Role>>(
-  //     'http://192.168.1.16:7000/employee/role/update',
-  //     data
-  //   );
-  // }
 
   deleteParent(parentId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(

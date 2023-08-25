@@ -28,7 +28,7 @@ import { nameMaxLength } from '../Validations/nameMaxLength.validator';
   selector: 'app-employee-type',
   templateUrl: './employee-type.component.html',
   styleUrls: ['./employee-type.component.scss'],
-  encapsulation: ViewEncapsulation.None
+
 })
 export class EmployeeTypeComponent {
   employeeTypeForm!: FormGroup;
