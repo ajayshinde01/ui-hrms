@@ -11,7 +11,7 @@
                   #avatarImg
                   class="avatar-photo"
                   [src]="
-                    url && url !== '' ? url : '../../../assets/profile-img.jpg'
+                    url && url !== '' ? url : 'assets/profile-img.jpg'
                   "
                   (mouseenter)="showAddPhotoOverlay = true"
                   alt="avatar photo"
@@ -116,6 +116,7 @@
               [max]="maxDob"
               [min]="minDob"
               (dateChange)="calculateAge($event)"
+              readonly
             />
             <mat-datepicker-toggle
               matSuffix
@@ -143,7 +144,7 @@
                 <input
                   matInput
                   formControlName="firstName"
-                  placeholder="Placeholder"
+                  placeholder="First Name"
                 />
                 <mat-error *ngIf="isControlInvalid('firstName')">
                   <span class="validate-text">{{
@@ -160,7 +161,7 @@
             <input
               matInput
               formControlName="lastName"
-              placeholder="Placeholder"
+              placeholder="Last Name"
             />
             <mat-error *ngIf="isControlInvalid('lastName')">
               <span class="validate-text">{{ getErrorMessage("lastName") }}</span>
@@ -184,7 +185,7 @@
               type="email"
               matInput
               formControlName="email"
-              placeholder="Placeholder"
+              placeholder="Email"
             />
             <mat-error *ngIf="isControlInvalid('email')">
               <span class="validate-text">{{ getErrorMessage("email") }}</span>
@@ -195,7 +196,7 @@
         <div class="col-lg-4">
           <mat-form-field appearance="outline" class="">
             <mat-label>Mobile Number</mat-label>
-            <input matInput formControlName="mobile" placeholder="Placeholder" />
+            <input matInput formControlName="mobile" placeholder="Mobile Number" />
             <mat-error *ngIf="isControlInvalid('mobile')">
               <span class="validate-text">{{ getErrorMessage("mobile") }}</span>
             </mat-error>
@@ -205,7 +206,7 @@
         <div class="col-lg-4">
           <mat-form-field appearance="outline" color="primary">
             <mat-label>Phone</mat-label>
-            <input matInput formControlName="phone" placeholder="Placeholder" />
+            <input matInput formControlName="phone" placeholder="Phone" />
             <mat-error *ngIf="isControlInvalid('phone')">
               <span class="validate-text">{{ getErrorMessage("phone") }}</span>
             </mat-error>
@@ -237,6 +238,7 @@
               s
               [matDatepicker]="picker1"
               placeholder="Choose a date"
+              readonly
             />
             <mat-datepicker-toggle
               matSuffix
@@ -288,7 +290,7 @@
         <div class="col-lg-4">
           <mat-form-field appearance="outline">
             <mat-label>User Id</mat-label>
-            <input matInput formControlName="userId" placeholder="Placeholder" />
+            <input matInput formControlName="userId" placeholder="User Id" />
           </mat-form-field>
         </div>
       </div>
