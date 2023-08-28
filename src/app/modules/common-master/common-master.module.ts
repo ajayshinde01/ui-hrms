@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ChildService } from './services/child.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ChildService } from './services/child.service';
     MatDividerModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
   ],
   providers: [ParentService, ChildService],
 })
