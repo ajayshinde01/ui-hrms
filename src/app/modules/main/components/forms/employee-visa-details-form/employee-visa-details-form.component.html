@@ -1,0 +1,86 @@
+<form [formGroup]="employeeVisaDetailsForm">
+
+<div class="container">
+<div class="row row-section mm mt-4">
+    <div class="d-flex justify-content-between">
+        <h2 class="card-title employee_info_title">Visa Details</h2>
+        <button class="close-btn" (click)="Close(false)">
+          <i style="font-size: 12px" class="fa">&#xf00d;</i>
+        </button>
+      </div>
+    
+    <div class="col-md-4 col-lg-4">
+        <mat-label>Country Code</mat-label>
+    </div>
+    <div class="col-md-8 col-lg-8 form-controls">
+      <mat-form-field  color="primary" appearance="outline">
+       
+        <mat-select  formControlName="countryCode" placeholder="Select">
+          <mat-option *ngFor="let country_code of country_codes" [value]="country_code.id">
+            {{ country_code.value }}
+        </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+</div>
+
+<div class="row mm">
+
+    <div class="col-md-4 col-lg-4">
+      <mat-label>Visa Number</mat-label>
+    </div>
+    <div class="col-md-8 col-lg-8 form-controls">
+      <mat-form-field appearance="outline" color="primary">
+        <input
+          matInput
+          formControlName="visaNumber"
+          placeholder="Visa Number"
+        />
+      </mat-form-field>
+    </div>
+</div>
+
+<div class="row mm">
+
+      <div class="col-md-4 col-lg-4">
+        <mat-label>Date Of Issue</mat-label>
+      </div>
+      <div class="col-md-8 col-lg-8 form-controls">
+        <mat-form-field appearance="outline" class="">
+            <input
+              matInput
+              formControlName="validDate"
+              [matDatepicker]="picker"
+              placeholder="Date Of Issue"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </div>
+</div>
+
+<div class="row mm">
+    <div class="col-md-4 col-lg-4">
+        <mat-label>Visa File</mat-label>
+      </div>
+      <div class="col-md-8 col-lg-8 form-controls">
+        <!--</mat-form-field> -->
+        <div class="passport-file-upload">  
+            <input #visaFile type="file" name="visaFile" accept="image/png, image/jpeg"
+            >
+        </div>
+    </div>
+</div>
+
+  <div class="form-footer">
+    <button  class="btn btn-primary px-4 float-right profile-save-btn"  (click)="onSubmit()">
+      Save
+    </button>
+
+  </div>
+</div>
+</form>
+<!--<button (click)="nextStep()">click here</button>-->

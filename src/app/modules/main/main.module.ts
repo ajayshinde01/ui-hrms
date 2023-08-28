@@ -1,7 +1,6 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MainRoutingModule } from './main-routing.module';
 import { CoreModule } from '../core/core.module';
 import { TestComponent } from './components/test/test.component';
@@ -25,6 +24,9 @@ import { GradeService } from '../master/services/grade.service';
 import { DivisionService } from './services/division.service';
 import { EmployeeTypeService } from '../master/services/employee-type.service';
 import { DepartmentService } from '../master/services/department.service';
+import { EmployeePersonalDetailsFormComponent } from './components/forms/employee-personal-details-form/employee-personal-details-form.component';
+import { EmployeeVisaDetailsFormComponent } from './components/forms/employee-visa-details-form/employee-visa-details-form.component';
+import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,10 @@ import { DepartmentService } from '../master/services/department.service';
     CompanyDetailsComponent,
     AlphabetOnlyDirective,
     EmployeeComponent,
-    EmployeeInfoComponent
+    EmployeeInfoComponent,
+    EmployeePersonalDetailsFormComponent,
+    EmployeeVisaDetailsFormComponent,
+    VisaDetailsTableComponent
   ],
   imports: [
     CommonModule,

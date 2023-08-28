@@ -38,6 +38,13 @@ export class EmployeeService {
     );
   }
 
+  AddVisaDetails(visa: Visa, emp_id:number): Observable<Visa> {
+    return this.http.post<Visa>(
+      'http://192.168.1.16:7000/employee/visa/'+emp_id+'/add',
+      visa
+    );
+  }
+
   updateEmployee(Id: string): Observable<Employees> {
     return this.http.put<Employees>('http://192.168.1.16:7000/employee/update', Id);
   }
@@ -58,7 +65,7 @@ export class EmployeeService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://192.168.1.45:8090/employee/data-table-metadata/visa'
+      'http://192.168.1.16:7000/employee/data-table-metadata/visa'
     );
   }
 
@@ -74,10 +81,11 @@ export class EmployeeService {
   }
 
   searchVisa(
-    params: HttpParams
+    params: HttpParams,
+    id:number
   ): Observable<{ content: Array<Visa>; totalElements: number }> {
     return this.http.get<{ content: Array<Visa>; totalElements: number }>(
-      'http://192.168.1.16:7000/employee/search',
+      'http://192.168.1.16:7000/employee/visa/'+id+'/search',
       {
         params: params,
       }
@@ -87,6 +95,12 @@ export class EmployeeService {
   deleteEmployee(employeeId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       'http://192.168.1.16:7000/employee/' + employeeId + '?updatedBy=Admin'
+    );
+  }
+
+  deleteEmployeeVisa(employeeId: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(
+      'http://192.168.1.16:7000/employee/visa/' + employeeId + '?updatedBy=Admin'
     );
   }
 
@@ -140,6 +154,16 @@ export class EmployeeService {
     return this.http.get<Array<CommonMaster>>(
 
       'http://192.168.1.16:7000/employee/common-master/Blood Group?sort=priority,code'
+
+    );
+
+  }
+
+  getCountryCode(): Observable<Array<CommonMaster>> {
+
+    return this.http.get<Array<CommonMaster>>(
+
+      'http://192.168.1.16:7000/employee/common-master/Country?sort=priority,code'
 
     );
 

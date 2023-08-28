@@ -161,7 +161,6 @@ export class EmployeeInfoComponent implements OnInit {
       middleName: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
@@ -220,7 +219,6 @@ export class EmployeeInfoComponent implements OnInit {
       phone: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),

@@ -5,6 +5,7 @@ import { LoginComponent } from '../core/components/login/login.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
 import { EmployeeInfoComponent } from './components/forms/employee-info/employee-info.component';
 import { EmployeeComponent } from './components/forms/employee/employee.component';
+import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
     children: [
       { path: 'employee-info', component: EmployeeComponent }
     ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'visa-table', component: VisaDetailsTableComponent }],
   },
   {
     path: '',
