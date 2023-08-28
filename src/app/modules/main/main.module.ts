@@ -25,6 +25,11 @@ import { GradeService } from '../master/services/grade.service';
 import { DivisionService } from './services/division.service';
 import { EmployeeTypeService } from '../master/services/employee-type.service';
 import { DepartmentService } from '../master/services/department.service';
+import { EducationalQualificationsTableComponent } from './components/summary-tables/educational-qualifications-table/educational-qualifications-table.component';
+import { EducationalQualificationFormComponent } from './components/forms/educational-qualification-form/educational-qualification-form.component';
+import { ProfessionalInformationComponent } from './components/forms/professional-information/professional-information.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,10 @@ import { DepartmentService } from '../master/services/department.service';
     CompanyDetailsComponent,
     AlphabetOnlyDirective,
     EmployeeComponent,
-    EmployeeInfoComponent
+    EmployeeInfoComponent,
+    EducationalQualificationsTableComponent,
+    EducationalQualificationFormComponent,
+    ProfessionalInformationComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +57,8 @@ import { DepartmentService } from '../master/services/department.service';
     MatDividerModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
+    HttpClientModule,
   ],
   providers: [
     CompanyDetailsService,
@@ -58,9 +68,8 @@ import { DepartmentService } from '../master/services/department.service';
     RoleService,
     EmployeeTypeService,
     DivisionService,
-    DepartmentService,],
-  exports: [
-    AlphabetOnlyDirective
-  ]
+    DepartmentService,
+  ],
+  exports: [AlphabetOnlyDirective],
 })
-export class MainModule { }
+export class MainModule {}

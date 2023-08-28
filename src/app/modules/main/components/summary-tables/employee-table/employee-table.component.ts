@@ -52,7 +52,7 @@ export class EmployeeTableComponent {
   action(event: Data) {
     let type: string = event['event'];
     let id: string = event['data'].id;
-    const queryParam = { id: id };
+    let queryParam = { id: id, actionLabel: 'Save' };
     switch (type) {
       case 'delete':
         this.employeeService.deleteEmployee(id).subscribe(
@@ -75,6 +75,7 @@ export class EmployeeTableComponent {
         this.router.navigate(['/main/employee-info']);
         break;
       case 'edit':
+        queryParam.actionLabel = 'Update';
         this.router.navigate(['/main/employee-info'], {
           queryParams: queryParam,
         });
@@ -88,8 +89,8 @@ export class EmployeeTableComponent {
       .search(params)
       .subscribe(
         (data: { content: Array<Employees>; totalElements: number }) => {
-         // console.log(data.content);
-        //  console.log(data.totalElements);
+          // console.log(data.content);
+          //  console.log(data.totalElements);
           this.employeeMetaData = data;
         }
       );
