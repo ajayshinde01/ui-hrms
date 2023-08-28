@@ -1,8 +1,5 @@
-<!-- <h2>Popup Content</h2>
-<p>{{ data.message }}</p> -->
-<h1 mat-dialog-title>Employee Type</h1>
 
-<div mat-dialog-actions>
-  
-  <button mat-button mat-dialog-close (click)="closeDialog()">Close</button>
-</div>
+<h2 mat-dialog-title>Confirmation</h2>
+
+<button mat-button (click)="onNoClick()">No</button>
+<button mat-button (click)="onYesClick()" cdkFocusInitial>Yes</button>

@@ -7,5 +7,7 @@ export interface Pagination {
 
   sortType?: string;
 
+  sortBy?: string;
+
   pageNumber: number;
 }

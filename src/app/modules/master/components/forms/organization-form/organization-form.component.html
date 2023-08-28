@@ -1,0 +1,256 @@
+<form [formGroup]="organizationForm">
+  <div class="container" style="width: 490px; height: 260px">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>Organization</h2>
+            <button class="close-btn" (click)="Close(false)">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Organization Code </mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder="AVI-INDIA"
+                formControlName="organizationCode"
+                [disabled]="isDisabled"
+                class=""
+              />
+              <div
+                *ngIf="
+                  organizationForm.controls['organizationCode']?.invalid &&
+                  organizationForm.controls['organizationCode']?.touched &&
+                  organizationForm.controls['organizationCode']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode']?.errors?.['required']"
+                  >Please enter Organization Code</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode']?.errors?.['whitespace'] && !organizationForm.controls['organizationCode']?.errors?.['leadingSpace'] && !organizationForm.controls['organizationCode']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationCode'].errors?.['pattern'] "
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode']?.errors?.['leadingSpace'] && !organizationForm.controls['organizationCode'].errors?.['pattern'] && !organizationForm.controls['organizationCode']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationCode'].errors?.['pattern'] && !organizationForm.controls['organizationCode']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationCode'].errors?.['pattern'] && organizationForm.controls['organizationCode']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode'].errors?.['pattern']"
+                  >Please enter valid Organization Code
+                </span>
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationCode']?.errors?.['idMaxLength'] && !organizationForm.controls['organizationCode'].errors?.['pattern'] && !organizationForm.controls['organizationCode']?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Organization Name</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder="Avisys India"
+                formControlName="organizationName"
+              />
+              <div
+                *ngIf="
+                  organizationForm.controls['organizationName']?.invalid &&
+                  organizationForm.controls['organizationName']?.touched &&
+                  organizationForm.controls['organizationName']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['required']"
+                  >Please enter Organization Name.
+                </span>
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['leadingSpace'] && !organizationForm.controls['organizationName'].errors?.['pattern'] && !organizationForm.controls['organizationName']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['whitespace'] && !organizationForm.controls['organizationName'].errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationName'].errors?.['pattern'] && !organizationForm.controls['organizationName']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationName'].errors?.['pattern'] && organizationForm.controls['organizationName']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName'].errors?.['pattern']"
+                  >Please enter valid Organization Name
+                </span>
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationName']?.errors?.['nameMaxLength'] && !organizationForm.controls['organizationName'].errors?.['pattern'] && !organizationForm.controls['organizationName']?.errors?.['leadingSpace']"
+                  >Maximum 100 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 field-one">
+          <mat-label class="desc-label">Organization Description</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder="Avisys India region"
+                formControlName="organizationDesc"
+              />
+              <div
+                *ngIf="
+                  organizationForm.controls['organizationDesc']?.invalid &&
+                  organizationForm.controls['organizationDesc']?.touched &&
+                  organizationForm.controls['organizationDesc']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['required']"
+                  >Please enter Organization Description</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc'].errors?.['pattern']"
+                  >Please enter valid Organization Desscription
+                </span>
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['leadingSpace'] && !organizationForm.controls['organizationDesc'].errors?.['pattern'] && !organizationForm.controls['organizationDesc']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['whitespace']"
+                  >Field can not be empty</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationDesc'].errors?.['pattern'] && !organizationForm.controls['organizationDesc']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['trailingSpace'] && !organizationForm.controls['organizationDesc'].errors?.['pattern'] && organizationForm.controls['organizationDesc']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="organizationForm.controls['organizationDesc']?.errors?.['descMaxLength'] && !organizationForm.controls['organizationDesc'].errors?.['pattern'] && !organizationForm.controls['organizationDesc']?.errors?.['leadingSpace']"
+                  >Maximum 250 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div _ngcontent-ng-c812429062="" class="form-footer">
+    <mat-dialog-actions>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="d-flex justify-content-end">
+              <button
+                class="save-btn"
+                (click)="onSumbit()"
+                [disabled]="!organizationForm.valid"
+              >
+                {{ actionLabel }}
+              </button>
+              <button class="profile-save-btn dark" (click)="resetForm()">
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-actions>
+  </div>
+</form>

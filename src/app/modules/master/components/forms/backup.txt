@@ -1,0 +1,413 @@
+<div class="form">
+  <form [formGroup]="roleForm">
+    <div class="page-title">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="container">
+              <div class="card-title">ROLE</div>
+              <div>
+                <button class="btn btn-warrning go-back" (click)="goBack()">
+                  Back
+                </button>
+              </div>
+            </div>
+            <div class="row mm">
+              <div class="col-lg-6">
+                <mat-label class="dd">Role Id</mat-label>
+                <div>
+                  <mat-form-field appearance="outline" color="primary">
+                    <input
+                      matInput
+                      placeholder="AVI-123"
+                      formControlName="roleId"
+                      [disabled]="isDisabled"
+                    />
+                    <div
+                      *ngIf="
+                        roleForm.controls['roleId']?.invalid &&
+                        roleForm.controls['roleId']?.touched &&
+                        roleForm.controls['roleId']?.errors
+                      "
+                    >
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['required']"
+                        >Please enter Role Id</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId'].errors?.['pattern']"
+                        >Please eneter valid Role Id
+                      </span>
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['trailingSpace']"
+                        >Leading space not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['whitespace'] && !roleForm.controls['roleId']?.errors?.['leadingSpace'] && !roleForm.controls['roleId']?.errors?.['trailingSpace'] "
+                        >No whitespaces are allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['trailingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['leadingSpace']"
+                        >Trailing space not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['trailingSpace'] && !roleForm.controls['roleId'].errors?.['pattern'] && roleForm.controls['roleId']?.errors?.['leadingSpace']"
+                        >Trailing, Leading spaces not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleId']?.errors?.['idMaxLength'] && !roleForm.controls['roleId'].errors?.['pattern'] && !roleForm.controls['roleId']?.errors?.['leadingSpace']"
+                        >Maximum 50 characters are allowed.</span
+                      >
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <mat-label class="dd">Role Name</mat-label>
+                <div class="">
+                  <mat-form-field appearance="outline" color="primary">
+                    <input
+                      matInput
+                      placeholder="SalesForce-Developer"
+                      class=""
+                      formControlName="roleName"
+                    />
+
+                    <div
+                      *ngIf="
+                        roleForm.controls['roleName']?.invalid &&
+                        roleForm.controls['roleName']?.touched &&
+                        roleForm.controls['roleName']?.errors
+                      "
+                    >
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['required']"
+                        >Please enter Role Name</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName'].errors?.['pattern']"
+                        >Please enter valid Role Name
+                      </span>
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['leadingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['trailingSpace']"
+                        >Leading space not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['whitespace']"
+                        >Field can not be empty.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['trailingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['leadingSpace']"
+                        >Trailing space not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['trailingSpace'] && !roleForm.controls['roleName'].errors?.['pattern'] && roleForm.controls['roleName']?.errors?.['leadingSpace']"
+                        >Trailing, Leading spaces not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['roleName']?.errors?.['nameMaxLength'] && !roleForm.controls['roleName'].errors?.['pattern'] && !roleForm.controls['roleName']?.errors?.['leadingSpace']"
+                        >Maximum 100 characters are allowed.</span
+                      >
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <mat-label class="dd">Organization Code</mat-label>
+                <div class="">
+                  <mat-form-field appearance="outline" color="primary">
+                    <input
+                      matInput
+                      placeholder="IND_PUNE"
+                      class=""
+                      formControlName="orgCode"
+                    />
+                    <div
+                      *ngIf="
+                        roleForm.controls['orgCode']?.invalid &&
+                        roleForm.controls['orgCode']?.touched &&
+                        roleForm.controls['orgCode']?.errors
+                      "
+                    >
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['orgCode']?.errors?.['required']"
+                        >Please enter Org Code
+                      </span>
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['orgCode'].errors?.['pattern']"
+                        >Please enter valid Org-Code.
+                      </span>
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace']"
+                        >Leading space not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['orgCode']?.errors?.['whitespace'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace'] && !roleForm.controls['orgCode']?.errors?.['trailingSpace'] "
+                        >No whitespaces are allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && !roleForm.controls['orgCode']?.errors?.['leadingSpace']"
+                        >Trailing space not allowed.</span
+                      >
+
+                      <span
+                        class="validate-text"
+                        *ngIf="roleForm.controls['orgCode']?.errors?.['trailingSpace'] && !roleForm.controls['orgCode'].errors?.['pattern'] && roleForm.controls['orgCode']?.errors?.['leadingSpace']"
+                        >Trailing, Leading spaces not allowed.</span
+                      >
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div _ngcontent-ng-c812429062="" class="form-footer">
+              <button
+                _ngcontent-ng-c812429062=""
+                class="profile-save-btn"
+                (click)="onSumbit()"
+                [disabled]="!roleForm.valid"
+              >
+                {{ actionLabel }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+//////////////////////////////////////////////////////////////////////
+.form-footer {
+  align-items: center;
+  justify-content: center;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
+  // display: inline-block;
+  float: left;
+  width: 92%;
+  margin-left: -10px;
+}
+.go-back {
+  width: 60px;
+  background-color: #534686;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  float: left;
+}
+
+.col-lg-6 {
+  margin-top: 18px;
+}
+// .form-header {
+//   display: inline;
+// }
+.validate-text {
+  font-size: 9px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
+}
+.card {
+  // margin-bottom: 30px;
+  border: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #0815420d;
+  margin: 0 auto;
+}
+.card .card-header {
+  border-bottom: none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: relative;
+  background-color: transparent;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #534686;
+}
+.dd {
+  display: inline-block;
+  color: black;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+:host::ng-deep .mat-mdc-text-field-wrapper {
+  // border:1px solid red !important;
+  width: 256px !important;
+  height: 35px !important;
+  font-size: 14px;
+  border-radius: 8px;
+}
+:host::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mat-mdc-form-field-infix {
+  padding-top: 6px !important;
+}
+// :host::ng-deep.mdc-text-field--outlined {
+// border:1px solid red;
+// }
+// :host::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//     border-radius: 50% !important;
+//     border: none;
+//     border-left: none;
+// }
+// :host::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+//     color: red;
+//   }
+// :host::ng-deep form-field-appearance-outline .mat-form-field-outline {
+//     color: red !important;
+//   }/* Font color */:host::ng-deep input.mat-input-element {
+//     color: red !important;
+//   }
+
+:host::ng-deep.mat-mdc-option {
+  min-height: 30px !important;
+}
+:host::ng-deep.mat-mdc-select-value {
+  font-size: 14px;
+  font-weight: 400;
+}
+/* Border */
+// :host::ng-deep.mat-form-field-appearance-outline.mat-form-field-outline {
+//     border:1px solid green!important;
+// }
+// :host::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--leading,
+// :host::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--notch,
+// :host::ng-deep.mdc-text-field-outlined.mdc-text-field:not(.mdc-text-field--disabaled).mdc-notched-outline--trailing
+// {
+//     border-color:red;
+// }
+// :host::ng-deep.mat-form-field.mat-focused .mat-form-field-ripple{
+//     background-color: red !important;
+// }
+:host::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
+  width: 40px;
+  height: 40px;
+  /* padding: 12px; */
+  top: -13px;
+}
+:host::ng-deep.mat-mdc-icon-button {
+  --mat-mdc-button-persistent-ripple-color: #fff !important;
+  --mat-mdc-button-ripple-color: rgba(0, 0, 0, 0.1) !important;
+}
+.card-title {
+  color: #534686;
+}
+.right-img {
+  height: 100px;
+  width: 100px;
+}
+.camera-image {
+  position: absolute;
+  top: 112px;
+  right: 48px;
+  font-size: 25px;
+  cursor: pointer;
+  color: #1e2120;
+}
+.card-img {
+  border: 1px solid #5346861a;
+  padding-top: 20px;
+}
+
+.profile-img {
+  height: 70px;
+  width: 70px;
+}
+.profile-section {
+  flex-direction: column;
+  border-bottom: 1px solid rgba(83, 70, 134, 0.1019607843);
+  margin-bottom: 15px;
+}
+.profile-name {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile-desg {
+  font-size: 12px;
+}
+.form-control,
+.form-select {
+  border-color: #5346861a;
+  font-size: 14px;
+  padding: 12px 15px;
+  border-radius: 8px;
+}
+.h4,
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.profile-save-btn {
+  padding: 0.6rem 1.75rem;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #534686;
+  border: 1px solid #534686;
+  color: white;
+}
+// :host::ng-deep.area{
+// height:80px;
+// }
+// :host::ng-deep.profile-email-box{
+// width:180px;
+// }
+.mm {
+  margin-top: -6px;
+}
+:host::ng-deep.mat-form-field-outline {
+  color: red !important;
+}
