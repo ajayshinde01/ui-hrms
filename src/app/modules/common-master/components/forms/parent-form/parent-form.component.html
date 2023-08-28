@@ -11,70 +11,14 @@
               </button>
             </div>
             <div class="row mm">
-              <div class="col-lg-4">
-                <mat-label class="dd">Master Name</mat-label>
+              <!-- <div class="col-lg-6">
+                
 
                 <div>
-                  <mat-form-field appearance="outline" color="primary">
-                    <input
-                      [class.custom-input]="isEdit"
-                      matInput
-                      placeholder=""
-                      formControlName="masterName"
-                    />
-                    <div
-                      *ngIf="
-                        parentForm.controls['masterName']?.invalid &&
-                        parentForm.controls['masterName']?.touched &&
-                        parentForm.controls['masterName']?.errors
-                      "
-                    >
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['masterName']?.errors?.['required']"
-                        >Please enter Master Name</span
-                      >
-
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['masterName'].errors?.['pattern']"
-                        >Please enter valid Master Name
-                      </span>
-
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['masterName']?.errors?.['leadingSpace'] && !parentForm.controls['masterName'].errors?.['pattern'] && !parentForm.controls['masterName']?.errors?.['trailingSpace']"
-                        >Leading space not allowed.</span
-                      >
-
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['value']?.errors?.['blank']"
-                        >No whitespaces are allowed</span
-                      >
-
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['masterName']?.errors?.['trailingSpace'] && !parentForm.controls['masterName'].errors?.['pattern'] && !parentForm.controls['masterName']?.errors?.['leadingSpace']"
-                        >Trailing space not allowed.</span
-                      >
-
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['masterName']?.errors?.['trailingSpace'] && !parentForm.controls['masterName'].errors?.['pattern'] && parentForm.controls['masterName']?.errors?.['leadingSpace']"
-                        >Trailing,Leading spaces not allowed.</span
-                      >
-
-                      <span
-                        class="validate-text"
-                        *ngIf="parentForm.controls['masterName']?.errors?.['nameMaxLength'] && !parentForm.controls['masterName'].errors?.['pattern'] && !parentForm.controls['masterName']?.errors?.['leadingSpace']"
-                        >Maximum 100 characters are allowed</span
-                      >
-                    </div>
-                  </mat-form-field>
+                 
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <mat-label class="dd">Value</mat-label>
                 <div class="">
                   <mat-form-field appearance="outline" color="primary">
@@ -195,8 +139,209 @@
                   </mat-form-field>
                 </div>
               </div>
-            </div>
+            </div> -->
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <mat-label class="dd">Master Name</mat-label>
+                    </div>
+                    <div class="col-lg-9">
+                      <mat-form-field appearance="outline" color="primary">
+                        <input
+                          [class.custom-input]="isEdit"
+                          matInput
+                          placeholder=""
+                          class="input-box"
+                          formControlName="masterName"
+                        />
+                        <div
+                          *ngIf="
+                            parentForm.controls['masterName']?.invalid &&
+                            parentForm.controls['masterName']?.touched &&
+                            parentForm.controls['masterName']?.errors
+                          "
+                        >
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['masterName']?.errors?.['required']"
+                            >Please enter Master Name</span
+                          >
 
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['masterName'].errors?.['pattern']"
+                            >Please enter valid Master Name
+                          </span>
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['masterName']?.errors?.['leadingSpace'] && !parentForm.controls['masterName'].errors?.['pattern'] && !parentForm.controls['masterName']?.errors?.['trailingSpace']"
+                            >Leading space not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['blank']"
+                            >No whitespaces are allowed</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['masterName']?.errors?.['trailingSpace'] && !parentForm.controls['masterName'].errors?.['pattern'] && !parentForm.controls['masterName']?.errors?.['leadingSpace']"
+                            >Trailing space not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['masterName']?.errors?.['trailingSpace'] && !parentForm.controls['masterName'].errors?.['pattern'] && parentForm.controls['masterName']?.errors?.['leadingSpace']"
+                            >Trailing,Leading spaces not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['masterName']?.errors?.['nameMaxLength'] && !parentForm.controls['masterName'].errors?.['pattern'] && !parentForm.controls['masterName']?.errors?.['leadingSpace']"
+                            >Maximum 100 characters are allowed</span
+                          >
+                        </div>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <mat-label class="dd">Value</mat-label>
+                    </div>
+                    <div class="col-lg-9">
+                      <mat-form-field appearance="outline" color="primary">
+                        <input
+                          [class.custom-input]="isEdit"
+                          matInput
+                          placeholder=""
+                          class=""
+                          formControlName="value"
+                          style="width: 100%"
+                        />
+
+                        <div
+                          *ngIf="
+                            parentForm.controls['value']?.invalid &&
+                            parentForm.controls['value']?.touched &&
+                            parentForm.controls['value']?.errors
+                          "
+                        >
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['required']"
+                            >Please enter Value</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value'].errors?.['pattern']"
+                            >Please enter valid Value
+                          </span>
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['leadingSpace'] && !parentForm.controls['value'].errors?.['pattern'] && !parentForm.controls['value']?.errors?.['trailingSpace']"
+                            >Leading space not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['whitespace'] && !parentForm.controls['value']?.errors?.['leadingSpace'] && !parentForm.controls['value']?.errors?.['trailingSpace'] && !parentForm.controls['value'].errors?.['pattern'] "
+                            >No whitespaces are allowed</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['trailingSpace'] && !parentForm.controls['value'].errors?.['pattern'] && !parentForm.controls['value']?.errors?.['leadingSpace']"
+                            >Trailing space not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['trailingSpace'] && !parentForm.controls['value'].errors?.['pattern'] && parentForm.controls['value']?.errors?.['leadingSpace']"
+                            >Trailing,Leading spaces not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['value']?.errors?.['nameMaxLength'] && !parentForm.controls['value'].errors?.['pattern'] && !parentForm.controls['value']?.errors?.['leadingSpace']"
+                            >Maximum 100 characters are allowed</span
+                          >
+                        </div>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <mat-label class="dd">Code</mat-label>
+                    </div>
+                    <div class="col-lg-9">
+                      <mat-form-field appearance="outline" color="primary">
+                        <input
+                          [class.custom-input]="isEdit"
+                          matInput
+                          placeholder=""
+                          class="input-box"
+                          formControlName="code"
+                        />
+                        <div
+                          *ngIf="
+                            parentForm.controls['code']?.invalid &&
+                            parentForm.controls['code']?.touched &&
+                            parentForm.controls['code']?.errors
+                          "
+                        >
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['code']?.errors?.['required']"
+                            >Please enter Code
+                          </span>
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['code'].errors?.['pattern']"
+                            >Please enter valid Code
+                          </span>
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['code']?.errors?.['leadingSpace'] && !parentForm.controls['code'].errors?.['pattern'] && !parentForm.controls['code']?.errors?.['trailingSpace']"
+                            >Leading space not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['code']?.errors?.['whitespace'] && !parentForm.controls['code']?.errors?.['leadingSpace'] && !parentForm.controls['code']?.errors?.['trailingSpace'] && !parentForm.controls['code'].errors?.['pattern'] "
+                            >No whitespaces are allowed</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['code']?.errors?.['trailingSpace'] && !parentForm.controls['code'].errors?.['pattern'] && !parentForm.controls['code']?.errors?.['leadingSpace']"
+                            >Trailing space not allowed.</span
+                          >
+
+                          <span
+                            class="validate-text"
+                            *ngIf="parentForm.controls['code']?.errors?.['trailingSpace'] && !parentForm.controls['code'].errors?.['pattern'] && parentForm.controls['code']?.errors?.['leadingSpace']"
+                            >Trailing,Leading spaces not allowed.</span
+                          >
+                        </div>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div _ngcontent-ng-c812429062="" class="form-footer">
               <button
                 *ngIf="!isEdit"
