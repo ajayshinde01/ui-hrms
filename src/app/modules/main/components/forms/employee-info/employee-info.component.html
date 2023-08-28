@@ -11,7 +11,7 @@
                   #avatarImg
                   class="avatar-photo"
                   [src]="
-                    url && url !== '' ? url : '../../../assets/profile-img.jpg'
+                    url && url !== '' ? url : 'assets/profile-img.jpg'
                   "
                   (mouseenter)="showAddPhotoOverlay = true"
                   alt="avatar photo"
@@ -74,8 +74,8 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <mat-form-field appearance="outline">
-            <mat-label>Employee code</mat-label>
+          <mat-label>Employee code</mat-label>
+          <mat-form-field appearance="outline">           
             <input
               matInput
               formControlName="employeeCode"
@@ -91,8 +91,8 @@
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
   
-          <mat-form-field appearance="outline">
-            <mat-label>Middle Name</mat-label>
+          <mat-label>Middle Name</mat-label>
+          <mat-form-field appearance="outline">            
             <input
               matInput
               formControlName="middleName"
@@ -106,8 +106,8 @@
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
   
-          <mat-form-field appearance="outline" class="">
-            <mat-label>Date Of Birthday</mat-label>
+          <mat-label>Date Of Birthday</mat-label>
+          <mat-form-field appearance="outline" class="">            
             <input
               matInput
               formControlName="dateOfBirth"
@@ -116,6 +116,7 @@
               [max]="maxDob"
               [min]="minDob"
               (dateChange)="calculateAge($event)"
+              readonly
             />
             <mat-datepicker-toggle
               matSuffix
@@ -128,8 +129,8 @@
         <div class="col-lg-4">
           <div class="row">
             <div class="col-lg-3">
-              <mat-form-field appearance="outline" color="primary">
-                <mat-label>Title</mat-label>
+              <mat-label>Title</mat-label>
+              <mat-form-field appearance="outline" color="primary">                
                 <mat-select formControlName="title" placeholder="Select">
                   <mat-option *ngFor="let title of titles" [value]="title.code">{{
                     title.value
@@ -138,12 +139,12 @@
               </mat-form-field>
             </div>
             <div class="col-lg-9">
-              <mat-form-field appearance="outline">
-                <mat-label>First Name</mat-label>
+              <mat-label>First Name</mat-label>
+              <mat-form-field appearance="outline">                
                 <input
                   matInput
                   formControlName="firstName"
-                  placeholder="Placeholder"
+                  placeholder="First Name"
                 />
                 <mat-error *ngIf="isControlInvalid('firstName')">
                   <span class="validate-text">{{
@@ -154,13 +155,13 @@
               </mat-form-field>
             </div>
           </div>
-  
-          <mat-form-field appearance="outline">
-            <mat-label>Last Name</mat-label>
+
+          <mat-label>Last Name</mat-label>
+          <mat-form-field appearance="outline">            
             <input
               matInput
               formControlName="lastName"
-              placeholder="Placeholder"
+              placeholder="Last Name"
             />
             <mat-error *ngIf="isControlInvalid('lastName')">
               <span class="validate-text">{{ getErrorMessage("lastName") }}</span>
@@ -168,8 +169,8 @@
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
   
-          <mat-form-field appearance="outline">
-            <mat-label>Age</mat-label>
+          <mat-label>Age</mat-label>
+          <mat-form-field appearance="outline">            
             <input matInput formControlName="age" placeholder="Age" readonly />
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
@@ -178,13 +179,13 @@
   
       <div class="row mm">
         <div class="col-lg-4">
-          <mat-form-field appearance="outline" color="primary">
-            <mat-label>Email</mat-label>
+          <mat-label>Email</mat-label>
+          <mat-form-field appearance="outline" color="primary">           
             <input
               type="email"
               matInput
               formControlName="email"
-              placeholder="Placeholder"
+              placeholder="Email"
             />
             <mat-error *ngIf="isControlInvalid('email')">
               <span class="validate-text">{{ getErrorMessage("email") }}</span>
@@ -193,9 +194,9 @@
         </div>
   
         <div class="col-lg-4">
-          <mat-form-field appearance="outline" class="">
-            <mat-label>Mobile Number</mat-label>
-            <input matInput formControlName="mobile" placeholder="Placeholder" />
+          <mat-label>Mobile Number</mat-label>
+          <mat-form-field appearance="outline" class="">           
+            <input matInput formControlName="mobile" placeholder="Mobile Number" />
             <mat-error *ngIf="isControlInvalid('mobile')">
               <span class="validate-text">{{ getErrorMessage("mobile") }}</span>
             </mat-error>
@@ -203,9 +204,9 @@
         </div>
   
         <div class="col-lg-4">
-          <mat-form-field appearance="outline" color="primary">
-            <mat-label>Phone</mat-label>
-            <input matInput formControlName="phone" placeholder="Placeholder" />
+          <mat-label>Phone</mat-label>
+          <mat-form-field appearance="outline" color="primary">            
+            <input matInput formControlName="phone" placeholder="Phone" />
             <mat-error *ngIf="isControlInvalid('phone')">
               <span class="validate-text">{{ getErrorMessage("phone") }}</span>
             </mat-error>
@@ -215,8 +216,8 @@
   
       <div class="row mm">
         <div class="col-lg-4">
-          <mat-form-field appearance="outline" color="primary">
-            <mat-label>Gender</mat-label>
+          <mat-label>Gender</mat-label>
+          <mat-form-field appearance="outline" color="primary">            
             <mat-select formControlName="gender" placeholder="Select">
               <mat-option *ngFor="let gender of genders" [value]="gender.code">{{
                 gender.value
@@ -229,14 +230,15 @@
         </div>
   
         <div class="col-lg-4">
-          <mat-form-field appearance="outline" class="">
-            <mat-label>Date Of Joining</mat-label>
+          <mat-label>Date Of Joining</mat-label>
+          <mat-form-field appearance="outline" class="">           
             <input
               matInput
               formControlName="dateOfJoining"
               s
               [matDatepicker]="picker1"
               placeholder="Choose a date"
+              readonly
             />
             <mat-datepicker-toggle
               matSuffix
@@ -250,8 +252,8 @@
         </div>
   
         <div class="col-lg-4" formGroupName="division">
-          <mat-form-field appearance="outline" color="primary">
-            <mat-label>Division</mat-label>
+          <mat-label>Division</mat-label>
+          <mat-form-field appearance="outline" color="primary">            
             <mat-select formControlName="id">
               <mat-option
                 *ngFor="let division of divisions"
@@ -269,8 +271,8 @@
   
       <div class="row mm">
         <div class="col-lg-4">
-          <mat-form-field appearance="outline" color="primary">
-            <mat-label>Status</mat-label>
+          <mat-label>Status</mat-label>
+          <mat-form-field appearance="outline" color="primary">            
             <mat-select formControlName="status" placeholder="Select">
               <mat-option *ngFor="let status of status" [value]="status.code">{{
                 status.value
@@ -286,9 +288,9 @@
   
       <div class="row mm">
         <div class="col-lg-4">
-          <mat-form-field appearance="outline">
-            <mat-label>User Id</mat-label>
-            <input matInput formControlName="userId" placeholder="Placeholder" />
+          <mat-label>User Id</mat-label>
+          <mat-form-field appearance="outline">            
+            <input matInput formControlName="userId" placeholder="User Id" />
           </mat-form-field>
         </div>
       </div>

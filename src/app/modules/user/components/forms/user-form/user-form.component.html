@@ -1,0 +1,344 @@
+<form [formGroup]="userForm">
+  <div class="container" style="width: 500px; height: auto">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>User</h2>
+            <button class="close-btn" (click)="Close(false)">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>First Name </mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput formControlName="firstName" />
+              <div
+                *ngIf="
+                  firstNameControl?.invalid &&
+                  firstNameControl?.touched &&
+                  firstNameControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['required']"
+                  >Please enter first name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['pattern']"
+                  >Please enter valid first name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['leadingSpace'] && !firstNameControl?.errors?.['pattern'] && !firstNameControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['whitespace'] && !firstNameControl?.errors?.['leadingSpace'] && !firstNameControl?.errors?.['trailingSpace']  && !firstNameControl?.errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['trailingSpace'] && !firstNameControl?.errors?.['pattern'] && !firstNameControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['trailingSpace'] && !firstNameControl?.errors?.['pattern'] && firstNameControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="firstNameControl?.errors?.['nameMaxLength'] && !firstNameControl?.errors?.['pattern'] && !firstNameControl?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Last Name</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput formControlName="lastName" />
+              <div
+                *ngIf="
+                  lastNameControl?.invalid &&
+                  lastNameControl?.touched &&
+                  lastNameControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['required']"
+                  >Please enter last name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['pattern']"
+                  >Please enter valid last name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['leadingSpace'] && !lastNameControl?.errors?.['pattern'] && !lastNameControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['whitespace'] && !lastNameControl?.errors?.['leadingSpace'] && !lastNameControl?.errors?.['trailingSpace']  && !firstNameControl?.errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['trailingSpace'] && !lastNameControl?.errors?.['pattern'] && !lastNameControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['trailingSpace'] && !lastNameControl?.errors?.['pattern'] && lastNameControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="lastNameControl?.errors?.['nameMaxLength'] && !lastNameControl?.errors?.['pattern'] && !lastNameControl?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 field-one">
+          <mat-label class="desc-label">Email ID</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput formControlName="email" />
+              <div
+                *ngIf="
+                  emailControl?.invalid &&
+                  emailControl?.touched &&
+                  emailControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['required']"
+                  >Please enter email id
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['pattern']"
+                  >Please enter valid email id
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['leadingSpace'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['whitespace'] && !emailControl?.errors?.['leadingSpace'] && !emailControl?.errors?.['trailingSpace']  && !emailControl?.errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['trailingSpace'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['trailingSpace'] && !emailControl?.errors?.['pattern'] && emailControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['emailMaxLength'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['leadingSpace']"
+                  >Maximum 40 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="!isDisabled">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Password</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input type="password" matInput formControlName="password" />
+              <div
+                *ngIf="
+                  passwordControl?.invalid &&
+                  passwordControl?.touched &&
+                  passwordControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="passwordControl?.errors?.['required']"
+                  >Please enter password
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="passwordControl?.errors?.['leadingSpace'] && !passwordControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="passwordControl?.errors?.['whitespace'] && !passwordControl?.errors?.['leadingSpace'] && !passwordControl?.errors?.['trailingSpace']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="passwordControl?.errors?.['trailingSpace'] && !passwordControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="passwordControl?.errors?.['trailingSpace'] && passwordControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="!isDisabled">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Confirm Password</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input
+                type="password"
+                matInput
+                formControlName="confirmPassword"
+              />
+              <div
+                *ngIf="
+                  confirmPasswordControl?.invalid &&
+                  confirmPasswordControl?.touched &&
+                  confirmPasswordControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="confirmPasswordControl?.errors?.['required']"
+                  >Please confirm password
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="confirmPasswordControl?.errors?.['passwordMismatch']"
+                  >Password do not match
+                </span>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Roles</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <mat-select
+                placeholder="Select Roles"
+                formControlName="roles"
+                multiple
+              >
+                <mat-option *ngFor="let role of allRoles" [value]="role.name">{{
+                  role.name
+                }}</mat-option>
+              </mat-select>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Status</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <mat-select placeholder="Select Status" formControlName="enabled">
+                <mat-option [value]="true">Enabled</mat-option>
+                <mat-option [value]="false">Disabled</mat-option>
+              </mat-select>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!userForm.valid"
+                >
+                  {{ actionLabel }}
+                </button>
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</form>

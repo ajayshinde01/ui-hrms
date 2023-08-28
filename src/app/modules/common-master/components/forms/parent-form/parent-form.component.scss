@@ -2,25 +2,43 @@
   align-items: center;
   justify-content: center;
 }
+.form-footer {
+  margin-top: 2%;
+}
 .go-back {
-  margin: 5px;
-  padding: 3px;
-  width: 50px;
-  margin-bottom: 8px;
-  background-color: skyblue;
+  padding: 0.3rem 1.75rem;
+  font-weight: 400;
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #534686;
+  border: 1px solid #534686;
+  color: white;
+  margin-left: 1%;
+  width: 90px;
+  height: 35px;
+  margin-top: -2.5%;
 }
 .card-title {
-  font-size: 16px;
-  font-weight: 550;
-  letter-spacing: 0.5px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  font-family: Roboto, sans-serif;
+  letter-spacing: 0.0125em;
+  margin: 0 0 16px;
+  margin-bottom: 3%;
 }
 .col-lg-6 {
   margin-top: 18px;
 }
-
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .custom-input {
-  color: rgb(116, 21, 21); /* Change text color */
+  //color: rgb(116, 21, 21); /* Change text color */
   border: 1px solid #ccc; /* Optional: Add border to the input box */
+  background-color: light goldenrod;
 }
 .validate-text {
   font-size: 9px;
@@ -32,13 +50,18 @@
 .form {
   width: 100%;
 }
+.spacing {
+  margin-bottom: 2%;
+}
 .card {
   border: none;
+  margin-top: -2.7%;
+  margin-left: -3%;
+  z-index: 10;
   letter-spacing: 0.5px;
-  margin: 0 auto;
-  width: 100%;
-  height: auto;
-  margin-top: -25px;
+  width: 81.5vw; /* 100% of viewport width */
+  height: 100vh; /* 100% of viewport height */
+  /* Adjust the z-index as needed */
 }
 .card .card-header {
   border-bottom: none;
@@ -64,33 +87,34 @@ h3 {
   margin-bottom: 5px;
 }
 
-:host::ng-deep .mat-mdc-text-field-wrapper {
+:host ::ng-deep .mat-mdc-text-field-wrapper {
   // border:1px solid red !important;
   width: 256px !important;
   height: 35px !important;
   font-size: 14px;
   border-radius: 8px;
 }
-:host::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+:host
+  ::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
   .mat-mdc-form-field-infix {
   padding-top: 6px !important;
 }
 
-:host::ng-deep.mat-mdc-option {
+:host ::ng-deep.mat-mdc-option {
   min-height: 30px !important;
 }
-:host::ng-deep.mat-mdc-select-value {
+:host ::ng-deep.mat-mdc-select-value {
   font-size: 14px;
   font-weight: 400;
 }
 
-:host::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
+:host ::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
   width: 40px;
   height: 40px;
   /* padding: 12px; */
   top: -13px;
 }
-:host::ng-deep.mat-mdc-icon-button {
+:host ::ng-deep.mat-mdc-icon-button {
   --mat-mdc-button-persistent-ripple-color: #fff !important;
   --mat-mdc-button-ripple-color: rgba(0, 0, 0, 0.1) !important;
 }
@@ -153,15 +177,44 @@ h4 {
   border: 1px solid #534686;
   color: white;
 }
-// :host::ng-deep.area{
+// :host ::ng-deep.area{
 // height:80px;
 // }
-// :host::ng-deep.profile-email-box{
+// :host ::ng-deep.profile-email-box{
 // width:180px;
 // }
 .mm {
   margin-top: -6px;
 }
-:host::ng-deep.mat-form-field-outline {
+:host ::ng-deep.mat-form-field-outline {
   color: red !important;
+}
+.save-btn {
+  padding: 0.3rem 1.75rem;
+  font-weight: 400;
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #534686;
+  border: 1px solid #534686;
+  color: white;
+  margin-left: 1%;
+  width: 90px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark {
+  padding: 0.3rem 1.75rem;
+  font-weight: 400;
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #534686;
+  border: 1px solid #534686;
+  color: white;
+  margin-left: 1%;
+  width: 90px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
 }

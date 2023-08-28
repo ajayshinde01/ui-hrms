@@ -44,6 +44,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
+  @ViewChild('confrimationmodel1') confrimationmodel1!: ElementRef;
 
   paginationList: Array<number> = [];
 
@@ -142,14 +143,17 @@ export class DatatableComponent implements OnInit, OnChanges {
         break;
 
       case 'delete':
+
+      console.log("this.selectedValue",this.selectedValue);
         data.data = this.selectedValue;
 
-        if (data.data == undefined)
+       if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
 
         if (data.data != undefined) {
           this.confrimationmodel.nativeElement.click();
-        }
+        // this.confrimationmodel1.nativeElement.click();
+       }
 
         break;
     }

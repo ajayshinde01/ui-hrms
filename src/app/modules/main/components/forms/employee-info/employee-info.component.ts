@@ -33,7 +33,11 @@ export class EmployeeInfoComponent implements OnInit {
   isAgeDisabled: boolean = false;
   age: number;
   selectedDate: Date;
+<<<<<<< HEAD
   url: String = '../../../assets/profile-img.jpg';
+=======
+  url: String = 'assets/profile-img.jpg';
+>>>>>>> 9433dc356f4f6114883eae74d51d9dd5c308e264
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef;
   photo: string;
   photoUpdated: any;
@@ -44,6 +48,10 @@ export class EmployeeInfoComponent implements OnInit {
   selectedIndex: number = 0;
   clickedTabIndex: number;
   minDob: Date;
+<<<<<<< HEAD
+=======
+  errorMessage: any;
+>>>>>>> 9433dc356f4f6114883eae74d51d9dd5c308e264
 
   constructor(
     public employeeService: EmployeeService,
@@ -97,7 +105,8 @@ export class EmployeeInfoComponent implements OnInit {
     console.log('controlName' + controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+
+      return CustomValidators.getErrorMessage(errorKey);
     }
 
     return '';
@@ -160,7 +169,6 @@ export class EmployeeInfoComponent implements OnInit {
       middleName: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
@@ -169,7 +177,8 @@ export class EmployeeInfoComponent implements OnInit {
           //Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
-      title: [''],
+      title: ['', 
+        Validators.required],
       firstName: [
         '',
         [
@@ -210,7 +219,7 @@ export class EmployeeInfoComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(10),
+          CustomValidators.maxLength(15),
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
           //  Validators.pattern('^[0-9]*$'),
           //Validators.pattern('^d{10}$'),
@@ -219,7 +228,6 @@ export class EmployeeInfoComponent implements OnInit {
       phone: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
@@ -279,7 +287,7 @@ export class EmployeeInfoComponent implements OnInit {
       this.fileUploadService.removeImage(this.photo).subscribe((res) => {
         console.log('received response', res);
         //this.url = res['message'];
-        this.url = '../../../assets/profile-img.jpg';
+        this.url = 'assets/profile-img.jpg';
       });
     }
   }
@@ -317,10 +325,13 @@ export class EmployeeInfoComponent implements OnInit {
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Save' },
             });
+            console.log("errormessage"+this.errorMessage);
+            //this.errorMessage=response.message;
           },
           (error: any) => {
+            console.log("errormessage"+JSON.stringify(error.error.message));
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn( error.error.message);
             }
           }
         );
@@ -333,7 +344,7 @@ export class EmployeeInfoComponent implements OnInit {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn( error.error.message);
             }
           }
         );

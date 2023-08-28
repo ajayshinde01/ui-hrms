@@ -35,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OrganizationComponent } from './components/summary-tables/organization/organization.component';
 import { OrganizationFormComponent } from './components/forms/organization-form/organization-form.component';
+import { OrganizationService } from './services/organization.service';
 @NgModule({
   declarations: [
     DesignationComponent,
@@ -80,6 +81,7 @@ import { OrganizationFormComponent } from './components/forms/organization-form/
     EmployeeTypeService,
     DivisionService,
     DepartmentService,
+    OrganizationService,
   ],
 })
 export class MasterModule {}

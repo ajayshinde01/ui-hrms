@@ -1,0 +1,160 @@
+<form [formGroup]="roleForm">
+  <div class="container" style="width: 500px; height: auto">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>Role</h2>
+            <button class="close-btn" (click)="Close(false)">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Role Name </mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput formControlName="name" [disabled]="isDisabled" />
+              <div
+                *ngIf="
+                  nameControl?.invalid &&
+                  nameControl?.touched &&
+                  nameControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['required']"
+                  >Please enter role name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['pattern']"
+                  >Please enter valid role name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['leadingSpace'] && !nameControl?.errors?.['pattern'] && !nameControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['whitespace'] && !nameControl?.errors?.['leadingSpace'] && !nameControl?.errors?.['trailingSpace']  && !nameControl?.errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['trailingSpace'] && !nameControl?.errors?.['pattern'] && !nameControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['trailingSpace'] && !nameControl?.errors?.['pattern'] && nameControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="nameControl?.errors?.['nameMaxLength'] && !nameControl?.errors?.['pattern'] && !nameControl?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Description</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput formControlName="description" />
+              <div
+                *ngIf="
+                  descriptionControl?.invalid &&
+                  descriptionControl?.touched &&
+                  descriptionControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['required']"
+                  >Please enter role description
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['pattern']"
+                  >Please enter valid role description
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['leadingSpace'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['whitespace'] && !descriptionControl?.errors?.['leadingSpace'] && !descriptionControl?.errors?.['trailingSpace']  && !descriptionControl?.errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['trailingSpace'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['trailingSpace'] && !descriptionControl?.errors?.['pattern'] && descriptionControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="descriptionControl?.errors?.['nameMaxLength'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
+                  >Maximum 50 characters are allowed</span
+                >
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!roleForm.valid"
+                >
+                  {{ actionLabel }}
+                </button>
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</form>

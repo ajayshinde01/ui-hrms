@@ -7,6 +7,7 @@ import { EmployeeInfoComponent } from './components/forms/employee-info/employee
 import { EmployeeComponent } from './components/forms/employee/employee.component';
 import { EducationalQualificationsTableComponent } from './components/summary-tables/educational-qualifications-table/educational-qualifications-table.component';
 import { ProfessionalInformationComponent } from './components/forms/professional-information/professional-information.component';
+import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
         component: EducationalQualificationsTableComponent,
       },
     ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'visa-table', component: VisaDetailsTableComponent }],
   },
   {
     path: '',

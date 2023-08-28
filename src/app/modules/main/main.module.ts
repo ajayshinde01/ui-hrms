@@ -1,7 +1,6 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MainRoutingModule } from './main-routing.module';
 import { CoreModule } from '../core/core.module';
 import { TestComponent } from './components/test/test.component';
@@ -30,6 +29,9 @@ import { EducationalQualificationFormComponent } from './components/forms/educat
 import { ProfessionalInformationComponent } from './components/forms/professional-information/professional-information.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeePersonalDetailsFormComponent } from './components/forms/employee-personal-details-form/employee-personal-details-form.component';
+import { EmployeeVisaDetailsFormComponent } from './components/forms/employee-visa-details-form/employee-visa-details-form.component';
+import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,9 @@ import { HttpClientModule } from '@angular/common/http';
     EducationalQualificationsTableComponent,
     EducationalQualificationFormComponent,
     ProfessionalInformationComponent,
+    EmployeePersonalDetailsFormComponent,
+    EmployeeVisaDetailsFormComponent,
+    VisaDetailsTableComponent,
   ],
   imports: [
     CommonModule,

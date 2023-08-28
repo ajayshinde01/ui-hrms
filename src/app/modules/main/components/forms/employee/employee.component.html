@@ -1,38 +1,41 @@
+
 <div class="page-title">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card employee-form-div">
-        <div class="row">
-          <div class="col-lg-8">
-            <h2 class="card-title employee_info_title">EMPLOYEE INFO</h2>
-          </div>
-          <div class="col-lg-4">
-            <div class="employee_info_btn">
-              <button class="btn btn-info go-back" (click)="goBack()">
-                Back
-              </button>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card employee-form-div">
+          <div class="row">
+            <div class="col-lg-8">
+              <h2 class="card-title employee_info_title">EMPLOYEE INFO</h2>
+            </div>
+            <div class="col-lg-4">
+              <div class="employee_info_btn">
+                <button class="btn btn-info go-back" (click)="goBack()">
+                  Back
+                </button>
+              </div>
             </div>
           </div>
+          <mat-tab-group>
+            <mat-tab label="Employee Info"
+              ><ng-template matTabContent
+                ><app-employee-info></app-employee-info></ng-template
+            ></mat-tab>
+            <mat-tab label="Company Details"  [disabled]='!emp_id'>
+              <ng-template matTabContent
+                ><app-company-details></app-company-details
+              ></ng-template>
+            </mat-tab>
+            <mat-tab label="Joining Details"  [disabled]='!emp_id'> Joining Details </mat-tab>
+            <mat-tab label="Contact Details"  [disabled]='!emp_id'> Contact Details</mat-tab>
+            <mat-tab label="Professional Details"  [disabled]='!emp_id'>Professional Details</mat-tab>
+            <mat-tab label="Personal Details"  [disabled]='!emp_id'> <app-professional-information></app-professional-information></mat-tab>
+            <mat-tab label="Visa Details"  [disabled]='!emp_id'>
+              <ng-template matTabContent
+              ><app-visa-details-table></app-visa-details-table></ng-template>
+            </mat-tab>
+          </mat-tab-group>
         </div>
-        <mat-tab-group>
-          <mat-tab label="Employee Info"
-            ><ng-template matTabContent
-              ><app-employee-info></app-employee-info></ng-template
-          ></mat-tab>
-          <mat-tab label="Company Details"
-            ><ng-template matTabContent
-              ><app-company-details></app-company-details
-            ></ng-template>
-          </mat-tab>
-          <mat-tab label="Joining Details"> Joining Details </mat-tab>
-          <mat-tab label="Contact Details"> Contact Details</mat-tab>
-          <mat-tab label="Professional Details">
-            <app-professional-information></app-professional-information>
-          </mat-tab>
-          <mat-tab label="Personal Details">Personal Details</mat-tab>
-          <mat-tab label="Visa Details">Visa Details</mat-tab>
-        </mat-tab-group>
       </div>
     </div>
   </div>
-</div>
+

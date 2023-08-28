@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CoreModule } from './modules/core/core.module';
 import { LoginComponent } from './modules/core/components/login/login.component';
+import { CoreModule } from './modules/core/core.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,6 +21,11 @@ const routes: Routes = [
       import('./modules/common-master/common-master.module').then(
         (m) => m.CommonMasterModule
       ),
+  },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./modules/user/user.module').then((m) => m.UserModule),
   },
   { path: 'login', component: LoginComponent },
   { path: 'admin-login', component: LoginComponent },
