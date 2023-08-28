@@ -212,7 +212,7 @@ export class EmployeeInfoComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(10),
+          CustomValidators.maxLength(15),
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
           //  Validators.pattern('^[0-9]*$'),
           //Validators.pattern('^d{10}$'),
