@@ -14,6 +14,9 @@
                   >{{ designation.designationName }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('designation.id')">
+                Please enter Designation
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4" formGroupName="grade">
@@ -24,6 +27,9 @@
                   grade.gradeName
                 }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('grade.id')">
+                Please enter Grade
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4" formGroupName="department">
@@ -36,6 +42,9 @@
                   >{{ department.departmentName }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('department.id')">
+                Please enter Department
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -48,6 +57,9 @@
                   role.roleName
                 }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('role.id')">
+                Please Enter Role
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -59,11 +71,14 @@
               >
                 <mat-option
                   *ngFor="let employee of employees"
-                  [value]="employee.id"
+                  [value]="employee.firstName"
                 >
                   {{ employee.firstName }} {{ employee.lastName }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('reviewerManager')">
+                {{ getErrorMessage("reviewerManager") }}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -75,11 +90,14 @@
               >
                 <mat-option
                   *ngFor="let employee of employees"
-                  [value]="employee.id"
+                  [value]="employee.firstName"
                 >
                   {{ employee.firstName }} {{ employee.lastName }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('reportingManager')">
+                {{ getErrorMessage("reportingManager") }}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -94,6 +112,9 @@
                   >{{ employeeType.type }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('employeeType.id')">
+                Please enter Employee Type
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -106,18 +127,27 @@
                   >{{ billable.value }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('billable')">
+                {{ getErrorMessage("billable") }}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <mat-label class="mat-label">Probation</mat-label>
+            <mat-label class="mat-label"
+              >Probation
+              {{ companyDetailsForm.controls["probation"].value }}</mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="probation" placeholder="Select">
                 <mat-option
                   *ngFor="let probation of probations"
                   [value]="probation.code"
-                  >{{ probation.value }} Months</mat-option
+                  >{{ probation.value }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('probation')">
+                {{ getErrorMessage("probation") }}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -130,7 +160,27 @@
                 formControlName="companyEmail"
                 placeholder="e.g akshay.deshmukh@avisys.in"
               />
-              <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+              <mat-error *ngIf="isControlInvalid('companyEmail')">
+                {{ getErrorMessage("companyEmail") }}
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  companyDetailsForm
+                    .get('companyEmail')
+                    ?.hasError('leadingSpace')
+                "
+              >
+                Leading spaces are not allowed.
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  companyDetailsForm
+                    .get('companyEmail')
+                    ?.hasError('trailingSpace')
+                "
+              >
+                Trailing spaces are not allowed.
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -141,7 +191,27 @@
                 formControlName="clientEmail"
                 placeholder="e.g akshay.deshmukh@stc.in"
               />
-              <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+              <mat-error *ngIf="isControlInvalid('clientEmail')">
+                {{ getErrorMessage("clientEmail") }}
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  companyDetailsForm
+                    .get('clientEmail')
+                    ?.hasError('leadingSpace')
+                "
+              >
+                Leading spaces are not allowed.
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  companyDetailsForm
+                    .get('clientEmail')
+                    ?.hasError('trailingSpace')
+                "
+              >
+                Trailing spaces are not allowed.
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -154,6 +224,9 @@
                   >{{ defaultShift.value }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('shift')">
+                {{ getErrorMessage("shift") }}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>

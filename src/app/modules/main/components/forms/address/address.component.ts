@@ -3,12 +3,13 @@ import { CommonMaster } from '../../../models/common-master.model';
 import { Address } from '../../../models/address.model';
 import { EmployeeService } from '../../../services/employee.service';
 import { AddressService } from '../../../services/address.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { Employees } from '../../../models/employee.model';
 import { mergeMap } from 'rxjs';
 import { state } from '@angular/animations';
+import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-address',
@@ -44,36 +45,76 @@ export class AddressComponent implements OnInit {
     this.FetchOwnershipStatus();
     this.FetchCountries();
 
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe((params: any) => {
       this.queryParams = params;
-    });
-    if (this.queryParams.actionLabel == 'Update') {
       this.getById(this.queryParams['id']);
       this.getCities();
       this.getStates();
-      this.actionLabel = 'Save';
-      // this.addressForm.controls['employeeId'].setValue(this.queryParams.id);
-    } else {
-      this.actionLabel = 'Save';
-    }
+    });
   }
-
-  // this.addressForm.controls['employeeId'].setValue(this.queryParams.id);
 
   initForm() {
     this.addressForm = this.formBuilder.group({
       id: [''],
-      addressType: [''],
-      address1: [''],
-      address2: [''],
-      landmark: [''],
-      tenureYear: [''],
-      tenureMonth: [''],
-      city: [''],
-      state: [''],
-      country: [''],
-      postcode: [''],
-      ownershipStatus: [''],
+      addressType: ['', [Validators.required]],
+      address1: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(100),
+          Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
+        ],
+      ],
+      address2: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(100),
+          Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
+        ],
+      ],
+      landmark: [
+        '',
+        [CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
+      ],
+      tenureYear: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(2),
+          Validators.pattern('^[0-9]{1,2}$'),
+        ],
+      ],
+      tenureMonth: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(2),
+          Validators.pattern('^(?:[0-9]|1[0-2])$'),
+        ],
+      ],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      postcode: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(6),
+          Validators.pattern('^[0-9]{6}$'),
+        ],
+      ],
+      ownershipStatus: ['', [Validators.required]],
       orgCode: ['AVI-IND'],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
@@ -179,7 +220,6 @@ export class AddressComponent implements OnInit {
           .subscribe(
             (response: Address) => {
               this.addressService.notify('Update Successfully...');
-              this.queryParams.actionLabel = 'Update';
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
               });
@@ -193,31 +233,30 @@ export class AddressComponent implements OnInit {
       }
     }
   }
-  getById(id: string) {
-    this.addressService.getAddressById(id).subscribe((response: Address) => {
-      console.log(response);
-      this.addressForm.patchValue({
-        id: response.id,
-        addressType: response.addressType,
-        address1: response.address1,
-        address2: response.address2,
-        landmark: response.landmark,
-        tenureYear: response.tenureYear,
-        tenureMonth: response.tenureMonth,
-        city: response.city,
-        state: response.state,
-        country: response.country,
-        postcode: response.postcode,
-        ownershipStatus: response.ownershipStatus,
-      });
-
-      this.response = response.id;
-      debugger;
-      if (this.response != undefined) {
+  getById(id: number) {
+    this.addressService.getAddressById(id).subscribe(
+      (response: Address) => {
+        this.addressForm.patchValue(response);
+        this.response = response.id;
         this.actionLabel = 'Update';
-      } else {
+      },
+      (error) => {
         this.actionLabel = 'Save';
       }
-    });
+    );
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.addressForm.get(controlName);
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.addressForm.get(controlName);
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+    return '';
   }
 }

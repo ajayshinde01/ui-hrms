@@ -67,28 +67,33 @@ export class EmergencyContactsTableComponent {
 
     switch (type) {
       case 'delete':
-        this.contactService.deleteContact(event['data'].contactId, this.queryParams.id).subscribe(
-          (response: ApiResponse) => {
-            console.log('DELETE-ROLE Request successful', response);
+        this.contactService
+          .deleteContact(event['data'].contactId, this.queryParams.id)
+          .subscribe(
+            (response: ApiResponse) => {
+              console.log('DELETE-ROLE Request successful', response);
 
-            this.contactService.notify('Role deleted successfully');
-
-            this.searchFunction(this.params);
-
-            const currentPage = Number(this.params.get('page'));
-
-            if (this.contactMetaData.content.length === 1 && currentPage > 0) {
-              const newPage = currentPage - 1;
-
-              this.params = this.params.set('page', newPage.toString());
+              this.contactService.notify('Role deleted successfully');
 
               this.searchFunction(this.params);
+
+              const currentPage = Number(this.params.get('page'));
+
+              if (
+                this.contactMetaData.content.length === 1 &&
+                currentPage > 0
+              ) {
+                const newPage = currentPage - 1;
+
+                this.params = this.params.set('page', newPage.toString());
+
+                this.searchFunction(this.params);
+              }
+            },
+            (error: any) => {
+              console.error('DELETE-ROLE Request failed', error);
             }
-          },
-          (error: any) => {
-            console.error('DELETE-ROLE Request failed', error);
-          }
-        );
+          );
 
         break;
 
@@ -105,6 +110,7 @@ export class EmergencyContactsTableComponent {
   }
 
   searchFunction(params: HttpParams) {
+    debugger;
     this.params = params;
     this.contactService
       .search(params, this.queryParams.id)

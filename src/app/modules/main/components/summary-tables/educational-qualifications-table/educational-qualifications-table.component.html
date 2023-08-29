@@ -1,0 +1,9 @@
+<app-datatable
+  (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="educationalQualificationsMetaData.content"
+  [headers]="educationalQualificationHeaders.columnsMetadata"
+  [totalRecord]="educationalQualificationsMetaData.totalElements"
+>
+</app-datatable>

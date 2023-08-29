@@ -3,15 +3,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonMaster } from 'src/app/modules/main/models/common-master.model';
 import { Division } from 'src/app/modules/main/models/division.model';
-
 import { CustomValidators } from 'src/app/modules/main/services/custom-validators.service';
 import { DivisionService } from 'src/app/modules/main/services/division.service';
 import { EmployeeService } from 'src/app/modules/main/services/employee.service';
 import { FileUploadService } from 'src/app/modules/main/services/file-upload.service';
 import { MatTab } from '@angular/material/tabs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Employees } from '../../../models/employee.model';
 
 @Component({
@@ -33,7 +32,7 @@ export class EmployeeInfoComponent implements OnInit {
   isAgeDisabled: boolean = false;
   age: number;
   selectedDate: Date;
-  url: String = '../../../assets/profile-img.jpg';
+  url: String = 'assets/profile-img.jpg';
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef;
   photo: string;
   photoUpdated: any;
@@ -44,6 +43,7 @@ export class EmployeeInfoComponent implements OnInit {
   selectedIndex: number = 0;
   clickedTabIndex: number;
   minDob: Date;
+  errorMessage: any;
 
   constructor(
     public employeeService: EmployeeService,
@@ -61,11 +61,23 @@ export class EmployeeInfoComponent implements OnInit {
     this.fetchTitles();
     this.fetchGender();
     this.fetchStatus();
+    // this.route.queryParams.subscribe((params: any) => {
+    //   this.queryParams = params;
+    //   if (this.queryParams['id'] != undefined) {
+    //     this.actionLabel = 'Update';
+    //     this.getById(this.queryParams['id']);
+    //   } else {
+    //     this.actionLabel = 'Save';
+    //   }
+    // });
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
+
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }
@@ -98,7 +110,9 @@ export class EmployeeInfoComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey);
+      console.log('controlName' + controlName);
+      console.log('controlName' + controlName);
+      return CustomValidators.getErrorMessage(errorKey, controlName);
     }
 
     return '';
@@ -161,7 +175,6 @@ export class EmployeeInfoComponent implements OnInit {
       middleName: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
@@ -170,7 +183,7 @@ export class EmployeeInfoComponent implements OnInit {
           //Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
-      title: [''],
+      title: ['', Validators.required],
       firstName: [
         '',
         [
@@ -211,7 +224,7 @@ export class EmployeeInfoComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(10),
+          CustomValidators.maxLength(15),
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
           //  Validators.pattern('^[0-9]*$'),
           //Validators.pattern('^d{10}$'),
@@ -220,7 +233,6 @@ export class EmployeeInfoComponent implements OnInit {
       phone: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
@@ -280,7 +292,7 @@ export class EmployeeInfoComponent implements OnInit {
       this.fileUploadService.removeImage(this.photo).subscribe((res) => {
         console.log('received response', res);
         //this.url = res['message'];
-        this.url = '../../../assets/profile-img.jpg';
+        this.url = 'assets/profile-img.jpg';
       });
     }
   }
@@ -318,10 +330,13 @@ export class EmployeeInfoComponent implements OnInit {
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Save' },
             });
+
+            //this.errorMessage=response.message;
           },
           (error: any) => {
+            console.log('errormessage' + JSON.stringify(error.error.message));
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );
@@ -334,7 +349,7 @@ export class EmployeeInfoComponent implements OnInit {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );

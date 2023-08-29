@@ -24,7 +24,7 @@ export class ParentComponent {
   };
   params: HttpParams = new HttpParams();
 
-  masterName: string = 'Parent';
+  masterName: string = 'COMMON MASTER';
 
   constructor(
     private parentService: ParentService,

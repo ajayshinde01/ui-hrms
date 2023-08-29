@@ -1,7 +1,6 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MainRoutingModule } from './main-routing.module';
 import { CoreModule } from '../core/core.module';
 import { TestComponent } from './components/test/test.component';
@@ -31,6 +30,18 @@ import { AddressComponent } from './components/forms/address/address.component';
 import { EmergencyContactsTableComponent } from './components/summary-tables/emergency-contacts-table/emergency-contacts-table.component';
 import { EmergencyContactComponent } from './components/forms/emergency-contact/emergency-contact.component';
 import { EmergencyContactsService } from './services/emergency-contacts.service';
+import { EducationalQualificationsTableComponent } from './components/summary-tables/educational-qualifications-table/educational-qualifications-table.component';
+import { EducationalQualificationFormComponent } from './components/forms/educational-qualification-form/educational-qualification-form.component';
+import { ProfessionalInformationComponent } from './components/forms/professional-information/professional-information.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { EmployeePersonalDetailsFormComponent } from './components/forms/employee-personal-details-form/employee-personal-details-form.component';
+import { EmployeeVisaDetailsFormComponent } from './components/forms/employee-visa-details-form/employee-visa-details-form.component';
+import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
+import { JoiningDetailsComponent } from './components/forms/joining-details/joining-details.component';
+import { WorkExperienceTableComponent } from './components/summary-tables/work-experience-table/work-experience-table.component';
+import { WorkExperienceFormComponent } from './components/forms/work-experience-form/work-experience-form.component';
+
 @NgModule({
   declarations: [
     TestComponent,
@@ -43,6 +54,15 @@ import { EmergencyContactsService } from './services/emergency-contacts.service'
     AddressComponent,
     EmergencyContactsTableComponent,
     EmergencyContactComponent,
+    EducationalQualificationsTableComponent,
+    EducationalQualificationFormComponent,
+    ProfessionalInformationComponent,
+    EmployeePersonalDetailsFormComponent,
+    EmployeeVisaDetailsFormComponent,
+    VisaDetailsTableComponent,
+    JoiningDetailsComponent,
+    WorkExperienceTableComponent,
+    WorkExperienceFormComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +78,8 @@ import { EmergencyContactsService } from './services/emergency-contacts.service'
     MatDividerModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
+    HttpClientModule,
   ],
   providers: [
     CompanyDetailsService,

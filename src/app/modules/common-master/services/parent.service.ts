@@ -29,7 +29,7 @@ export class ParentService {
     );
   }
   // Needs to modify
-  searchParentById(id: string): Observable<Parent> {
+  searchParentById(id: number): Observable<Parent> {
     return this.http.get<Parent>(
       'http://192.168.1.16:7000/employee/common-master/get/' + id
     );

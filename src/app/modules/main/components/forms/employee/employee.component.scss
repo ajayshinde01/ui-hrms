@@ -1,154 +1,156 @@
 ::ng-deep .mat-mdc-tab-body-content {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 :host::ng-deep .mat-mdc-form-field {
-    display: flex !important;
-    margin-top: 10px;
-    //  margin-bottom: 15px;
+  display: flex !important;
+  margin-top: 10px;
+  //  margin-bottom: 15px;
 }
 
 :host::ng-deep .profile-title {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    border: 1px solid black;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 :host::ng-deep .profile-section img {
-    height: 200px;
+  height: 200px;
 }
 
 :host::ng-deep .mat-mdc-form-field-infix {
-    min-height: 50px;
+  min-height: 50px;
 }
 
-:host::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-    padding-top: 10px;
-    padding-bottom: 10px;
+:host::ng-deep
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mat-mdc-form-field-infix {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 :host::ng-deep .employee-form-btn-div {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 :host::ng-deep .mat-divider {
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
 }
 
 img {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
 }
 
 .hoverable {
-    position: relative;
-    display: block;
-    cursor: pointer;
-    height: 200px;
-    width: 200px;
-    border: 5px solid #000;
-    border-radius: 50%;
+  position: relative;
+  display: block;
+  cursor: pointer;
+  height: 200px;
+  width: 200px;
+  border: 5px solid #000;
+  border-radius: 50%;
 }
 
 .hoverable .hover-text {
-    position: absolute;
-    display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .hoverable .background {
-    position: absolute;
-    display: none;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.5);
-    pointer-events: none;
-    border-radius: 50%;
-    z-index: 1;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
 }
 
 .hoverable:hover .hover-text {
-    display: block;
+  display: block;
 }
 
 .hoverable:hover .background {
-    display: block;
+  display: block;
 }
 
 #fileInput {
-    display: none;
+  display: none;
 }
 
 .employee-form-div {
-    height: 650px;
-    overflow: auto;
-    max-height: fit-content;
-    /* display: flex;
+  height: 90vh;
+  overflow: auto;
+  max-height: fit-content;
+  /* display: flex;
       flex-direction: column;
       height: 90vh;
       overflow-y: auto;*/
 }
 
 #avatar-container {
-    position: relative;
+  position: relative;
 }
 
 #avatar-photo,
 #add-photo-overlay {
-    height: 13rem; //13rem;
-    width: 13rem; //13rem;
+  height: 13rem; //13rem;
+  width: 13rem; //13rem;
 }
 
 #add-photo-overlay {
-    position: absolute;
-    top: 0px;
-    z-index: 2;
-    background-color: rgba(233, 236, 239, 0.6);
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+  background-color: rgba(233, 236, 239, 0.6);
 }
 
 #add-avatar-photo-button {
-    position: absolute;
-    z-index: 3;
-    color: #13293d;
+  position: absolute;
+  z-index: 3;
+  color: #13293d;
 }
 
 #remove-avatar-photo-button {
-    position: absolute;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
-    top: 10%; //5
-    right: 8%; //5
-    z-index: 3;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.57);
-    border-radius: 12px;
+  position: absolute;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  top: 10%; //5
+  right: 8%; //5
+  z-index: 3;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.57);
+  border-radius: 12px;
 }
 
 #remove-avatar-photo-button:hover {
-    background-color: #e74c3c;
+  background-color: #e74c3c;
 }
 
 .center-positon-absolute {
-    position: absolute;
-    top: 50%;
-    /* position the top  edge of the element at the middle of the parent */
-    left: 50%;
-    /* position the left edge of the element at the middle of the parent */
-    transform: translate(-50%, -50%);
-    /* This is a shorthand of translateX(-50%) and translateY(-50%) */
-    /*** Explanation
+  position: absolute;
+  top: 50%;
+  /* position the top  edge of the element at the middle of the parent */
+  left: 50%;
+  /* position the left edge of the element at the middle of the parent */
+  transform: translate(-50%, -50%);
+  /* This is a shorthand of translateX(-50%) and translateY(-50%) */
+  /*** Explanation
       Adding top/left of 50% moves the top/left margin edge of the element to the middle of the parent, 
       and translate() function with the (negative) value of -50% moves the element by the half of its size. 
       Hence the element will be positioned at the middle.
@@ -157,26 +159,27 @@ img {
 }
 
 .avatar-photo {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .employee_info_title {
-    width: 50%;
+  width: 50%;
 }
 
 .employee_info_btn {
-    text-align: right;
+  text-align: right;
 }
 
 .employee_info_btn .btn {
-    color: white;
+  color: white;
 }
 
 .profile-save-btn,
 .go-back {
-    background-color: #534686;
-    border-color: #534686;
+  background-color: #534686;
+  border-color: #534686;
 }

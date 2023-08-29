@@ -1,62 +1,97 @@
 <form [formGroup]="emergencyContactForm">
-  <div class="container">
-    <div class="row row-section mm mt-4">
-      <div class="d-flex justify-content-between">
-        <h2 class="card-title employee_info_title">Emergency Contacts</h2>
-        <button class="close-btn" (click)="Close(false)">
-          <i style="font-size: 12px" class="fa">&#xf00d;</i>
-        </button>
+  <div class="container" style="width: 490px; height: 390px">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>Emergency Contact</h2>
+            <button class="close-btn" (click)="Close(false)">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
+          </div>
+          <div class="line"></div>
+        </div>
       </div>
-
-      <div class="row mm">
-        <div class="col-md-4 col-lg-4">
+    </div>
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
           <mat-label>Emergency Contact Name</mat-label>
         </div>
-        <div class="col-md-8 col-lg-8 form-controls">
+        <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
-            <input
-              matInput
-              formControlName="emergencyContactName"
-              placeholder="Contact Name"
-            />
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder=""
+                formControlName="emergencyContactName"
+              />
+            </div>
           </mat-form-field>
         </div>
       </div>
+    </div>
 
-      <div class="row mm">
-        <div class="col-md-4 col-lg-4">
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
           <mat-label>Emergency Contact Number</mat-label>
         </div>
-        <div class="col-md-8 col-lg-8 form-controls">
+        <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
-            <input
-              matInput
-              formControlName="emergencyContactNumber"
-              placeholder="Contact Number"
-            />
+            <div class="form-controls">
+              <input
+                matInput
+                placeholder=""
+                formControlName="emergencyContactNumber"
+              />
+            </div>
           </mat-form-field>
         </div>
       </div>
+    </div>
 
-      <div class="row mm">
-        <div class="col-md-4 col-lg-4">
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 field-one">
           <mat-label>Relation</mat-label>
         </div>
-        <div class="col-md-8 col-lg-8 form-controls">
+        <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
-            <input matInput formControlName="Relation" placeholder="relation" />
+            <div class="form-controls">
+              <input matInput formControlName="relation" />
+            </div>
           </mat-form-field>
         </div>
       </div>
+    </div>
 
-      <div class="form-footer">
-        <button
-          class="btn btn-primary px-4 float-right profile-save-btn"
-          (click)="onSubmit()"
-        >
-          Save
-        </button>
-      </div>
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!emergencyContactForm.valid"
+                >
+                  {{ actionLabel }}
+                </button>
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
     </div>
   </div>
 </form>

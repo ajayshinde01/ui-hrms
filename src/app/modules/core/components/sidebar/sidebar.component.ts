@@ -206,31 +206,62 @@ export class SidebarComponent implements OnInit {
       },
       {
         name: 'User Management',
-        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
-        showSubmenu: false,
+        icon: 'fa-solid fa-lock ps-1 sidebar-icon',
+        showSubmenu: true,
         submenu: [
           {
-            name: 'employee-master',
+            name: 'User',
             icon: 'fa-solid fa-ellipsis',
-            // routerLink: ['/main/employee'],
+            routerLink: ['/user/user-table'],
+            arrowMaster: false,
+          },
+          {
+            name: 'Role',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/user/user-role-table'],
+            arrowMaster: false,
+          },
+          {
+            name: 'Scope',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/user/scope-table'],
             arrowMaster: false,
           },
         ],
       },
-      {
-        name: 'Email',
+  //          {
+  //       name: 'Email',
 
-        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+  //       icon: 'fa-solid fa-envelope ps-1 sidebar-icon',
 
-        showSubmenu: true,
-      },
+  //       showSubmenu: true,
+  //       submenu:[
+     
+  //         {
+  //           name: 'Email',
+  //           icon: 'fa-solid fa-ellipsis',
+  //           routerLink: ['/master/emailtable'],
+  //           arrowMaster: false,
+  //         },
+  // ]
+  //     },
       {
         name: 'Email Template',
 
-        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+        icon: 'fa-solid fa-envelope ps-1 sidebar-icon',
 
         showSubmenu: true,
+        submenu:[
+     
+          {
+            name: 'Email Template',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/master/emailtemplatetable'],
+            arrowMaster: false,
+          },
+  ]
       },
+   
     ];
   }
 

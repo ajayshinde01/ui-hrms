@@ -35,8 +35,6 @@ export class EmergencyContactComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.emp_id = this.route.snapshot.paramMap.get("id");
-    // console.log("emp_id", this.route.snapshot.paramMap);
     this.initForm();
     this.emp_id = this.route.snapshot.queryParamMap.get('id'); // Replace 'paramName' with the actual query parameter name
     console.log('Query parameter value:', this.emp_id);
@@ -54,6 +52,11 @@ export class EmergencyContactComponent implements OnInit {
 
   Close(isUpdate: boolean) {
     this._mdr.close(isUpdate);
+  }
+
+  resetForm() {
+    // this.collectQueryParams();
+    this.initForm();
   }
 
   onSubmit() {

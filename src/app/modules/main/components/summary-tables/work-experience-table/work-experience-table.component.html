@@ -1,0 +1,10 @@
+<p>work-experience-table works!</p>
+<app-datatable
+  (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="workExperiencesMetaData.content"
+  [headers]="workExperienceHeaders.columnsMetadata"
+  [totalRecord]="workExperiencesMetaData.totalElements"
+>
+</app-datatable>

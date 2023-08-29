@@ -17,7 +17,7 @@ export class EmergencyContactsService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8090/employee/data-table-metadata/emergency-contact'
+      'http://192.168.1.16:7000/employee/data-table-metadata/emergency-contact'
     );
   }
 
@@ -27,7 +27,7 @@ export class EmergencyContactsService {
   ): Observable<EmergencyContacts> {
     console.log(id);
     return this.http.post<EmergencyContacts>(
-      'http://localhost:8090/employee/contact/' + id + '/add',
+      'http://192.168.1.16:7000/employee/contact/' + id + '/add',
       contact
     );
   }
@@ -37,14 +37,14 @@ export class EmergencyContactsService {
     id: number
   ): Observable<EmergencyContacts> {
     return this.http.put<EmergencyContacts>(
-      'http://localhost:8090/employee/contact/' + id + '/update',
+      'http://192.168.1.16:7000/employee/contact/' + id + '/update',
       contact
     );
   }
 
   deleteContact(contactId: string, id: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      `http://localhost:8090/employee/contact/${id}/${contactId}?updatedBy=Admin`
+      `http://192.168.1.16:7000/employee/contact/${id}/${contactId}?updatedBy=Admin`
     );
   }
 
@@ -55,7 +55,7 @@ export class EmergencyContactsService {
     return this.http.get<{
       content: Array<EmergencyContacts>;
       totalElements: number;
-    }>(`http://localhost:8090/employee/contact/${id}/search`, {
+    }>(`http://192.168.1.16:7000/employee/contact/${id}/search`, {
       params: params,
     });
   }

@@ -1,0 +1,9 @@
+<app-datatable
+  (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="roleMetaData.content"
+  [headers]="roleHeaders.columnsMetadata"
+  [totalRecord]="roleMetaData.totalElements"
+  [masterName]="masterName"
+></app-datatable>
