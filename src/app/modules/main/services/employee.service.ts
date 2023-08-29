@@ -30,10 +30,10 @@ export class EmployeeService {
     );
   }
 
-  AddPersonalDetails(employee: EmployeePersonalDetails): Observable<EmployeePersonalDetails> {
+  AddPersonalDetails(employee: EmployeePersonalDetails, emp_id:number): Observable<EmployeePersonalDetails> {
     console.log(employee);
     return this.http.post<EmployeePersonalDetails>(
-      'http://192.168.1.16:7000/employee/personal-details/create',
+      'http://192.168.1.16:7000/employee/personal-details/create/'+emp_id,
       employee
     );
   }
@@ -47,6 +47,18 @@ export class EmployeeService {
 
   updateEmployee(Id: string): Observable<Employees> {
     return this.http.put<Employees>('http://192.168.1.16:7000/employee/update', Id);
+  }
+
+  
+
+  updateEmployeevisa(Id: string, emp_id:number): Observable<Visa> {
+    console.log("visaaaid",Id);
+    return this.http.put<Visa>('http://192.168.1.16:7000/employee/visa/'+emp_id+'/update', Id);
+  }
+
+  updateEmployeePersonalDetails(Id: string, emp_id:number): Observable<EmployeePersonalDetails> {
+    console.log("visaaaid",Id);
+    return this.http.put<EmployeePersonalDetails>('http://192.168.1.16:7000/employee/personal-details/update/'+emp_id, Id);
   }
 
   searchEmployeeById(Id: string): Observable<Employees> {
@@ -89,6 +101,18 @@ export class EmployeeService {
       {
         params: params,
       }
+    );
+  }
+
+  searchVisaById(emp_id:string, visaid: number): Observable<Visa> {
+    return this.http.get<Visa>(
+      'http://192.168.1.16:7000/employee/visa/'+emp_id+'/'+visaid
+    );
+  }
+
+  searchPersonalDetailsById(emp_id:string): Observable<EmployeePersonalDetails> {
+    return this.http.get<EmployeePersonalDetails>(
+      'http://192.168.1.16:7000/employee/personal-details/'+emp_id
     );
   }
 

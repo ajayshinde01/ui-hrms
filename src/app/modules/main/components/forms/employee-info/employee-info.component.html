@@ -87,8 +87,6 @@
                 getErrorMessage("employeeCode")
               }}</span>
             </mat-error>
-            <mat-hint>Employee Code format should be AVI-001</mat-hint>
-            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
   
           <mat-label>Middle Name</mat-label>
@@ -96,7 +94,6 @@
             <input
               matInput
               formControlName="middleName"
-              placeholder="Placeholder"
             />
             <mat-error *ngIf="isControlInvalid('middleName')">
               <span class="validate-text">{{
@@ -132,6 +129,7 @@
               <mat-label>Title</mat-label>
               <mat-form-field appearance="outline" color="primary">                
                 <mat-select formControlName="title" placeholder="Select">
+                  <mat-option>Select</mat-option>
                   <mat-option *ngFor="let title of titles" [value]="title.code">{{
                     title.value
                   }}</mat-option>
@@ -144,7 +142,6 @@
                 <input
                   matInput
                   formControlName="firstName"
-                  placeholder="First Name"
                 />
                 <mat-error *ngIf="isControlInvalid('firstName')">
                   <span class="validate-text">{{
@@ -161,7 +158,6 @@
             <input
               matInput
               formControlName="lastName"
-              placeholder="Last Name"
             />
             <mat-error *ngIf="isControlInvalid('lastName')">
               <span class="validate-text">{{ getErrorMessage("lastName") }}</span>
@@ -171,7 +167,7 @@
   
           <mat-label>Age</mat-label>
           <mat-form-field appearance="outline">            
-            <input matInput formControlName="age" placeholder="Age" readonly />
+            <input matInput formControlName="age" readonly />
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
         </div>
@@ -185,7 +181,6 @@
               type="email"
               matInput
               formControlName="email"
-              placeholder="Email"
             />
             <mat-error *ngIf="isControlInvalid('email')">
               <span class="validate-text">{{ getErrorMessage("email") }}</span>
@@ -196,7 +191,7 @@
         <div class="col-lg-4">
           <mat-label>Mobile Number</mat-label>
           <mat-form-field appearance="outline" class="">           
-            <input matInput formControlName="mobile" placeholder="Mobile Number" />
+            <input matInput formControlName="mobile" />
             <mat-error *ngIf="isControlInvalid('mobile')">
               <span class="validate-text">{{ getErrorMessage("mobile") }}</span>
             </mat-error>
@@ -206,7 +201,7 @@
         <div class="col-lg-4">
           <mat-label>Phone</mat-label>
           <mat-form-field appearance="outline" color="primary">            
-            <input matInput formControlName="phone" placeholder="Phone" />
+            <input matInput formControlName="phone" />
             <mat-error *ngIf="isControlInvalid('phone')">
               <span class="validate-text">{{ getErrorMessage("phone") }}</span>
             </mat-error>
@@ -219,6 +214,7 @@
           <mat-label>Gender</mat-label>
           <mat-form-field appearance="outline" color="primary">            
             <mat-select formControlName="gender" placeholder="Select">
+              <mat-option>Select</mat-option>
               <mat-option *ngFor="let gender of genders" [value]="gender.code">{{
                 gender.value
               }}</mat-option>
@@ -254,7 +250,8 @@
         <div class="col-lg-4" formGroupName="division">
           <mat-label>Division</mat-label>
           <mat-form-field appearance="outline" color="primary">            
-            <mat-select formControlName="id">
+            <mat-select formControlName="id" placeholder="Select">
+              <mat-option>Select</mat-option>
               <mat-option
                 *ngFor="let division of divisions"
                 [value]="division.id"
@@ -274,6 +271,7 @@
           <mat-label>Status</mat-label>
           <mat-form-field appearance="outline" color="primary">            
             <mat-select formControlName="status" placeholder="Select">
+              <mat-option>Select</mat-option>
               <mat-option *ngFor="let status of status" [value]="status.code">{{
                 status.value
               }}</mat-option>
@@ -290,7 +288,7 @@
         <div class="col-lg-4">
           <mat-label>User Id</mat-label>
           <mat-form-field appearance="outline">            
-            <input matInput formControlName="userId" placeholder="User Id" />
+            <input matInput formControlName="userId" />
           </mat-form-field>
         </div>
       </div>
