@@ -6,7 +6,18 @@ import { ParentService } from '../../../services/parent.service';
 import { HttpParams } from '@angular/common/http';
 import { ColumnsMetadata } from '../../../models/columnMetaData';
 import { ChildService } from '../../../services/child.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ChildFormComponent } from '../child-form/child-form.component';
+import { ApiResponse } from '../../../models/response';
+import { leadingSpaceValidator } from 'src/app/modules/master/components/forms/Validations/leadingSpace.validator';
+import { nameMaxLength } from 'src/app/modules/master/components/forms/Validations/nameMaxLength.validator';
+import { trailingSpaceValidator } from 'src/app/modules/master/components/forms/Validations/trailingSpace.validator';
+import { whitespaceValidator } from 'src/app/modules/master/components/forms/Validations/whiteSpace.validator';
+import { blankValidator } from 'src/app/modules/master/components/forms/Validations/blankData.validator';
+
+export interface DialogData {
+  id: number;
+}
 
 @Component({
   selector: 'app-parent-form',
@@ -15,6 +26,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ParentFormComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+
+  matDialogRef: MatDialogRef<ChildFormComponent>;
 
   childMetaData: { content: Array<Parent>; totalElements: number } = {
     content: [],
@@ -25,12 +38,16 @@ export class ParentFormComponent {
   };
   params: HttpParams = new HttpParams();
 
+  masterName: string = '';
   parentForm!: FormGroup;
   parent!: Parent;
   submitted: boolean = false;
   queryParams?: Params;
   isEdit: boolean = false;
+  errorMessage: string = '';
+
   isDisabled: boolean = false;
+  id: number;
   constructor(
     private formBuilder: FormBuilder,
     private parentService: ParentService,
@@ -46,7 +63,6 @@ export class ParentFormComponent {
     let params = new HttpParams();
     params = params.set('page', 0);
     params = params.set('size', 10);
-    // this.searchFunction(params);
   }
 
   getChildHeaders() {
@@ -79,13 +95,49 @@ export class ParentFormComponent {
   initForm() {
     this.parentForm = this.formBuilder.group({
       id: [''],
-      masterName: [{ value: '', disabled: this.isDisabled }],
-      code: [{ value: '', disabled: this.isDisabled }, [Validators.required]],
-      value: [{ value: '', disabled: this.isDisabled }, [Validators.required]],
+      masterName: [
+        { value: '', disabled: this.isDisabled },
+        [
+          Validators.required,
+          leadingSpaceValidator,
+          trailingSpaceValidator,
+          nameMaxLength,
+          blankValidator,
+          Validators.pattern('^[a-zA-Z\\s]+$'),
+        ],
+      ],
+      code: [
+        { value: '', disabled: true },
+        [
+          Validators.required,
+          leadingSpaceValidator,
+          trailingSpaceValidator,
+          nameMaxLength,
+          Validators.pattern('^[a-zA-Z\\s\\_]+$'),
+          whitespaceValidator,
+        ],
+      ],
+      value: [
+        { value: '', disabled: this.isDisabled },
+        [
+          Validators.required,
+          leadingSpaceValidator,
+          trailingSpaceValidator,
+          nameMaxLength,
+          blankValidator,
+          Validators.pattern('^[a-zA-Z\\s]+$'),
+        ],
+      ],
       createdBy: [''],
       master: ['true'],
     });
+
+    this.parentForm.get('value')?.valueChanges.subscribe((newValue) => {
+      const formattedValue = newValue.toUpperCase().replace(/ /g, '_');
+      this.parentForm.get('code')?.setValue(formattedValue);
+    });
   }
+
   get idControl() {
     return this.parentForm.get('id');
   }
@@ -108,6 +160,7 @@ export class ParentFormComponent {
   onSubmit() {
     if (this.parentForm.valid) {
       const formData = this.parentForm.value;
+      this.parentForm.get('code')?.enable();
 
       this.parentService.createParent(formData).subscribe(
         (response: Parent) => {
@@ -117,7 +170,8 @@ export class ParentFormComponent {
         },
         (error: any) => {
           if (error.status == 400) {
-            this.parentService.warn('Already present');
+            this.errorMessage = error.error.message;
+            this.parentService.warn(this.errorMessage);
           }
           console.error('POST Request failed', error);
         }
@@ -127,35 +181,35 @@ export class ParentFormComponent {
 
   action(event: Data) {
     let type: string = event['event'];
-    let id: string = event['data'].roleId;
-    const queryParam = { id: id };
-    // switch (type) {
-    //   case 'delete':
-    //     this.childService.deleteChild(event['data'].roleId).subscribe(
-    //       (response: ApiResponse) => {
-    //         this.roleService.notify('Role deleted successfully');
-    //         this.searchFunction(this.params);
-    //         const currentPage = Number(this.params.get('page'));
-    //         if (this.roleMetaData.content.length === 1 && currentPage > 0) {
-    //           const newPage = currentPage - 1;
-    //           this.params = this.params.set('page', newPage.toString());
-    //           this.searchFunction(this.params);
-    //         }
-    //       },
-    //       (error: any) => {
-    //         console.error('DELETE-ROLE Request failed', error);
-    //       }
-    //     );
-    //     break;
-    //   case 'add':
-    //     //this.OpenModal();
-    //     this.router.navigate(['/master/role']);
-    //     break;
-    //   case 'edit':
-    //     //this.OpenModalForEdit(id);
-    //     this.router.navigate(['/master/role'], { queryParams: queryParam });
-    //     break;
-    // }
+    let id: number = event['data'].id;
+    this.id = event['data'].id;
+    switch (type) {
+      case 'delete':
+        this.childService.deleteChild(event['data'].id).subscribe(
+          (response: ApiResponse) => {
+            this.childService.notify('Child deleted successfully');
+            this.searchFunction(this.params);
+            const currentPage = Number(this.params.get('page'));
+            if (this.childMetaData.content.length === 1 && currentPage > 0) {
+              const newPage = currentPage - 1;
+              this.params = this.params.set('page', newPage.toString());
+              this.searchFunction(this.params);
+            }
+          },
+          (error: any) => {
+            console.error('DELETE-CHILD Request failed', error);
+          }
+        );
+        break;
+      case 'add':
+        this.OpenModal();
+        this.router.navigate(['/common-master/parentForm']);
+        break;
+      case 'edit':
+        this.OpenModal();
+        this.router.navigate(['/common-master/parentForm']);
+        break;
+    }
   }
 
   searchFunction(params: HttpParams) {
@@ -167,15 +221,28 @@ export class ParentFormComponent {
       });
   }
 
-  getById(id: string) {
+  getById(id: number) {
     this.parentService.searchParentById(id).subscribe((response: Parent) => {
       console.log('GET-SEARCH BY ID Request successful', response);
       this.parentForm.patchValue(response);
       this.parent = response;
       this.parent.masterName = response.masterName;
-      console.log(this.parent.masterName);
+      console.log('Master Name', this.parent.masterName);
       console.log(this.parent);
       this.searchFunction(this.params);
+    });
+  }
+
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(ChildFormComponent, {
+      data: { id: this.id, masterName: this.parent.masterName },
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+      if (res == true) {
+      }
     });
   }
 
@@ -183,18 +250,4 @@ export class ParentFormComponent {
     this.collectQueryParams();
     this.initForm();
   }
-
-  // OpenModalForEdit(data: string) {
-  //       this.matDialogRef = this.matDialog.open(RoleFormComponent, {
-  //         data: { id: data },
-  //         disableClose: true,
-  //       });
-
-  //       this.matDialogRef.afterClosed().subscribe((res: any) => {
-  //         this.searchFunction(this.params);
-  //         if (res == true) {
-  //         }
-  //       });
-  //     }
-  //   }
 }

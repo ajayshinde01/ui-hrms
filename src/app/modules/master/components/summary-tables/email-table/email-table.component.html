@@ -1,0 +1,10 @@
+<app-datatable
+  (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="emailMetaData.content"
+  [headers]="emailHeaders.columnsMetadata"
+  [totalRecord]="emailMetaData.totalElements"
+  [masterName]="masterName"
+>
+</app-datatable>

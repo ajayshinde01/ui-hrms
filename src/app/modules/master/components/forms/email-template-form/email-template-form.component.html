@@ -1,0 +1,211 @@
+<form [formGroup]="emailTemplateForm">
+    <div class="container" style="width: 490px; height: 390px">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="d-flex justify-content-between">
+              <h2 class="title" mat-dialog-title>Email Template</h2>
+              <button class="close-btn"   (click)="Close(false)">
+                <i style="font-size: 12px" class="fa">&#xf00d;</i>
+              </button>
+            </div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row row-section">
+          <div class="col-md-4 mt-2">
+            <mat-label>Template Name</mat-label>
+          </div>
+          <div class="col-md-8">
+            <mat-form-field appearance="outline" color="primary">
+              <div class="form-controls">
+                <input
+                  matInput
+                  placeholder="Template Name"
+                  formControlName="name"
+                />
+                <div
+                *ngIf="
+                  emailTemplateForm.controls['name']?.invalid &&
+                  emailTemplateForm.controls['name']?.touched &&
+                  emailTemplateForm.controls['name']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['required']"
+                  >Please enter template name
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name'].errors?.['pattern']"
+                  >Please enter valid template name</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['leadingSpace'] && !emailTemplateForm.controls['name'].errors?.['pattern'] && !emailTemplateForm.controls['name']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['whitespace']"
+                  >Field can not be empty</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['trailingSpace'] && !emailTemplateForm.controls['name'].errors?.['pattern'] && !emailTemplateForm.controls['name']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['trailingSpace'] && !emailTemplateForm.controls['name'].errors?.['pattern'] && emailTemplateForm.controls['name']?.errors?.['leadingSpace']"
+                  >Trailing , Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['name']?.errors?.['nameMaxLength'] && !emailTemplateForm.controls['name'].errors?.['pattern'] && !emailTemplateForm.controls['name']?.errors?.['leadingSpace']"
+                  >Maximum 100 characters are allowed</span
+                >
+              </div>
+
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <div class="row row-section">
+          <div class="col-md-4 mt-2">
+            <mat-label>Template Subject</mat-label>
+          </div>
+          <div class="col-md-8">
+            <mat-form-field appearance="outline" color="primary">
+              <div class="form-controls">
+                <input
+                  matInput
+                  placeholder="Template Subject"
+                formControlName="subject"
+                />
+                <div
+                *ngIf="
+                  emailTemplateForm.controls['subject']?.invalid &&
+                  emailTemplateForm.controls['subject']?.touched &&
+                  emailTemplateForm.controls['subject']?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['required']"
+                  >Please enter template subject
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject'].errors?.['pattern']"
+                  >Please enter valid template name</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['blank']"
+                  >No whitespaces are allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['leadingSpace'] && !emailTemplateForm.controls['subject'].errors?.['pattern'] && !emailTemplateForm.controls['subject']?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['whitespace']"
+                  >Field can not be empty</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['trailingSpace'] && !emailTemplateForm.controls['subject'].errors?.['pattern'] && !emailTemplateForm.controls['subject']?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['trailingSpace'] && !emailTemplateForm.controls['subject'].errors?.['pattern'] && emailTemplateForm.controls['subject']?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+
+                <span
+                  class="validate-text"
+                  *ngIf="emailTemplateForm.controls['subject']?.errors?.['nameMaxLength'] && !emailTemplateForm.controls['subject'].errors?.['pattern'] && !emailTemplateForm.controls['subject']?.errors?.['leadingSpace']"
+                  >Maximum 100 characters are allowed</span
+                >
+              </div>
+
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+  
+    
+  
+      <div class="form-group">
+        <div class="row row-section">
+          <div class="col-md-4 mt-2">
+            <mat-label>Content</mat-label>
+          </div>
+          <div class="col-md-8">
+            <div class="form-controls">
+              <ckeditor  [disabled]="false" [editor]="Editor" formControlName="content" 
+              #ckeditorEleRef>
+  
+          </ckeditor>
+            </div>
+           
+           
+          </div>
+        </div>
+      </div>
+  
+      <div _ngcontent-ng-c812429062="" class="form-footer">
+        <mat-dialog-actions>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="d-flex justify-content-end">
+                  <button
+                    _ngcontent-ng-c812429062=""
+                    class="save-btn"
+                 
+                    (click)="onSubmit()"
+                    [disabled]="!emailTemplateForm.valid"
+
+                  >
+            {{actionLabel}}
+                  </button>
+                  <button
+                    _ngcontent-ng-c812429062=""
+                    class="profile-save-btn dark"
+                    (click)="resetForm()"
+
+                
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-dialog-actions>
+      </div>
+    </div>
+  </form>
+  

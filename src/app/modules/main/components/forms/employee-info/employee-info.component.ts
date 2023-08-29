@@ -99,7 +99,7 @@ export class EmployeeInfoComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey);
+      return CustomValidators.getErrorMessage(errorKey, controlName);
     }
 
     return '';
@@ -170,8 +170,7 @@ export class EmployeeInfoComponent implements OnInit {
           //Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
-      title: ['', 
-        Validators.required],
+      title: ['', Validators.required],
       firstName: [
         '',
         [
@@ -318,13 +317,13 @@ export class EmployeeInfoComponent implements OnInit {
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Save' },
             });
-            console.log("errormessage"+this.errorMessage);
+            // console.log("errormessage"+this.errorMessage);
             //this.errorMessage=response.message;
           },
           (error: any) => {
-            console.log("errormessage"+JSON.stringify(error.error.message));
+            console.log('errormessage' + JSON.stringify(error.error.message));
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn( error.error.message);
+              this.employeeService.warn(error.error.message);
             }
           }
         );
@@ -337,7 +336,7 @@ export class EmployeeInfoComponent implements OnInit {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn( error.error.message);
+              this.employeeService.warn(error.error.message);
             }
           }
         );

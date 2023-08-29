@@ -8,34 +8,46 @@
             <mat-label class="mat-label">Designation</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let designation of designations"
                   [value]="designation.id"
                   >{{ designation.designationName }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('designation.id')">
+                Please enter Designation
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4" formGroupName="grade">
             <mat-label class="mat-label">Grade</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option *ngFor="let grade of grades" [value]="grade.id">{{
                   grade.gradeName
                 }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('grade.id')">
+                Please enter Grade
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4" formGroupName="department">
             <mat-label class="mat-label">Department</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let department of departments"
                   [value]="department.id"
                   >{{ department.departmentName }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('department.id')">
+                Please enter Department
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -44,10 +56,14 @@
             <mat-label class="mat-label">Role</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option *ngFor="let role of roles" [value]="role.id">{{
                   role.roleName
                 }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('role.id')">
+                Please Enter Role
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -57,13 +73,17 @@
                 formControlName="reviewerManager"
                 placeholder="Select"
               >
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let employee of employees"
-                  [value]="employee.id"
+                  [value]="employee.firstName"
                 >
                   {{ employee.firstName }} {{ employee.lastName }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('reviewerManager')">
+                {{ getErrorMessage("reviewerManager") }}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -73,13 +93,17 @@
                 formControlName="reportingManager"
                 placeholder="Select"
               >
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let employee of employees"
-                  [value]="employee.id"
+                  [value]="employee.firstName"
                 >
                   {{ employee.firstName }} {{ employee.lastName }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('reportingManager')">
+                {{ getErrorMessage("reportingManager") }}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -88,36 +112,48 @@
             <mat-label class="mat-label">Employee Type</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let employeeType of employeeTypes"
                   [value]="employeeType.id"
                   >{{ employeeType.type }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('employeeType.id')">
+                Please enter Employee Type
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
             <mat-label class="mat-label">Billable</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="billable" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let billable of billables"
                   [value]="billable.code"
                   >{{ billable.value }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('billable')">
+                {{ getErrorMessage("billable") }}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
             <mat-label class="mat-label">Probation</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="probation" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let probation of probations"
                   [value]="probation.code"
-                  >{{ probation.value }} Months</mat-option
+                  >{{ probation.value }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('probation')">
+                {{ getErrorMessage("probation") }}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -130,7 +166,11 @@
                 formControlName="companyEmail"
                 placeholder="e.g akshay.deshmukh@avisys.in"
               />
-              <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+              <mat-error *ngIf="isControlInvalid('companyEmail')">
+                <span class="validate-text">{{
+                  getErrorMessage("companyEmail")
+                }}</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
@@ -141,19 +181,27 @@
                 formControlName="clientEmail"
                 placeholder="e.g akshay.deshmukh@stc.in"
               />
-              <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+              <mat-error *ngIf="isControlInvalid('clientEmail')">
+                <span class="validate-text">{{
+                  getErrorMessage("clientEmail")
+                }}</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-4">
             <mat-label class="mat-label">Default Shift</mat-label>
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="shift" placeholder="Select">
+                <mat-option>Select</mat-option>
                 <mat-option
                   *ngFor="let defaultShift of defaultShifts"
                   [value]="defaultShift.code"
                   >{{ defaultShift.value }}</mat-option
                 >
               </mat-select>
+              <mat-error *ngIf="isControlInvalid('shift')">
+                {{ getErrorMessage("shift") }}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>

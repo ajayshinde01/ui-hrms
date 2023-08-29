@@ -22,18 +22,17 @@ export class ChildService {
     );
   }
 
-  // createParent(data: Parent): Observable<Parent> {
-  //   return this.http.post<Parent>(
-  //     'http://192.168.1.16:7000/employee/common-master/create',
-  //     data
-  //   );
-  // }
-  // Needs to modify
-  // searchParentById(id: string): Observable<Parent> {
-  //   return this.http.get<Parent>(
-  //     'http://192.168.1.16:7000/employee/common-master/get/' + id
-  //   );
-  // }
+  createChild(data: Parent): Observable<Parent> {
+    return this.http.post<Parent>(
+      'http://192.168.1.16:7000/employee/common-master/create',
+      data
+    );
+  }
+  searchChildById(id: number): Observable<Parent> {
+    return this.http.get<Parent>(
+      'http://192.168.1.16:7000/employee/common-master/get/' + id
+    );
+  }
 
   deleteChild(childId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
@@ -54,6 +53,14 @@ export class ChildService {
       {
         params: params,
       }
+    );
+  }
+
+  updateChild(data: Parent): Observable<Parent> {
+    console.log(data);
+    return this.http.put<Parent>(
+      'http://192.168.1.16:7000/employee/common-master/update',
+      data
     );
   }
 

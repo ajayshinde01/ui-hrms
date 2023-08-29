@@ -24,6 +24,11 @@ import { GradeService } from '../master/services/grade.service';
 import { DivisionService } from './services/division.service';
 import { EmployeeTypeService } from '../master/services/employee-type.service';
 import { DepartmentService } from '../master/services/department.service';
+import { EducationalQualificationsTableComponent } from './components/summary-tables/educational-qualifications-table/educational-qualifications-table.component';
+import { EducationalQualificationFormComponent } from './components/forms/educational-qualification-form/educational-qualification-form.component';
+import { ProfessionalInformationComponent } from './components/forms/professional-information/professional-information.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 import { EmployeePersonalDetailsFormComponent } from './components/forms/employee-personal-details-form/employee-personal-details-form.component';
 import { EmployeeVisaDetailsFormComponent } from './components/forms/employee-visa-details-form/employee-visa-details-form.component';
 import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
@@ -36,9 +41,12 @@ import { VisaDetailsTableComponent } from './components/summary-tables/visa-deta
     AlphabetOnlyDirective,
     EmployeeComponent,
     EmployeeInfoComponent,
+    EducationalQualificationsTableComponent,
+    EducationalQualificationFormComponent,
+    ProfessionalInformationComponent,
     EmployeePersonalDetailsFormComponent,
     EmployeeVisaDetailsFormComponent,
-    VisaDetailsTableComponent
+    VisaDetailsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +62,8 @@ import { VisaDetailsTableComponent } from './components/summary-tables/visa-deta
     MatDividerModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
+    HttpClientModule,
   ],
   providers: [
     CompanyDetailsService,
@@ -63,9 +73,8 @@ import { VisaDetailsTableComponent } from './components/summary-tables/visa-deta
     RoleService,
     EmployeeTypeService,
     DivisionService,
-    DepartmentService,],
-  exports: [
-    AlphabetOnlyDirective
-  ]
+    DepartmentService,
+  ],
+  exports: [AlphabetOnlyDirective],
 })
-export class MainModule { }
+export class MainModule {}

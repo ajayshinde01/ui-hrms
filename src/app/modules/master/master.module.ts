@@ -35,6 +35,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OrganizationComponent } from './components/summary-tables/organization/organization.component';
 import { OrganizationFormComponent } from './components/forms/organization-form/organization-form.component';
+import { OrganizationService } from './services/organization.service';
+import { EmailTemplateFormComponent } from './components/forms/email-template-form/email-template-form.component';
+import { EmailTemplateTableComponent } from './components/summary-tables/email-template-table/email-template-table.component';
+import { EmailtemplateService } from './services/emailtemplate.service';
+import { EmailFormComponent } from './components/forms/email-form/email-form.component';
+import { EmailTableComponent } from './components/summary-tables/email-table/email-table.component';
+import { EmailService } from './services/email.service';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 @NgModule({
   declarations: [
     DesignationComponent,
@@ -54,6 +63,10 @@ import { OrganizationFormComponent } from './components/forms/organization-form/
     DashboardComponent,
     OrganizationComponent,
     OrganizationFormComponent,
+ EmailTemplateFormComponent,
+    EmailTemplateTableComponent,
+    EmailFormComponent,
+    EmailTableComponent,
   ],
   entryComponents: [RoleFormComponent],
   imports: [
@@ -71,6 +84,7 @@ import { OrganizationFormComponent } from './components/forms/organization-form/
     ToastrModule,
     MatFormFieldModule,
     HttpClientModule,
+   CKEditorModule
   ],
 
   providers: [
@@ -80,6 +94,9 @@ import { OrganizationFormComponent } from './components/forms/organization-form/
     EmployeeTypeService,
     DivisionService,
     DepartmentService,
+    OrganizationService,
+   EmailtemplateService,
+    EmailService
   ],
 })
 export class MasterModule {}
