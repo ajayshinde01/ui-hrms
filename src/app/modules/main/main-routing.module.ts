@@ -5,6 +5,7 @@ import { LoginComponent } from '../core/components/login/login.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
 import { EmployeeInfoComponent } from './components/forms/employee-info/employee-info.component';
 import { EmployeeComponent } from './components/forms/employee/employee.component';
+import { AddressComponent } from './components/forms/address/address.component';
 
 const routes: Routes = [
   {
@@ -22,16 +23,17 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [
-      { path: 'employee-info', component: EmployeeComponent }
-    ],
+    children: [{ path: 'employee-info', component: EmployeeComponent }],
   },
   {
     path: '',
     component: LayoutComponent,
-    children: [
-     
-    ],
+    children: [{ path: 'address', component: AddressComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [],
   },
   {
     path: '',

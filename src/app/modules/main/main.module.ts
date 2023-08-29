@@ -25,7 +25,12 @@ import { GradeService } from '../master/services/grade.service';
 import { DivisionService } from './services/division.service';
 import { EmployeeTypeService } from '../master/services/employee-type.service';
 import { DepartmentService } from '../master/services/department.service';
-
+import { AddressService } from './services/address.service';
+import { ContactDetailsComponent } from './components/forms/contact-details/contact-details.component';
+import { AddressComponent } from './components/forms/address/address.component';
+import { EmergencyContactsTableComponent } from './components/summary-tables/emergency-contacts-table/emergency-contacts-table.component';
+import { EmergencyContactComponent } from './components/forms/emergency-contact/emergency-contact.component';
+import { EmergencyContactsService } from './services/emergency-contacts.service';
 @NgModule({
   declarations: [
     TestComponent,
@@ -33,7 +38,11 @@ import { DepartmentService } from '../master/services/department.service';
     CompanyDetailsComponent,
     AlphabetOnlyDirective,
     EmployeeComponent,
-    EmployeeInfoComponent
+    EmployeeInfoComponent,
+    ContactDetailsComponent,
+    AddressComponent,
+    EmergencyContactsTableComponent,
+    EmergencyContactComponent,
   ],
   imports: [
     CommonModule,
@@ -58,9 +67,10 @@ import { DepartmentService } from '../master/services/department.service';
     RoleService,
     EmployeeTypeService,
     DivisionService,
-    DepartmentService,],
-  exports: [
-    AlphabetOnlyDirective
-  ]
+    DepartmentService,
+    AddressService,
+    EmergencyContactsService,
+  ],
+  exports: [AlphabetOnlyDirective],
 })
-export class MainModule { }
+export class MainModule {}
