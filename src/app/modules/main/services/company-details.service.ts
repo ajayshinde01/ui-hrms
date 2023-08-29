@@ -5,13 +5,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CommonMaster } from '../models/common-master.model';
 import { CompanyDetails } from '../models/company-details.model';
 
-@Injectable(
-)
+@Injectable()
 export class CompanyDetailsService {
   private dataSubject = new BehaviorSubject<string>('');
   public data$ = this.dataSubject.asObservable();
 
-  constructor(private http: HttpClient, private toastrService: ToastrService) { }
+  constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
   getAllDefaultShift(): Observable<Array<CommonMaster>> {
     return this.http.get<Array<CommonMaster>>(
@@ -31,6 +30,15 @@ export class CompanyDetailsService {
     );
   }
 
+  updateCompanyDetails(
+    companyDetails: CompanyDetails,
+    employeeId: number
+  ): Observable<CompanyDetails> {
+    return this.http.put<CompanyDetails>(
+      'http://192.168.1.16:7000/employee/company-detail/update/' + employeeId,
+      companyDetails
+    );
+  }
   notify(message: string) {
     this.toastrService.success(message);
   }
@@ -48,4 +56,17 @@ export class CompanyDetailsService {
       companyDetails
     );
   }
+
+  searchCompanyDetailsById(Id: string): Observable<CompanyDetails> {
+    return this.http.get<CompanyDetails>(
+      'http://192.168.1.16:7000/employee/company-detail/' + Id
+    );
+  }
+
+  // updateCompanyDetails(formData: any) {
+  //   return this.http.put<Employees>(
+  //     'http://192.168.1.16:7000/employee/update',
+  //     Id
+  //   );
+  // }
 }

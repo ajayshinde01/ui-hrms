@@ -28,7 +28,7 @@
             <mat-tab label="Joining Details"  [disabled]='!emp_id'> Joining Details </mat-tab>
             <mat-tab label="Contact Details"  [disabled]='!emp_id'> Contact Details</mat-tab>
             <mat-tab label="Professional Details"  [disabled]='!emp_id'>Professional Details</mat-tab>
-            <mat-tab label="Personal Details"  [disabled]='!emp_id'><app-employee-personal-details-form></app-employee-personal-details-form></mat-tab>
+            <mat-tab label="Personal Details"  [disabled]='!emp_id'> <app-professional-information></app-professional-information></mat-tab>
             <mat-tab label="Visa Details"  [disabled]='!emp_id'>
               <ng-template matTabContent
               ><app-visa-details-table></app-visa-details-table></ng-template>
@@ -38,3 +38,4 @@
       </div>
     </div>
   </div>
+

@@ -229,20 +229,39 @@ export class SidebarComponent implements OnInit {
           },
         ],
       },
-      {
-        name: 'Email',
+  //          {
+  //       name: 'Email',
 
-        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+  //       icon: 'fa-solid fa-envelope ps-1 sidebar-icon',
 
-        showSubmenu: true,
-      },
+  //       showSubmenu: true,
+  //       submenu:[
+     
+  //         {
+  //           name: 'Email',
+  //           icon: 'fa-solid fa-ellipsis',
+  //           routerLink: ['/master/emailtable'],
+  //           arrowMaster: false,
+  //         },
+  // ]
+  //     },
       {
         name: 'Email Template',
 
-        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+        icon: 'fa-solid fa-envelope ps-1 sidebar-icon',
 
         showSubmenu: true,
+        submenu:[
+     
+          {
+            name: 'Email Template',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/master/emailtemplatetable'],
+            arrowMaster: false,
+          },
+  ]
       },
+   
     ];
   }
 

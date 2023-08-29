@@ -5,6 +5,8 @@ import { LoginComponent } from '../core/components/login/login.component';
 import { EmployeeTableComponent } from './components/summary-tables/employee-table/employee-table.component';
 import { EmployeeInfoComponent } from './components/forms/employee-info/employee-info.component';
 import { EmployeeComponent } from './components/forms/employee/employee.component';
+import { EducationalQualificationsTableComponent } from './components/summary-tables/educational-qualifications-table/educational-qualifications-table.component';
+import { ProfessionalInformationComponent } from './components/forms/professional-information/professional-information.component';
 import { VisaDetailsTableComponent } from './components/summary-tables/visa-details-table/visa-details-table.component';
 
 const routes: Routes = [
@@ -23,8 +25,16 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    children: [{ path: 'employee-info', component: EmployeeComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
     children: [
-      { path: 'employee-info', component: EmployeeComponent }
+      {
+        path: 'educational-qualification',
+        component: EducationalQualificationsTableComponent,
+      },
     ],
   },
   {
@@ -36,7 +46,10 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-     
+      {
+        path: 'professional-information',
+        component: ProfessionalInformationComponent,
+      },
     ],
   },
   {

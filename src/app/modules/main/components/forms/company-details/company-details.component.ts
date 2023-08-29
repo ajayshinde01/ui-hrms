@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { EmployeeService } from '../../../services/employee.service';
 import { CompanyDetailsService } from '../../../services/company-details.service';
@@ -16,6 +16,7 @@ import { DepartmentService } from 'src/app/modules/master/services/department.se
 import { GradeService } from 'src/app/modules/master/services/grade.service';
 import { EmployeeTypeService } from 'src/app/modules/master/services/employee-type.service';
 import { CompanyDetails } from '../../../models/company-details.model';
+import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-company-details',
@@ -35,6 +36,8 @@ export class CompanyDetailsComponent implements OnInit {
   employees: Employees[] = [];
   designations: Designation[] = [];
   actionLabel: String;
+  companyDetailsId: number;
+  response: number;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -46,7 +49,7 @@ export class CompanyDetailsComponent implements OnInit {
     private departmentService: DepartmentService,
     private employeeTypeService: EmployeeTypeService,
     private gradeService: GradeService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -61,22 +64,17 @@ export class CompanyDetailsComponent implements OnInit {
     this.fetchDesignations();
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
-      if (
-        this.queryParams['id'] != undefined &&
-        this.queryParams.actionLabel == 'Update'
-      ) {
-        this.actionLabel = 'Update';
-        this.companyDetailsForm.controls['employeeId'].setValue(
-          this.queryParams.id
-        );
-        // this.getById(this.queryParams['id']);
-      } else {
-        this.actionLabel = 'Save';
-        this.companyDetailsForm.controls['employeeId'].setValue(
-          this.queryParams.id
-        );
-      }
     });
+
+    if (this.queryParams.actionLabel == 'Update') {
+      this.getById(this.queryParams['id']);
+      this.actionLabel = 'Save';
+    } else {
+      this.actionLabel = 'Save';
+      // this.companyDetailsForm.controls['employeeId'].setValue(
+      //   this.queryParams.id
+      // );
+    }
   }
   fetchDesignations() {
     this.designationService.getDesignations().subscribe((response) => {
@@ -126,29 +124,46 @@ export class CompanyDetailsComponent implements OnInit {
 
   initForm() {
     this.companyDetailsForm = this.formBuilder.group({
-      employeeId: [''],
+      id: [''],
       designation: this.formBuilder.group({
-        id: [''],
+        id: ['', Validators.required],
       }),
       grade: this.formBuilder.group({
-        id: [''],
+        id: ['', Validators.required],
       }),
       department: this.formBuilder.group({
-        id: [''],
+        id: ['', Validators.required],
       }),
       role: this.formBuilder.group({
-        id: [''],
+        id: ['', Validators.required],
       }),
-      reviewerManager: [''],
-      reportingManager: [''],
+      reviewerManager: ['', Validators.required],
+      reportingManager: ['', Validators.required],
       employeeType: this.formBuilder.group({
-        id: [''],
+        id: ['', Validators.required],
       }),
-      billable: [''],
-      probation: [''],
-      companyEmail: [''],
-      clientEmail: [''],
-      shift: [''],
+      billable: ['', Validators.required],
+      probation: ['', Validators.required],
+      // companyEmail: ['', Validators.required],
+      // clientEmail: [''],
+      companyEmail: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.validEmailFormat(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
+      clientEmail: [
+        '',
+        [
+          CustomValidators.validEmailFormat(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
+      shift: ['', Validators.required],
       orgCode: ['AVI01'],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
@@ -167,7 +182,15 @@ export class CompanyDetailsComponent implements OnInit {
           .subscribe(
             (response: CompanyDetails) => {
               this.companyDetailsService.notify('Data Saved Successfully...');
-              this.router.navigate(['/main/company-details-form']);
+              this.actionLabel = 'Update';
+              this.response = response.id;
+              this.queryParams = {
+                id: this.queryParams.id,
+                actionLabel: 'Update',
+              };
+              this.router.navigate(['/main/employee-info'], {
+                queryParams: this.queryParams,
+              });
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
@@ -176,19 +199,56 @@ export class CompanyDetailsComponent implements OnInit {
             }
           );
       }
-      // if (this.actionLabel === 'Update') {
-      //   this.employeeService.updateEmployee(formData).subscribe(
-      //     (response: Employees) => {
-      //       this.employeeService.notify('Update Successfully...');
-      //       this.router.navigate(['/main/employee-table']);
-      //     },
-      //     (error: any) => {
-      //       if (error.status == 400 || error.status == 404) {
-      //         this.employeeService.warn('Credentials already present');
-      //       }
-      //     }
-      //   );
-      // }
+      if (this.actionLabel === 'Update') {
+        formData.id = this.response;
+        debugger;
+        this.companyDetailsService
+          .updateCompanyDetails(formData, this.queryParams.id)
+          .subscribe(
+            (response: CompanyDetails) => {
+              this.companyDetailsService.notify('Update Successfully...');
+              this.queryParams.actionLabel = 'Update';
+              this.router.navigate(['/main/employee-info'], {
+                queryParams: this.queryParams,
+              });
+            },
+            (error: any) => {
+              if (error.status == 400 || error.status == 404) {
+                this.companyDetailsService.warn('Credentials already present');
+              }
+            }
+          );
+      }
     }
+  }
+
+  getById(id: string) {
+    debugger;
+    this.companyDetailsService
+      .searchCompanyDetailsById(id)
+      .subscribe((response: CompanyDetails) => {
+        this.companyDetailsForm.patchValue(response);
+        this.response = response.id;
+        debugger;
+        if (this.response != undefined) {
+          this.actionLabel = 'Update';
+        } else {
+          this.actionLabel = 'Save';
+        }
+      });
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.companyDetailsForm.get(controlName);
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.companyDetailsForm.get(controlName);
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+    return '';
   }
 }
