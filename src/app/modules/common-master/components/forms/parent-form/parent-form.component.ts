@@ -159,7 +159,6 @@ export class ParentFormComponent {
 
   onSubmit() {
     if (this.parentForm.valid) {
-      console.log('valid form');
       const formData = this.parentForm.value;
       this.parentForm.get('code')?.enable();
 

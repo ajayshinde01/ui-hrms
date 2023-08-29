@@ -74,7 +74,7 @@ export class ChildFormComponent {
         ],
       ],
       value: [
-        '',
+        { value: '', disabled: false },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -152,7 +152,7 @@ export class ChildFormComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.childService.warn('Credentials already present');
+              this.childService.warn('Child ID already present');
             }
           }
         );

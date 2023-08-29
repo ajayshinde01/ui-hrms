@@ -15,6 +15,10 @@ import { DepartmentComponent } from './components/forms/department-form/departme
 import { DepartmentTableComponent } from './components/summary-tables/department-table/department-table.component';
 import { DashboardComponent } from './components/summary-tables/dashboard/dashboard.component';
 import { OrganizationComponent } from './components/summary-tables/organization/organization.component';
+import { EmailTemplateFormComponent } from './components/forms/email-template-form/email-template-form.component';
+import { EmailTemplateTableComponent } from './components/summary-tables/email-template-table/email-template-table.component';
+import { EmailFormComponent } from './components/forms/email-form/email-form.component';
+import { EmailTableComponent } from './components/summary-tables/email-table/email-table.component';
 
 const routes: Routes = [
   {
@@ -100,6 +104,26 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [{ path: 'organization', component: OrganizationComponent }],
   },
+{
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'emailtemplate', component: EmailTemplateFormComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'emailtemplatetable', component: EmailTemplateTableComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'emailform', component: EmailFormComponent }],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'emailtable', component: EmailTableComponent }],
+  }
 ];
 
 @NgModule({
