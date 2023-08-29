@@ -145,6 +145,7 @@ export class EducationalQualificationsTableComponent implements OnInit {
     this.matDialogRef = this.matDialog.open(
       EducationalQualificationFormComponent,
       {
+        data: { educationalQualificationId: this.id, id: this.id },
         disableClose: true,
       }
     );
@@ -158,7 +159,7 @@ export class EducationalQualificationsTableComponent implements OnInit {
     this.matDialogRef = this.matDialog.open(
       EducationalQualificationFormComponent,
       {
-        data: { educationalQualificationId: this.id },
+        data: { educationalQualificationId: data },
         disableClose: true,
       }
     );

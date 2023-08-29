@@ -60,15 +60,18 @@ export class EducationalQualificationService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8090/employee/data-table-metadata/educational-qualification'
+      'http://192.168.1.16:7000/employee/data-table-metadata/educational-qualification'
     );
   }
 
-  // searchDivisionById(divisionId: string): Observable<Division> {
-  //   return this.http.get<Division>(
-  //     'http://192.168.1.16:7000/employee/division/' + divisionId
-  //   );
-  // }
+  getByEmployeeId(
+    employeeId: number,
+    educationalId: number
+  ): Observable<EducationalQualification> {
+    return this.http.get<EducationalQualification>(
+      'http://localhost:8090/employee/education/${employeeId}/${educationalId}'
+    );
+  }
 
   // updateDivision(divisionId: string): Observable<Division> {
   //   return this.http.put<Division>(

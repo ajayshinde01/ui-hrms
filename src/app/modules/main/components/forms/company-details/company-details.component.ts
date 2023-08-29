@@ -150,17 +150,25 @@ export class CompanyDetailsComponent implements OnInit {
         '',
         [
           Validators.required,
-          CustomValidators.validEmailFormat(),
           CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(50),
+          Validators.pattern(
+            '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'
+          ),
         ],
       ],
       clientEmail: [
         '',
         [
-          CustomValidators.validEmailFormat(),
           CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(50),
+          Validators.pattern(
+            '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'
+          ),
         ],
       ],
       shift: ['', Validators.required],
@@ -228,6 +236,7 @@ export class CompanyDetailsComponent implements OnInit {
       .searchCompanyDetailsById(id)
       .subscribe((response: CompanyDetails) => {
         this.companyDetailsForm.patchValue(response);
+        console.log(this.companyDetailsForm.value);
         this.response = response.id;
         debugger;
         if (this.response != undefined) {
