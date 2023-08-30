@@ -31,6 +31,8 @@ import { DataTableService } from './dataTable.service';
 export class DatatableComponent implements OnInit, OnChanges {
   @Input() dataSource!: Array<Object>;
 
+  @Input () buttonVisible: Array<boolean>=[false,false,false]
+
   @Input() headers!: Array<ColumnsMetadata>;
 
   @Input() totalRecord: number = 0;
@@ -58,7 +60,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   cardDivHeight: any = '';
 
   cardHeights!: number;
-  @Input() buttonVisible: Array<boolean> = [false, false, false];
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 

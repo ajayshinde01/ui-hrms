@@ -1,9 +1,9 @@
 <app-datatable
   [buttonVisible]="buttonVisible"
   (buttonFunction)="action($event)"
-  (deleteFunction)="action($event)"
+  (deleteFunction)="action($event)" 
   (paginationParams)="searchFunction($event)"
-  [dataSource]="emailMetaData.content"
+  [dataSource]="emailMetaData"
   [headers]="emailHeaders.columnsMetadata"
   [totalRecord]="emailMetaData.totalElements"
   [masterName]="masterName"

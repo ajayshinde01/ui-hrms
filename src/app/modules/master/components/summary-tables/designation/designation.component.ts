@@ -27,6 +27,7 @@ export class DesignationComponent {
   designationHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Designation';

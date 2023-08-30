@@ -1,161 +1,140 @@
-
 <form [formGroup]="emailForm">
-    <div class="container" style="width: 490px; height:500px">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex justify-content-between">
-              <h2 class="title" mat-dialog-title>Email</h2>
-              <button class="close-btn" (click)="Close(false)"  >
-                <i style="font-size: 12px" class="fa">&#xf00d;</i>
-              </button>
-            </div>
-            <div class="line"></div>
+  <div class="container" style="width: 750px; height: 770px">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between">
+            <h2 class="title" mat-dialog-title>Email</h2>
+            <button class="close-btn" (click)="Close(false)">
+              <i style="font-size: 12px" class="fa">&#xf00d;</i>
+            </button>
           </div>
+          <div class="line"></div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="row row-section">
-          <div class="col-md-4 mt-2">
-            <mat-label>To</mat-label>
-          </div>
-          <div class="col-md-8">
-            <mat-form-field appearance="outline" color="primary">
-              <div class="form-controls">
-                <input
-                  matInput
-                  placeholder="To"
-                 formControlName="to"
-                />
-             
-
-              </div>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <div class="row row-section">
-          <div class="col-md-4 mt-2">
-            <mat-label>CC</mat-label>
-          </div>
-          <div class="col-md-8">
-            <mat-form-field appearance="outline" color="primary">
-              <div class="form-controls">
-                <input
-                  matInput
-                  placeholder="cc"
-                formControlName="cc"
-               
-                />
-            
-
-              </div>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row row-section">
-          <div class="col-md-4 mt-2">
-            <mat-label>Subject</mat-label>
-          </div>
-          <div class="col-md-8">
-            <mat-form-field appearance="outline" color="primary">
-              <div class="form-controls">
-                <input
-                  matInput
-                  placeholder="cc"
-                formControlName="subject"
-               
-                />
-            
-
-              </div>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row row-section">
-          <div class="col-md-4 mt-2">
-            <mat-label>DateTime</mat-label>
-          </div>
-          <div class="col-md-8">
-            <div class="form-controls">
-              <input type="datetime-local" formControlName="dateTime">
-            </div>
-     
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row row-section">
-          <div class="col-md-4 mt-2">
-            <mat-label>Upload File</mat-label>
-          </div>
-          <div class="col-md-8">
-         <input type="file" formControlName="file"  #fileInput multiple (change)="createEmail($event)">
-         <ng-container *ngIf="selectedFile">
-          <i [class]="getFileIconClass(selectedFile.type)"></i>
-        </ng-container>
-          </div>
-        </div>
-      </div>
-  
-    
-  
-      <div class="form-group">
-        <div class="row row-section">
-          <div class="col-md-4 mt-2">
-            <mat-label>Content</mat-label>
-          </div>
-          <div class="col-md-8">
-            <ckeditor  [disabled]="true" [editor]="Editor" formControlName="emailBody"
-
-            class="height-400" id="emailCon" #ckeditorEleRef>
-
-        </ckeditor>
-            
-          </div>
-        </div>
-      </div>
-  
-      <div _ngcontent-ng-c812429062="" class="form-footer">
-        <mat-dialog-actions>
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="d-flex justify-content-end">
-                  <button
-                    _ngcontent-ng-c812429062=""
-                    class="save-btn"
-                 
-                    (click)="onSubmit()"
-                    [disabled]="!emailForm.valid"
-                    enctype="multipart/form-data"
-                  >
-            {{actionLabel}}
-                  </button>
-                  <button
-                    _ngcontent-ng-c812429062=""
-                    class="profile-save-btn dark"
-                    (click)="resetForm()"
-
-                
-                  >
-                    Reset
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-dialog-actions>
       </div>
     </div>
-  </form>
-  
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>To</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="text-area text-two" appearance="outline">
+            <div class="form-controls text-two">
+              <textarea matInput formControlName="to" class="text-two">
+                </textarea>
+
+
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>CC</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline">
+            <div class="form-controls">
+              <textarea matInput formControlName="cc" placeholder="">
+
+                </textarea>
+
+
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>Subject</mat-label>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput placeholder="" formControlName="subject" />
+
+
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>DateTime</mat-label>
+        </div>
+        <div class="col-md-8">
+          <div class="form-controls">
+            <input type="datetime-local" formControlName="dateTime">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>Upload File</mat-label>
+        </div>
+        <div class="col-md-8">
+          <input type="file" formControlName="file" #fileInput multiple (change)="createEmail($event)">
+          <ng-container *ngIf="selectedFile">
+            <i [class]="getFileIconClass(selectedFile.type)"></i>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>Content</mat-label>
+        </div>
+        <div class="col-md-8">
+          <div class="form-controls">
+            <ckeditor [disabled]="false" [editor]="Editor" formControlName="body" #ckeditorEleRef>
+
+            </ckeditor>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()" enctype="multipart/form-data">
+                  {{actionLabel}}
+                </button>
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</form>

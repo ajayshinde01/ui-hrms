@@ -34,6 +34,7 @@ export class EmailTemplateTableComponent {
 
   masterName: string = 'Email Template';
 
+
   constructor(
     public emailtemplateService: EmailtemplateService,
 

@@ -31,6 +31,7 @@ export class RoleComponent {
   roleHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+ 
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Role';
