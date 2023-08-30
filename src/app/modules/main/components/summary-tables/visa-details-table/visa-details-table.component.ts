@@ -151,8 +151,6 @@ export class VisaDetailsTableComponent {
    actions(event: Data) {
     let type: string = event['event'];
     let id: string = event['data'].id;
-
-    console.log("dataid",id);
     const queryParam = { id: id };
     switch (type) {
       case 'delete':

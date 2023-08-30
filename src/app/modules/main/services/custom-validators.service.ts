@@ -1,5 +1,6 @@
 import {
   AbstractControl,
+  FormControl,
   ValidationErrors,
   ValidatorFn,
   Validators,
@@ -116,6 +117,26 @@ export class CustomValidators {
     };
   }
 
+  static validVisaDate(): ValidatorFn {
+    return (control: AbstractControl):  ValidationErrors | null => {
+      const today = new Date().getTime();
+  
+      if (!(control && control.value)) {
+        // if there's no control or no value, that's ok
+        return null;
+      }
+  
+      // return null if there's no errors
+      if(control.value.getTime() < today){
+         return { validVisaDate: true };
+      }else{
+        console.log("here");
+      }
+      return null;
+    };
+    
+  }
+
   static getErrorMessage(errorKey: string, fieldName: string): string {
     const fieldNames: { [key: string]: string } = {
       confirmationDate: 'Confirmation Date',
@@ -130,8 +151,28 @@ export class CustomValidators {
       clientEmail: 'Client Email',
       shift: 'Shift',
       reportingManager: 'Reporting Manager',
-      reviewerManager: 'ReviewerManager',
+      reviewerManager: 'Reviewer Manager',
       id: 'Designation Id',
+
+      //employee infor form
+      employeeCode: 'Employee Code',
+      profileImage: 'Profile Image',
+      firstName: 'First Name',
+      middleName: 'Middle Name',
+      lastName: 'Last Name',
+      dateOfBirth: 'Date Of Birth',
+      gender: 'Gender',
+      dateOfJoining: 'Date Of Joining',
+      age: 'Age',
+      status: 'Status',
+      division: 'Division',
+      userId: 'UserId',
+      email: 'Email',
+
+      //employee Visa Form
+      countryCode: 'Country Code',
+      visaNumber: 'Visa Number',
+      validDate: 'Valid Date',
     };
 
     const errorMessages: { [key: string]: string } = {
@@ -148,6 +189,7 @@ export class CustomValidators {
       validResignationDate: `Resignation Date should be a future date`,
       validRelievingDate: `Relieving Date should be a future date`,
       validEmailFormat: `Please enter valid email format`,
+      validVisaDate: `should be grater than today`,
     };
     return errorMessages[errorKey] || 'Validation error';
   }

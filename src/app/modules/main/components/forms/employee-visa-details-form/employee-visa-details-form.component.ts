@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Data, Router } from '@angular/router';
 import { Visa } from 'src/app/modules/main/models/visa.model';
@@ -46,7 +46,8 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
    // console.log("visaid", this.visaid);   
     this.initForm();    
     this.fetchCountryCode();
-    this.collectQueryParams();
+   // this.collectQueryParams();
+   this.getById(this.emp_id);
     console.log("dfd",this.inputFromParent);
     console.log('Query parameter value:', this.emp_id);
    
@@ -57,20 +58,50 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         id: [''],
         countryCode:['', Validators.required],
         orgCode:['AVI-123'],
-        //visaNumber:[''],
         visaNumber:['', [
          Validators.required,
          CustomValidators.noLeadingSpace(),
          CustomValidators.whitespaceValidator(),
          CustomValidators.noTrailingSpace(),
-        // CustomValidators.maxLength(16),
-        // Validators.pattern('^4[0-9]{12}(?:[0-9]{3})?$'),
+         CustomValidators.maxLength(16),
+         Validators.pattern('^4[0-9]{12}(?:[0-9]{3})?$'),
         ]
        ],
         visaFile:[''],
-        validDate:['', Validators.required],
+        validDate:['', [Validators.required, this.dateValidator()]],
         
       });
+    }
+
+     dateValidator(): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const today = new Date().getTime();
+    
+        if (!(control && control.value)) {
+          // if there's no control or no value, that's ok
+          return null;
+        }
+    
+        // return null if there's no errors
+        return control.value.getTime() < today
+          ? { invalidDate: 'Visa Date should be a future date' }
+          : null;
+      };
+    }
+
+    getErrorMessage(controlName: string): string {
+      const control = this.employeeVisaDetailsForm.get(controlName);  
+      //console.log("controlNamecontrolName",controlName);
+      if (control && control.errors) {
+        const errorKey = Object.keys(control.errors)[0];  
+        return CustomValidators.getErrorMessage(errorKey, controlName);
+      }  
+      return '';
+    }
+
+    isControlInvalid(controlName: string): boolean {
+      const control = this.employeeVisaDetailsForm.get(controlName);  
+      return !!control && control.invalid && control.touched;
     }
 
     collectQueryParams() {
@@ -98,6 +129,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     }
 
     getById(id: string) {
+      if(this.data !=null){
       this.visaid=this.data.id;
       this.employeeService
         .searchVisaById(this.emp_id, this.visaid)
@@ -105,7 +137,11 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           this.employeeVisaDetailsForm.patchValue(response);
           this.employeeVisaDetailsForm.controls["countryCode"].patchValue(response.countryCode)
           this.visa = response;
+        },
+        err => {
+         console.log('oops',err);
         });
+      }
     }
 
   fetchCountryCode() {
@@ -134,6 +170,8 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       if(file.size > 2e+6){
         this.FleSizeError='File is too large should not exceed Over 2MB';
         console.log('File is too large. Over 2MB');
+      }else{
+        this.FleSizeError='';
       }
     }
   }
