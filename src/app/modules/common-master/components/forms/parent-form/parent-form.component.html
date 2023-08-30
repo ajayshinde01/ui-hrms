@@ -364,6 +364,7 @@
             <div class="spacing"></div>
             <app-datatable
               *ngIf="isEdit"
+              [buttonVisible]="buttonVisible"
               [dataSource]="childMetaData.content"
               [headers]="childHeaders.columnsMetadata"
               [totalRecord]="childMetaData.totalElements"

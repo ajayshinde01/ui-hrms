@@ -112,8 +112,6 @@ export class JoiningDetailsComponent implements OnInit {
       resignationDate: [
         '',
         [
-          Validators.required,
-
           CustomValidators.validResignationDate(currentDate),
 
           CustomValidators.futureDate(),
@@ -123,8 +121,6 @@ export class JoiningDetailsComponent implements OnInit {
       relievingDate: [
         '',
         [
-          Validators.required,
-
           CustomValidators.validRelievingDate(currentDate),
 
           CustomValidators.futureDate(),

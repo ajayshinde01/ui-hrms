@@ -59,6 +59,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   cardDivHeight: any = '';
 
   cardHeights!: number;
+  @Input() buttonVisible: Array<boolean> = [false, false, false];
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 
@@ -143,24 +144,23 @@ export class DatatableComponent implements OnInit, OnChanges {
         break;
 
       case 'delete':
-
-      console.log("this.selectedValue",this.selectedValue);
+        console.log('this.selectedValue', this.selectedValue);
         data.data = this.selectedValue;
 
-       if (data.data == undefined)
+        if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
-       
+
         if (data.data != undefined) {
           this.confrimationmodel.nativeElement.click();
-       }
+        }
 
         break;
     }
   }
 
   clickMethod() {
-    if(confirm("Are you sure to delete ")) {
-      console.log("Implement delete functionality here");
+    if (confirm('Are you sure to delete ')) {
+      console.log('Implement delete functionality here');
     }
   }
 

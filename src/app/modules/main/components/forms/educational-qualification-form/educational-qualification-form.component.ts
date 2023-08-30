@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EducationalQualificationService } from '../../../services/educational-qualification.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EducationalQualification } from '../../../models/educational-qualification.model';
+import { CommonMaster } from '../../../models/common-master.model';
 
 @Component({
   selector: 'app-educational-qualification-form',
@@ -18,6 +19,7 @@ export class EducationalQualificationFormComponent implements OnInit {
   isDisabled: boolean = false;
   educationalQualificationId: number;
   employeeId: number;
+  qualificationLevels: CommonMaster[] = [];
   constructor(
     private _mdr: MatDialogRef<EducationalQualificationFormComponent>,
     private formBuilder: FormBuilder,
@@ -28,22 +30,15 @@ export class EducationalQualificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.initForm();
     this.collectQueryParams();
   }
 
   collectQueryParams() {
-    if (this.data['educationalQualificationId'] != undefined) {
-      this.educationalQualificationId = this.data['educationalQualificationId'];
-      this.employeeId = this.data['id'];
-      this.getById(this.employeeId, this.educationalQualificationId);
-      this.isDisabled = true;
-    }
-  }
-
-  goBack() {
-    this.router.navigate(['/user/user-table']);
+    this.educationalQualificationId = this.data['educationalQualificationId'];
+    this.employeeId = this.data['id'];
+    this.getById(this.employeeId, this.educationalQualificationId);
+    this.isDisabled = true;
   }
 
   initForm() {
@@ -97,7 +92,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             (response: EducationalQualification) => {
               console.log('PUT-SCOPE Request successful', response);
               this.educationalQualificationService.notify(
-                'Educational Qualification successfully..!'
+                'Educational Qualification added successfully..!'
               );
               // this.router.navigate(['/main/educational-qualification']);
               this.Close(true);

@@ -1,10 +1,10 @@
-<form [formGroup]="educationalDetailsForm">
+<form [formGroup]="certificationsForm">
   <div class="container" style="width: 490px; height: 390px">
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-between">
-            <h2 class="title" mat-dialog-title>Educational Qualification</h2>
+            <h2 class="title" mat-dialog-title>Certification</h2>
             <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
@@ -16,36 +16,12 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Educational Qualification</mat-label>
+          <mat-label>Certification</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="educationalQualification"
-              />
-            </div>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="row row-section">
-        <div class="col-md-4 mt-2">
-          <mat-label>Qualification Level</mat-label>
-        </div>
-        <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
-            <div class="form-controls">
-              <mat-option>Select</mat-option>
-              <mat-option
-                *ngFor="let qualificationLevel of qualificationLevels"
-                [value]="qualificationLevel.code"
-                >{{ qualificationLevel.value }}</mat-option
-              >
+              <input matInput placeholder="" formControlName="certification" />
             </div>
           </mat-form-field>
         </div>
@@ -55,12 +31,12 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label>School/University</mat-label>
+          <mat-label>Issued By</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="instituteName" />
+              <input matInput placeholder="" formControlName="issuedBy" />
             </div>
           </mat-form-field>
         </div>
@@ -70,15 +46,15 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Year Of Passing</mat-label>
+          <mat-label>Date Of Certification</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
             <input
               matInput
-              formControlName="passingYear"
+              formControlName="dateOfCertification"
               [matDatepicker]="picker"
-              placeholder="Choose a date"
+              placeholder="DD/MM/YYYY"
             />
             <mat-datepicker-toggle
               matSuffix
@@ -100,7 +76,7 @@
                   _ngcontent-ng-c812429062=""
                   class="save-btn"
                   (click)="onSubmit()"
-                  [disabled]="!educationalDetailsForm.valid"
+                  [disabled]="!certificationsForm.valid"
                 >
                   {{ actionLabel }}
                 </button>

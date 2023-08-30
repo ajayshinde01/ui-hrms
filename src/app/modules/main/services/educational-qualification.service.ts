@@ -19,14 +19,7 @@ export class EducationalQualificationService {
       educationalQualification
     );
   }
-  // searchScopeById(
-  //   employeeId: number,
-  //   educationalQualification: EducationalQualification
-  // ) {
-  //   return this.http.get<EducationalQualification>(
-  //     `http://192.168.1.16:7000/employee/education/1/search?keyword=SSC&page=0&size=1&sort=educationalQualification`
-  //   );
-  // }
+
   updateEducationalQualification(
     educationalQualification: EducationalQualification,
     employeeId: number
@@ -40,13 +33,6 @@ export class EducationalQualificationService {
   public data$ = this.dataSubject.asObservable();
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
-
-  // createDivision(division: Division): Observable<Division> {
-  //   return this.http.post<Division>(
-  //     'http://192.168.1.16:7000/employee/division/create',
-  //     division
-  //   );
-  // }
 
   getEducationalQualifications(
     employeeId: number
@@ -72,13 +58,6 @@ export class EducationalQualificationService {
       `http://192.168.1.16:7000/employee/education/${employeeId}/${educationalId}`
     );
   }
-
-  // updateDivision(divisionId: string): Observable<Division> {
-  //   return this.http.put<Division>(
-  //     'http://192.168.1.16:7000/employee/division/update',
-  //     divisionId
-  //   );
-  // }
 
   deleteEducationalQualification(
     EducationalQualificationId: number,

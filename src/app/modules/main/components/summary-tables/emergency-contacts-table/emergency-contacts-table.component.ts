@@ -15,6 +15,7 @@ import { EmergencyContactsService } from '../../../services/emergency-contacts.s
 })
 export class EmergencyContactsTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  buttonVisible: Array<boolean> = [true, true, true];
   queryParams?: any;
 
   matDialogRef: MatDialogRef<EmergencyContactComponent>;

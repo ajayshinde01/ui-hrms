@@ -14,7 +14,7 @@ import { ApiResponse } from '../../../models/response';
 })
 export class ParentComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   parentMetaData: { content: Array<Parent>; totalElements: number } = {
     content: [],
     totalElements: 0,

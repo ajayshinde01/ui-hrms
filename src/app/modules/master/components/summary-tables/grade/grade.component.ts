@@ -16,6 +16,7 @@ import { GradeFormComponent } from '../../forms/grade-form/grade.form.component'
 })
 export class GradeComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<GradeFormComponent>;
   gradeMetaData: { content: Array<Grade>; totalElements: number } = {
     content: [],

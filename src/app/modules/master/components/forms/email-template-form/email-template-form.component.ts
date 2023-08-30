@@ -2,25 +2,28 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 
 import { EmailTemplate } from '../../../models/emailTemplate';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { EmailtemplateService } from '../../../services/emailtemplate.service';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
 import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { blankValidator } from '../Validations/blankData.validator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 @Component({
   selector: 'app-email-template-form',
   templateUrl: './email-template-form.component.html',
-  styleUrls: ['./email-template-form.component.scss']
+  styleUrls: ['./email-template-form.component.scss'],
 })
-export class EmailTemplateFormComponent implements OnInit{
-  
+export class EmailTemplateFormComponent implements OnInit {
   @ViewChild('ckeditorEleRef')
   ckeditorElementComponent!: CKEditorComponent;
-  public Editor:any = ClassicEditor;
+  public Editor: any = ClassicEditor;
 
   emailTemplateForm!: FormGroup;
   emailtemplate: EmailTemplate;
@@ -42,9 +45,7 @@ export class EmailTemplateFormComponent implements OnInit{
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
-  
 
-   
     this.emailTemplateForm
       .get('name')
       ?.valueChanges.subscribe((value: string) => {
@@ -60,7 +61,7 @@ export class EmailTemplateFormComponent implements OnInit{
             ?.setValue(newValue, { emitEvent: false });
         }
       });
-      this.emailTemplateForm
+    this.emailTemplateForm
       .get('subject')
       ?.valueChanges.subscribe((value: string) => {
         if (value.length > 0) {
@@ -98,7 +99,7 @@ export class EmailTemplateFormComponent implements OnInit{
   initForm() {
     this.emailTemplateForm = this.formBuilder.group({
       id: [''],
-    
+
       name: [
         '',
         [
@@ -121,24 +122,26 @@ export class EmailTemplateFormComponent implements OnInit{
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
-      content:[''],
+      content: [''],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
-      updatedAt: [null]
+      updatedAt: [null],
     });
   }
 
   onSubmit() {
     if (this.emailTemplateForm.valid) {
-   //   this.emailTemplateForm.get('id')?.enable();
+      //   this.emailTemplateForm.get('id')?.enable();
       const formData = this.emailTemplateForm.value;
       // formData.updatedBy = 'Admin';
 
       if (this.actionLabel === 'Save') {
         this.emailTemplateService.createEmailTemplate(formData).subscribe(
           (response: EmailTemplate) => {
-            this.emailTemplateService.notify('Email template added successfully');
+            this.emailTemplateService.notify(
+              'Email template added successfully'
+            );
 
             this.Close(true);
           },
@@ -151,10 +154,12 @@ export class EmailTemplateFormComponent implements OnInit{
         );
       }
       if (this.actionLabel === 'Update') {
-      //  formData.updatedBy = 'Admin';
+        //  formData.updatedBy = 'Admin';
         this.emailTemplateService.updateEmailTemplateById(formData).subscribe(
           (response: EmailTemplate) => {
-            this.emailTemplateService.notify('Email template updated successfully');
+            this.emailTemplateService.notify(
+              'Email template updated successfully'
+            );
 
             this.Close(true);
           },

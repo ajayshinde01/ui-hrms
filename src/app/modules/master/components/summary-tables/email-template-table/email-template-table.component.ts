@@ -10,18 +10,21 @@ import { ApiResponse } from '../../../models/response';
 @Component({
   selector: 'app-email-template-table',
   templateUrl: './email-template-table.component.html',
-  styleUrls: ['./email-template-table.component.scss']
+  styleUrls: ['./email-template-table.component.scss'],
 })
 export class EmailTemplateTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<EmailTemplateFormComponent>;
 
   emailTemplateHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
 
-  emailTemplateMetaData: { content: Array<EmailTemplate>; totalElements: number } = {
+  emailTemplateMetaData: {
+    content: Array<EmailTemplate>;
+    totalElements: number;
+  } = {
     content: [],
 
     totalElements: 0,
@@ -78,7 +81,9 @@ export class EmailTemplateTableComponent {
 
           .subscribe(
             (response: ApiResponse) => {
-              this.emailtemplateService.notify('EmailTemplate deleted successfully');
+              this.emailtemplateService.notify(
+                'EmailTemplate deleted successfully'
+              );
 
               this.searchFunction(this.params);
 
@@ -137,34 +142,33 @@ export class EmailTemplateTableComponent {
           this.emailTemplateMetaData = data;
         }
       );
+  }
 
-}
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(EmailTemplateFormComponent, {
+      disableClose: true,
+    });
 
-OpenModal() {
-  this.matDialogRef = this.matDialog.open(EmailTemplateFormComponent, {
-    disableClose: true,
-  });
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
 
-  this.matDialogRef.afterClosed().subscribe((res: any) => {
-    this.searchFunction(this.params);
+      if (res == true) {
+      }
+    });
+  }
 
-    if (res == true) {
-    }
-  });
-}
+  OpenModalForEdit(id: number) {
+    this.matDialogRef = this.matDialog.open(EmailTemplateFormComponent, {
+      data: { id: id },
 
-OpenModalForEdit(id: number) {
-  this.matDialogRef = this.matDialog.open(EmailTemplateFormComponent, {
-    data: { id: id },
+      disableClose: true,
+    });
 
-    disableClose: true,
-  });
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
 
-  this.matDialogRef.afterClosed().subscribe((res: any) => {
-    this.searchFunction(this.params);
-
-    if (res == true) {
-    }
-  });
-}
+      if (res == true) {
+      }
+    });
+  }
 }

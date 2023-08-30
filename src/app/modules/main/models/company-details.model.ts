@@ -6,7 +6,7 @@ export interface CompanyDetails {
   shift: String;
   reviewerManager: String;
   reportingManager: String;
-  probation: number;
+  probation: String;
   createdAt: String;
   updatedAt: String;
   createdBy: String;
