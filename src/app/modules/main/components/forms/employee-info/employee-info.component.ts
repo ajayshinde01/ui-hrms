@@ -61,15 +61,7 @@ export class EmployeeInfoComponent implements OnInit {
     this.fetchTitles();
     this.fetchGender();
     this.fetchStatus();
-    // this.route.queryParams.subscribe((params: any) => {
-    //   this.queryParams = params;
-    //   if (this.queryParams['id'] != undefined) {
-    //     this.actionLabel = 'Update';
-    //     this.getById(this.queryParams['id']);
-    //   } else {
-    //     this.actionLabel = 'Save';
-    //   }
-    // });
+
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
@@ -110,8 +102,6 @@ export class EmployeeInfoComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      console.log('controlName' + controlName);
-      console.log('controlName' + controlName);
       return CustomValidators.getErrorMessage(errorKey, controlName);
     }
 
@@ -330,7 +320,7 @@ export class EmployeeInfoComponent implements OnInit {
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Save' },
             });
-
+            // console.log("errormessage"+this.errorMessage);
             //this.errorMessage=response.message;
           },
           (error: any) => {

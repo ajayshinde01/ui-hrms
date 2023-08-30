@@ -1,6 +1,7 @@
 <form [formGroup]="employeeForm">
   <div class="scroll-container">
     <!-- !! Employee Info !!-->
+
     <div class="row mb-2 mt-4">
       <div class="col-lg-4">
         <div class="profile-title">
@@ -40,6 +41,7 @@
               </div>
 
               <!-- Input file -->
+
               <input
                 #fileInput
                 type="file"
@@ -49,30 +51,13 @@
                 style="display: none"
               />
             </div>
-            <!--    <img [src]="url" alt="Profile Image" id="avatar-photo" class="avatar-photo" />
-                <div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"
-  (mouseleave)="showAddPhotoOverlay=false">
-                <div class="hover-text">
-                  <button id="add-avatar-photo-button" class="center-positon-absolute" mat-icon-button >
-                    <mat-icon>add_a_photo</mat-icon>
-                  </button>
-                </div>
-                <mat-icon
-                  id="remove-avatar-photo-button"
-                  matTooltip="remove this photo"
-                  >close</mat-icon
-                >
-              </div>
-              <input
-                id="fileInput"
-                type="file"
-                (change)="uploadImage($event)"  style="display:none;"
-              />-->
           </div>
         </div>
       </div>
+
       <div class="col-lg-4">
         <mat-label>Employee code</mat-label>
+
         <mat-form-field appearance="outline">
           <input
             matInput
@@ -80,31 +65,30 @@
             placeholder="AVI-001"
             oninput="this.value = this.value.toUpperCase()"
           />
+
           <mat-error *ngIf="isControlInvalid('employeeCode')">
             <span class="validate-text">{{
               getErrorMessage("employeeCode")
             }}</span>
           </mat-error>
-          <mat-hint>Employee Code format should be AVI-001</mat-hint>
-          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         </mat-form-field>
 
         <mat-label>Middle Name</mat-label>
+
         <mat-form-field appearance="outline">
-          <input
-            matInput
-            formControlName="middleName"
-            placeholder="Placeholder"
-          />
+          <input matInput formControlName="middleName" />
+
           <mat-error *ngIf="isControlInvalid('middleName')">
             <span class="validate-text">{{
               getErrorMessage("middleName")
             }}</span>
           </mat-error>
+
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         </mat-form-field>
 
         <mat-label>Date Of Birthday</mat-label>
+
         <mat-form-field appearance="outline" class="">
           <input
             matInput
@@ -116,10 +100,12 @@
             (dateChange)="calculateAge($event)"
             readonly
           />
+
           <mat-datepicker-toggle
             matSuffix
             [for]="picker"
           ></mat-datepicker-toggle>
+
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -128,44 +114,52 @@
         <div class="row">
           <div class="col-lg-3">
             <mat-label>Title</mat-label>
+
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="title" placeholder="Select">
+                <mat-option>Select</mat-option>
+
                 <mat-option *ngFor="let title of titles" [value]="title.code">{{
                   title.value
                 }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
+
           <div class="col-lg-9">
             <mat-label>First Name</mat-label>
+
             <mat-form-field appearance="outline">
-              <input
-                matInput
-                formControlName="firstName"
-                placeholder="First Name"
-              />
+              <input matInput formControlName="firstName" />
+
               <mat-error *ngIf="isControlInvalid('firstName')">
                 <span class="validate-text">{{
                   getErrorMessage("firstName")
                 }}</span>
               </mat-error>
+
               <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> oninput=this.value = this.value.Capitalize-->
             </mat-form-field>
           </div>
         </div>
 
         <mat-label>Last Name</mat-label>
+
         <mat-form-field appearance="outline">
-          <input matInput formControlName="lastName" placeholder="Last Name" />
+          <input matInput formControlName="lastName" />
+
           <mat-error *ngIf="isControlInvalid('lastName')">
             <span class="validate-text">{{ getErrorMessage("lastName") }}</span>
           </mat-error>
+
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         </mat-form-field>
 
         <mat-label>Age</mat-label>
+
         <mat-form-field appearance="outline">
-          <input matInput formControlName="age" placeholder="Age" readonly />
+          <input matInput formControlName="age" readonly />
+
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         </mat-form-field>
       </div>
@@ -174,13 +168,10 @@
     <div class="row mm">
       <div class="col-lg-4">
         <mat-label>Email</mat-label>
+
         <mat-form-field appearance="outline" color="primary">
-          <input
-            type="email"
-            matInput
-            formControlName="email"
-            placeholder="Email"
-          />
+          <input type="email" matInput formControlName="email" />
+
           <mat-error *ngIf="isControlInvalid('email')">
             <span class="validate-text">{{ getErrorMessage("email") }}</span>
           </mat-error>
@@ -189,12 +180,10 @@
 
       <div class="col-lg-4">
         <mat-label>Mobile Number</mat-label>
+
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="mobile"
-            placeholder="Mobile Number"
-          />
+          <input matInput formControlName="mobile" />
+
           <mat-error *ngIf="isControlInvalid('mobile')">
             <span class="validate-text">{{ getErrorMessage("mobile") }}</span>
           </mat-error>
@@ -203,8 +192,10 @@
 
       <div class="col-lg-4">
         <mat-label>Phone</mat-label>
+
         <mat-form-field appearance="outline" color="primary">
-          <input matInput formControlName="phone" placeholder="Phone" />
+          <input matInput formControlName="phone" />
+
           <mat-error *ngIf="isControlInvalid('phone')">
             <span class="validate-text">{{ getErrorMessage("phone") }}</span>
           </mat-error>
@@ -215,12 +206,16 @@
     <div class="row mm">
       <div class="col-lg-4">
         <mat-label>Gender</mat-label>
+
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="gender" placeholder="Select">
+            <mat-option>Select</mat-option>
+
             <mat-option *ngFor="let gender of genders" [value]="gender.code">{{
               gender.value
             }}</mat-option>
           </mat-select>
+
           <mat-error *ngIf="isControlInvalid('gender')">
             {{ getErrorMessage("gender") }}
           </mat-error>
@@ -229,6 +224,7 @@
 
       <div class="col-lg-4">
         <mat-label>Date Of Joining</mat-label>
+
         <mat-form-field appearance="outline" class="">
           <input
             matInput
@@ -238,11 +234,14 @@
             placeholder="Choose a date"
             readonly
           />
+
           <mat-datepicker-toggle
             matSuffix
             [for]="picker1"
           ></mat-datepicker-toggle>
+
           <mat-datepicker #picker1></mat-datepicker>
+
           <mat-error *ngIf="isControlInvalid('dateOfJoining')">
             {{ getErrorMessage("dateOfJoining") }}
           </mat-error>
@@ -251,8 +250,11 @@
 
       <div class="col-lg-4" formGroupName="division">
         <mat-label>Division</mat-label>
+
         <mat-form-field appearance="outline" color="primary">
-          <mat-select formControlName="id">
+          <mat-select formControlName="id" placeholder="Select">
+            <mat-option>Select</mat-option>
+
             <mat-option
               *ngFor="let division of divisions"
               [value]="division.id"
@@ -260,6 +262,7 @@
               {{ division.divisionName }}
             </mat-option>
           </mat-select>
+
           <mat-error *ngIf="isControlInvalid('id')">
             {{ getErrorMessage("id") }}
           </mat-error>
@@ -270,30 +273,37 @@
     <div class="row mm">
       <div class="col-lg-4">
         <mat-label>Status</mat-label>
+
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="status" placeholder="Select">
+            <mat-option>Select</mat-option>
+
             <mat-option *ngFor="let status of status" [value]="status.code">{{
               status.value
             }}</mat-option>
           </mat-select>
+
           <mat-error *ngIf="isControlInvalid('status')">
             {{ getErrorMessage("status") }}
           </mat-error>
         </mat-form-field>
       </div>
     </div>
+
     <mat-divider></mat-divider>
 
     <div class="row mm">
       <div class="col-lg-4">
         <mat-label>User Id</mat-label>
+
         <mat-form-field appearance="outline">
-          <input matInput formControlName="userId" placeholder="User Id" />
+          <input matInput formControlName="userId" />
         </mat-form-field>
       </div>
     </div>
 
     <mat-divider></mat-divider>
+
     <div class="form-footer">
       <button
         _ngcontent-ng-c812429062=""

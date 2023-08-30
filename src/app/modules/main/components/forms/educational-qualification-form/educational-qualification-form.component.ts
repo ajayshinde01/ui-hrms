@@ -28,24 +28,26 @@ export class EducationalQualificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.collectQueryParams();
+    debugger;
     this.initForm();
+    this.collectQueryParams();
   }
 
   collectQueryParams() {
-    this.route.queryParams.subscribe((params) => {
-      this.queryParams = params;
-      if (this.data['educationalQualification'] != undefined) {
-        this.actionLabel = 'Update';
-        this.educationalQualificationId = this.data['educationalQualification'];
-        this.employeeId = this.queryParams['id'];
-        this.getById(this.employeeId, this.educationalQualificationId);
-        this.isDisabled = true;
-      } else {
-        this.actionLabel = 'Save';
-        this.employeeId = this.queryParams['id'];
-      }
-    });
+    debugger;
+    // this.route.queryParams.subscribe((params) => {
+    //   this.queryParams = params;
+    // });
+    if (this.data['educationalQualificationId'] != undefined) {
+      this.actionLabel = 'Update';
+      this.educationalQualificationId = this.data['educationalQualificationId'];
+      this.employeeId = this.queryParams['id'];
+      this.getById(this.employeeId, this.educationalQualificationId);
+      this.isDisabled = true;
+    } else {
+      this.actionLabel = 'Save';
+      this.employeeId = this.data['id'];
+    }
   }
 
   goBack() {
@@ -123,12 +125,11 @@ export class EducationalQualificationFormComponent implements OnInit {
   }
 
   getById(id: number, educationalqualificationId: number) {
-    this.educationalQualificationService;
-    // .searchScopeById(id, educationalqualificationId)
-    // .subscribe((response: EducationalQualification) => {
-    //   console.log('GET-SEARCH BY ID Request successful', response);
-    //   this.educationalDetailsForm.patchValue(response);
-    // });
+    this.educationalQualificationService
+      .getByEmployeeId(id, educationalqualificationId)
+      .subscribe((response) => {
+        this.educationalDetailsForm.patchValue(response);
+      });
   }
 
   Close(isUpdate: boolean) {
