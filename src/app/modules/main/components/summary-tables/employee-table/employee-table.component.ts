@@ -22,7 +22,7 @@ export class EmployeeTableComponent {
     totalElements: 0,
   };
 
-  masterName: 'Employee';
+  masterName: string = 'Employee';
 
   params: HttpParams = new HttpParams();
   constructor(
