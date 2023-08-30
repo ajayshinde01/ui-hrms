@@ -39,7 +39,7 @@ export class DepartmentTableComponent {
 
     totalElements: 0,
   };
-
+  buttonVisible:Array<boolean> =[true ,true, true]
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Department';

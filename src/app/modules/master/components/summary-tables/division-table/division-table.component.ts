@@ -24,7 +24,7 @@ export class DivisionTableComponent {
   divisionHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
-
+  buttonVisible:Array<boolean> =[true ,true, true]
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Division';

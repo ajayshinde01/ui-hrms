@@ -26,6 +26,7 @@ export class DesignationComponent {
   designationHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+  buttonVisible:Array<boolean> =[true ,true, true]
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Designation';

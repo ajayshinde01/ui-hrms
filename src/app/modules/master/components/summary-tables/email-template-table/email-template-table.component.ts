@@ -30,6 +30,7 @@ export class EmailTemplateTableComponent {
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Email Template';
+  buttonVisible:Array<boolean> =[true ,true, true]
 
   constructor(
     public emailtemplateService: EmailtemplateService,

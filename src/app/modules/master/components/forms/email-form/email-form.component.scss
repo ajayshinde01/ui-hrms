@@ -2,7 +2,7 @@
 .validate-text {
     font-size: 9px;
     text-align: left;
-   // color: red;
+   color: red;
     position: relative; 
     left: -15px;
   }
@@ -26,7 +26,7 @@
     width: 25px;
     height: 20px;
     font-size: 8px;
-    margin-top: 8%;
+    margin-top: 6%;
     border-radius: 7px;
     border: none;
     margin-right: -30px;
@@ -48,24 +48,26 @@
     justify-content: flex-end !important;
     width: 99%;
   }
-  .action-btn {
-    margin: 3px;
-    height: 30px;
 
-  }
+  // .action-btn {
+  //   margin: 3px;
+  //   height: 30px;
+
+  // }
+
   .desc-label {
     margin-top: -20px !important;
   }
   
-  .field-one {
-    margin-top: 3px;
-  }
-  .profile-save-btn {
-    cursor: pointer;
-    background-color: blue;
-    color: white;
-    margin-right: 3px;
-  }
+  // .field-one {
+  //   margin-top: 3px;
+  // }
+//   .profile-save-btn {
+//     cursor: pointer;
+//     background-color: blue;
+//     color: white;
+//     margin-right: 3px;
+//   }
   
   .save-btn {
     width: 60px;
@@ -86,29 +88,48 @@
     color: white;
   }
   
-  :host ::ng-deep .mat-mdc-text-field-wrapper {
+  // :host ::ng-deep .mat-mdc-text-field-wrapper {
 
-    width: 256px !important;
-    height: 35px !important;
-    font-size: 14px;
-    border-radius: 8px;
+  //   width: 256px !important;
+  //   height: 35px !important;
+  //   font-size: 14px;
+  //   border-radius: 8px;
+  // }
+
+
+  // :host ::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  //   .mat-mdc-form-field-infix {
+  //   padding-top: 6px !important;
+  // }
+  :host ::ng-deep .mat-mdc-text-field-wrapper {
+    width: 265% !important;
+    
   }
-  :host ::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
-    .mat-mdc-form-field-infix {
-    padding-top: 6px !important;
+  textarea{
+    resize: none;
   }
+  // .mat-mdc-form-field-flex {
+  //   width: 501px !important;
+  //   height: 56px !important;
+  // }
+
   :host ::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
     width: 40px;
     height: 40px;
     top: -13px;
   }
 
+  :host ::ng-deep .ck.ck-editor {
+    position: relative;
+    width: 561px;
+}
 
 :host ::ng-deep .ck-editor__editable_inline {
   min-width: 40px;
-  min-height: 100px;
+  min-height: 250px;
 }
 
 .container{
   overflow-x: hidden;
+  overflow-y: hidden;
 }

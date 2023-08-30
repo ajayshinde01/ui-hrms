@@ -1,9 +1,10 @@
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Email } from '../models/email';
 import { ColumnsMetadata } from '../models/columnMetaData';
+import { ApiResponse } from '../models/response';
 @Injectable()
 export class EmailService {
 
@@ -15,7 +16,7 @@ export class EmailService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://192.168.1.16:7010/data-table-metadata/email-info'
+      'http://192.168.1.62:7010/data-table-metadata/email-info'
     );
   }
 
@@ -23,7 +24,7 @@ export class EmailService {
     params: HttpParams
   ): Observable<{ content: Array<Email>; totalElements: number }> {
     return this.http.get<{ content: Array<Email>; totalElements: number }>(
-      'http://192.168.1.16:7010/email/get',
+      'http://192.168.1.62:7010/email/get',
       {
         params: params,
       }
@@ -56,12 +57,33 @@ export class EmailService {
   //   return this.http.post('http://192.168.1.16:7010/email/send', formData);
   // }
 
-    createEmail(mailRequest:FormData,file:File): Observable<any> {
+  //   createEmail(mailRequest:FormData,file:File): Observable<any> {
       
   
-    return this.http.post('http://192.168.1.16:7010/email/send', mailRequest);
+  //   return this.http.post('http://192.168.1.16:7010/email/send', mailRequest);
+  // }
+
+//Kiran
+      createEmail(formData:FormData): Observable<any> {
+ 
+        const httpOptions = {
+          headers: new HttpHeaders({
+           "Content-Type": "multipart/form-data,application/json",
+           "Access-Control-Allow-Origin": "*" 
+          })
+        };
+  
+    return this.http.post('http://192.168.1.16:7010/email/send', formData);
   }
   
+  
+  deleteEmail(id: number): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(
+      'http://192.168.1.16:7010/template/' +
+        id +
+        '?updatedBy=Admin'
+    );
+  }
   notify(message: string) {
     const toastrConfig: Partial<IndividualConfig> = {
       timeOut: 2500,

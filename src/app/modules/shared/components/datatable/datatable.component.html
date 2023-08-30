@@ -32,16 +32,16 @@
                   <option value="15">15</option>
                   <option value="20">20</option>
                 </select>
-                <button class="action-btn" (click)="buttonEvent('add')">
+                <button *ngIf="buttonVisible[0]" class="action-btn" (click)="buttonEvent('add')">
                   <i class="fa fa-plus icon-class" aria-hidden="true"></i>
                 </button>
-                <button class="action-btn" (click)="buttonEvent('edit')">
+                <button *ngIf="buttonVisible[1]" class="action-btn" (click)="buttonEvent('edit')">
                   <i
                     class="fa-regular fa-pen-to-square icon-class"
                     aria-hidden="true"
                   ></i>
                 </button>
-                <button class="action-btn" (click)="buttonEvent('delete')">
+                <button *ngIf="buttonVisible[2]" class="action-btn" (click)="buttonEvent('delete')">
                   <i class="fa fa-trash icon-class" aria-hidden="true"></i>
                 </button>
               </div>

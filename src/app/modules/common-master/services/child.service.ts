@@ -22,20 +22,6 @@ export class ChildService {
     );
   }
 
-<<<<<<< HEAD
-  // createParent(data: Parent): Observable<Parent> {
-  //   return this.http.post<Parent>(
-  //     'http://192.168.1.16:7000/employee/common-master/create',
-  //     data
-  //   );
-  // }
-  // Needs to modify
-  // searchParentById(id: string): Observable<Parent> {
-  //   return this.http.get<Parent>(
-  //     'http://192.168.1.16:7000/employee/common-master/get/' + id
-  //   );
-  // }
-=======
   createChild(data: Parent): Observable<Parent> {
     return this.http.post<Parent>(
       'http://192.168.1.16:7000/employee/common-master/create',
@@ -47,7 +33,6 @@ export class ChildService {
       'http://192.168.1.16:7000/employee/common-master/get/' + id
     );
   }
->>>>>>> 9433dc356f4f6114883eae74d51d9dd5c308e264
 
   deleteChild(childId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
@@ -71,8 +56,6 @@ export class ChildService {
     );
   }
 
-<<<<<<< HEAD
-=======
   updateChild(data: Parent): Observable<Parent> {
     console.log(data);
     return this.http.put<Parent>(
@@ -81,7 +64,6 @@ export class ChildService {
     );
   }
 
->>>>>>> 9433dc356f4f6114883eae74d51d9dd5c308e264
   notify(message: string) {
     const toastrConfig: Partial<IndividualConfig> = {
       timeOut: 2500,

@@ -33,11 +33,7 @@ export class EmployeeInfoComponent implements OnInit {
   isAgeDisabled: boolean = false;
   age: number;
   selectedDate: Date;
-<<<<<<< HEAD
-  url: String = '../../../assets/profile-img.jpg';
-=======
   url: String = 'assets/profile-img.jpg';
->>>>>>> 9433dc356f4f6114883eae74d51d9dd5c308e264
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef;
   photo: string;
   photoUpdated: any;
@@ -48,10 +44,7 @@ export class EmployeeInfoComponent implements OnInit {
   selectedIndex: number = 0;
   clickedTabIndex: number;
   minDob: Date;
-<<<<<<< HEAD
-=======
   errorMessage: any;
->>>>>>> 9433dc356f4f6114883eae74d51d9dd5c308e264
 
   constructor(
     public employeeService: EmployeeService,
@@ -106,7 +99,7 @@ export class EmployeeInfoComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey);
+      return CustomValidators.getErrorMessage(errorKey,controlName);
     }
 
     return '';
