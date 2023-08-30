@@ -62,19 +62,10 @@ export class CompanyDetailsComponent implements OnInit {
     this.fetchDefaultShifts();
     this.fetchAllEmployees();
     this.fetchDesignations();
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe((params: any) => {
       this.queryParams = params;
-    });
-
-    if (this.queryParams.actionLabel == 'Update') {
       this.getById(this.queryParams['id']);
-      this.actionLabel = 'Save';
-    } else {
-      this.actionLabel = 'Save';
-      // this.companyDetailsForm.controls['employeeId'].setValue(
-      //   this.queryParams.id
-      // );
-    }
+    });
   }
   fetchDesignations() {
     this.designationService.getDesignations().subscribe((response) => {
@@ -192,10 +183,7 @@ export class CompanyDetailsComponent implements OnInit {
               this.companyDetailsService.notify('Data Saved Successfully...');
               this.actionLabel = 'Update';
               this.response = response.id;
-              this.queryParams = {
-                id: this.queryParams.id,
-                actionLabel: 'Update',
-              };
+
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
               });
@@ -231,20 +219,18 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
   getById(id: string) {
-    debugger;
-    this.companyDetailsService
-      .searchCompanyDetailsById(id)
-      .subscribe((response: CompanyDetails) => {
+    // debugger;
+    this.companyDetailsService.searchCompanyDetailsById(id).subscribe(
+      (response: CompanyDetails) => {
         this.companyDetailsForm.patchValue(response);
         console.log(this.companyDetailsForm.value);
         this.response = response.id;
-        debugger;
-        if (this.response != undefined) {
-          this.actionLabel = 'Update';
-        } else {
-          this.actionLabel = 'Save';
-        }
-      });
+        this.actionLabel = 'Update';
+      },
+      (error) => {
+        this.actionLabel = 'Save';
+      }
+    );
   }
 
   isControlInvalid(controlName: string): boolean {

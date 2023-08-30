@@ -1,13 +1,13 @@
 export interface CommonMaster {
   id: number;
-  masterName: String;
-  code: String;
+  masterName: string;
+  code: string;
   priority: number;
-  value: String;
-  foreignKey: String;
-  createdAt: String;
-  updatedAt: String;
-  createdBy: String;
-  updatedBy: String;
-  master: String;
+  value: string;
+  foreignKey: string;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string;
+  updatedBy: string;
+  isMaster: string;
 }

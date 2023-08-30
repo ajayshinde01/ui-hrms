@@ -10,7 +10,7 @@ export class CustomValidators {
   static noLeadingSpace(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.startsWith(' ')) {
+      if (typeof value === 'string' && value && value.startsWith(' ')) {
         return { leadingSpace: true };
       }
       return null;
@@ -20,7 +20,7 @@ export class CustomValidators {
   static noTrailingSpace(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.endsWith(' ')) {
+      if (typeof value === 'string' && value && value.endsWith(' ')) {
         return { trailingSpace: true };
       }
       return null;
@@ -30,7 +30,7 @@ export class CustomValidators {
   static maxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.length > maxLength) {
+      if (typeof value === 'string' && value && value.length > maxLength) {
         return { maxLength: `Maximum ${maxLength} characters are allowed.` };
       }
       return null;
@@ -40,7 +40,7 @@ export class CustomValidators {
   static whitespaceValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.trim() === '') {
+      if (typeof value === 'string' && value && value.trim() === '') {
         return { whitespace: true };
       }
       return null;
@@ -102,6 +102,20 @@ export class CustomValidators {
       if (value && resignationDate <= new Date()) {
         return { validResignationDate: true };
       }
+      return null;
+    };
+  }
+
+  static noticePeriodMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+
+      if (value && value.length > maxLength) {
+        return {
+          noticePeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
       return null;
     };
   }
@@ -173,14 +187,25 @@ export class CustomValidators {
       countryCode: 'Country Code',
       visaNumber: 'Visa Number',
       validDate: 'Valid Date',
+      addressType: 'Address Type',
+      address1: 'Address 1',
+      address2: 'Address 2',
+      landmark: 'Landmark',
+      tenureYear: 'Years',
+      tenureMonth: 'Months',
+      ownershipStatus: 'ownershipStatus',
+      country: 'Country',
+      state: 'State',
+      city: 'City',
+      postcode: 'Post Code',
     };
 
     const errorMessages: { [key: string]: string } = {
       required: `Please enter ${fieldNames[fieldName]}`,
-      pattern: 'Invalid pattern',
+      pattern: `Please enter valid ${fieldNames[fieldName]}`,
       leadingSpace: `Leading spaces not allowed in ${fieldNames[fieldName]}`,
       trailingSpace: `Trailing spaces not allowed in ${fieldNames[fieldName]}`,
-      maxLength: `${fieldNames[fieldName]} should not exceed specified character limit.`,
+      maxLength: `${fieldNames[fieldName]} should not exceed limit.`,
       whitespace: `No whitespaces allowed in ${fieldNames[fieldName]}`,
       validDateFormat: `${fieldNames[fieldName]} should be in DD/MM/YYYY format`,
       futureDate: `Please enter a future date for ${fieldNames[fieldName]}`,
@@ -190,6 +215,7 @@ export class CustomValidators {
       validRelievingDate: `Relieving Date should be a future date`,
       validEmailFormat: `Please enter valid email format`,
       validVisaDate: `should be grater than today`,
+      noticePeriodMaxLength: `Maximum 2 number are allowed`,
     };
     return errorMessages[errorKey] || 'Validation error';
   }

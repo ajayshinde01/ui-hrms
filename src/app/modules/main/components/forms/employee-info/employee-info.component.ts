@@ -3,15 +3,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonMaster } from 'src/app/modules/main/models/common-master.model';
 import { Division } from 'src/app/modules/main/models/division.model';
-
 import { CustomValidators } from 'src/app/modules/main/services/custom-validators.service';
 import { DivisionService } from 'src/app/modules/main/services/division.service';
 import { EmployeeService } from 'src/app/modules/main/services/employee.service';
 import { FileUploadService } from 'src/app/modules/main/services/file-upload.service';
 import { MatTab } from '@angular/material/tabs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Employees } from '../../../models/employee.model';
 
 @Component({
@@ -62,11 +61,15 @@ export class EmployeeInfoComponent implements OnInit {
     this.fetchTitles();
     this.fetchGender();
     this.fetchStatus();
+
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
+
       if (this.queryParams['id'] != undefined) {
+        console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
         this.getById(this.queryParams['id']);
+        this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
       }

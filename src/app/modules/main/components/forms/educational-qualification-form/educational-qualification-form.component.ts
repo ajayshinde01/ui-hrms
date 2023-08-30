@@ -38,10 +38,13 @@ export class EducationalQualificationFormComponent implements OnInit {
     // this.route.queryParams.subscribe((params) => {
     //   this.queryParams = params;
     // });
-    if (this.data['educationalQualificationId'] != undefined) {
+    if (
+      this.data['educationalQualificationId'] != undefined &&
+      this.data['actionLabel']
+    ) {
       this.actionLabel = 'Update';
       this.educationalQualificationId = this.data['educationalQualificationId'];
-      this.employeeId = this.queryParams['id'];
+      this.employeeId = this.data['id'];
       this.getById(this.employeeId, this.educationalQualificationId);
       this.isDisabled = true;
     } else {
@@ -125,6 +128,7 @@ export class EducationalQualificationFormComponent implements OnInit {
   }
 
   getById(id: number, educationalqualificationId: number) {
+    debugger;
     this.educationalQualificationService
       .getByEmployeeId(id, educationalqualificationId)
       .subscribe((response) => {

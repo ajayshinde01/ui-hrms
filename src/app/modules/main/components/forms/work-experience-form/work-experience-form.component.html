@@ -1,31 +1,31 @@
-<form [formGroup]="educationalDetailsForm">
-  <div class="container" style="width: 490px; height: 390px">
+<form [formGroup]="workExperienceForm">
+  <div class="container" style="width: 490px; height: 430px">
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-between">
-            <h2 class="title" mat-dialog-title>Educational Qualification</h2>
-            <button class="close-btn" (click)="Close(false)">
+            <h2 class="title" mat-dialog-title>Work Experince</h2>
+
+            <button class="close-btn" (click)="closeDialog(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
           </div>
+
           <div class="line"></div>
         </div>
       </div>
     </div>
+
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Educational Qualification</mat-label>
+          <mat-label>Company</mat-label>
         </div>
+
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="educationalQualification"
-              />
+              <input matInput placeholder="" formControlName="company" />
             </div>
           </mat-form-field>
         </div>
@@ -35,34 +35,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Qualification Level</mat-label>
+          <mat-label>Designation</mat-label>
         </div>
-        <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
-            <div class="form-controls">
-              <mat-select
-                formControlName="qualificationLevel"
-                placeholder="Select"
-              >
-                <mat-option value="one">Secondary</mat-option>
-                <mat-option value="two">Higher Secondary</mat-option>
-                <mat-option value="three">Graduate</mat-option>
-              </mat-select>
-            </div>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <div class="row row-section">
-        <div class="col-md-4 field-one">
-          <mat-label>School/University</mat-label>
-        </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="instituteName" />
+              <input matInput placeholder="" formControlName="designation" />
             </div>
           </mat-form-field>
         </div>
@@ -72,21 +51,66 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Year Of Passing</mat-label>
+          <mat-label>From Date</mat-label>
         </div>
+
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
             <input
               matInput
-              formControlName="passingYear"
-              [matDatepicker]="picker"
+              formControlName="fromDate"
+              [matDatepicker]="fromDatePicker"
               placeholder="Choose a date"
             />
+
             <mat-datepicker-toggle
               matSuffix
-              [for]="picker"
+              [for]="fromDatePicker"
             ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>To Date</mat-label>
+        </div>
+
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" class="">
+            <input
+              matInput
+              formControlName="toDate"
+              [matDatepicker]="toDatePicker"
+              placeholder="Choose a date"
+            />
+
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="toDatePicker"
+            ></mat-datepicker-toggle>
+
+            <mat-datepicker #toDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row row-section">
+        <div class="col-md-4 mt-2">
+          <mat-label>Address</mat-label>
+        </div>
+
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" color="primary">
+            <div class="form-controls">
+              <input matInput placeholder="" formControlName="company" />
+            </div>
           </mat-form-field>
         </div>
       </div>
@@ -102,10 +126,11 @@
                   _ngcontent-ng-c812429062=""
                   class="save-btn"
                   (click)="onSubmit()"
-                  [disabled]="!educationalDetailsForm.valid"
+                  [disabled]="!workExperienceForm.valid"
                 >
                   {{ actionLabel }}
                 </button>
+
                 <button
                   _ngcontent-ng-c812429062=""
                   class="profile-save-btn dark"

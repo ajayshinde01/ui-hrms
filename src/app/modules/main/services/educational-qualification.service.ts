@@ -69,7 +69,7 @@ export class EducationalQualificationService {
     educationalId: number
   ): Observable<EducationalQualification> {
     return this.http.get<EducationalQualification>(
-      'http://localhost:8090/employee/education/${employeeId}/${educationalId}'
+      `http://192.168.1.16:7000/employee/education/${employeeId}/${educationalId}`
     );
   }
 
