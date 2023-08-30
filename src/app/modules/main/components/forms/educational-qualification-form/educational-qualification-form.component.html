@@ -40,12 +40,17 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <mat-option>Select</mat-option>
-              <mat-option
-                *ngFor="let qualificationLevel of qualificationLevels"
-                [value]="qualificationLevel.code"
-                >{{ qualificationLevel.value }}</mat-option
+              <mat-select
+                formControlName="qualificationLevel"
+                placeholder="Select"
               >
+                <mat-option>Select</mat-option>
+                <mat-option
+                  *ngFor="let qualificationLevel of qualificationLevels"
+                  [value]="qualificationLevel.code"
+                  >{{ qualificationLevel.value }}</mat-option
+                >
+              </mat-select>
             </div>
           </mat-form-field>
         </div>
