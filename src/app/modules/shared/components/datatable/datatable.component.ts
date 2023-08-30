@@ -44,7 +44,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
-  @ViewChild('confrimationmodel1') confrimationmodel1!: ElementRef;
 
   paginationList: Array<number> = [];
 
@@ -114,53 +113,34 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   delete() {
     console.log('delete?');
-
     let data = { event: 'delete', data: {} };
-
     data.data = this.selectedValue;
-    console.log(data.data);
-
     return this.deleteFunction.emit(data);
   }
 
   buttonEvent(event: string) {
     let data = { event: event, data: {} };
-
     switch (event) {
       case 'add':
         return this.buttonFunction.emit(data);
-
         break;
 
       case 'edit':
         data.data = this.selectedValue;
-
         if (data.data == undefined)
           this.dataTableService.notify('Please select record to edit');
-
         return this.buttonFunction.emit(data);
-
         break;
 
       case 'delete':
-
-      console.log("this.selectedValue",this.selectedValue);
         data.data = this.selectedValue;
-
-       if (data.data == undefined)
+        if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
-       
         if (data.data != undefined) {
           this.confrimationmodel.nativeElement.click();
-       }
+        }
 
         break;
-    }
-  }
-
-  clickMethod() {
-    if(confirm("Are you sure to delete ")) {
-      console.log("Implement delete functionality here");
     }
   }
 

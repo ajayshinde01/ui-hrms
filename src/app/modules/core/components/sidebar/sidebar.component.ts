@@ -148,15 +148,6 @@ export class SidebarComponent implements OnInit {
           },
 
           {
-            name: 'Organization',
-
-            icon: 'fa-solid fa-ellipsis',
-
-            routerLink: ['/master/organization'],
-
-            arrowMaster: false,
-          },
-          {
             name: 'Division',
             icon: 'fa-solid fa-ellipsis',
             routerLink: ['/master/division-table'],
@@ -203,6 +194,15 @@ export class SidebarComponent implements OnInit {
         routerLink: ['/common-master/parent'],
 
         showSubmenu: true,
+      },
+      {
+        name: 'Organization',
+
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+
+        routerLink: ['/master/organization'],
+
+        arrowMaster: false,
       },
       {
         name: 'User Management',

@@ -1,70 +1,6 @@
-// //////////////////////////////////////////////
-// .noText {
-
-//   opacity: 0.5;
-
-// }
-
-// .form-control.search-box {
-
-//   width: 200px; /* Change this value to the desired width */
-
-//   height: 28px; /* Change this value to the desired height */
-
-//   margin-right: 10px;
-
-// }
-.cardht {
-  height: var(--cardHeight);
-
-  overflow-y: auto;
-}
-
 .noText {
   opacity: 0.5;
 }
-
-// .form-control.search-box {
-//   width: 200px; /* Change this value to the desired width */
-
-//   height: 28px; /* Change this value to the desired height */
-
-//   margin-right: 10px;
-// }
-
-// .table-responsive1 {
-
-//   overflow-y: scroll;
-
-//   height: 420px;
-
-// }
-
-// .table-responsive1 {
-//   overflow: auto;
-
-//   height: 430px;
-// }
-
-// .table-responsive1 {
-
-//   overflow: auto;
-
-//   height: 100%; /* Use 100% to fill the container */
-
-//   display: flex;
-
-//   flex-direction: column; /* Stack the table and other elements vertically */
-
-// }
-
-// /* Adjust the height of the table content */
-
-// .data-table {
-
-//   flex: 1; /* Allow the table to take up remaining vertical space */
-
-// }
 
 .action-btn {
   border: none;
@@ -73,15 +9,13 @@
 
   width: 40px;
 
-  
-
   padding: 2px;
 
   background-color: white;
 }
 
 .action-btn:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .pagination-number {
@@ -92,14 +26,11 @@
   cursor: pointer;
 }
 
-
-
 thead th {
-  border-bottom: 2px solid black; 
+  border-bottom: 2px solid black;
 }
 
 th {
- 
   padding: 8px;
 
   text-align: left;
@@ -169,17 +100,6 @@ th {
   font-weight: 900;
 }
 
-
-// .content {
-
-//     background-color: #f9f9f9;
-
-//     border-radius: 30px;
-
-//     padding: 20px;
-
-// }
-
 .are-you text-center {
   font-size: 32px;
 
@@ -187,24 +107,6 @@ th {
 
   // color: darkblue;
 }
-
-// .form-control.search {
-//   width: 180px;
-
-//   height: 35px;
-
-//   margin-left: 10px;
-
-//   // background-color: #f9f9f9;
-
-//   color: #cbbdc2;
-
-//   border: 1px solid #f9f9f9;
-
-//   box-shadow: none !important;
-
-//   margin-right: 20px;
-// }
 
 label {
   font-size: 14px;
@@ -590,12 +492,6 @@ select {
   cursor: pointer;
 }
 
-.cardht {
-  height: var(--cardHeight);
-
-  overflow-y: auto;
-}
-
 .page-link1 {
   position: relative;
 
@@ -621,7 +517,7 @@ select {
 //   color: var(--bs-pagination-active-color);
 
 //   background-color: rgb(103, 97, 126);
-  
+
 //   border-color: black !important;
 //   cursor: pointer;
 // }
@@ -633,8 +529,6 @@ select {
   color: rgb(0, 0, 0) !important;
 
   padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
-
- 
 }
 .pagination-box {
   text-align: center;
@@ -689,4 +583,14 @@ select {
   height: 31px;
   margin-right: 10px;
   margin-top: 5px;
+}
+.cardht {
+  //height: var(--cardHeight);
+  border: none;
+  // height: auto;
+  overflow-y: auto;
+  box-shadow: none;
+}
+.scroll {
+  overflow-y: auto !important;
 }
