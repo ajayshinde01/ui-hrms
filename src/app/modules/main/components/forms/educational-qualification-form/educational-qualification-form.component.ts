@@ -32,6 +32,14 @@ export class EducationalQualificationFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.collectQueryParams();
+    this.getEducationalQualifications();
+  }
+  getEducationalQualifications() {
+    this.educationalQualificationService
+      .getQualificationLevels()
+      .subscribe((Response) => {
+        this.qualificationLevels = Response;
+      });
   }
 
   collectQueryParams() {
