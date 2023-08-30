@@ -27,7 +27,7 @@ import { DepartmentComponent } from '../../forms/department-form/department.comp
 })
 export class DepartmentTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<DepartmentComponent>;
 
   departmentHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
@@ -39,7 +39,7 @@ export class DepartmentTableComponent {
 
     totalElements: 0,
   };
-  buttonVisible:Array<boolean> =[true ,true, true]
+
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Department';
@@ -171,7 +171,7 @@ export class DepartmentTableComponent {
 
       disableClose: true,
     });
-
+    console.log('params', this.params);
     this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
 

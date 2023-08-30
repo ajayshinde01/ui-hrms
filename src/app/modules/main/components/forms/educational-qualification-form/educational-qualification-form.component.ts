@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EducationalQualificationService } from '../../../services/educational-qualification.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EducationalQualification } from '../../../models/educational-qualification.model';
+import { CommonMaster } from '../../../models/common-master.model';
 
 @Component({
   selector: 'app-educational-qualification-form',
@@ -18,6 +19,7 @@ export class EducationalQualificationFormComponent implements OnInit {
   isDisabled: boolean = false;
   educationalQualificationId: number;
   employeeId: number;
+  qualificationLevels: CommonMaster[] = [];
   constructor(
     private _mdr: MatDialogRef<EducationalQualificationFormComponent>,
     private formBuilder: FormBuilder,
@@ -28,30 +30,15 @@ export class EducationalQualificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
-    this.collectQueryParams();
     this.initForm();
+    this.collectQueryParams();
   }
 
   collectQueryParams() {
-    this.route.queryParams.subscribe((params) => {
-      debugger;
-      this.queryParams = params;
-      if (this.data['educationalQualification'] != undefined) {
-        this.actionLabel = 'Update';
-        this.educationalQualificationId = this.data['educationalQualification'];
-        this.employeeId = this.queryParams['id'];
-        this.getById(this.employeeId, this.educationalQualificationId);
-        this.isDisabled = true;
-      } else {
-        this.actionLabel = 'Save';
-        this.employeeId = this.queryParams['id'];
-      }
-    });
-  }
-
-  goBack() {
-    this.router.navigate(['/user/user-table']);
+    this.educationalQualificationId = this.data['educationalQualificationId'];
+    this.employeeId = this.data['id'];
+    this.getById(this.employeeId, this.educationalQualificationId);
+    this.isDisabled = true;
   }
 
   initForm() {
@@ -105,7 +92,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             (response: EducationalQualification) => {
               console.log('PUT-SCOPE Request successful', response);
               this.educationalQualificationService.notify(
-                'Educational Qualification successfully..!'
+                'Educational Qualification added successfully..!'
               );
               // this.router.navigate(['/main/educational-qualification']);
               this.Close(true);
@@ -125,12 +112,17 @@ export class EducationalQualificationFormComponent implements OnInit {
   }
 
   getById(id: number, educationalqualificationId: number) {
-    this.educationalQualificationService;
-    // .searchScopeById(id, educationalqualificationId)
-    // .subscribe((response: EducationalQualification) => {
-    //   console.log('GET-SEARCH BY ID Request successful', response);
-    //   this.educationalDetailsForm.patchValue(response);
-    // });
+    this.educationalQualificationService
+      .getByEmployeeId(id, educationalqualificationId)
+      .subscribe(
+        (response) => {
+          this.educationalDetailsForm.patchValue(response);
+          this.actionLabel = 'Update';
+        },
+        (error) => {
+          this.actionLabel = 'Save';
+        }
+      );
   }
 
   Close(isUpdate: boolean) {

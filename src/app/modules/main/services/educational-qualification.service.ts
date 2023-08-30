@@ -19,14 +19,7 @@ export class EducationalQualificationService {
       educationalQualification
     );
   }
-  // searchScopeById(
-  //   employeeId: number,
-  //   educationalQualification: EducationalQualification
-  // ) {
-  //   return this.http.get<EducationalQualification>(
-  //     `http://192.168.1.16:7000/employee/education/1/search?keyword=SSC&page=0&size=1&sort=educationalQualification`
-  //   );
-  // }
+
   updateEducationalQualification(
     educationalQualification: EducationalQualification,
     employeeId: number
@@ -41,13 +34,6 @@ export class EducationalQualificationService {
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
-  // createDivision(division: Division): Observable<Division> {
-  //   return this.http.post<Division>(
-  //     'http://192.168.1.16:7000/employee/division/create',
-  //     division
-  //   );
-  // }
-
   getEducationalQualifications(
     employeeId: number
   ): Observable<Array<EducationalQualification>> {
@@ -60,22 +46,18 @@ export class EducationalQualificationService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://localhost:8090/employee/data-table-metadata/educational-qualification'
+      'http://192.168.1.16:7000/employee/data-table-metadata/educational-qualification'
     );
   }
 
-  // searchDivisionById(divisionId: string): Observable<Division> {
-  //   return this.http.get<Division>(
-  //     'http://192.168.1.16:7000/employee/division/' + divisionId
-  //   );
-  // }
-
-  // updateDivision(divisionId: string): Observable<Division> {
-  //   return this.http.put<Division>(
-  //     'http://192.168.1.16:7000/employee/division/update',
-  //     divisionId
-  //   );
-  // }
+  getByEmployeeId(
+    employeeId: number,
+    educationalId: number
+  ): Observable<EducationalQualification> {
+    return this.http.get<EducationalQualification>(
+      `http://192.168.1.16:7000/employee/education/${employeeId}/${educationalId}`
+    );
+  }
 
   deleteEducationalQualification(
     EducationalQualificationId: number,

@@ -14,6 +14,7 @@ import { ApiResponse } from '../../../models/response';
   styleUrls: ['./scope-table.component.scss'],
 })
 export class ScopeTableComponent {
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<ScopeFormComponent>;
 
   scopeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {

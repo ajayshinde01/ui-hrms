@@ -1,9 +1,13 @@
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { EmailtemplateService } from '../../../services/emailtemplate.service';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
@@ -16,9 +20,12 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-email-form',
   templateUrl: './email-form.component.html',
-  styleUrls: ['./email-form.component.scss']
+  styleUrls: ['./email-form.component.scss'],
 })
 export class EmailFormComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('ckeditorEleRef')
+  ckeditorElementComponent!: CKEditorComponent;
   public Editor: any = ClassicEditor;
   emailForm!: FormGroup;
   email: Email;
@@ -42,7 +49,6 @@ export class EmailFormComponent implements OnInit {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
-
   }
 
   collectQueryParams() {
@@ -52,7 +58,7 @@ export class EmailFormComponent implements OnInit {
       if (this.queryParams['id'] != undefined) {
         console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
-        // this.getById(this.queryParams['id']);
+        //  this.getById(this.queryParams['id']);
         this.isDisabled = true;
       } else {
         this.actionLabel = 'Send';
@@ -60,14 +66,11 @@ export class EmailFormComponent implements OnInit {
     });
   }
   getFileIconClass(fileType: string): string {
-
     const iconMap: { [key: string]: string } = {
       'image/jpeg': 'fas fa-file-image',
       'image/png': 'fas fa-file-image',
       'application/pdf': 'fas fa-file-pdf',
       'text/plain': 'fas fa-file-alt',
-
-
     };
 
     return iconMap[fileType] || 'fas fa-file';
@@ -121,6 +124,15 @@ export class EmailFormComponent implements OnInit {
       }
     }
   }
+
+  // getById(id: number) {
+  //   this.emailTemplateService
+  //     .searchEmailTemplateById(id)
+  //     .subscribe((response: EmailTemplate) => {
+  //       this.emailTemplateForm.patchValue(response);
+  //       this.emailtemplate = response;
+  //     });
+  // }
 
   Close(isUpdate: boolean) {
     this._mdr.close(isUpdate);

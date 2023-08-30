@@ -1,5 +1,6 @@
 import {
   AbstractControl,
+  FormControl,
   ValidationErrors,
   ValidatorFn,
   Validators,
@@ -9,7 +10,7 @@ export class CustomValidators {
   static noLeadingSpace(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.startsWith(' ')) {
+      if (typeof value === 'string' && value && value.startsWith(' ')) {
         return { leadingSpace: true };
       }
       return null;
@@ -19,7 +20,7 @@ export class CustomValidators {
   static noTrailingSpace(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.endsWith(' ')) {
+      if (typeof value === 'string' && value && value.endsWith(' ')) {
         return { trailingSpace: true };
       }
       return null;
@@ -29,7 +30,7 @@ export class CustomValidators {
   static maxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.length > maxLength) {
+      if (typeof value === 'string' && value && value.length > maxLength) {
         return { maxLength: `Maximum ${maxLength} characters are allowed.` };
       }
       return null;
@@ -39,7 +40,7 @@ export class CustomValidators {
   static whitespaceValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (value && value.trim() === '') {
+      if (typeof value === 'string' && value && value.trim() === '') {
         return { whitespace: true };
       }
       return null;
@@ -105,6 +106,20 @@ export class CustomValidators {
     };
   }
 
+  static noticePeriodMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+
+      if (value && value.length > maxLength) {
+        return {
+          noticePeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
   static validRelievingDate(joiningDate: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
@@ -114,6 +129,26 @@ export class CustomValidators {
       }
       return null;
     };
+  }
+
+  static validVisaDate(): ValidatorFn {
+    return (control: AbstractControl):  ValidationErrors | null => {
+      const today = new Date().getTime();
+  
+      if (!(control && control.value)) {
+        // if there's no control or no value, that's ok
+        return null;
+      }
+  
+      // return null if there's no errors
+      if(control.value.getTime() < today){
+         return { validVisaDate: true };
+      }else{
+        console.log("here");
+      }
+      return null;
+    };
+    
   }
 
   static getErrorMessage(errorKey: string, fieldName: string): string {
@@ -130,16 +165,47 @@ export class CustomValidators {
       clientEmail: 'Client Email',
       shift: 'Shift',
       reportingManager: 'Reporting Manager',
-      reviewerManager: 'ReviewerManager',
+      reviewerManager: 'Reviewer Manager',
       id: 'Designation Id',
+
+      //employee infor form
+      employeeCode: 'Employee Code',
+      profileImage: 'Profile Image',
+      firstName: 'First Name',
+      middleName: 'Middle Name',
+      lastName: 'Last Name',
+      dateOfBirth: 'Date Of Birth',
+      gender: 'Gender',
+      dateOfJoining: 'Date Of Joining',
+      age: 'Age',
+      status: 'Status',
+      division: 'Division',
+      userId: 'UserId',
+      email: 'Email',
+
+      //employee Visa Form
+      countryCode: 'Country Code',
+      visaNumber: 'Visa Number',
+      validDate: 'Valid Date',
+      addressType: 'Address Type',
+      address1: 'Address 1',
+      address2: 'Address 2',
+      landmark: 'Landmark',
+      tenureYear: 'Years',
+      tenureMonth: 'Months',
+      ownershipStatus: 'ownershipStatus',
+      country: 'Country',
+      state: 'State',
+      city: 'City',
+      postcode: 'Post Code',
     };
 
     const errorMessages: { [key: string]: string } = {
       required: `Please enter ${fieldNames[fieldName]}`,
-      pattern: 'Invalid pattern',
+      pattern: `Please enter valid ${fieldNames[fieldName]}`,
       leadingSpace: `Leading spaces not allowed in ${fieldNames[fieldName]}`,
       trailingSpace: `Trailing spaces not allowed in ${fieldNames[fieldName]}`,
-      maxLength: `${fieldNames[fieldName]} should not exceed specified character limit.`,
+      maxLength: `${fieldNames[fieldName]} should not exceed limit.`,
       whitespace: `No whitespaces allowed in ${fieldNames[fieldName]}`,
       validDateFormat: `${fieldNames[fieldName]} should be in DD/MM/YYYY format`,
       futureDate: `Please enter a future date for ${fieldNames[fieldName]}`,
@@ -148,6 +214,8 @@ export class CustomValidators {
       validResignationDate: `Resignation Date should be a future date`,
       validRelievingDate: `Relieving Date should be a future date`,
       validEmailFormat: `Please enter valid email format`,
+      validVisaDate: `should be grater than today`,
+      noticePeriodMaxLength: `Maximum 2 number are allowed`,
     };
     return errorMessages[errorKey] || 'Validation error';
   }

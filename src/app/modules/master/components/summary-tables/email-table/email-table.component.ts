@@ -12,11 +12,11 @@ import { EmailService } from '../../../services/email.service';
 @Component({
   selector: 'app-email-table',
   templateUrl: './email-table.component.html',
-  styleUrls: ['./email-table.component.scss']
+  styleUrls: ['./email-table.component.scss'],
 })
 export class EmailTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, false, false];
   matDialogRef: MatDialogRef<EmailFormComponent>;
 
   emailHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
@@ -29,7 +29,7 @@ export class EmailTableComponent {
   //   totalElements: 0,
   // };
   emailMetaData:any
-  buttonVisible:Array<boolean> =[true ,false, false]
+
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Email';
@@ -112,16 +112,16 @@ export class EmailTableComponent {
 
         break;
 
-  //     case 'edit':
-  //       this.OpenModalForEdit(id);
+      //     case 'edit':
+      //       this.OpenModalForEdit(id);
 
-  //       this.router.navigate(['/master/emailtemplatetable'], {
-  //         queryParams: queryParam,
-  //       });
+      //       this.router.navigate(['/master/emailtemplatetable'], {
+      //         queryParams: queryParam,
+      //       });
 
-  //       break;
-     }
-   }
+      //       break;
+    }
+  }
 
   searchFunction(params: HttpParams) {
     this.params = params;
@@ -130,44 +130,40 @@ export class EmailTableComponent {
 
       .search(params)
 
-      .subscribe(
-        (data: { content: Array<Email>; totalElements: number }) => {
-          // console.log(data.content);
+      .subscribe((data: { content: Array<Email>; totalElements: number }) => {
+        console.log(data.content);
 
-          // console.log(data.totalElements);
+        console.log(data.totalElements);
 
-          this.emailMetaData = data.content;
-          
-        }
-      );
+        this.emailMetaData = data.content;
+      });
+  }
 
-}
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(EmailFormComponent, {
+      disableClose: true,
+    });
 
-OpenModal() {
-  this.matDialogRef = this.matDialog.open(EmailFormComponent, {
-    disableClose: true,
-  });
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
 
-  this.matDialogRef.afterClosed().subscribe((res: any) => {
-    this.searchFunction(this.params);
+      if (res == true) {
+      }
+    });
+  }
 
-    if (res == true) {
-    }
-  });
-}
+  OpenModalForEdit(id: number) {
+    this.matDialogRef = this.matDialog.open(EmailFormComponent, {
+      data: { id: id },
 
-OpenModalForEdit(id: number) {
-  this.matDialogRef = this.matDialog.open(EmailFormComponent, {
-    data: { id: id },
+      disableClose: true,
+    });
 
-    disableClose: true,
-  });
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
 
-  this.matDialogRef.afterClosed().subscribe((res: any) => {
-    this.searchFunction(this.params);
-
-    if (res == true) {
-    }
-  });
-}
+      if (res == true) {
+      }
+    });
+  }
 }

@@ -1,12 +1,13 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import { ActivatedRoute, Params, Data, Router } from '@angular/router';
 import { Visa } from 'src/app/modules/main/models/visa.model';
 import { EmployeeService } from 'src/app/modules/main/services/employee.service';
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { CommonMaster } from '../../../models/common-master.model';
+import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-employee-visa-details-form',
@@ -18,14 +19,19 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   selectedProduct: any;
   @Input() inputFromParent : string;
   employeeVisaDetailsForm!: FormGroup;
+  queryParams?: Params;
+  isDisabled: boolean = false;
   country_codes: CommonMaster[] = [];
   actionLabel: string = 'Save';
   visa: Visa;
   emp_id:any;
-
+  visaid:number;
+  files: File[];
+  visaFile:any;
+  FleSizeError: string='';
   constructor(
     private _mdr: MatDialogRef<EmployeeVisaDetailsFormComponent>,
-    @Inject(MAT_DIALOG_DATA) data: string,
+    @Inject(MAT_DIALOG_DATA) public data: Visa,
     private employeeService: EmployeeService,
     private router: Router,
     private dialog: MatDialog,
@@ -36,11 +42,13 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
 
   ngOnInit(): void {
    // this.emp_id = this.route.snapshot.paramMap.get("id");
-   // console.log("emp_id", this.route.snapshot.paramMap);   
-    this.fetchCountryCode();
-    this.initForm();    
-    console.log("dfd",this.inputFromParent);
     this.emp_id = this.route.snapshot.queryParamMap.get('id'); // Replace 'paramName' with the actual query parameter name
+   // console.log("visaid", this.visaid);   
+    this.initForm();    
+    this.fetchCountryCode();
+   // this.collectQueryParams();
+   this.getById(this.emp_id);
+    console.log("dfd",this.inputFromParent);
     console.log('Query parameter value:', this.emp_id);
    
   }
@@ -48,18 +56,98 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   initForm() {
       this.employeeVisaDetailsForm = this.formBuilder.group({
         id: [''],
-        countryCode:[''],
+        countryCode:['', Validators.required],
         orgCode:['AVI-123'],
-        visaNumber:[''],
-        validDate:[''],
+        visaNumber:['', [
+         Validators.required,
+         CustomValidators.noLeadingSpace(),
+         CustomValidators.whitespaceValidator(),
+         CustomValidators.noTrailingSpace(),
+         CustomValidators.maxLength(16),
+         Validators.pattern('^4[0-9]{12}(?:[0-9]{3})?$'),
+        ]
+       ],
+        visaFile:[''],
+        validDate:['', [Validators.required, this.dateValidator()]],
         
       });
+    }
+
+     dateValidator(): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const today = new Date().getTime();
+    
+        if (!(control && control.value)) {
+          // if there's no control or no value, that's ok
+          return null;
+        }
+    
+        // return null if there's no errors
+        return control.value.getTime() < today
+          ? { invalidDate: 'Visa Date should be a future date' }
+          : null;
+      };
+    }
+
+    getErrorMessage(controlName: string): string {
+      const control = this.employeeVisaDetailsForm.get(controlName);  
+      //console.log("controlNamecontrolName",controlName);
+      if (control && control.errors) {
+        const errorKey = Object.keys(control.errors)[0];  
+        return CustomValidators.getErrorMessage(errorKey, controlName);
+      }  
+      return '';
+    }
+
+    isControlInvalid(controlName: string): boolean {
+      const control = this.employeeVisaDetailsForm.get(controlName);  
+      return !!control && control.invalid && control.touched;
+    }
+
+    collectQueryParams() {
+     /* this.route.queryParams.subscribe((params) => {
+        this.queryParams = params;
+  
+        if (this.queryParams['id'] != undefined) {
+          console.log(this.queryParams['id']);
+          this.actionLabel = 'Update';
+          this.getById(this.queryParams['id']);
+          this.isDisabled = true;
+        } else {
+          this.actionLabel = 'Save';
+        }
+      });*/
+      if (this.emp_id != undefined) {
+        console.log(this.emp_id);
+        this.actionLabel = 'Update';
+        this.getById(this.emp_id);
+        this.isDisabled = true;
+      } else {
+        this.actionLabel = 'Save';
+      }
+
+    }
+
+    getById(id: string) {
+      if(this.data !=null){
+      this.visaid=this.data.id;
+      this.employeeService
+        .searchVisaById(this.emp_id, this.visaid)
+        .subscribe((response: Visa) => {
+          this.employeeVisaDetailsForm.patchValue(response);
+          this.employeeVisaDetailsForm.controls["countryCode"].patchValue(response.countryCode)
+          this.visa = response;
+        },
+        err => {
+         console.log('oops',err);
+        });
+      }
     }
 
   fetchCountryCode() {
     this.employeeService.getCountryCode().subscribe((Response: Array<CommonMaster>)=>{
       this.country_codes =Response;
-      console.log(this.country_codes);
+      console.log("country_code",this.country_codes);
     })
   }
 
@@ -67,15 +155,39 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     this._mdr.close(isUpdate);
   }
 
+  
+  openVisaFileInput(visaFileInput: any) {
+    visaFileInput.click();
+  }
+  onFileSelect(event:any) {
+    if (event.target.files.length > 0) {
+      this.files = event.target.files[0];
+      //this.employeeVisaDetailsForm.get('visaFile').setValue(this.files);
+      console.log(this.files);
+      const file = event.target.files[0];
+      console.log('size', file.size);
+      console.log('type', file.type);
+      if(file.size > 2e+6){
+        this.FleSizeError='File is too large should not exceed Over 2MB';
+        console.log('File is too large. Over 2MB');
+      }else{
+        this.FleSizeError='';
+      }
+    }
+  }
+
   onSubmit() {
- 
     if (this.employeeVisaDetailsForm.valid) {
+      
       const formData = this.employeeVisaDetailsForm.value;
+     
+      formData["visaFile"]= this.files;
+
       if (this.actionLabel === 'Save') {
         this.employeeService.AddVisaDetails(formData,this.emp_id).subscribe(
           (response: Visa) => {
             this.employeeService.notify('Data Saved Successfully...');
-            this.router.navigate(['/master/employee-form']);
+            this.router.navigate(['/main/employee-form']);
 
             
           },
@@ -87,19 +199,25 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         );
       }
       if (this.actionLabel === 'Update') {
-        /*this.employeeService.updateEmployee(formData).subscribe(
-          (response: EmployeePersonalDetails) => {
+        this.employeeService.updateEmployeevisa(formData, this.emp_id).subscribe(
+          (response: Visa) => {
             this.employeeService.notify('Update Successfully...');
-            this.router.navigate(['/main/employee-table']);
+           this.router.navigate(['/main/employee-info'], {
+              queryParams: { id: this.emp_id, actionLabel: 'Save' },
+            });
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
               this.employeeService.warn('Credentials already present');
             }
           }
-        );*/
+        );
       }
     }
+  }
+
+  onresetForm(){
+    this.employeeVisaDetailsForm.reset();
   }
 
 }

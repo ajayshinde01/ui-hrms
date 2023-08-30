@@ -32,12 +32,12 @@
                 <span
                   class="validate-text"
                   *ngIf="nameControl?.errors?.['required']"
-                  >Please enter role name
+                  >Please enter Role Name
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="nameControl?.errors?.['pattern']"
-                  >Please enter valid role name
+                  >Please enter valid Role Name
                 </span>
                 <span
                   class="validate-text"
@@ -62,7 +62,7 @@
                 <span
                   class="validate-text"
                   *ngIf="nameControl?.errors?.['nameMaxLength'] && !nameControl?.errors?.['pattern'] && !nameControl?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed</span
+                  >Role Name should not exceed 50 characters</span
                 >
               </div>
             </div>
@@ -90,12 +90,12 @@
                 <span
                   class="validate-text"
                   *ngIf="descriptionControl?.errors?.['required']"
-                  >Please enter role description
+                  >Please enter Description
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="descriptionControl?.errors?.['pattern']"
-                  >Please enter valid role description
+                  >Please enter valid Description
                 </span>
                 <span
                   class="validate-text"
@@ -120,7 +120,7 @@
                 <span
                   class="validate-text"
                   *ngIf="descriptionControl?.errors?.['nameMaxLength'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed</span
+                  >Description should not exceed 250 characters</span
                 >
               </div>
             </div>

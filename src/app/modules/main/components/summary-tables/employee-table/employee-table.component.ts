@@ -22,6 +22,8 @@ export class EmployeeTableComponent {
     totalElements: 0,
   };
 
+  masterName: string = 'Employee';
+  buttonVisible: Array<boolean> = [true, true, true];
   params: HttpParams = new HttpParams();
   constructor(
     private employeeService: EmployeeService,

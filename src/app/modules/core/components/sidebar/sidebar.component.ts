@@ -148,15 +148,6 @@ export class SidebarComponent implements OnInit {
           },
 
           {
-            name: 'Organization',
-
-            icon: 'fa-solid fa-ellipsis',
-
-            routerLink: ['/master/organization'],
-
-            arrowMaster: false,
-          },
-          {
             name: 'Division',
             icon: 'fa-solid fa-ellipsis',
             routerLink: ['/master/division-table'],
@@ -173,10 +164,10 @@ export class SidebarComponent implements OnInit {
       {
         name: 'Employee',
         icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
-        showSubmenu: false,
+        showSubmenu: true,
         submenu: [
           {
-            name: 'employee-master',
+            name: 'Employee Master',
             icon: 'fa-solid fa-ellipsis',
             routerLink: ['/main/employee-table'],
             arrowMaster: false,
@@ -205,6 +196,15 @@ export class SidebarComponent implements OnInit {
         showSubmenu: true,
       },
       {
+        name: 'Organization',
+
+        icon: 'fa-solid fa-rocket ps-1 sidebar-icon',
+
+        routerLink: ['/master/organization'],
+
+        arrowMaster: false,
+      },
+      {
         name: 'User Management',
         icon: 'fa-solid fa-lock ps-1 sidebar-icon',
         showSubmenu: true,
@@ -229,14 +229,29 @@ export class SidebarComponent implements OnInit {
           },
         ],
       },
-           {
-        name: 'Email',
+      //          {
+      //       name: 'Email',
+
+      //       icon: 'fa-solid fa-envelope ps-1 sidebar-icon',
+
+      //       showSubmenu: true,
+      //       submenu:[
+
+      //         {
+      //           name: 'Email',
+      //           icon: 'fa-solid fa-ellipsis',
+      //           routerLink: ['/master/emailtable'],
+      //           arrowMaster: false,
+      //         },
+      // ]
+      //     },
+      {
+        name: 'Email Template',
 
         icon: 'fa-solid fa-envelope ps-1 sidebar-icon',
 
         showSubmenu: true,
-        submenu:[
-     
+        submenu: [
           {
             name: 'Email Template',
             icon: 'fa-solid fa-ellipsis',

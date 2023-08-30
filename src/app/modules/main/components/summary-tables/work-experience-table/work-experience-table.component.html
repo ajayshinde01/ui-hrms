@@ -1,0 +1,10 @@
+<app-datatable
+  [buttonVisible]="buttonVisible"
+  (buttonFunction)="action($event)"
+  (deleteFunction)="action($event)"
+  (paginationParams)="searchFunction($event)"
+  [dataSource]="workExperiencesMetaData.content"
+  [headers]="workExperienceHeaders.columnsMetadata"
+  [totalRecord]="workExperiencesMetaData.totalElements"
+>
+</app-datatable>

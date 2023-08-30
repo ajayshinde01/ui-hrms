@@ -1,5 +1,5 @@
 <div class="container1">
-  <div class="card mb-3 cardht" [style.--cardHeight.px]="cardDivHeight">
+  <div class="card mb-3 cardht scroll" [style.--cardHeight.px]="cardDivHeight">
     <div class="card-header1">
       <div class="card-title">
         <div class="d-flex justify-content-between">
@@ -187,7 +187,7 @@
     </div>
   </div>
 </div>
-///////////////////////////////////////////////////s
+
 <div class="container">
   <!-- Button trigger modal -->
 
@@ -198,17 +198,6 @@
     class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
-  >
-    Launch demo modal
-  </button>
-
-  <button
-    type="button"
-    hidden
-    #confrimationmodel1
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal1"
   >
     Launch demo modal
   </button>
@@ -248,81 +237,18 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-success confirm"
+            class="btn btn-success"
             data-bs-dismiss="modal"
             (click)="delete()"
           >
             Yes
           </button>
 
-          <button
-            type="button"
-            class="btn btn-danger confirm"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
             Close
           </button>
         </div>
       </div>
     </div>
   </div>
-
-  ////////
-  <ng-template #content let-c="close" let-d="dismiss">
-    <div
-      class="modal fade"
-      id="exampleModal1"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <!-- <h5 class="modal-title " id="exampleModalLabel"></h5> -->
-
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-
-          <div class="modal-body">
-            <div class="text-center">
-              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            </div>
-            <div class="text-center">
-              <div class="are-you text-center"><b>Are you sure? </b></div>
-              <div class="you-want text-center">
-                You want to delete the data
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-success confirm"
-              data-bs-dismiss="modal"
-              (click)="delete()"
-            >
-              Yess
-            </button>
-
-            <button
-              type="button"
-              class="btn btn-danger confirm"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-template>
 </div>
-
-///////////////////////////////////////////////////////////////////

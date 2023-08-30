@@ -21,7 +21,7 @@ import { RoleFormComponent } from '../../forms/role-form/role.form.component';
 })
 export class RoleComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<RoleFormComponent>;
 
   roleMetaData: { content: Array<Role>; totalElements: number } = {
@@ -31,7 +31,7 @@ export class RoleComponent {
   roleHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
-  buttonVisible:Array<boolean> =[true ,true, true]
+ 
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Role';

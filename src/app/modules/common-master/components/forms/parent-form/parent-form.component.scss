@@ -21,6 +21,19 @@
   height: 35px;
   margin-top: -2.5%;
 }
+.go-back:active {
+  padding: 0.3rem 1.75rem;
+  font-weight: 400;
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #534686;
+  border: 1px solid #534686;
+  color: white;
+  margin-left: 1%;
+  width: 90px;
+  height: 35px;
+  margin-top: -2.5%;
+}
 .card-title {
   font-size: 20px;
   font-weight: 500;
@@ -66,6 +79,7 @@
   width: 81.5vw; /* 100% of viewport width */
   height: 100vh; /* 100% of viewport height */
   /* Adjust the z-index as needed */
+  //overflow-y: auto;
 }
 @media (max-width: 100%) {
   .card {
@@ -192,6 +206,7 @@ h4 {
   border: 1px solid #534686;
   color: white;
 }
+
 .mm {
   margin-top: -6px;
 }
@@ -233,4 +248,8 @@ h4 {
   font-size: 14px;
   border-radius: 8px;
   margin-left: -12% !important;
+}
+
+:host ::ng-deep.mat-mdc-text-field-wrapper:disabled {
+  background-color: lightgrey !important;
 }
