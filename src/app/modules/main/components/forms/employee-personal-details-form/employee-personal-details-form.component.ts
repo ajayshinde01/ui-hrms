@@ -63,25 +63,25 @@ export class EmployeePersonalDetailsFormComponent {
         ],
       ],
       healthDetails:[''],
-      cprNumber:[''],
+      cprNumber:['',[Validators.pattern('^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$')]],//1610721012
       gosi:[''],
-      aadhaarNumber:[''],
+      aadhaarNumber:['',[Validators.pattern('^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$')]],
       aadhaarName:[''],
-      passportNumber:[''],
+      passportNumber:['',[Validators.pattern('^[A-PR-WY][1-9]\\d\\s?\\d{4}[1-9]$')]],
       aadhaarFile:[''],
       passportName:[''],
       passportIssueDate:[''],
       passportValidity:[''],
       passportFile:['',Validators.required],
       placeOfIssue:[''],
-      panCardNumber:[''],
+      panCardNumber:['',[Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
       panCardName:[''],
       panCardFile:[''],
-      bankAccountNumber:[''],
+      bankAccountNumber:['',[Validators.pattern('^\d{9,18}$')]],
       bankName:[''],
-      ifscCode:[''],
+      ifscCode:['',[Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')]],
       uanNumber:[''],
-      pfNumber:[''],
+      pfNumber:['',[Validators.pattern('^[A-Z]{2}[\s\/]?[A-Z]{3}[\s\/]?[0-9]{7}[\s\/]?[0-9]{3}[\s\/]?[0-9]{7}$')]],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
@@ -120,6 +120,9 @@ export class EmployeePersonalDetailsFormComponent {
       .subscribe((response: EmployeePersonalDetails) => {
         this.employeePersonalDetailsForm.patchValue(response);
         this.employee = response;
+      },
+      err => {
+       console.log('oops',err);
       });
   }
 

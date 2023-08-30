@@ -1,6 +1,6 @@
-<form [formGroup]="employeeVisaDetailsForm">
+<div class="container mat-dialog-content">
+  <form [formGroup]="employeeVisaDetailsForm">
 
-<div class="container">
 <div class="row row-section mm mt-4">
     <div class="d-flex justify-content-between">
         <h2 class="card-title employee_info_title">Visa Details</h2>
@@ -16,10 +16,14 @@
       <mat-form-field  color="primary" appearance="outline">
        
         <mat-select  formControlName="countryCode" placeholder="Select">
+          <mat-option>Select</mat-option>
           <mat-option *ngFor="let country_code of country_codes" [value]="country_code.value">
             {{ country_code.value }}
         </mat-option>
         </mat-select>
+        <mat-error *ngIf="isControlInvalid('countryCode')">
+          {{ getErrorMessage("countryCode") }}
+        </mat-error>
       </mat-form-field>
     </div>
 </div>
@@ -36,6 +40,9 @@
           formControlName="visaNumber"
           placeholder="Visa Number"
         />
+        <mat-error *ngIf="isControlInvalid('visaNumber')">
+          {{ getErrorMessage("visaNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
 </div>
@@ -51,18 +58,24 @@
               matInput
               formControlName="validDate"
               [matDatepicker]="picker"
-              placeholder="Date Of Issue"
+              placeholder=""
             />
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <!--<mat-error *ngIf="isControlInvalid('validDate')">
+              {{ getErrorMessage("validDate") }}
+            </mat-error>-->
+            <mat-error *ngIf="employeeVisaDetailsForm.controls['validDate']?.errors">
+              {{ employeeVisaDetailsForm.controls['validDate']?.errors?.['invalidDate'] }}
+            </mat-error>
           </mat-form-field>
     </div>
 </div>
 
-<div class="row mm">
+<div class="row mm mt-2">
     <div class="col-md-4 col-lg-4">
         <mat-label>Visa File</mat-label>
       </div>
@@ -79,15 +92,16 @@
 </div>
 
   <div class="d-flex justify-content-end form-footer"  mat-dialog-actions>
-    <button  class="btn btn-primary px-4 float-right visa-btn"  (click)="onSubmit()"  [disabled]="!employeeVisaDetailsForm.valid">
+    <button mat-button  class="btn btn-primary px-4 float-right visa-btn"  (click)="onSubmit()"  [disabled]="!employeeVisaDetailsForm.valid">
       Save
     </button>
 
-    <button  class="btn dark visa-btn" type="button" (click)="onresetForm()">
+    <button mat-button class="btn dark visa-btn" type="button" (click)="onresetForm()">
          Reset
     </button>
 
   </div>
-</div>
 </form>
+
+</div>
 <!--<button (click)="nextStep()">click here</button>-->

@@ -171,7 +171,7 @@ export class DepartmentTableComponent {
 
       disableClose: true,
     });
-
+console.log("params",this.params);
     this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
 
