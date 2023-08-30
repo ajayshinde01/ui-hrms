@@ -149,13 +149,18 @@ export class DatatableComponent implements OnInit, OnChanges {
 
        if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
-
+       
         if (data.data != undefined) {
           this.confrimationmodel.nativeElement.click();
-        // this.confrimationmodel1.nativeElement.click();
        }
 
         break;
+    }
+  }
+
+  clickMethod() {
+    if(confirm("Are you sure to delete ")) {
+      console.log("Implement delete functionality here");
     }
   }
 

@@ -16,7 +16,7 @@ import { ApiResponse } from '../../../models/response';
 export class VisaDetailsTableComponent {
   [x: string]: any;
   emp_id:any;
-  
+  visa_id:any;
   employeeVisaHeaders: { columnsMetadata: Array<ColumnsMetadata> };
  // employeeVisaHeaders={columnsMetadata: Array<ColumnsMetadata>};
  /* employeeVisaHeaders = { columnsMetadata:
@@ -89,11 +89,12 @@ export class VisaDetailsTableComponent {
    ) {}
  
    ngOnInit(): void {
-    this.emp_id = this.route.snapshot.queryParamMap.get("id");
+    
      this.getHeaders();
      console.log("Visa table");
      this.params = this.params.set('page', 0);
      this.params = this.params.set('size', 10);
+     this.emp_id = this.route.snapshot.queryParamMap.get("id");
      this.searchFunction(this.params);
    }
  
@@ -112,6 +113,8 @@ export class VisaDetailsTableComponent {
    action(event: Data) {
      let type: string = event['event'];
      let id: string = event['data'].id;
+
+     console.log("dataid",id);
      const queryParam = { id: id };
      switch (type) {
        case 'delete':
@@ -136,17 +139,45 @@ export class VisaDetailsTableComponent {
        //  this.router.navigate(['/main/visa-table']);
          break;
        case 'edit':
-         this.router.navigate(['/main/employee-table'], {
-           queryParams: queryParam,
-         });
+        this.visa_id=id;
+        this.OpenModalForEdit(id);
+       //  this.router.navigate(['/main/visa-table'], {
+       //    queryParams: queryParam,
+       //  });
          break;
      }
    }
+
+   actions(event: Data) {
+    let type: string = event['event'];
+    let id: string = event['data'].id;
+    const queryParam = { id: id };
+    switch (type) {
+      case 'delete':
+        this.employeeService.deleteEmployeeVisa(id).subscribe(
+          (response: ApiResponse) => {
+            this.employeeService.notify('Employee visa details Deleted successfully..!');
+            const currentPage = Number(this.params.get('page'));
+            if (this.employeeVisaMetaData.content.length === 1 && currentPage > 0) {
+              const newPage = currentPage - 1;
+              this.params = this.params.set('page', newPage.toString());
+              this.searchFunction(this.params);
+            }
+            this.searchFunction(this.params);
+          },
+          (error: any) => {
+            console.error('DELETE-Employee Request failed', error);
+          }
+        );
+        break;
+         }
+  }
+
  
    searchFunction(params: HttpParams) {
     //let id=1;    
      this.params = params;
-     console.log("params", this.params);
+    // console.log("params", this.params);
      this.employeeService
        .searchVisa(params,this.emp_id)
        .subscribe(
@@ -169,5 +200,20 @@ export class VisaDetailsTableComponent {
       if (res == true) {
       }
     });*/
+  }
+
+  OpenModalForEdit(id: string) {
+    this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
+      data: { id: id },
+
+      disableClose: true,
+    });
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
+      if (res == true) {
+      }
+    });
   }
 }

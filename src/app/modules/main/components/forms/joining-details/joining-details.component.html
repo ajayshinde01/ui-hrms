@@ -1,0 +1,113 @@
+<form *ngIf="joiningForm" [formGroup]="joiningForm">
+  <div class="row mt-4">
+    <h2>JOINING DETAILS</h2>
+
+    <div class="row mm 4">
+      <div class="col-lg-6">
+        <mat-label>Confirmation Date</mat-label>
+
+        <mat-form-field appearance="outline" class="">
+          <input
+            matInput
+            formControlName="confirmationDate"
+            [matDatepicker]="confirmationDatePicker"
+            placeholder="DD/MM/YYYY"
+            readonly
+          />
+
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="confirmationDatePicker"
+          ></mat-datepicker-toggle>
+
+          <mat-datepicker #confirmationDatePicker></mat-datepicker>
+
+          <mat-error *ngIf="isControlInvalid('confirmationDate')">
+            {{ getErrorMessage("confirmationDate") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-6">
+        <mat-label>Notice Period</mat-label>
+
+        <mat-form-field appearance="outline" class="">
+          <input
+            matInput
+            formControlName="noticePeriod"
+            placeholder="Notice Period"
+          />
+
+          <mat-error *ngIf="isControlInvalid('noticePeriod')">
+            {{ getErrorMessage("noticePeriod") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mm">
+      <div class="col-lg-6">
+        <mat-label>Resignation Date</mat-label>
+
+        <mat-form-field appearance="outline" class="">
+          <input
+            matInput
+            formControlName="resignationDate"
+            [matDatepicker]="resignationDatePicker"
+            placeholder="DD/MM/YYYY"
+            readonly
+          />
+
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="resignationDatePicker"
+          ></mat-datepicker-toggle>
+
+          <mat-datepicker #resignationDatePicker></mat-datepicker>
+
+          <mat-error *ngIf="isControlInvalid('resignationDate')">
+            {{ getErrorMessage("resignationDate") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-6">
+        <mat-label>Relieving Date</mat-label>
+
+        <mat-form-field appearance="outline" class="">
+          <input
+            matInput
+            formControlName="relievingDate"
+            [matDatepicker]="relievingDatePicker"
+            placeholder="DD/MM/YYYY"
+            readonly
+          />
+
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="relievingDatePicker"
+          ></mat-datepicker-toggle>
+
+          <mat-datepicker #relievingDatePicker></mat-datepicker>
+
+          <mat-error *ngIf="isControlInvalid('relievingDate')">
+            {{ getErrorMessage("relievingDate") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="form-footer">
+      <button
+        _ngcontent-ng-c812429062=""
+        class="btn btn-primary px-4 float-right profile-save-btn"
+        (click)="onSubmit()"
+        [disabled]="!joiningForm.valid"
+      >
+        {{ actionLabel }}
+      </button>
+    </div>
+  </div>
+</form>
