@@ -47,13 +47,9 @@ export class WorkExperienceFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
-
     this.collectQueryParams();
 
     this.initForm();
-
-    console.log(this.data);
   }
 
   collectQueryParams() {
@@ -62,10 +58,15 @@ export class WorkExperienceFormComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
-      if (this.data['workExperience'] != undefined) {
+      debugger;
+
+      if (
+        this.data['workExperienceId'] != undefined &&
+        this.data['id'] != undefined
+      ) {
         this.actionLabel = 'Update';
 
-        this.workExperienceId = this.data['workExperience'];
+        this.workExperienceId = this.data['workExperienceId'];
 
         this.employeeId = this.queryParams['id'];
 
@@ -78,8 +79,6 @@ export class WorkExperienceFormComponent implements OnInit {
         this.employeeId = this.queryParams['id'];
       }
     });
-
-    console.log(this.employeeId);
   }
 
   goBack() {
@@ -90,7 +89,7 @@ export class WorkExperienceFormComponent implements OnInit {
     this.workExperienceForm = this.formBuilder.group({
       id: [''],
 
-      company: [''],
+      companyName: [''],
 
       designation: [''],
 
@@ -107,14 +106,14 @@ export class WorkExperienceFormComponent implements OnInit {
       createdAt: [null],
 
       updatedAt: [null],
+
+      orgCode: ['AVI01'],
     });
   }
 
   onSubmit() {
     if (this.workExperienceForm.valid) {
       const formData = this.workExperienceForm.value;
-
-      this.collectQueryParams();
 
       if (this.actionLabel === 'Save') {
         this.workExperienceService
@@ -164,9 +163,16 @@ export class WorkExperienceFormComponent implements OnInit {
 
   getById(id: number, workExperienceId: number) {
     // Retrieve the work experience by ID and populate the form fields
-    // Example: this.workExperienceService.getById(id, workExperienceId).subscribe((response: WorkExperience) => {
-    //   this.workExperienceForm.patchValue(response);
-    // });
+
+    this.workExperienceService
+
+      .getWorkExperienceById(id, workExperienceId)
+
+      .subscribe((response: WorkExperience) => {
+        console.log(response);
+
+        this.workExperienceForm.patchValue(response);
+      });
   }
 
   closeDialog(isUpdate: boolean) {

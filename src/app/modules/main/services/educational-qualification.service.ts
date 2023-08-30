@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { EducationalQualification } from '../models/educational-qualification.model';
 import { ColumnsMetadata } from '../models/columns-metadata';
 import { ApiResponse } from '../models/response';
+import { CommonMaster } from '../models/common-master.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,12 @@ export class EducationalQualificationService {
   ): Observable<Array<EducationalQualification>> {
     return this.http.get<Array<EducationalQualification>>(
       `http://192.168.1.16:7000/employee/education/${employeeId}/get-all`
+    );
+  }
+
+  getQualificationLevels(): Observable<Array<CommonMaster>> {
+    return this.http.get<Array<CommonMaster>>(
+      `http://192.168.1.16:7000/employee/common-master/Qualification Level?sort=priority,code`
     );
   }
 
