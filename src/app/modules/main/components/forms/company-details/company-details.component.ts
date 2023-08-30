@@ -66,15 +66,15 @@ export class CompanyDetailsComponent implements OnInit {
       this.queryParams = params;
     });
 
-    if (this.queryParams.actionLabel == 'Update') {
-      this.getById(this.queryParams['id']);
-      this.actionLabel = 'Save';
-    } else {
-      this.actionLabel = 'Save';
-      // this.companyDetailsForm.controls['employeeId'].setValue(
-      //   this.queryParams.id
-      // );
-    }
+    // if (this.queryParams.actionLabel == 'Update') {
+    this.getById(this.queryParams['id']);
+    // this.actionLabel = 'Save';
+    // } else {
+    //   this.actionLabel = 'Save';
+    //   // this.companyDetailsForm.controls['employeeId'].setValue(
+    //   //   this.queryParams.id
+    //   // );
+    // }
   }
   fetchDesignations() {
     this.designationService.getDesignations().subscribe((response) => {
