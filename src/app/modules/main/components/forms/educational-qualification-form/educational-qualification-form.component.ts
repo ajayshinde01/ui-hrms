@@ -28,7 +28,6 @@ export class EducationalQualificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.initForm();
     this.collectQueryParams();
   }

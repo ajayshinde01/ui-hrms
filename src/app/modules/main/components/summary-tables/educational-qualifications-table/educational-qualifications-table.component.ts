@@ -138,7 +138,6 @@ export class EducationalQualificationsTableComponent implements OnInit {
     });
   }
   OpenModalForEdit(data: string, id: number) {
-    debugger;
     this.matDialogRef = this.matDialog.open(
       EducationalQualificationFormComponent,
       {
