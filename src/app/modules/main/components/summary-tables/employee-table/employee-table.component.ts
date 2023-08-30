@@ -22,6 +22,8 @@ export class EmployeeTableComponent {
     totalElements: 0,
   };
 
+  masterName: string = 'Employee';
+
   params: HttpParams = new HttpParams();
   constructor(
     private employeeService: EmployeeService,

@@ -1,6 +1,16 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { EmailtemplateService } from '../../../services/emailtemplate.service';
 import { leadingSpaceValidator } from '../Validations/leadingSpace.validator';
 import { trailingSpaceValidator } from '../Validations/trailingSpace.validator';
@@ -16,14 +26,13 @@ import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 @Component({
   selector: 'app-email-form',
   templateUrl: './email-form.component.html',
-  styleUrls: ['./email-form.component.scss']
+  styleUrls: ['./email-form.component.scss'],
 })
-export class EmailFormComponent implements OnInit
-{
+export class EmailFormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('ckeditorEleRef')
   ckeditorElementComponent!: CKEditorComponent;
-  public Editor:any = ClassicEditor;
+  public Editor: any = ClassicEditor;
   emailForm!: FormGroup;
   email: Email;
   submitted: boolean = false;
@@ -45,7 +54,6 @@ export class EmailFormComponent implements OnInit
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
-
   }
   collectQueryParams() {
     this.route.queryParams.subscribe((params) => {
@@ -54,7 +62,7 @@ export class EmailFormComponent implements OnInit
       if (this.queryParams['id'] != undefined) {
         console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
-      //  this.getById(this.queryParams['id']);
+        //  this.getById(this.queryParams['id']);
         this.isDisabled = true;
       } else {
         this.actionLabel = 'Save';
@@ -62,14 +70,11 @@ export class EmailFormComponent implements OnInit
     });
   }
   getFileIconClass(fileType: string): string {
-
     const iconMap: { [key: string]: string } = {
       'image/jpeg': 'fas fa-file-image',
       'image/png': 'fas fa-file-image',
       'application/pdf': 'fas fa-file-pdf',
       'text/plain': 'fas fa-file-alt',
-
-
     };
 
     return iconMap[fileType] || 'fas fa-file';
@@ -78,30 +83,24 @@ export class EmailFormComponent implements OnInit
     this.selectedFile = event.target.files[0];
   }
 
- 
-
   // goBack() {
   //   this.router.navigate(['/master/department-table']);
   // }
   initForm() {
     this.emailForm = this.formBuilder.group({
       id: [''],
-      to: ['',Validators.required],
-      cc: ['',Validators.required],
-      subject:['',Validators.required],
-      dateTime:['',Validators.required],
-      file:[''],
-      timeZone:['Asia/Kokata',Validators.required],
-      body:['',Validators.required],
-    
+      to: ['', Validators.required],
+      cc: ['', Validators.required],
+      subject: ['', Validators.required],
+      dateTime: ['', Validators.required],
+      file: [''],
+      timeZone: ['Asia/Kokata', Validators.required],
+      body: ['', Validators.required],
     });
   }
 
   // onSubmit() {
   //   if (this.emailForm.valid) {
-   
-
-   
 
   //     // if (this.actionLabel === 'Send') {
   //     //   this.emailService.createEmail(formData).subscribe(
@@ -118,7 +117,6 @@ export class EmailFormComponent implements OnInit
   //     //     }
   //     //   );
   //     // }
-
 
   //     // if (this.actionLabel === 'Update') {
   //     // //  formData.updatedBy = 'Admin';
@@ -141,19 +139,30 @@ export class EmailFormComponent implements OnInit
   onSubmit() {
     if (this.emailForm.valid) {
       const mailRequest = new FormData();
-      
+
       mailRequest.append('to', JSON.stringify(this.emailForm.get('to')?.value));
       mailRequest.append('cc', JSON.stringify(this.emailForm.get('cc')?.value));
-      mailRequest.append('subject', JSON.stringify(this.emailForm.get('subject')?.value));
-      mailRequest.append('body', JSON.stringify(this.emailForm.get('body')?.value));
-      mailRequest.append('dateTime', JSON.stringify(this.emailForm.get('dateTime')?.value));
-      mailRequest.append('timeZone', JSON.stringify(this.emailForm.get('timeZone')?.value));
-  
+      mailRequest.append(
+        'subject',
+        JSON.stringify(this.emailForm.get('subject')?.value)
+      );
+      mailRequest.append(
+        'body',
+        JSON.stringify(this.emailForm.get('body')?.value)
+      );
+      mailRequest.append(
+        'dateTime',
+        JSON.stringify(this.emailForm.get('dateTime')?.value)
+      );
+      mailRequest.append(
+        'timeZone',
+        JSON.stringify(this.emailForm.get('timeZone')?.value)
+      );
 
       const files: FileList = this.fileInput.nativeElement.files;
-    for (let i = 0; i < files.length; i++) {
-      mailRequest.append('file', files[i]);
-    }
+      for (let i = 0; i < files.length; i++) {
+        mailRequest.append('file', files[i]);
+      }
       // const fileInput = document.getElementById('fileInput') as HTMLInputElement;
       // if (fileInput.files && fileInput.files.length > 0) {
       //   mailRequest.append('file', fileInput.files[0]);
@@ -174,8 +183,8 @@ export class EmailFormComponent implements OnInit
       //   this.errorMessage = error.message;
       //   this.emailService.warn(this.errorMessage);
       // });
-  
-      this.emailService.createEmail(mailRequest,this.selectedFile).subscribe(
+
+      this.emailService.createEmail(mailRequest, this.selectedFile).subscribe(
         (response: any) => {
           // Handle success
           this.emailService.notify('Email sent successfully');
@@ -192,8 +201,6 @@ export class EmailFormComponent implements OnInit
     }
   }
 
-
-  
   // getById(id: number) {
   //   this.emailTemplateService
   //     .searchEmailTemplateById(id)
@@ -211,5 +218,4 @@ export class EmailFormComponent implements OnInit
     this.collectQueryParams();
     this.initForm();
   }
- 
 }
