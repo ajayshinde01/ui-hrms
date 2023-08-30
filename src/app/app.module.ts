@@ -13,15 +13,23 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from './modules/master/components/helper/popup/popup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { config } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
+import { TokenInterceptor } from './modules/core/components/auth/token.interceptor';
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({
   declarations: [AppComponent],
-  providers: [{ provide: CONFIG, useValue: config }],
+  providers: [
+    { provide: CONFIG, useValue: config },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [PopupComponent],
   imports: [
