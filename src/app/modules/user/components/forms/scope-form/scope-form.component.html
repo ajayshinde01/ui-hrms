@@ -16,7 +16,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Scope Name </mat-label>
+          <mat-label>Scope Name</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -32,12 +32,12 @@
                 <span
                   class="validate-text"
                   *ngIf="nameControl?.errors?.['required']"
-                  >Please enter scope name
+                  >Please enter Scope Name
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="nameControl?.errors?.['pattern']"
-                  >Please enter valid scope name
+                  >Please enter valid Scope Name
                 </span>
                 <span
                   class="validate-text"
@@ -62,7 +62,7 @@
                 <span
                   class="validate-text"
                   *ngIf="nameControl?.errors?.['nameMaxLength'] && !nameControl?.errors?.['pattern'] && !nameControl?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed</span
+                  >Scope Name should not exceed 50 characters</span
                 >
               </div>
             </div>
@@ -90,12 +90,12 @@
                 <span
                   class="validate-text"
                   *ngIf="displayNameControl?.errors?.['required']"
-                  >Please enter scope name
+                  >Please enter Display Name
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="displayNameControl?.errors?.['pattern']"
-                  >Please enter valid scope name
+                  >Please enter valid Display Name
                 </span>
                 <span
                   class="validate-text"
@@ -120,7 +120,7 @@
                 <span
                   class="validate-text"
                   *ngIf="displayNameControl?.errors?.['nameMaxLength'] && !displayNameControl?.errors?.['pattern'] && !displayNameControl?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed</span
+                  >Display Name should not exceed 250 characters</span
                 >
               </div>
             </div>
@@ -162,7 +162,6 @@
                   _ngcontent-ng-c812429062=""
                   class="profile-save-btn dark"
                   (click)="resetForm()"
-                  [disabled]="!scopeForm.valid"
                 >
                   Reset
                 </button>

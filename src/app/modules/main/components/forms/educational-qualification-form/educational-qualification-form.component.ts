@@ -34,22 +34,11 @@ export class EducationalQualificationFormComponent implements OnInit {
   }
 
   collectQueryParams() {
-    debugger;
-    // this.route.queryParams.subscribe((params) => {
-    //   this.queryParams = params;
-    // });
-    if (
-      this.data['educationalQualificationId'] != undefined &&
-      this.data['actionLabel']
-    ) {
-      this.actionLabel = 'Update';
+    if (this.data['educationalQualificationId'] != undefined) {
       this.educationalQualificationId = this.data['educationalQualificationId'];
       this.employeeId = this.data['id'];
       this.getById(this.employeeId, this.educationalQualificationId);
       this.isDisabled = true;
-    } else {
-      this.actionLabel = 'Save';
-      this.employeeId = this.data['id'];
     }
   }
 
@@ -128,12 +117,17 @@ export class EducationalQualificationFormComponent implements OnInit {
   }
 
   getById(id: number, educationalqualificationId: number) {
-    debugger;
     this.educationalQualificationService
       .getByEmployeeId(id, educationalqualificationId)
-      .subscribe((response) => {
-        this.educationalDetailsForm.patchValue(response);
-      });
+      .subscribe(
+        (response) => {
+          this.educationalDetailsForm.patchValue(response);
+          this.actionLabel = 'Update';
+        },
+        (error) => {
+          this.actionLabel = 'Save';
+        }
+      );
   }
 
   Close(isUpdate: boolean) {
