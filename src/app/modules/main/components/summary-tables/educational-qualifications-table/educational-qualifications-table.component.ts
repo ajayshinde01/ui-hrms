@@ -32,6 +32,8 @@ export class EducationalQualificationsTableComponent implements OnInit {
       columnsMetadata: [],
     };
   params: HttpParams = new HttpParams();
+  buttonVisible: Array<boolean> = [true, true, true];
+
   constructor(
     private educationalQualificationService: EducationalQualificationService,
     private router: Router,

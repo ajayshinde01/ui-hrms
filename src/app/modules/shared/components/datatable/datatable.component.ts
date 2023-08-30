@@ -58,6 +58,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   cardDivHeight: any = '';
 
   cardHeights!: number;
+  @Input() buttonVisible: Array<boolean> = [false, false, false];
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 

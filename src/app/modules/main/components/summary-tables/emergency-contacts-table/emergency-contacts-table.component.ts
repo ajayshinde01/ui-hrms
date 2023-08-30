@@ -17,6 +17,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmergencyContactsTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  buttonVisible: Array<boolean> = [true, true, true];
+  queryParams?: any;
+
   matDialogRef: MatDialogRef<EmergencyContactComponent>;
   id: number;
   // contactHeaders: any;

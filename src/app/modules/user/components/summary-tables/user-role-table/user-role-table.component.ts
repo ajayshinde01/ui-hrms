@@ -14,6 +14,7 @@ import { ApiResponse } from '../../../models/response';
   styleUrls: ['./user-role-table.component.scss'],
 })
 export class UserRoleTableComponent {
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<UserRoleFormComponent>;
 
   roleHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {

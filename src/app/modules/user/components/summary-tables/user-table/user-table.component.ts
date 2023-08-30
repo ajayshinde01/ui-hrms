@@ -15,6 +15,7 @@ import { UserFormComponent } from '../../forms/user-form/user-form.component';
 })
 export class UserTableComponent implements OnInit {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<UserFormComponent>;
 
   userHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {

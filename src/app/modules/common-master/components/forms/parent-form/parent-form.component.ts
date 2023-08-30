@@ -26,7 +26,7 @@ export interface DialogData {
 })
 export class ParentFormComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<ChildFormComponent>;
 
   childMetaData: { content: Array<Parent>; totalElements: number } = {

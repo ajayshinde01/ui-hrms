@@ -27,7 +27,7 @@ import { HttpParams } from '@angular/common/http'; // Import HttpParams
 })
 export class WorkExperienceTableComponent implements OnInit {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<WorkExperienceFormComponent>;
 
   id: number;
