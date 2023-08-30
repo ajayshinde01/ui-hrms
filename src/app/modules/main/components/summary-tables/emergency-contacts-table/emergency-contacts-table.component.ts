@@ -100,12 +100,12 @@ export class EmergencyContactsTableComponent {
 
       case 'add':
         this.OpenModal();
-        this.router.navigate(['/master/role']);
+        // this.router.navigate(['/master/role']);
         break;
 
       case 'edit':
         this.OpenModalForEdit(id);
-        this.router.navigate(['/master/role'], { queryParams: queryParam });
+        // this.router.navigate(['/master/role'], { queryParams: queryParam });
         break;
     }
   }
