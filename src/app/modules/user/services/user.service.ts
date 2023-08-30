@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ColumnsMetadata } from '../models/columns-metadata';
 import { User } from '../models/user.model';
 import { ApiResponse } from '../models/response';
+import { CommonMaster } from '../models/common-master.model';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,12 @@ export class UserService {
   deleteUser(userId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       'http://192.168.1.16:7080/user/' + userId
+    );
+  }
+
+  getUserStatus(): Observable<Array<CommonMaster>> {
+    return this.http.get<Array<CommonMaster>>(
+      'http://192.168.1.16:7000/employee/common-master/User Status?sort=priority,code'
     );
   }
 

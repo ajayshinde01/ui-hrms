@@ -32,12 +32,12 @@
                 <span
                   class="validate-text"
                   *ngIf="firstNameControl?.errors?.['required']"
-                  >Please enter first name
+                  >Please enter First Name
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="firstNameControl?.errors?.['pattern']"
-                  >Please enter valid first name
+                  >Please enter valid First Name
                 </span>
                 <span
                   class="validate-text"
@@ -62,7 +62,7 @@
                 <span
                   class="validate-text"
                   *ngIf="firstNameControl?.errors?.['nameMaxLength'] && !firstNameControl?.errors?.['pattern'] && !firstNameControl?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed</span
+                  >First Name should not exceed 50 characters</span
                 >
               </div>
             </div>
@@ -90,12 +90,12 @@
                 <span
                   class="validate-text"
                   *ngIf="lastNameControl?.errors?.['required']"
-                  >Please enter last name
+                  >Please enter Last Name
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="lastNameControl?.errors?.['pattern']"
-                  >Please enter valid last name
+                  >Please enter valid Last Name
                 </span>
                 <span
                   class="validate-text"
@@ -120,7 +120,7 @@
                 <span
                   class="validate-text"
                   *ngIf="lastNameControl?.errors?.['nameMaxLength'] && !lastNameControl?.errors?.['pattern'] && !lastNameControl?.errors?.['leadingSpace']"
-                  >Maximum 50 characters are allowed</span
+                  >Last Name should not exceed 50 characters</span
                 >
               </div>
             </div>
@@ -148,12 +148,12 @@
                 <span
                   class="validate-text"
                   *ngIf="emailControl?.errors?.['required']"
-                  >Please enter email id
+                  >Please enter Email ID
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="emailControl?.errors?.['pattern']"
-                  >Please enter valid email id
+                  >Please enter valid Email ID
                 </span>
                 <span
                   class="validate-text"
@@ -178,7 +178,7 @@
                 <span
                   class="validate-text"
                   *ngIf="emailControl?.errors?.['emailMaxLength'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['leadingSpace']"
-                  >Maximum 40 characters are allowed</span
+                  >Email ID should not exceed 40 characters</span
                 >
               </div>
             </div>
@@ -206,7 +206,7 @@
                 <span
                   class="validate-text"
                   *ngIf="passwordControl?.errors?.['required']"
-                  >Please enter password
+                  >Please enter Password
                 </span>
                 <span
                   class="validate-text"
@@ -258,12 +258,12 @@
                 <span
                   class="validate-text"
                   *ngIf="confirmPasswordControl?.errors?.['required']"
-                  >Please confirm password
+                  >Please enter Confirm Password
                 </span>
                 <span
                   class="validate-text"
                   *ngIf="confirmPasswordControl?.errors?.['passwordMismatch']"
-                  >Password do not match
+                  >Password and Confirm Password should be same
                 </span>
               </div>
             </div>
@@ -280,11 +280,8 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <mat-select
-                placeholder="Select Roles"
-                formControlName="roles"
-                multiple
-              >
+              <mat-select placeholder="Select" formControlName="roles" multiple>
+                <!-- <mat-option>Select</mat-option> -->
                 <mat-option *ngFor="let role of allRoles" [value]="role.name">{{
                   role.name
                 }}</mat-option>
@@ -303,9 +300,13 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <mat-select placeholder="Select Status" formControlName="enabled">
-                <mat-option [value]="true">Enabled</mat-option>
-                <mat-option [value]="false">Disabled</mat-option>
+              <mat-select placeholder="Select" formControlName="enabled">
+                <mat-option>Select</mat-option>
+                <mat-option
+                  *ngFor="let status of allUserStatus"
+                  [value]="status.code"
+                  >{{ status.value }}</mat-option
+                >
               </mat-select>
             </div>
           </mat-form-field>

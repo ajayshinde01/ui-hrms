@@ -12,6 +12,7 @@ import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { blankValidator } from '../Validations/blankData.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { emailMaxLength } from '../Validations/emailMaxLength.validator';
+import { CommonMaster } from '../../../models/common-master.model';
 
 @Component({
   selector: 'app-user-form',
@@ -26,6 +27,7 @@ export class UserFormComponent {
   actionLabel: string = 'Save';
   allRoles: UserRole[] = [];
   isDisabled: boolean = false;
+  allUserStatus: CommonMaster[] = [];
 
   constructor(
     private _mdr: MatDialogRef<UserFormComponent>,
@@ -40,6 +42,7 @@ export class UserFormComponent {
     this.collectQueryParams();
     this.initForm();
     this.getAllRoles();
+    this.getAllUserStatus();
   }
 
   collectQueryParams() {
@@ -181,10 +184,16 @@ export class UserFormComponent {
     };
   }
 
+  getAllUserStatus() {
+    this.userService.getUserStatus().subscribe((response) => {
+      this.allUserStatus = response;
+    });
+  }
+
   onSubmit() {
     if (this.userForm.valid) {
       const formData = this.userForm.value;
-      console.log(formData);
+      console.log(this.queryParams);
 
       if (this.actionLabel === 'Save') {
         this.userService.createUser(formData).subscribe(
