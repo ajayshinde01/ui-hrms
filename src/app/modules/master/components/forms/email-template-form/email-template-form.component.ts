@@ -31,6 +31,7 @@ export class EmailTemplateFormComponent implements OnInit {
   queryParams?: Params;
   isDisabled: boolean = false;
   errorMessage: string = '';
+  
 
   actionLabel: string = 'Save';
   constructor(

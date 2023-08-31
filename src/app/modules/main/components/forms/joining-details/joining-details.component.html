@@ -24,7 +24,7 @@
         <mat-label>Notice Period</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input matInput formControlName="noticePeriod" placeholder="Notice Period" />
+          <input matInput type="number" formControlName="noticePeriod" placeholder="Notice Period" />
 
           <mat-error *ngIf="isControlInvalid('noticePeriod')">
             {{ getErrorMessage("noticePeriod") }}

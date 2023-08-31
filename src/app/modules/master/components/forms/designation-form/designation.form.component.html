@@ -1,5 +1,5 @@
 <form [formGroup]="designationForm">
-  <div class="container" style="width: 490px; height: 390px">
+  <div class="container" style="width: 490px; height: 420px">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -163,13 +163,16 @@
           <mat-label class="desc-label">Designation Description</mat-label>
         </div>
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
+          <mat-form-field class="textarea-outline" appearance="outline">
             <div class="form-controls">
-              <input
+              <!-- <input
                 matInput
                 placeholder="Sample Description"
                 formControlName="designationDesc"
-              />
+              /> -->
+              <textarea matInput placeholder="Sample Description"
+              formControlName="designationDesc">
+              </textarea>
               <div
                 *ngIf="
                   designationForm.controls['designationDesc']?.invalid &&
@@ -178,49 +181,49 @@
                 "
               >
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['required']"
                   >Please enter Designation Description</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc'].errors?.['pattern']"
                   >Please enter valid Designation Description
                 </span>
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['leadingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['trailingSpace']"
                   >Leading space not allowed</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['blank']"
                   >No whitespaces are allowed</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['whitespace']"
                   >Field can not be empty</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['trailingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
                   >Trailing space not allowed</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['trailingSpace'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
                   >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="designationForm.controls['designationDesc']?.errors?.['descMaxLength'] && !designationForm.controls['designationDesc'].errors?.['pattern'] && !designationForm.controls['designationDesc']?.errors?.['leadingSpace']"
                   >Maximum 250 characters are allowed</span
                 >

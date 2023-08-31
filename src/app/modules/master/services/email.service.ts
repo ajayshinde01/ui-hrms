@@ -16,7 +16,7 @@ export class EmailService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://192.168.1.62:7010/data-table-metadata/email-info'
+      'http://192.168.1.16:7010/data-table-metadata/email-info'
     );
   }
 
@@ -24,46 +24,13 @@ export class EmailService {
     params: HttpParams
   ): Observable<{ content: Array<Email>; totalElements: number }> {
     return this.http.get<{ content: Array<Email>; totalElements: number }>(
-      'http://192.168.1.62:7010/email/get',
+      'http://192.168.1.16:7010/email/get',
       {
         params: params,
       }
     );
   }
 
-  // createEmail(email:Email): Observable<Email> {
-  //   console.log(email);
-  //   return this.http.post<Email>(
-  //     'http://192.168.1.16:7010/email/send',
-  //     email
-  //   );
-
-  // }
-
-
-  // createEmail(email: Email, file: File): Observable<any> {
-  //   const formData: FormData = new FormData();
-  //   formData.append('file', file);
-  //   console.log(email);
-  //   console.log(file);
-  // console.log(formData);
-  //   return this.http.post('http://192.168.1.16:7010/email/send', formData);
-  // }
-
-  //  createEmail(email: Email, file: File): Observable<any> {
-  //   const formData: FormData = new FormData();
-  //   formData.append('file', file);
-  // console.log(formData);
-  //   return this.http.post('http://192.168.1.16:7010/email/send', formData);
-  // }
-
-  //   createEmail(mailRequest:FormData,file:File): Observable<any> {
-      
-  
-  //   return this.http.post('http://192.168.1.16:7010/email/send', mailRequest);
-  // }
-
-//Kiran
       createEmail(formData:FormData): Observable<any> {
  
         const httpOptions = {
@@ -73,17 +40,17 @@ export class EmailService {
           })
         };
   
-    return this.http.post('http://192.168.1.62:7010/email/send', formData);
+    return this.http.post('http://192.168.1.16:7010/email/send', formData);
   }
   
   
-  deleteEmail(id: number): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7010/template/' +
-        id +
-        '?updatedBy=Admin'
-    );
-  }
+  // deleteEmail(id: number): Observable<ApiResponse> {
+  //   return this.http.delete<ApiResponse>(
+  //     'http://192.168.1.16:7010/template/' +
+  //       id +
+  //       '?updatedBy=Admin'
+  //   );
+  // }
   notify(message: string) {
     const toastrConfig: Partial<IndividualConfig> = {
       timeOut: 2500,

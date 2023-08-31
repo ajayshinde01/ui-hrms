@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
           // Need to store jwt token in session storage and route it to the landing page.
           sessionStorage.setItem('userRole', response.role);
           sessionStorage.setItem('jwtToken', response.jwtToken);
+          sessionStorage.setItem('orgCode', response.orgCode);
+
+
           this.router.navigate(['/master/dashboard']);
         },
         (error: any) => {

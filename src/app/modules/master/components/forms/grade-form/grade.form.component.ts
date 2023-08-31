@@ -32,6 +32,7 @@ export class GradeFormComponent {
   actionLabel: string = 'Save';
   button: boolean = false;
   isDisabled: boolean = false;
+  orgCode=sessionStorage.getItem('orgCode')
   gradeTypeOptions: { gradeType: Array<GradeType> } = {
     gradeType: [],
   };
@@ -123,7 +124,7 @@ export class GradeFormComponent {
       ],
       gradeType: ['', Validators.required],
       orgCode: [
-        '',
+        { value: this.orgCode, disabled: true },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -155,6 +156,7 @@ export class GradeFormComponent {
     this.isDisabled = false;
     if (this.gradeForm.valid) {
       this.gradeForm.get('gradeId')?.enable();
+      this.gradeForm.get('orgCode')?.enable();
       const formData = this.gradeForm.value;
       formData.updatedBy = 'Admin';
 

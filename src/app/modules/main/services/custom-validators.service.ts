@@ -30,7 +30,7 @@ export class CustomValidators {
   static maxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (typeof value === 'string' && value && value.length > maxLength) {
+      if (typeof value === 'string' && value && value.toString().length > maxLength) {
         return { maxLength: `Maximum ${maxLength} characters are allowed.` };
       }
       return null;
@@ -46,6 +46,16 @@ export class CustomValidators {
       return null;
     };
   }
+  static validAddressFormat(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const addressRegex = /^[a-zA-Z0-9 .,\-\/#+]+$/;
+      if (value && !addressRegex.test(value)) {
+        return { validAddressFormat: true };
+      }
+      return null;
+    };
+  }
 
   static validDateFormat(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -53,6 +63,28 @@ export class CustomValidators {
       const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
       if (value && !dateRegex.test(value)) {
         return { validDateFormat: true };
+      }
+      return null;
+    };
+  }
+
+  static validCompanyFormat(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const addressRegex = /^[A-Za-z0-9 .-]{1,}$/;
+      if (value && !addressRegex.test(value)) {
+        return { validCompanyFormat: true };
+      }
+      return null;
+    };
+  }
+
+  static validDesignationFormat(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const addressRegex = /^[A-Za-z0-9 .-]{1,}$/;
+      if (value && !addressRegex.test(value)) {
+        return { validDesignationFormat: true };
       }
       return null;
     };
@@ -89,6 +121,7 @@ export class CustomValidators {
   static validNoticePeriod(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
+      console.log(value)
       if (value && !/^\d+$/.test(value)) {
         return { validNoticePeriod: true };
       }
@@ -109,10 +142,58 @@ export class CustomValidators {
   static noticePeriodMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
+      console.log(value)
 
-      if (value && value.length > maxLength) {
+      if (value && value.toString().length > maxLength) {
         return {
           noticePeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  static designationPeriodMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value)
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          designationPeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  static addressPeriodMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value)
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          addressPeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+
+
+  static maxLengthOfCompany(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value)
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          maxLengthOfCompany: `Maximum ${maxLength} characters are allowed.`,
         };
       }
 
@@ -260,6 +341,14 @@ export class CustomValidators {
       validEmailFormat: `Please enter valid email format`,
       validVisaDate: `should be grater than today`,
       noticePeriodMaxLength: `Maximum 2 number are allowed`,
+      graterWorkExperince: `To Date should be greater than From Date`,
+      maxLengthOfCompany: `Maximum 50 character are allowed`,
+      designationPeriodMaxLength: `Maximum 50 number are allowed`,
+      validAddressFormat: `Please enter valid Address`,
+      addressPeriodMaxLength: `Maximum 50 character are allowed`,
+      validCompanyFormat: `Please enter valid Company Name`,
+      validDesignationFormat: `Please enter valid Designation`
+
     };
     return errorMessages[errorKey] || 'Validation error';
   }
