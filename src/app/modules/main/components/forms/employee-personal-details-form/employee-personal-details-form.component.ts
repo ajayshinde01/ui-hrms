@@ -77,7 +77,7 @@ export class EmployeePersonalDetailsFormComponent {
       panCardNumber:['',[Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
       panCardName:[''],
       panCardFile:[''],
-      bankAccountNumber:['',[Validators.pattern('^\d{9,18}$')]],
+      bankAccountNumber:['',[Validators.pattern('^[0-9]{9,18}$')]],
       bankName:[''],
       ifscCode:['',[Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')]],
       uanNumber:[''],
@@ -89,6 +89,25 @@ export class EmployeePersonalDetailsFormComponent {
       orgCode: "AVI01"
 
     });
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.employeePersonalDetailsForm.get(controlName);
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.employeePersonalDetailsForm.get(controlName);
+
+    console.log('controlName' + controlName);
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+
+    return '';
   }
 
   collectQueryParams() {
