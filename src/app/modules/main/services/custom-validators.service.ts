@@ -223,6 +223,8 @@ export class CustomValidators {
       countryCode: 'Country Code',
       visaNumber: 'Visa Number',
       validDate: 'Valid Date',
+
+      //employee address form
       addressType: 'Address Type',
       address1: 'Address 1',
       address2: 'Address 2',
@@ -235,11 +237,17 @@ export class CustomValidators {
       city: 'City',
       postcode: 'Post Code',
 
+      //emegency contact form
+      emergencyContactName: 'Name',
+      emergencyContactNumber: 'Number',
+      relation: 'Relation',
+
       //educational qualification form
       educationalQualification: 'Educational Qualification',
       qualificationLevel: 'Qualification Level',
       instituteName: 'School/University Name',
       passingYear: 'Passing Year',
+
       //work Experince
       companyName: 'Comany Name',
       designation: 'Designation',

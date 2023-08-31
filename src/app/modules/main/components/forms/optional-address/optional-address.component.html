@@ -1,10 +1,14 @@
-<form [formGroup]="addressForm">
+<form [formGroup]="optionalAddressForm">
   <div class="col-lg-4">
     <br />
     <mat-label>Address Type</mat-label>
     <mat-form-field appearance="outline" color="primary">
-      <mat-select formControlName="addressType" placeholder="Select">
-        <mat-option value="PERMANENT">PERMANENT</mat-option>
+      <mat-select
+        formControlName="addressType"
+        placeholder="Select"
+        [disabled]="true"
+      >
+        <mat-option value="CORRESPONDENCE">CORRESPONDENCE</mat-option>
       </mat-select>
       <mat-error *ngIf="isControlInvalid('addressType')">
         {{ getErrorMessage("addressType") }}
@@ -162,11 +166,9 @@
       _ngcontent-ng-c812429062=""
       class="btn btn-primary px-4 float-right profile-save-btn"
       (click)="onSubmit()"
-      [disabled]="!addressForm.valid"
+      [disabled]="!optionalAddressForm.valid"
     >
       {{ actionLabel }}
     </button>
   </div>
 </form>
-<mat-divider></mat-divider>
-<app-optional-address></app-optional-address>

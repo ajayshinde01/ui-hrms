@@ -27,10 +27,10 @@ export class AddressService {
     );
   }
 
-  getAddressById(id: number): Observable<Address> {
+  getAddressById(id: number, addressType: string): Observable<Address> {
     console.log('get address by employee id :' + id);
     return this.http.get<Address>(
-      `http://192.168.1.16:7000/employee/address/${id}/get-address`
+      `http://192.168.1.16:7000/employee/address/${id}/${addressType}`
     );
   }
 
