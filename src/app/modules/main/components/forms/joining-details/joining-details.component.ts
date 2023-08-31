@@ -96,15 +96,10 @@ export class JoiningDetailsComponent implements OnInit {
         '',
         [
           Validators.required,
-
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.noTrailingSpace(),
-
           CustomValidators.noticePeriodMaxLength(2),
-
           CustomValidators.validNoticePeriod(),
         ],
       ],
@@ -231,6 +226,7 @@ export class JoiningDetailsComponent implements OnInit {
 
       if (this.actionLabel === 'Update') {
         formData.id = this.response;
+        formData.updatedBy = "Admin"
 
         this.joiningDetailsService
           .updateJoiningDetails(this.queryParams.id, formData)
