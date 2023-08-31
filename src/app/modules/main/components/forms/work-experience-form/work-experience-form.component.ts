@@ -45,7 +45,7 @@ export class WorkExperienceFormComponent implements OnInit {
     private route: ActivatedRoute,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.collectQueryParams();
@@ -90,31 +90,37 @@ export class WorkExperienceFormComponent implements OnInit {
     this.workExperienceForm = this.formBuilder.group({
       id: [''],
 
-      companyName: ['',
-        [Validators.required,
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),]],
+      companyName: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
 
-      designation: ['',
-        [Validators.required,
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),]],
+      designation: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
 
-      fromDate: ['',
-        [Validators.required,
-        ]],
+      fromDate: ['', [Validators.required]],
 
-      toDate: ['',
-        [Validators.required,
-        ]],
+      toDate: ['', [Validators.required]],
 
-      address: ['',
-        [Validators.required,
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),]],
+      address: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
 
       createdBy: ['Admin'],
 
@@ -131,7 +137,7 @@ export class WorkExperienceFormComponent implements OnInit {
   onSubmit() {
     if (this.workExperienceForm.valid) {
       const formData = this.workExperienceForm.value;
-      formData.createdBy = 'Admin'
+      formData.createdBy = 'Admin';
 
       if (this.actionLabel === 'Save') {
         this.workExperienceService
@@ -156,7 +162,7 @@ export class WorkExperienceFormComponent implements OnInit {
       }
 
       if (this.actionLabel === 'Update') {
-        formData.updatedBy = "Admin"
+        formData.updatedBy = 'Admin';
         this.workExperienceService
 
           .updateWorkExperience(formData, this.employeeId)
