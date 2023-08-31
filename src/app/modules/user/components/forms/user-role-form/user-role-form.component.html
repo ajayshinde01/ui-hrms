@@ -77,54 +77,54 @@
           <mat-label>Description</mat-label>
         </div>
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
-            <div class="form-controls">
-              <input matInput formControlName="description" />
-              <div
-                *ngIf="
-                  descriptionControl?.invalid &&
-                  descriptionControl?.touched &&
-                  descriptionControl?.errors
-                "
+          <!-- <mat-form-field appearance="outline" color="primary"> -->
+          <div class="text-area">
+            <textarea matInput formControlName="description"></textarea>
+            <div
+              *ngIf="
+                descriptionControl?.invalid &&
+                descriptionControl?.touched &&
+                descriptionControl?.errors
+              "
+            >
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['required']"
+                >Please enter Description
+              </span>
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['pattern']"
+                >Please enter valid Description
+              </span>
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['leadingSpace'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['trailingSpace']"
+                >Leading space not allowed</span
               >
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['required']"
-                  >Please enter Description
-                </span>
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['pattern']"
-                  >Please enter valid Description
-                </span>
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['leadingSpace'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['trailingSpace']"
-                  >Leading space not allowed</span
-                >
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['whitespace'] && !descriptionControl?.errors?.['leadingSpace'] && !descriptionControl?.errors?.['trailingSpace']  && !descriptionControl?.errors?.['pattern']"
-                  >No whitespaces are allowed</span
-                >
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['trailingSpace'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
-                  >Trailing space not allowed</span
-                >
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['trailingSpace'] && !descriptionControl?.errors?.['pattern'] && descriptionControl?.errors?.['leadingSpace']"
-                  >Trailing, Leading spaces not allowed</span
-                >
-                <span
-                  class="validate-text"
-                  *ngIf="descriptionControl?.errors?.['nameMaxLength'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
-                  >Description should not exceed 250 characters</span
-                >
-              </div>
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['whitespace'] && !descriptionControl?.errors?.['leadingSpace'] && !descriptionControl?.errors?.['trailingSpace']  && !descriptionControl?.errors?.['pattern']"
+                >No whitespaces are allowed</span
+              >
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['trailingSpace'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
+                >Trailing space not allowed</span
+              >
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['trailingSpace'] && !descriptionControl?.errors?.['pattern'] && descriptionControl?.errors?.['leadingSpace']"
+                >Trailing, Leading spaces not allowed</span
+              >
+              <span
+                class="validate-text"
+                *ngIf="descriptionControl?.errors?.['nameMaxLength'] && !descriptionControl?.errors?.['pattern'] && !descriptionControl?.errors?.['leadingSpace']"
+                >Description should not exceed 250 characters</span
+              >
             </div>
-          </mat-form-field>
+          </div>
+          <!-- </mat-form-field> -->
         </div>
       </div>
     </div>

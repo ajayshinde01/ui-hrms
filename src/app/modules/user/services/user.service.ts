@@ -20,7 +20,7 @@ export class UserService {
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
-      'http://192.168.1.16:7080/data-table-metadata/user'
+      'http://localhost:7080/data-table-metadata/user'
     );
   }
 
@@ -28,7 +28,7 @@ export class UserService {
     params: HttpParams
   ): Observable<{ content: Array<User>; totalElements: number }> {
     return this.http.get<{ content: Array<User>; totalElements: number }>(
-      'http://192.168.1.16:7080/user/search',
+      'http://localhost:7080/user/search',
       {
         params: params,
       }
@@ -36,24 +36,24 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>('http://192.168.1.16:7080/user/create', user);
+    return this.http.post<User>('http://localhost:7080/user/create', user);
   }
 
   getUsers(): Observable<Array<User>> {
-    return this.http.get<Array<User>>('http://192.168.1.16:7080/user/get-all');
+    return this.http.get<Array<User>>('http://localhost:7080/user/get-all');
   }
 
   searchUserById(userId: string): Observable<User> {
-    return this.http.get<User>('http://192.168.1.16:7080/user/' + userId);
+    return this.http.get<User>('http://localhost:7080/user/' + userId);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>('http://192.168.1.16:7080/user', user);
+    return this.http.put<User>('http://localhost:7080/user', user);
   }
 
   deleteUser(userId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7080/user/' + userId
+      'http://localhost:7080/user/' + userId
     );
   }
 
