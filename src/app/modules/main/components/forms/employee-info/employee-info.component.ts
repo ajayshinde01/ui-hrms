@@ -32,7 +32,7 @@ export class EmployeeInfoComponent implements OnInit {
   isAgeDisabled: boolean = false;
   age: number;
   selectedDate: Date;
-  url: String = 'assets/profile-img.jpg';
+  url: String = 'assets/profile-img.png';
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef;
   photo: string;
   photoUpdated: any;
@@ -282,7 +282,7 @@ export class EmployeeInfoComponent implements OnInit {
       this.fileUploadService.removeImage(this.url).subscribe((res) => {
         console.log('received response', res);
         //this.url = res['message'];
-        this.url = 'assets/profile-img.jpg';
+        this.url = 'assets/profile-img.png';
       });
     }
   }
