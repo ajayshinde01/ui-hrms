@@ -51,7 +51,7 @@ export class JoiningDetailsComponent implements OnInit {
     private joiningDetailsService: JoiningDetailsService,
 
     private employeeService: EmployeeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -112,6 +112,8 @@ export class JoiningDetailsComponent implements OnInit {
       resignationDate: [
         '',
         [
+          Validators.required,
+
           CustomValidators.validResignationDate(currentDate),
 
           CustomValidators.futureDate(),
@@ -121,6 +123,8 @@ export class JoiningDetailsComponent implements OnInit {
       relievingDate: [
         '',
         [
+          Validators.required,
+
           CustomValidators.validRelievingDate(currentDate),
 
           CustomValidators.futureDate(),

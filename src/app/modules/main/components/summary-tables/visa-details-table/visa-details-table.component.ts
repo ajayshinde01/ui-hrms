@@ -15,6 +15,7 @@ import { ApiResponse } from '../../../models/response';
 })
 export class VisaDetailsTableComponent {
   [x: string]: any;
+  buttonVisible: Array<boolean> = [true, true, true];
   emp_id: any;
   visa_id: any;
   employeeVisaHeaders: { columnsMetadata: Array<ColumnsMetadata> };
@@ -85,7 +86,7 @@ export class VisaDetailsTableComponent {
     private router: Router,
     private matDialog: MatDialog,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getHeaders();

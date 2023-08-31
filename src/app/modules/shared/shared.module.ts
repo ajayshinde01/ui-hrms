@@ -4,9 +4,10 @@ import { DatatableComponent } from './components/datatable/datatable.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DataTableService } from './components/datatable/dataTable.service';
+import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 
 @NgModule({
-  declarations: [DatatableComponent],
+  declarations: [DatatableComponent, DeletePopupComponent],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [DatatableComponent],
   providers: [DataTableService],
