@@ -21,11 +21,7 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="emergencyContactName"
-              />
+              <input matInput formControlName="emergencyContactName" />
               <mat-error *ngIf="isControlInvalid('emergencyContactName')">
                 {{ getErrorMessage("emergencyContactName") }}
               </mat-error>
@@ -43,11 +39,7 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="emergencyContactNumber"
-              />
+              <input matInput formControlName="emergencyContactNumber" />
               <mat-error *ngIf="isControlInvalid('emergencyContactNumber')">
                 {{ getErrorMessage("emergencyContactNumber") }}
               </mat-error>

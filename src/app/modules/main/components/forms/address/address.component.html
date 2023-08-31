@@ -3,9 +3,7 @@
     <br />
     <mat-label>Address Type</mat-label>
     <mat-form-field appearance="outline" color="primary">
-      <mat-select formControlName="addressType" placeholder="Select">
-        <mat-option value="PERMANENT">PERMANENT</mat-option>
-      </mat-select>
+      <input matInput formControlName="addressType" readonly />
       <mat-error *ngIf="isControlInvalid('addressType')">
         {{ getErrorMessage("addressType") }}
       </mat-error>
@@ -15,7 +13,7 @@
     <div class="col-lg-4">
       <mat-label>Address 1</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="address1" placeholder="Placeholder" />
+        <input matInput formControlName="address1" />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         <mat-error *ngIf="isControlInvalid('address1')">
           {{ getErrorMessage("address1") }}
@@ -25,7 +23,7 @@
     <div class="col-lg-4">
       <mat-label>Address 2</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="address2" placeholder="Placeholder" />
+        <input matInput formControlName="address2" />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         <mat-error *ngIf="isControlInvalid('address2')">
           {{ getErrorMessage("address2") }}
@@ -35,7 +33,7 @@
     <div class="col-lg-4">
       <mat-label>Landmark</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="landmark" placeholder="Placeholder" />
+        <input matInput formControlName="landmark" />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         <mat-error *ngIf="isControlInvalid('landmark')">
           {{ getErrorMessage("landmark") }}
@@ -51,11 +49,7 @@
     <div class="col-lg-1">
       <mat-label>Years</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="tenureYear"
-          placeholder="Placeholder"
-        />
+        <input matInput formControlName="tenureYear" />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         <mat-error *ngIf="isControlInvalid('tenureYear')">
           {{ getErrorMessage("tenureYear") }}
@@ -65,11 +59,7 @@
     <div class="col-lg-1">
       <mat-label>Months</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="tenureMonth"
-          placeholder="Placeholder"
-        />
+        <input matInput formControlName="tenureMonth" />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         <mat-error *ngIf="isControlInvalid('tenureMonth')">
           {{ getErrorMessage("tenureMonth") }}
@@ -79,7 +69,7 @@
     <div class="col-lg-4">
       <mat-label>Post Code</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="postcode" placeholder="Placeholder" />
+        <input matInput formControlName="postcode" />
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         <mat-error *ngIf="isControlInvalid('postcode')">
           {{ getErrorMessage("postcode") }}
@@ -160,7 +150,7 @@
   <div class="form-footer">
     <button
       _ngcontent-ng-c812429062=""
-      class="btn btn-primary px-4 float-right profile-save-btn"
+      class="btn btn-primary px-4 float-right profile-save-btn address-details-save-btn"
       (click)="onSubmit()"
       [disabled]="!addressForm.valid"
     >

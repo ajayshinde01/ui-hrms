@@ -8,3 +8,8 @@
 .col-lg-1 {
   flex-basis: 11.5%; /* Adjust the width percentage as needed */
 }
+
+:host ::ng-deep .address-details-save-btn {
+  background-color: #534686;
+  border: #534686;
+}
