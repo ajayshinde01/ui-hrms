@@ -95,12 +95,9 @@ export class JoiningDetailsComponent implements OnInit {
       noticePeriod: [
         '',
         [
-          Validators.required,
-          CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
-          CustomValidators.noTrailingSpace(),
           CustomValidators.noticePeriodMaxLength(2),
           CustomValidators.validNoticePeriod(),
+          Validators.required,
         ],
       ],
 

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class WorkExperienceFormComponent implements OnInit {
     private route: ActivatedRoute,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.collectQueryParams();
@@ -54,12 +54,10 @@ export class WorkExperienceFormComponent implements OnInit {
   }
 
   collectQueryParams() {
-    debugger;
+
 
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
-
-      debugger;
 
       if (
         this.data['workExperienceId'] != undefined &&
@@ -96,6 +94,8 @@ export class WorkExperienceFormComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLengthOfCompany(50),
+          CustomValidators.validCompanyFormat()
         ],
       ],
 
@@ -104,14 +104,17 @@ export class WorkExperienceFormComponent implements OnInit {
         [
           Validators.required,
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.designationPeriodMaxLength(100),
+          CustomValidators.validDesignationFormat()
         ],
       ],
 
       fromDate: ['', [Validators.required]],
 
-      toDate: ['', [Validators.required]],
+      toDate: ['', [
+        Validators.required,
+        this.graterWorkExperince()]],
 
       address: [
         '',
@@ -119,6 +122,7 @@ export class WorkExperienceFormComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.validAddressFormat()
         ],
       ],
 
@@ -185,6 +189,29 @@ export class WorkExperienceFormComponent implements OnInit {
       }
     }
   }
+
+  graterWorkExperince(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const value = control.value as Date;
+      console.log(value)
+      if (control.touched) {
+        if (value != null) {
+          const fromdate = this.workExperienceForm.get('fromDate')?.value
+          console.log(fromdate)
+          if (fromdate == null) {
+            return { fromdate: true };
+          }
+          if (fromdate > value) {
+            return { graterWorkExperince: true }
+          }
+        }
+      }
+
+      return null;
+    }
+  }
+
+
 
   isControlInvalid(controlName: string): boolean {
     const control = this.workExperienceForm.get(controlName);
