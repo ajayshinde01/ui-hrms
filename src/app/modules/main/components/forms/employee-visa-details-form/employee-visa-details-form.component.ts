@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Data, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { EmployeeService } from 'src/app/modules/main/services/employee.service'
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 import { CommonMaster } from '../../../models/common-master.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import { FileUploadService } from '../../../services/file-upload.service';
 
 @Component({
   selector: 'app-employee-visa-details-form',
@@ -26,9 +27,13 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   visa: Visa;
   emp_id:any;
   visaid:number;
-  files: File[];
+  files: File;
   visaFile:any;
   FleSizeError: string='';
+  url: any;
+  file_name: any;
+  viewFile: any;
+
   constructor(
     private _mdr: MatDialogRef<EmployeeVisaDetailsFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Visa,
@@ -37,7 +42,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-
+    private fileUploadService: FileUploadService,
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +51,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
    // console.log("visaid", this.visaid);   
     this.initForm();    
     this.fetchCountryCode();
-   // this.collectQueryParams();
+    this.collectQueryParams();
    this.getById(this.emp_id);
     console.log("dfd",this.inputFromParent);
     console.log('Query parameter value:', this.emp_id);
@@ -68,15 +73,31 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         ]
        ],
         visaFile:[''],
-        validDate:['', [Validators.required, this.dateValidator()]],
+        validDate:['', [this.validVisaDate()]]//, [this.validVisaDate()]],
         
       });
+    }
+
+     validVisaDate(): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const today = new Date().getTime();
+        console.log("validVisaDate",control.value);
+        if (!(control && control.value)) {
+          // if there's no control or no value, that's ok
+          return null;
+        }
+    
+        // return null if there's no errors
+        return control.value.getTime() < today
+          ? { invalidDate: 'Visa Date should be a future date' }
+          : null;
+      };
     }
 
      dateValidator(): ValidatorFn {
       return (control: AbstractControl): { [key: string]: any } | null => {
         const today = new Date().getTime();
-    
+        console.log("datevalidator",control.value);
         if (!(control && control.value)) {
           // if there's no control or no value, that's ok
           return null;
@@ -117,7 +138,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           this.actionLabel = 'Save';
         }
       });*/
-      if (this.emp_id != undefined) {
+      if (this.data.id !=undefined && this.data.actionLabel) {
         console.log(this.emp_id);
         this.actionLabel = 'Update';
         this.getById(this.emp_id);
@@ -137,8 +158,11 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           this.employeeVisaDetailsForm.patchValue(response);
           this.employeeVisaDetailsForm.controls["countryCode"].patchValue(response.countryCode)
           this.visa = response;
+          this.viewFile=response['visaFile'];
+          console.log('response',response);
         },
         err => {
+          this.actionLabel='Update';
          console.log('oops',err);
         });
       }
@@ -173,42 +197,51 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       }else{
         this.FleSizeError='';
       }
+
+      if (file) {
+        this.fileUploadService.uploadImage(file).subscribe((res) => {
+          console.log('received response', res);
+          this.url = res['message'];
+          this.file_name = res['message'];
+          this.viewFile=res['message'];
+        });
+      }
     }
   }
 
   onSubmit() {
     if (this.employeeVisaDetailsForm.valid) {
-      
-      const formData = this.employeeVisaDetailsForm.value;
-     
-      formData["visaFile"]= this.files;
-
+      console.log("this.files",this.files);
+      console.log("action label",this.emp_id);
+    this.employeeVisaDetailsForm.value.visaFile=this.file_name;
+    const formData = this.employeeVisaDetailsForm.value;
       if (this.actionLabel === 'Save') {
-        this.employeeService.AddVisaDetails(formData,this.emp_id).subscribe(
+        this.employeeService.AddVisaDetails(formData, this.emp_id).subscribe(
           (response: Visa) => {
             this.employeeService.notify('Data Saved Successfully...');
-            this.router.navigate(['/main/employee-form']);
-
-            
+            this.router.navigate(['/main/employee-form']);   
+            this.Close(true);         
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );
       }
       if (this.actionLabel === 'Update') {
+        console.log("test",this.employeeVisaDetailsForm.value);
         this.employeeService.updateEmployeevisa(formData, this.emp_id).subscribe(
           (response: Visa) => {
             this.employeeService.notify('Update Successfully...');
            this.router.navigate(['/main/employee-info'], {
               queryParams: { id: this.emp_id, actionLabel: 'Save' },
             });
+            this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );

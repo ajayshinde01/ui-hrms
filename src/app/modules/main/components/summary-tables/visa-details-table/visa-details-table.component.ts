@@ -197,10 +197,14 @@ export class VisaDetailsTableComponent {
 
   OpenModal() {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
+      width: '500px',
+      panelClass: 'my-dialog',
       disableClose: true,
     });
 
-    /* this.matDialogRef.afterClosed().subscribe((res: any) => {
+    
+
+   /* this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
 
       if (res == true) {
@@ -210,8 +214,9 @@ export class VisaDetailsTableComponent {
 
   OpenModalForEdit(id: string) {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
-      data: { id: id },
-
+      data: { id: id , actionLabel: 'Save'},
+      width: '500px',
+      panelClass: 'my-dialog',
       disableClose: true,
     });
 

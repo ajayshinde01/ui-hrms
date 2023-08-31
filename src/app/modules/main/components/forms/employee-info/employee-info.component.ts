@@ -32,7 +32,7 @@ export class EmployeeInfoComponent implements OnInit {
   isAgeDisabled: boolean = false;
   age: number;
   selectedDate: Date;
-  url: String = 'assets/profile-img.jpg';
+  url: String = 'assets/profile-img.png';
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef;
   photo: string;
   photoUpdated: any;
@@ -263,7 +263,7 @@ export class EmployeeInfoComponent implements OnInit {
 
     // save the image in the back end database
     // and get the photo url
-    this.photo = 'xxxx';
+   // this.photo = 'xxxx';
     this.photoUpdated.emit(this.photo);
   }
 
@@ -278,11 +278,11 @@ export class EmployeeInfoComponent implements OnInit {
     //this.photoUpdated.emit(this.photo);
     console.log('received request', this.photo);
     // let photoUpdated1=this.photo;
-    if (this.photo) {
-      this.fileUploadService.removeImage(this.photo).subscribe((res) => {
+    if (this.url) {
+      this.fileUploadService.removeImage(this.url).subscribe((res) => {
         console.log('received response', res);
         //this.url = res['message'];
-        this.url = 'assets/profile-img.jpg';
+        this.url = 'assets/profile-img.png';
       });
     }
   }
@@ -313,6 +313,8 @@ export class EmployeeInfoComponent implements OnInit {
   onSubmit() {
     if (this.employeeForm.valid) {
       const formData = this.employeeForm.value;
+      this.employeeForm.value.profileImage=this.url;
+      console.log("employeeForm",this.employeeForm.value);
       if (this.actionLabel === 'Save') {
         this.employeeService.createEmployee(formData).subscribe(
           (response: Employees) => {
@@ -351,7 +353,13 @@ export class EmployeeInfoComponent implements OnInit {
       .searchEmployeeById(id)
       .subscribe((response: Employees) => {
         this.employeeForm.patchValue(response);
-        // this.employee = response;
+        this.url = response.profileImage;
+         //this.photo =this.url; 
+         if(this.url !=undefined){
+       //  const filepath=tst.split('/').pop()[0];
+        }
+      //   console.log("filename",filename);
+
       });
   }
 
@@ -362,6 +370,7 @@ export class EmployeeInfoComponent implements OnInit {
         console.log('received response', res);
         this.url = res['message'];
         this.photo = res['file'];
+        console.log("photo",this.photo);
       });
     }
   }
