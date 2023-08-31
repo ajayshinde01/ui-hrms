@@ -68,7 +68,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
          CustomValidators.noLeadingSpace(),
          CustomValidators.whitespaceValidator(),
          CustomValidators.noTrailingSpace(),
-         CustomValidators.maxLength(16),
+         CustomValidators.maxLength(13),
          Validators.pattern('^4[0-9]{12}(?:[0-9]{3})?$'),
         ]
        ],
