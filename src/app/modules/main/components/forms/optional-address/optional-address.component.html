@@ -1,14 +1,16 @@
 <form [formGroup]="optionalAddressForm">
-  <div class="col-lg-4">
+  <!-- <div class="col-lg-4">
     <br />
     <mat-label>Address Type</mat-label>
     <mat-form-field appearance="outline" color="primary">
-      <input matInput formControlName="addressType" readonly />
+      <input matInput formControlName="addressType" readonly />CORRESPONDENCE
       <mat-error *ngIf="isControlInvalid('addressType')">
         {{ getErrorMessage("addressType") }}
       </mat-error>
     </mat-form-field>
-  </div>
+  </div> -->
+  <h2>PERMANENT ADDRESS</h2>
+
   <div class="row mm">
     <div class="col-lg-4">
       <mat-label>Address 1</mat-label>
