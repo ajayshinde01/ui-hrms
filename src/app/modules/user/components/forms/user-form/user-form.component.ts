@@ -28,6 +28,7 @@ export class UserFormComponent {
   allRoles: UserRole[] = [];
   isDisabled: boolean = false;
   allUserStatus: CommonMaster[] = [];
+  enabled: String = '';
 
   constructor(
     private _mdr: MatDialogRef<UserFormComponent>,
@@ -102,7 +103,7 @@ export class UserFormComponent {
             whitespaceValidator,
             emailMaxLength,
             Validators.pattern(
-              '^(?!.*[._-]{2})[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
+              '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
             ),
           ],
         ],
@@ -193,7 +194,10 @@ export class UserFormComponent {
   onSubmit() {
     if (this.userForm.valid) {
       const formData = this.userForm.value;
-      console.log(this.queryParams);
+      console.log(formData);
+      if (formData.enabled === undefined) {
+        formData.enabled = this.enabled;
+      }
 
       if (this.actionLabel === 'Save') {
         this.userService.createUser(formData).subscribe(
@@ -235,6 +239,7 @@ export class UserFormComponent {
       console.log('GET-SEARCH BY ID Request successful', response);
       this.userForm.patchValue(response);
       this.user = response;
+      this.enabled = response.enabled;
     });
   }
 
