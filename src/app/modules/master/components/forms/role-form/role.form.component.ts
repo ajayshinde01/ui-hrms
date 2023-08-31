@@ -30,6 +30,7 @@ export class RoleFormComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
+  orgCode=sessionStorage.getItem('orgCode')
   params: HttpParams = new HttpParams();
   roleMetaData: { content: Array<Role>; totalElements: number } = {
     content: [],
@@ -48,6 +49,7 @@ export class RoleFormComponent {
     //this.searchFunction(this.params);
   }
   ngOnInit(): void {
+    
     this.collectQueryParams();
     this.initForm();
     this.roleForm.get('roleId')?.valueChanges.subscribe((value: string) => {
@@ -117,7 +119,9 @@ export class RoleFormComponent {
         ],
       ],
       orgCode: [
-        '',
+   
+
+        { value: this.orgCode, disabled: true },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -144,6 +148,7 @@ export class RoleFormComponent {
   onSumbit() {
     if (this.roleForm.valid) {
       this.roleForm.get('roleId')?.enable();
+      this.roleForm.get('orgCode')?.enable();
       const formData = this.roleForm.value;
       formData.updatedBy = 'Admin';
 

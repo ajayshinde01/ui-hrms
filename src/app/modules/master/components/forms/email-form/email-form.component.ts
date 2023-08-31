@@ -17,6 +17,8 @@ import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { Email } from '../../../models/email';
 import { EmailService } from '../../../services/email.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { whitespaceValidator } from '../Validations/whiteSpace.validator';
+import { emailMaxLength } from 'src/app/modules/user/components/forms/Validations/emailMaxLength.validator';
 @Component({
   selector: 'app-email-form',
   templateUrl: './email-form.component.html',
@@ -49,6 +51,7 @@ export class EmailFormComponent implements OnInit {
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
+
   }
 
   collectQueryParams() {
@@ -82,9 +85,39 @@ export class EmailFormComponent implements OnInit {
   initForm() {
     this.emailForm = this.formBuilder.group({
       id: [''],
-      to: [''],
-      cc: [''],
-      subject: [''],
+      to: ['', 
+      [
+        Validators.required,
+        leadingSpaceValidator,
+        trailingSpaceValidator,
+        blankValidator,
+        whitespaceValidator,
+        emailMaxLength,
+        Validators.pattern(
+          '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
+        ),
+      ],],
+      cc: ['', 
+      [
+        Validators.required,
+        leadingSpaceValidator,
+        trailingSpaceValidator,
+        blankValidator,
+        whitespaceValidator,
+        emailMaxLength,
+        Validators.pattern(
+          '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
+        ),
+      ]],
+      subject: ['',
+      [
+        Validators.required,
+        leadingSpaceValidator,
+        trailingSpaceValidator,
+        nameMaxLength,
+        blankValidator,
+        Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
+      ] ],
       dateTime: [''],
       timeZone: ['Asia/Kolkata'],
       body: [''],
@@ -96,15 +129,12 @@ export class EmailFormComponent implements OnInit {
 
   onSubmit() {
     if (this.emailForm.valid) {
+      console.log(this.emailForm)
       const formData = new FormData();
       const value = { ...this.emailForm.getRawValue() };
-
       value.to = value.to.split(',');
       value.cc = value.cc.split(',');
-
       formData.append('file', this.selectedFile);
-
-      // Convert value object to JSON blob
       let blob = new Blob([JSON.stringify(value)], { type: 'application/json' });
       formData.append('mailRequest', blob);
 

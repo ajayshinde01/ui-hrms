@@ -1,5 +1,5 @@
 <form [formGroup]="emailForm">
-  <div class="container" style="width: 750px; height: 770px">
+  <div class="container" style="width: 800px; height: 660px">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -19,10 +19,57 @@
           <mat-label>To</mat-label>
         </div>
         <div class="col-md-8">
-          <mat-form-field class="text-area text-two" appearance="outline">
-            <div class="form-controls text-two">
-              <textarea matInput formControlName="to" class="text-two">
-                </textarea>
+          <mat-form-field class="" appearance="outline">
+            <div class="form-controls">
+              <input
+              matInput
+              placeholder=""
+              formControlName="to"
+            />
+            <div
+            *ngIf="
+            emailForm.controls['to']?.invalid &&
+            emailForm.controls['to']?.touched &&
+            emailForm.controls['to']?.errors
+          "
+          >
+            <span
+              class="validate-text"
+              *ngIf="emailForm.controls['to']?.errors?.['required']"
+              >Please enter email id
+            </span>
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['pattern']"
+              >Please enter valid email id
+            </span>
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['leadingSpace'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['trailingSpace']"
+              >Leading space not allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['whitespace'] && !emailForm?.errors?.['leadingSpace'] && !emailForm?.errors?.['trailingSpace']  && !emailForm?.errors?.['pattern']"
+              >No whitespaces are allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['trailingSpace'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['leadingSpace']"
+              >Trailing space not allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['trailingSpace'] && !emailForm?.errors?.['pattern'] && emailForm?.errors?.['leadingSpace']"
+              >Trailing, Leading spaces not allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['emailMaxLength'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['leadingSpace']"
+              >Email id should not exceed 40 characters</span
+            >
+          </div>
+
 
 
             </div>
@@ -41,9 +88,54 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline">
             <div class="form-controls">
-              <textarea matInput formControlName="cc" placeholder="">
-
-                </textarea>
+              <input
+              matInput
+              placeholder=""
+              formControlName="cc"
+            />
+            <div
+            *ngIf="
+            emailForm.controls['cc']?.invalid &&
+            emailForm.controls['cc']?.touched &&
+            emailForm.controls['cc']?.errors
+          "
+          >
+            <span
+              class="validate-text"
+              *ngIf="emailForm.controls['cc']?.errors?.['required']"
+              >Please enter email id
+            </span>
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['pattern']"
+              >Please enter valid email id
+            </span>
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['leadingSpace'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['trailingSpace']"
+              >Leading space not allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['whitespace'] && !emailForm?.errors?.['leadingSpace'] && !emailForm?.errors?.['trailingSpace']  && !emailForm?.errors?.['pattern']"
+              >No whitespaces are allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['trailingSpace'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['leadingSpace']"
+              >Trailing space not allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['trailingSpace'] && !emailForm?.errors?.['pattern'] && emailForm?.errors?.['leadingSpace']"
+              >Trailing, Leading spaces not allowed</span
+            >
+            <span
+              class="validate-text"
+              *ngIf="emailForm?.errors?.['emailMaxLength'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['leadingSpace']"
+              >Email id should not exceed 40 characters</span
+            >
+          </div>
 
 
             </div>
@@ -61,7 +153,57 @@
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <input matInput placeholder="" formControlName="subject" />
+              <div
+              *ngIf="
+                emailForm.controls['subject']?.invalid &&
+                emailForm.controls['subject']?.touched &&
+                emailForm.controls['subject']?.errors
+              "
+            >
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['required']"
+                >Please enter subject
+              </span>
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject'].errors?.['pattern']"
+                >Please enter valid subject</span
+              >
 
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['blank']"
+                >No whitespaces are allowed</span
+              >
+
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['leadingSpace'] && !emailForm.controls['subject'].errors?.['pattern'] && !emailForm.controls['subject']?.errors?.['trailingSpace']"
+                >Leading space not allowed</span
+              >
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['whitespace']"
+                >Field can not be empty</span
+              >
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['trailingSpace'] && !emailForm.controls['subject'].errors?.['pattern'] && !emailForm.controls['subject']?.errors?.['leadingSpace']"
+                >Trailing space not allowed</span
+              >
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['trailingSpace'] && !emailForm.controls['subject'].errors?.['pattern'] && emailForm.controls['subject']?.errors?.['leadingSpace']"
+                >Trailing, Leading spaces not allowed</span
+              >
+
+              <span
+                class="validate-text"
+                *ngIf="emailForm.controls['subject']?.errors?.['nameMaxLength'] && !emailForm.controls['subject'].errors?.['pattern'] && !emailForm.controls['subject']?.errors?.['leadingSpace']"
+                >Maximum 100 characters are allowed</span
+              >
+            </div>
 
             </div>
           </mat-form-field>
@@ -108,7 +250,7 @@
         </div>
         <div class="col-md-8">
           <div class="form-controls">
-            <ckeditor [disabled]="false" [editor]="Editor" formControlName="body" #ckeditorEleRef>
+            <ckeditor [disabled]="false" [editor]="Editor" formControlName="body" #ckeditorEleRef >
 
             </ckeditor>
           </div>

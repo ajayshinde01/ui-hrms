@@ -40,6 +40,7 @@ export class DesignationFormComponent {
   actionLabel: string = 'Save';
   params: HttpParams = new HttpParams();
   errorMessage: string = '';
+  orgCode=sessionStorage.getItem('orgCode')
 
   constructor(
     private _mdr: MatDialogRef<DesignationFormComponent>,
@@ -147,7 +148,7 @@ export class DesignationFormComponent {
         ],
       ],
       orgCode: [
-        '',
+        { value: this.orgCode, disabled: true },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -180,6 +181,7 @@ export class DesignationFormComponent {
   onSumbit() {
     if (this.designationForm.valid) {
       this.designationForm.get('designationId')?.enable();
+      this.designationForm.get('orgCode')?.enable();
       const formData = this.designationForm.value;
       formData.updatedBy = 'Admin';
 

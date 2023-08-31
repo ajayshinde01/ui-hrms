@@ -42,6 +42,7 @@ export class DivisionComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
+  orgCode=sessionStorage.getItem('orgCode')
 
   constructor(
     private _mdr: MatDialogRef<DivisionComponent>,
@@ -140,7 +141,7 @@ export class DivisionComponent {
         ],
       ],
       orgCode: [
-        '',
+        { value: this.orgCode, disabled: true },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -158,6 +159,7 @@ export class DivisionComponent {
   onSubmit() {
     if (this.divisionForm.valid) {
       this.divisionForm.get('divisionId')?.enable();
+      this.divisionForm.get('orgCode')?.enable();
       const formData = this.divisionForm.value;
       formData.updatedBy = 'Admin';
       if (this.actionLabel === 'Save') {
