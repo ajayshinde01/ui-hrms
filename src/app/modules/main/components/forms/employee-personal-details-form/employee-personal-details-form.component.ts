@@ -1,5 +1,5 @@
   import { Component, Input, ViewEncapsulation } from '@angular/core';
-  import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+  import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
   import { ActivatedRoute, Data, Router } from '@angular/router';
   import { CustomValidators } from 'src/app/modules/main/services/custom-validators.service';
   import { EmployeeService } from 'src/app/modules/main/services/employee.service';
@@ -102,8 +102,8 @@
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace()
         ]],
-        passportIssueDate:[''],
-        passportValidity:[''],
+        passportIssueDate:['',[this.validIssueDate()]],
+        passportValidity:['',[this.validpassportValidityDate()]],
         passportFile:[''],
         placeOfIssue:['',[
           CustomValidators.noLeadingSpace(),
@@ -160,6 +160,38 @@
         orgCode: "AVI01"
 
       });
+    }
+
+    validIssueDate(): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const today = new Date().getTime();
+        console.log("validIssueDate",control.value);
+        if (!(control && control.value)) {
+          // if there's no control or no value, that's ok
+          return null;
+        }
+    
+        // return null if there's no errors
+        return control.value.getTime() < today
+          ? { invalidIssueDate: 'Passport Issue Date should be a future date' }
+          : null;
+      };
+    }
+
+    validpassportValidityDate(): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const today = new Date().getTime();
+        console.log("validpassportValidityDate",control.value);
+        if (!(control && control.value)) {
+          // if there's no control or no value, that's ok
+          return null;
+        }
+    
+        // return null if there's no errors
+        return control.value.getTime() < today
+          ? { invalidValidityDate: 'Valid Upto should be a future date' }
+          : null;
+      };
     }
 
     isControlInvalid(controlName: string): boolean {
