@@ -16,18 +16,19 @@ import { EmailService } from '../../../services/email.service';
 })
 export class EmailTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-  buttonVisible: Array<boolean> = [true, true, true];
+  buttonVisible: Array<boolean> = [true, false, false];
   matDialogRef: MatDialogRef<EmailFormComponent>;
 
   emailHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
 
-  emailMetaData: { content: Array<Email>; totalElements: number } = {
-    content: [],
+  // emailMetaData: { content: Array<Email>; totalElements: number } = {
+  //   content: [],
 
-    totalElements: 0,
-  };
+  //   totalElements: 0,
+  // };
+  emailMetaData:any
 
   params: HttpParams = new HttpParams();
 
@@ -56,7 +57,6 @@ export class EmailTableComponent {
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
         this.emailHeaders = response;
 
-        console.log(this.emailHeaders);
       },
 
       (error: any) => {
@@ -73,37 +73,37 @@ export class EmailTableComponent {
     const queryParam = { id: id };
 
     switch (type) {
-      //case 'delete':
-      // this.emailtemplateService
+      // case 'delete':
+      //   this.emailService
 
-      //   .deleteEmailTemplate(event['data'].id)
+      //     .deleteEmail(event['data'].id)
 
-      //   .subscribe(
-      //     (response: ApiResponse) => {
-      //       this.emailtemplateService.notify('EmailTemplate deleted successfully');
-
-      //       this.searchFunction(this.params);
-
-      //       const currentPage = Number(this.params.get('page'));
-
-      //       if (
-      //         this.emailTemplateMetaData.content.length === 1 &&
-      //         currentPage > 0
-      //       ) {
-      //         const newPage = currentPage - 1;
-
-      //         this.params = this.params.set('page', newPage.toString());
+      //     .subscribe(
+      //       (response: ApiResponse) => {
+      //         this.emailService.notify('Email deleted successfully');
 
       //         this.searchFunction(this.params);
+
+      //         const currentPage = Number(this.params.get('page'));
+
+      //         if (
+      //           this.emailMetaData.content.length === 1 &&
+      //           currentPage > 0
+      //         ) {
+      //           const newPage = currentPage - 1;
+
+      //           this.params = this.params.set('page', newPage.toString());
+
+      //           this.searchFunction(this.params);
+      //         }
+      //       },
+
+      //       (error: any) => {
+      //         console.error('DELETE-Email Request failed', error);
       //       }
-      //     },
+      //     );
 
-      //     (error: any) => {
-      //       console.error('DELETE-Department Request failed', error);
-      //     }
-      //   );
-
-      //    break;
+      //  break;
 
       case 'add':
         this.OpenModal();
@@ -135,7 +135,7 @@ export class EmailTableComponent {
 
         console.log(data.totalElements);
 
-        this.emailMetaData = data;
+        this.emailMetaData = data.content;
       });
   }
 

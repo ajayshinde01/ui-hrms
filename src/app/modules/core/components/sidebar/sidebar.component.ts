@@ -258,8 +258,17 @@ export class SidebarComponent implements OnInit {
             routerLink: ['/master/emailtemplatetable'],
             arrowMaster: false,
           },
-        ],
+          {
+            name: 'Email',
+            icon: 'fa-solid fa-ellipsis',
+            routerLink: ['/master/emailtable'],
+            arrowMaster: false,
+          }
+       
+  ]
       },
+ 
+   
     ];
   }
 

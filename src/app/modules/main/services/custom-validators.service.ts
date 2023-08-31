@@ -203,6 +203,12 @@ export class CustomValidators {
       qualificationLevel: 'Qualification Level',
       instituteName: 'School/University Name',
       passingYear: 'Passing Year',
+      //work Experince
+      companyName: 'Comany Name',
+      designation: 'Designation',
+      fromDate: 'From Date',
+      toDate: 'To Date',
+      address: 'Address',
     };
 
     const errorMessages: { [key: string]: string } = {

@@ -8,12 +8,11 @@ export interface Email{
     body:string; 
     jobGroup:string;
     description:string;
+    startTime:string;
     status:string;
     jobId:string;
     message:string;
     triggerName:string;
     jobName:string;
     file:string;
-   
-    
 }

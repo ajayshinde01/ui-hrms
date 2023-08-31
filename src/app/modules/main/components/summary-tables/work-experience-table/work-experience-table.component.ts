@@ -44,74 +44,106 @@ export class WorkExperienceTableComponent implements OnInit {
     totalElements: 0,
   };
 
-  params: HttpParams = new HttpParams(); // Initialize HttpParams
-
-  masterName: string = 'Work Experience';
+  params: HttpParams = new HttpParams(); // Create an instance of HttpParams
 
   constructor(
-    private workExperienceService: WorkExperienceService,
-
-    private matDialog: MatDialog,
+    private workExperienceService: WorkExperienceService, // Update the service name
 
     private route: ActivatedRoute,
 
-    private toastrService: ToastrService // Import ToastrService
+    private matDialog: MatDialog,
+
+    private toastrService: ToastrService // Update the service name
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      this.id = +params['id'];
-
-      this.sendDataEvnt.emit(this.id);
-
-      console.log(this.sendDataEvnt);
+      this.id = params['id'];
     });
 
-    this.searchFunction(this.params);
-
     this.getHeaders();
+
+    let params = new HttpParams(); // Create an instance of HttpParams
+
+    params = params.set('page', '0'); // Set page as a string
+
+    params = params.set('size', '10'); // Set size as a string
+
+    this.searchFunction(params);
   }
 
   getHeaders() {
     this.workExperienceService
 
-      .fetchWorkExperienceHeaders()
+      .fetchWorkExperienceHeaders() // Update the service method name
 
       .subscribe(
         (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
           this.workExperienceHeaders = response;
-
-          console.log(this.workExperienceHeaders);
         },
 
         (error: any) => {
-          console.error('GET Request for Headers failed', error);
+          console.error('GET Request failed', error);
         }
       );
   }
 
   action(event: any) {
-    const type: string = event['event'];
+    let type: string = event['event'];
 
-    const id: string = event['data'].id;
+    let id: string = event['data'].id;
+
+    const queryParam = { workExperienceId: id }; // Update the query parameter name
 
     switch (type) {
+      case 'delete':
+        this.workExperienceService // Update the service name
+
+          .deleteWorkExperience(event['data'].id, this.id) // Update the service method name and parameters
+
+          .subscribe(
+            (response: ApiResponse) => {
+              console.log(
+                'DELETE-Work Experience Request successful',
+                response
+              );
+
+              this.toastrService.success(
+                'Work Experience deleted successfully'
+              ); // Update the service name
+
+              this.searchFunction(this.params);
+
+              const currentPage = Number(this.params.get('page'));
+
+              if (
+                this.workExperiencesMetaData.content.length === 1 &&
+                currentPage > 0
+              ) {
+                const newPage = currentPage - 1;
+
+                this.params = this.params.set('page', newPage.toString());
+
+                this.searchFunction(this.params);
+              }
+            },
+
+            (error: any) => {
+              console.error('DELETE-Work Experience Request failed', error);
+            }
+          );
+
+        break;
+
       case 'add':
-        this.openAddModal();
+        this.openModal(); // Update the method name
 
         break;
 
       case 'edit':
-        this.openEditModal(parseInt(id, 10)); // Convert id to a number
+        this.openModalForEdit(id, this.id); // Update the method name and parameters
 
         break;
-
-      case 'delete':
-        this.deleteWorkExperience(parseInt(id, 10)); // Convert id to a number
-
-        break;
-
-      // Add more cases as needed
     }
   }
 
@@ -120,66 +152,64 @@ export class WorkExperienceTableComponent implements OnInit {
 
     this.workExperienceService
 
-      .searchWorkExperiences(params, this.id)
+      .searchWorkExperiences(params, this.id) // Call the method with parameters like this
 
       .subscribe(
-        (data: {
-          content: Array<WorkExperience>;
+        (data: { content: Array<WorkExperience>; totalElements: number }) => {
+          console.log(data.content);
 
-          totalElements: number;
-        }) => {
+          console.log(data.totalElements);
+
           this.workExperiencesMetaData = data;
-        },
-
-        (error: any) => {
-          console.error('Search failed', error);
         }
       );
   }
 
-  openAddModal() {
-    this.matDialogRef = this.matDialog.open(WorkExperienceFormComponent, {
-      disableClose: true,
-    });
+  openModal() {
+    this.matDialogRef = this.matDialog.open(
+      WorkExperienceFormComponent, // Update the component name
 
-    this.matDialogRef.afterClosed().subscribe((res: any) => {
-      if (res === true) {
-        this.searchFunction(this.params);
-      }
-    });
-  }
+      {
+        data: {
+          id: this.id,
+        },
 
-  openEditModal(id: number) {
-    this.matDialogRef = this.matDialog.open(WorkExperienceFormComponent, {
-      data: { workExperienceId: id }, // Pass workExperienceId
-
-      disableClose: true,
-    });
-
-    this.matDialogRef.afterClosed().subscribe((res: any) => {
-      if (res === true) {
-        this.searchFunction(this.params);
-      }
-    });
-  }
-
-  deleteWorkExperience(id: number) {
-    this.workExperienceService.deleteWorkExperience(id, this.id).subscribe(
-      (response: ApiResponse) => {
-        console.log('Work experience deleted', response);
-
-        this.toastrService.success('Work experience deleted successfully');
-
-        this.searchFunction(this.params);
-      },
-
-      (error: any) => {
-        console.error('Delete failed', error);
-
-        this.toastrService.error(
-          'An error occurred while deleting work experience'
-        );
+        disableClose: true,
       }
     );
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
+      if (res == true) {
+        // Do something if necessary
+      }
+    });
+  }
+
+  openModalForEdit(data: string, id: number) {
+    debugger;
+
+    this.matDialogRef = this.matDialog.open(
+      WorkExperienceFormComponent, // Update the component name
+
+      {
+        data: {
+          workExperienceId: data, // Update the property name
+
+          id: id,
+        },
+
+        disableClose: true,
+      }
+    );
+
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
+
+      if (res == true) {
+        // Do something if necessary
+      }
+    });
   }
 }

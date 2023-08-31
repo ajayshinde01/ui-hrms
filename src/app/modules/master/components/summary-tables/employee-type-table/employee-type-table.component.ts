@@ -27,9 +27,10 @@ export class EmployeeTypeTableComponent {
   // employeeTypeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
   //   columnsMetadata: [],
   // };
+  buttonVisible:Array<boolean> =[true ,true, true]
   employeeTypeHeaders: any;
   params: HttpParams = new HttpParams();
-  buttonVisible: Array<boolean> = [true, true, true];
+
   masterName: string = 'Employee Type';
 
   matDialogRef: MatDialogRef<EmployeeTypeComponent>;

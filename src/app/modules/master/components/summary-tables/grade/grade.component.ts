@@ -25,6 +25,7 @@ export class GradeComponent {
   gradesHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+  
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Grade';
