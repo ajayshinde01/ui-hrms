@@ -62,6 +62,16 @@ export class WorkExperienceService {
     employeeId: number
   ): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
+      `http://192.168.1.16:7000/employee/work-experience/${employeeId}/${workExperienceId}?updatedBy=Admin`
+    );
+  }
+
+  getWorkExperienceById(
+    employeeId: number,
+
+    workExperienceId: number
+  ): Observable<WorkExperience> {
+    return this.http.get<WorkExperience>(
       `http://192.168.1.16:7000/employee/work-experience/${employeeId}/${workExperienceId}`
     );
   }
@@ -81,6 +91,7 @@ export class WorkExperienceService {
       totalElements: number;
     }>(
       `http://192.168.1.16:7000/employee/work-experience/${employeeId}/search`,
+
       {
         params: params,
       }

@@ -41,6 +41,8 @@ import { VisaDetailsTableComponent } from './components/summary-tables/visa-deta
 import { JoiningDetailsComponent } from './components/forms/joining-details/joining-details.component';
 import { WorkExperienceTableComponent } from './components/summary-tables/work-experience-table/work-experience-table.component';
 import { WorkExperienceFormComponent } from './components/forms/work-experience-form/work-experience-form.component';
+import { CertificationTableComponent } from './components/summary-tables/certification-table/certification-table.component';
+import { CertificationFormComponent } from './components/forms/certification-form/certification-form.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { WorkExperienceFormComponent } from './components/forms/work-experience-
     JoiningDetailsComponent,
     WorkExperienceTableComponent,
     WorkExperienceFormComponent,
+    CertificationTableComponent,
+    CertificationFormComponent,
   ],
   imports: [
     CommonModule,

@@ -46,7 +46,7 @@ export class ChildService {
     masterName: string,
     params: HttpParams
   ): Observable<{ content: Array<Parent>; totalElements: number }> {
-    const url = `http://192.168.1.16:7000/employee/common-master/${masterName}/search-childs`;
+    const url = `http://192.168.1.16:7000/employee/common-master/${masterName}/search-childs?sort=priority,code`;
 
     return this.http.get<{ content: Array<Parent>; totalElements: number }>(
       url,

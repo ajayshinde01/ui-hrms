@@ -16,6 +16,7 @@ import { DesignationFormComponent } from '../../forms/designation-form/designati
 })
 export class DesignationComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<DesignationFormComponent>;
 
   designationMetaData: { content: Array<Designation>; totalElements: number } =
@@ -26,6 +27,7 @@ export class DesignationComponent {
   designationHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+
   params: HttpParams = new HttpParams();
 
   masterName: string = 'Designation';

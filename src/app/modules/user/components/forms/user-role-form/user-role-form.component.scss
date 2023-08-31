@@ -38,6 +38,7 @@
 .justify-content-end {
   justify-content: flex-end !important;
   width: 99%;
+  padding-bottom: 15px;
 }
 .action-btn {
   margin: 3px;
@@ -92,10 +93,33 @@
   top: -13px;
 }
 
+:host::ng-deep.mat-mdc-input-element {
+  height: 85px;
+  width: 255px;
+  resize: none;
+}
+
 .validate-text {
   font-size: 9px;
   text-align: left;
   color: red;
   position: relative;
   left: -15px;
+}
+
+.validate-text-area {
+  font-size: 9px;
+  text-align: left;
+  color: red;
+  position: relative;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
 }

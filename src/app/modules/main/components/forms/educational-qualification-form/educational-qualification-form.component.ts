@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EducationalQualificationService } from '../../../services/educational-qualification.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EducationalQualification } from '../../../models/educational-qualification.model';
+import { CommonMaster } from '../../../models/common-master.model';
+import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-educational-qualification-form',
@@ -18,6 +20,7 @@ export class EducationalQualificationFormComponent implements OnInit {
   isDisabled: boolean = false;
   educationalQualificationId: number;
   employeeId: number;
+  qualificationLevels: CommonMaster[] = [];
   constructor(
     private _mdr: MatDialogRef<EducationalQualificationFormComponent>,
     private formBuilder: FormBuilder,
@@ -28,42 +31,51 @@ export class EducationalQualificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.initForm();
     this.collectQueryParams();
+    this.getEducationalQualifications();
+  }
+  getEducationalQualifications() {
+    this.educationalQualificationService
+      .getQualificationLevels()
+      .subscribe((Response) => {
+        this.qualificationLevels = Response;
+      });
   }
 
   collectQueryParams() {
-    debugger;
-    // this.route.queryParams.subscribe((params) => {
-    //   this.queryParams = params;
-    // });
-    if (
-      this.data['educationalQualificationId'] != undefined &&
-      this.data['actionLabel']
-    ) {
-      this.actionLabel = 'Update';
-      this.educationalQualificationId = this.data['educationalQualificationId'];
-      this.employeeId = this.data['id'];
-      this.getById(this.employeeId, this.educationalQualificationId);
-      this.isDisabled = true;
-    } else {
-      this.actionLabel = 'Save';
-      this.employeeId = this.data['id'];
-    }
-  }
-
-  goBack() {
-    this.router.navigate(['/user/user-table']);
+    this.educationalQualificationId = this.data['educationalQualificationId'];
+    this.employeeId = this.data['id'];
+    this.getById(this.employeeId, this.educationalQualificationId);
+    this.isDisabled = true;
   }
 
   initForm() {
     this.educationalDetailsForm = this.formBuilder.group({
       id: [''],
-      educationalQualification: [''],
-      qualificationLevel: [''],
-      instituteName: [''],
-      passingYear: [''],
+      educationalQualification: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(50),
+          Validators.pattern('^[a-zA-Z.-]{1,50}$'),
+        ],
+      ],
+      qualificationLevel: ['', Validators.required],
+      instituteName: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(100),
+          Validators.pattern('^[a-zA-Z.-]{1,100}$'),
+        ],
+      ],
+      passingYear: ['', Validators.required],
       orgCode: ['AVI-01'],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
@@ -108,7 +120,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             (response: EducationalQualification) => {
               console.log('PUT-SCOPE Request successful', response);
               this.educationalQualificationService.notify(
-                'Educational Qualification successfully..!'
+                'Educational Qualification added successfully..!'
               );
               // this.router.navigate(['/main/educational-qualification']);
               this.Close(true);
@@ -128,12 +140,17 @@ export class EducationalQualificationFormComponent implements OnInit {
   }
 
   getById(id: number, educationalqualificationId: number) {
-    debugger;
     this.educationalQualificationService
       .getByEmployeeId(id, educationalqualificationId)
-      .subscribe((response) => {
-        this.educationalDetailsForm.patchValue(response);
-      });
+      .subscribe(
+        (response) => {
+          this.educationalDetailsForm.patchValue(response);
+          this.actionLabel = 'Update';
+        },
+        (error) => {
+          this.actionLabel = 'Save';
+        }
+      );
   }
 
   Close(isUpdate: boolean) {
@@ -143,5 +160,19 @@ export class EducationalQualificationFormComponent implements OnInit {
   resetForm() {
     this.collectQueryParams();
     this.initForm();
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.educationalDetailsForm.get(controlName);
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.educationalDetailsForm.get(controlName);
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+    return '';
   }
 }

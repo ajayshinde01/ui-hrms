@@ -1,27 +1,32 @@
-import { InjectionToken, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatFormFieldControl,
-  MatFormFieldModule,
-} from '@angular/material/form-field';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { InjectionToken, NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from './modules/master/components/helper/popup/popup.component';
-import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { config } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
+import { TokenInterceptor } from './modules/core/components/auth/token.interceptor';
+import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({
   declarations: [AppComponent],
-  providers: [{ provide: CONFIG, useValue: config }],
+  providers: [
+    { provide: CONFIG, useValue: config },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [PopupComponent],
   imports: [

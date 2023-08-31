@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { WorkExperienceService } from '../../../services/work-experience.service
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { WorkExperience } from '../../../models/work-experience.model';
+import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-work-experience-form',
@@ -44,16 +45,12 @@ export class WorkExperienceFormComponent implements OnInit {
     private route: ActivatedRoute,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    debugger;
-
     this.collectQueryParams();
 
     this.initForm();
-
-    console.log(this.data);
   }
 
   collectQueryParams() {
@@ -62,10 +59,15 @@ export class WorkExperienceFormComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
 
-      if (this.data['workExperience'] != undefined) {
+      debugger;
+
+      if (
+        this.data['workExperienceId'] != undefined &&
+        this.data['id'] != undefined
+      ) {
         this.actionLabel = 'Update';
 
-        this.workExperienceId = this.data['workExperience'];
+        this.workExperienceId = this.data['workExperienceId'];
 
         this.employeeId = this.queryParams['id'];
 
@@ -78,8 +80,6 @@ export class WorkExperienceFormComponent implements OnInit {
         this.employeeId = this.queryParams['id'];
       }
     });
-
-    console.log(this.employeeId);
   }
 
   goBack() {
@@ -90,15 +90,31 @@ export class WorkExperienceFormComponent implements OnInit {
     this.workExperienceForm = this.formBuilder.group({
       id: [''],
 
-      company: [''],
+      companyName: ['',
+        [Validators.required,
+        CustomValidators.noLeadingSpace(),
+        CustomValidators.whitespaceValidator(),
+        CustomValidators.noTrailingSpace(),]],
 
-      designation: [''],
+      designation: ['',
+        [Validators.required,
+        CustomValidators.noLeadingSpace(),
+        CustomValidators.whitespaceValidator(),
+        CustomValidators.noTrailingSpace(),]],
 
-      fromDate: [''],
+      fromDate: ['',
+        [Validators.required,
+        ]],
 
-      toDate: [''],
+      toDate: ['',
+        [Validators.required,
+        ]],
 
-      address: [''],
+      address: ['',
+        [Validators.required,
+        CustomValidators.noLeadingSpace(),
+        CustomValidators.whitespaceValidator(),
+        CustomValidators.noTrailingSpace(),]],
 
       createdBy: ['Admin'],
 
@@ -107,14 +123,15 @@ export class WorkExperienceFormComponent implements OnInit {
       createdAt: [null],
 
       updatedAt: [null],
+
+      orgCode: ['AVI01'],
     });
   }
 
   onSubmit() {
     if (this.workExperienceForm.valid) {
       const formData = this.workExperienceForm.value;
-
-      this.collectQueryParams();
+      formData.createdBy = 'Admin'
 
       if (this.actionLabel === 'Save') {
         this.workExperienceService
@@ -139,6 +156,7 @@ export class WorkExperienceFormComponent implements OnInit {
       }
 
       if (this.actionLabel === 'Update') {
+        formData.updatedBy = "Admin"
         this.workExperienceService
 
           .updateWorkExperience(formData, this.employeeId)
@@ -162,11 +180,36 @@ export class WorkExperienceFormComponent implements OnInit {
     }
   }
 
+  isControlInvalid(controlName: string): boolean {
+    const control = this.workExperienceForm.get(controlName);
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.workExperienceForm.get(controlName);
+
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+
+    return '';
+  }
+
   getById(id: number, workExperienceId: number) {
     // Retrieve the work experience by ID and populate the form fields
-    // Example: this.workExperienceService.getById(id, workExperienceId).subscribe((response: WorkExperience) => {
-    //   this.workExperienceForm.patchValue(response);
-    // });
+
+    this.workExperienceService
+
+      .getWorkExperienceById(id, workExperienceId)
+
+      .subscribe((response: WorkExperience) => {
+        console.log(response);
+
+        this.workExperienceForm.patchValue(response);
+      });
   }
 
   closeDialog(isUpdate: boolean) {

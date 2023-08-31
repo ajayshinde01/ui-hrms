@@ -150,7 +150,6 @@ export class RoleFormComponent {
       if (this.actionLabel === 'Save') {
         this.roleService.createRole(formData).subscribe(
           (response: Array<Role>) => {
-            //this._mdr.close(true);
             this.roleService.notify('Role added successfully');
             this.Close(true);
           },

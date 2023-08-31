@@ -7,18 +7,10 @@
         <mat-label>Confirmation Date</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="confirmationDate"
-            [matDatepicker]="confirmationDatePicker"
-            placeholder="DD/MM/YYYY"
-            readonly
-          />
+          <input matInput formControlName="confirmationDate" [matDatepicker]="confirmationDatePicker"
+            placeholder="DD/MM/YYYY" readonly />
 
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="confirmationDatePicker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="confirmationDatePicker"></mat-datepicker-toggle>
 
           <mat-datepicker #confirmationDatePicker></mat-datepicker>
 
@@ -32,11 +24,7 @@
         <mat-label>Notice Period</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="noticePeriod"
-            placeholder="Notice Period"
-          />
+          <input matInput formControlName="noticePeriod" placeholder="Notice Period" />
 
           <mat-error *ngIf="isControlInvalid('noticePeriod')">
             {{ getErrorMessage("noticePeriod") }}
@@ -50,18 +38,10 @@
         <mat-label>Resignation Date</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="resignationDate"
-            [matDatepicker]="resignationDatePicker"
-            placeholder="DD/MM/YYYY"
-            readonly
-          />
+          <input matInput formControlName="resignationDate" [matDatepicker]="resignationDatePicker"
+            placeholder="DD/MM/YYYY" readonly />
 
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="resignationDatePicker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="resignationDatePicker"></mat-datepicker-toggle>
 
           <mat-datepicker #resignationDatePicker></mat-datepicker>
 
@@ -75,18 +55,10 @@
         <mat-label>Relieving Date</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="relievingDate"
-            [matDatepicker]="relievingDatePicker"
-            placeholder="DD/MM/YYYY"
-            readonly
-          />
+          <input matInput formControlName="relievingDate" [matDatepicker]="relievingDatePicker" placeholder="DD/MM/YYYY"
+            readonly />
 
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="relievingDatePicker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="relievingDatePicker"></mat-datepicker-toggle>
 
           <mat-datepicker #relievingDatePicker></mat-datepicker>
 
@@ -100,12 +72,8 @@
     <mat-divider></mat-divider>
 
     <div class="form-footer">
-      <button
-        _ngcontent-ng-c812429062=""
-        class="btn btn-primary px-4 float-right profile-save-btn"
-        (click)="onSubmit()"
-        [disabled]="!joiningForm.valid"
-      >
+      <button _ngcontent-ng-c812429062="" class="btn btn-primary px-4 float-right joining-details-save-btn"
+        (click)="onSubmit()" [disabled]="!joiningForm.valid">
         {{ actionLabel }}
       </button>
     </div>

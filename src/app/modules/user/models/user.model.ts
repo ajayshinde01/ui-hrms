@@ -7,5 +7,5 @@ export interface User {
   statusCode: Number;
   status: String;
   roles: String[];
-  enabled: boolean;
+  enabled: String;
 }

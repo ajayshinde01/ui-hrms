@@ -12,6 +12,7 @@ import { nameMaxLength } from '../Validations/nameMaxLength.validator';
 import { blankValidator } from '../Validations/blankData.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { emailMaxLength } from '../Validations/emailMaxLength.validator';
+import { CommonMaster } from '../../../models/common-master.model';
 
 @Component({
   selector: 'app-user-form',
@@ -26,6 +27,8 @@ export class UserFormComponent {
   actionLabel: string = 'Save';
   allRoles: UserRole[] = [];
   isDisabled: boolean = false;
+  allUserStatus: CommonMaster[] = [];
+  enabled: String = '';
 
   constructor(
     private _mdr: MatDialogRef<UserFormComponent>,
@@ -40,6 +43,7 @@ export class UserFormComponent {
     this.collectQueryParams();
     this.initForm();
     this.getAllRoles();
+    this.getAllUserStatus();
   }
 
   collectQueryParams() {
@@ -99,7 +103,7 @@ export class UserFormComponent {
             whitespaceValidator,
             emailMaxLength,
             Validators.pattern(
-              '^(?!.*[._-]{2})[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
+              '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
             ),
           ],
         ],
@@ -181,10 +185,19 @@ export class UserFormComponent {
     };
   }
 
+  getAllUserStatus() {
+    this.userService.getUserStatus().subscribe((response) => {
+      this.allUserStatus = response;
+    });
+  }
+
   onSubmit() {
     if (this.userForm.valid) {
       const formData = this.userForm.value;
       console.log(formData);
+      if (formData.enabled === undefined) {
+        formData.enabled = this.enabled;
+      }
 
       if (this.actionLabel === 'Save') {
         this.userService.createUser(formData).subscribe(
@@ -226,6 +239,7 @@ export class UserFormComponent {
       console.log('GET-SEARCH BY ID Request successful', response);
       this.userForm.patchValue(response);
       this.user = response;
+      this.enabled = response.enabled;
     });
   }
 

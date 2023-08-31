@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { EducationalQualification } from '../models/educational-qualification.model';
 import { ColumnsMetadata } from '../models/columns-metadata';
 import { ApiResponse } from '../models/response';
+import { CommonMaster } from '../models/common-master.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +20,7 @@ export class EducationalQualificationService {
       educationalQualification
     );
   }
-  // searchScopeById(
-  //   employeeId: number,
-  //   educationalQualification: EducationalQualification
-  // ) {
-  //   return this.http.get<EducationalQualification>(
-  //     `http://192.168.1.16:7000/employee/education/1/search?keyword=SSC&page=0&size=1&sort=educationalQualification`
-  //   );
-  // }
+
   updateEducationalQualification(
     educationalQualification: EducationalQualification,
     employeeId: number
@@ -41,18 +35,17 @@ export class EducationalQualificationService {
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
-  // createDivision(division: Division): Observable<Division> {
-  //   return this.http.post<Division>(
-  //     'http://192.168.1.16:7000/employee/division/create',
-  //     division
-  //   );
-  // }
-
   getEducationalQualifications(
     employeeId: number
   ): Observable<Array<EducationalQualification>> {
     return this.http.get<Array<EducationalQualification>>(
       `http://192.168.1.16:7000/employee/education/${employeeId}/get-all`
+    );
+  }
+
+  getQualificationLevels(): Observable<Array<CommonMaster>> {
+    return this.http.get<Array<CommonMaster>>(
+      `http://192.168.1.16:7000/employee/common-master/Qualification Level?sort=priority,code`
     );
   }
 
@@ -72,13 +65,6 @@ export class EducationalQualificationService {
       `http://192.168.1.16:7000/employee/education/${employeeId}/${educationalId}`
     );
   }
-
-  // updateDivision(divisionId: string): Observable<Division> {
-  //   return this.http.put<Division>(
-  //     'http://192.168.1.16:7000/employee/division/update',
-  //     divisionId
-  //   );
-  // }
 
   deleteEducationalQualification(
     EducationalQualificationId: number,

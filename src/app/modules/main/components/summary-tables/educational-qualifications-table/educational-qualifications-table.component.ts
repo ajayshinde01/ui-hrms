@@ -32,6 +32,8 @@ export class EducationalQualificationsTableComponent implements OnInit {
       columnsMetadata: [],
     };
   params: HttpParams = new HttpParams();
+  buttonVisible: Array<boolean> = [true, true, true];
+
   constructor(
     private educationalQualificationService: EducationalQualificationService,
     private router: Router,
@@ -40,23 +42,7 @@ export class EducationalQualificationsTableComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      // this.queryParams = params;
-      // if (this.queryParams.actionLabel == 'Update') {
-      //   console.log('Hi');
-      //   this.actionLabel = 'Update';
-      //   this.companyDetailsForm.controls['employeeId'].setValue(
-      //     this.queryParams.id
-      //   );
-      //   this.getById(this.queryParams['id']);
-      // } else {
-      //   this.actionLabel = 'Save';
-      //   this.companyDetailsForm.controls['employeeId'].setValue(
-      //     this.queryParams.id
-      //   );
-      // }
       this.id = params['id'];
-      debugger;
-      console.log(this.id);
     });
     this.getHeaders();
     let params = new HttpParams();
@@ -70,7 +56,6 @@ export class EducationalQualificationsTableComponent implements OnInit {
       .subscribe(
         (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
           this.educationalQualificationHeaders = response;
-          console.log(this.educationalQualificationHeaders);
         },
         (error: any) => {
           console.error('GET Request failed', error);
@@ -118,11 +103,7 @@ export class EducationalQualificationsTableComponent implements OnInit {
         // this.router.navigate(['/main/educational-qualification']);
         break;
       case 'edit':
-        debugger;
         this.OpenModalForEdit(id, this.id);
-        // this.router.navigate(['/main/employee-info'], {
-        //   queryParams: queryParam,
-        // });
         break;
     }
   }
@@ -148,7 +129,6 @@ export class EducationalQualificationsTableComponent implements OnInit {
         data: {
           educationalQualificationId: this.id,
           id: this.id,
-          actionLabel: 'Save',
         },
         disableClose: true,
       }
@@ -160,14 +140,12 @@ export class EducationalQualificationsTableComponent implements OnInit {
     });
   }
   OpenModalForEdit(data: string, id: number) {
-    debugger;
     this.matDialogRef = this.matDialog.open(
       EducationalQualificationFormComponent,
       {
         data: {
           educationalQualificationId: data,
           id: id,
-          actionLabel: 'Update',
         },
         disableClose: true,
       }

@@ -131,6 +131,7 @@ export class CustomValidators {
     };
   }
 
+<<<<<<< HEAD
   // static validVisaDate(): ValidatorFn {
   //   return (control: AbstractControl):  ValidationErrors | { [key: string]: any } | null => {
   //     const value = control.value as Date;
@@ -158,15 +159,30 @@ export class CustomValidators {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const today = new Date().getTime();
       console.log("validVisaDate",control.value);
+=======
+  static validVisaDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const today = new Date().getTime();
+
+>>>>>>> 49dfb5da72370a4d1b02486bb5f2060d1b0c3223
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
       }
-  
+
       // return null if there's no errors
+<<<<<<< HEAD
       return control.value.getTime() < today
         ? { invalidDate: 'Visa Date should be a future date' }
         : null;
+=======
+      if (control.value.getTime() < today) {
+        return { validVisaDate: true };
+      } else {
+        console.log('here');
+      }
+      return null;
+>>>>>>> 49dfb5da72370a4d1b02486bb5f2060d1b0c3223
     };
   }
 
@@ -218,6 +234,18 @@ export class CustomValidators {
       state: 'State',
       city: 'City',
       postcode: 'Post Code',
+
+      //educational qualification form
+      educationalQualification: 'Educational Qualification',
+      qualificationLevel: 'Qualification Level',
+      instituteName: 'School/University Name',
+      passingYear: 'Passing Year',
+      //work Experince
+      companyName: 'Comany Name',
+      designation: 'Designation',
+      fromDate: 'From Date',
+      toDate: 'To Date',
+      address: 'Address',
     };
 
     const errorMessages: { [key: string]: string } = {
