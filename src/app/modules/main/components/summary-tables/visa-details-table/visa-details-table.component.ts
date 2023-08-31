@@ -15,11 +15,12 @@ import { ApiResponse } from '../../../models/response';
 })
 export class VisaDetailsTableComponent {
   [x: string]: any;
-  emp_id:any;
-  visa_id:any;
+  buttonVisible: Array<boolean> = [true, true, true];
+  emp_id: any;
+  visa_id: any;
   employeeVisaHeaders: { columnsMetadata: Array<ColumnsMetadata> };
- // employeeVisaHeaders={columnsMetadata: Array<ColumnsMetadata>};
- /* employeeVisaHeaders = { columnsMetadata:
+  // employeeVisaHeaders={columnsMetadata: Array<ColumnsMetadata>};
+  /* employeeVisaHeaders = { columnsMetadata:
   [
     {
         name: "",
@@ -52,14 +53,14 @@ export class VisaDetailsTableComponent {
 ]};*/
 
   // employeeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
-   //  columnsMetadata: [],
-   //};
-   employeeVisaMetaData: { content: Array<Visa>; totalElements: number } = {
+  //  columnsMetadata: [],
+  //};
+  employeeVisaMetaData: { content: Array<Visa>; totalElements: number } = {
     content: [],
-     totalElements: 0,
-   };
-//   (data: { content: Array<Visa>; totalElements: number })
- /*  employeeVisaMetaData={
+    totalElements: 0,
+  };
+  //   (data: { content: Array<Visa>; totalElements: number })
+  /*  employeeVisaMetaData={
     content:[
       {
           id: "1",
@@ -76,79 +77,82 @@ export class VisaDetailsTableComponent {
     ],
     totalElements:0
 };*/
-   matDialogRef: MatDialogRef<EmployeeVisaDetailsFormComponent>;
+  matDialogRef: MatDialogRef<EmployeeVisaDetailsFormComponent>;
 
-   params: HttpParams = new HttpParams();
+  params: HttpParams = new HttpParams();
 
-   constructor(
-     private employeeService: EmployeeService,
-     private router: Router,
-     private matDialog: MatDialog,
-     private route: ActivatedRoute,
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router,
+    private matDialog: MatDialog,
+    private route: ActivatedRoute
+  ) { }
 
-   ) {}
- 
-   ngOnInit(): void {
-    
-     this.getHeaders();
-     console.log("Visa table");
-     this.params = this.params.set('page', 0);
-     this.params = this.params.set('size', 10);
-     this.emp_id = this.route.snapshot.queryParamMap.get("id");
-     this.searchFunction(this.params);
-   }
- 
-   getHeaders() {
-     this.employeeService.getEmployeeVisaHeaders().subscribe(
-       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
-         this.employeeVisaHeaders = response;
-         console.log(this.employeeVisaHeaders);
-       },
-       (error: any) => {
-         console.error('GET Request failed', error);
-       }
-     );
-   }
- 
-   action(event: Data) {
-     let type: string = event['event'];
-     let id: string = event['data'].id;
+  ngOnInit(): void {
+    this.getHeaders();
+    console.log('Visa table');
+    this.params = this.params.set('page', 0);
+    this.params = this.params.set('size', 10);
+    this.emp_id = this.route.snapshot.queryParamMap.get('id');
+    this.searchFunction(this.params);
+  }
 
-     console.log("dataid",id);
-     const queryParam = { id: id };
-     switch (type) {
-       case 'delete':
-         this.employeeService.deleteEmployeeVisa(id).subscribe(
-           (response: ApiResponse) => {
-             this.employeeService.notify('Employee visa details Deleted successfully..!');
-             const currentPage = Number(this.params.get('page'));
-             if (this.employeeVisaMetaData.content.length === 1 && currentPage > 0) {
-               const newPage = currentPage - 1;
-               this.params = this.params.set('page', newPage.toString());
-             //  this.searchFunction(this.params);
-             }
-             this.searchFunction(this.params);
-           },
-           (error: any) => {
-             console.error('DELETE-Employee Request failed', error);
-           }
-         );
-         break;
-       case 'add':
+  getHeaders() {
+    this.employeeService.getEmployeeVisaHeaders().subscribe(
+      (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
+        this.employeeVisaHeaders = response;
+        console.log(this.employeeVisaHeaders);
+      },
+      (error: any) => {
+        console.error('GET Request failed', error);
+      }
+    );
+  }
+
+  action(event: Data) {
+    let type: string = event['event'];
+    let id: string = event['data'].id;
+
+    console.log('dataid', id);
+    const queryParam = { id: id };
+    switch (type) {
+      case 'delete':
+        this.employeeService.deleteEmployeeVisa(id).subscribe(
+          (response: ApiResponse) => {
+            this.employeeService.notify(
+              'Employee visa details Deleted successfully..!'
+            );
+            const currentPage = Number(this.params.get('page'));
+            if (
+              this.employeeVisaMetaData.content.length === 1 &&
+              currentPage > 0
+            ) {
+              const newPage = currentPage - 1;
+              this.params = this.params.set('page', newPage.toString());
+              //  this.searchFunction(this.params);
+            }
+            this.searchFunction(this.params);
+          },
+          (error: any) => {
+            console.error('DELETE-Employee Request failed', error);
+          }
+        );
+        break;
+      case 'add':
         this.OpenModal();
-       //  this.router.navigate(['/main/visa-table']);
-         break;
-       case 'edit':
-        this.visa_id=id;
+        //  this.router.navigate(['/main/visa-table']);
+        break;
+      case 'edit':
+        this.visa_id = id;
         this.OpenModalForEdit(id);
-       //  this.router.navigate(['/main/visa-table'], {
-       //    queryParams: queryParam,
-       //  });
-         break;
-     }
-   }
+        //  this.router.navigate(['/main/visa-table'], {
+        //    queryParams: queryParam,
+        //  });
+        break;
+    }
+  }
 
-   actions(event: Data) {
+  actions(event: Data) {
     let type: string = event['event'];
     let id: string = event['data'].id;
     const queryParam = { id: id };
@@ -156,9 +160,14 @@ export class VisaDetailsTableComponent {
       case 'delete':
         this.employeeService.deleteEmployeeVisa(id).subscribe(
           (response: ApiResponse) => {
-            this.employeeService.notify('Employee visa details Deleted successfully..!');
+            this.employeeService.notify(
+              'Employee visa details Deleted successfully..!'
+            );
             const currentPage = Number(this.params.get('page'));
-            if (this.employeeVisaMetaData.content.length === 1 && currentPage > 0) {
+            if (
+              this.employeeVisaMetaData.content.length === 1 &&
+              currentPage > 0
+            ) {
               const newPage = currentPage - 1;
               this.params = this.params.set('page', newPage.toString());
               this.searchFunction(this.params);
@@ -170,31 +179,28 @@ export class VisaDetailsTableComponent {
           }
         );
         break;
-         }
+    }
   }
 
- 
-   searchFunction(params: HttpParams) {
-    //let id=1;    
-     this.params = params;
+  searchFunction(params: HttpParams) {
+    //let id=1;
+    this.params = params;
     // console.log("params", this.params);
-     this.employeeService
-       .searchVisa(params,this.emp_id)
-       .subscribe(
-         (data: { content: Array<Visa>; totalElements: number }) => {
-           //console.log("visadetails",data);
-          // console.log(data.totalElements);
-           this.employeeVisaMetaData = data;
-         }
-       );
-   }
+    this.employeeService
+      .searchVisa(params, this.emp_id)
+      .subscribe((data: { content: Array<Visa>; totalElements: number }) => {
+        //console.log("visadetails",data);
+        // console.log(data.totalElements);
+        this.employeeVisaMetaData = data;
+      });
+  }
 
-   OpenModal() {
+  OpenModal() {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
       disableClose: true,
     });
 
-   /* this.matDialogRef.afterClosed().subscribe((res: any) => {
+    /* this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
 
       if (res == true) {

@@ -16,6 +16,7 @@ import { DivisionComponent } from '../../forms/division-form/division.component'
 })
 export class DivisionTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<DivisionComponent>;
   divisionMetaData: { content: Array<Division>; totalElements: number } = {
     content: [],

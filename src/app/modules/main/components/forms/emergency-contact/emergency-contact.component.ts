@@ -16,38 +16,111 @@ import { EmergencyContactsService } from '../../../services/emergency-contacts.s
   styleUrls: ['./emergency-contact.component.scss'],
 })
 export class EmergencyContactComponent implements OnInit {
-  params: HttpParams = new HttpParams();
-  selectedProduct: any;
-  @Input() inputFromParent: string;
   emergencyContactForm!: FormGroup;
+  submitted: boolean = false;
+  queryParams: Params;
   actionLabel: string = 'Save';
-  contacts: EmergencyContacts;
-  emp_id: any;
-
+  isDisabled: boolean = false;
+  emergencyContactId: number;
+  employeeId: number;
   constructor(
     private _mdr: MatDialogRef<EmergencyContactComponent>,
-    @Inject(MAT_DIALOG_DATA) data: string,
+    private formBuilder: FormBuilder,
     private contactService: EmergencyContactsService,
     private router: Router,
-    private dialog: MatDialog,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.emp_id = this.route.snapshot.queryParamMap.get('id'); // Replace 'paramName' with the actual query parameter name
-    console.log('Query parameter value:', this.emp_id);
+    this.collectQueryParams();
+  }
+
+  collectQueryParams() {
+    this.emergencyContactId = this.data['emergencyContactId'];
+    this.employeeId = this.data['employeeId'];
+    this.getById(this.employeeId, this.emergencyContactId);
+    debugger;
+    this.isDisabled = true;
+  }
+
+  goBack() {
+    this.router.navigate(['/user/user-table']);
   }
 
   initForm() {
     this.emergencyContactForm = this.formBuilder.group({
       id: [''],
       emergencyContactName: [''],
-      orgCode: ['AVI-123'],
       emergencyContactNumber: [''],
       relation: [''],
+      orgCode: ['AVI-01'],
+      createdBy: ['Admin'],
+      updatedBy: ['Admin'],
+      createdAt: [null],
+      updatedAt: [null],
     });
+  }
+
+  onSubmit() {
+    if (this.emergencyContactForm.valid) {
+      const formData = this.emergencyContactForm.value;
+
+      if (this.actionLabel === 'Save') {
+        this.contactService
+          .AddEmergencyContact(formData, this.employeeId)
+          .subscribe(
+            (response: EmergencyContacts) => {
+              console.log('POST-SCOPE Request successful', response);
+              this.contactService.notify(
+                'Emergency Contact Added Successfully..!'
+              );
+              this.Close(true);
+            },
+
+            (error: any) => {
+              if (error.status == 400 || error.status == 404) {
+                this.contactService.warn('Emergency Contact Already Present');
+              }
+
+              console.error('POST Request failed', error);
+            }
+          );
+      }
+
+      if (this.actionLabel === 'Update') {
+        this.contactService
+          .updateEmergencyContact(formData, this.employeeId)
+          .subscribe(
+            (response: EmergencyContacts) => {
+              console.log('PUT-SCOPE Request successful', response);
+              this.contactService.notify('Emergency Contact successfully..!');
+              // this.router.navigate(['/main/educational-qualification']);
+              this.Close(true);
+            },
+            (error: any) => {
+              if (error.status == 404) {
+                this.contactService.warn('Scope already present');
+              }
+
+              console.error('PUT Request failed', error);
+            }
+          );
+      }
+    }
+  }
+
+  getById(id: number, emergencyContactId: number) {
+    this.contactService.getByEmployeeId(id, emergencyContactId).subscribe(
+      (response) => {
+        this.emergencyContactForm.patchValue(response);
+        this.actionLabel = 'Update';
+      },
+      (error) => {
+        this.actionLabel = 'Save';
+      }
+    );
   }
 
   Close(isUpdate: boolean) {
@@ -55,43 +128,7 @@ export class EmergencyContactComponent implements OnInit {
   }
 
   resetForm() {
-    // this.collectQueryParams();
+    this.collectQueryParams();
     this.initForm();
-  }
-
-  onSubmit() {
-    if (this.emergencyContactForm.valid) {
-      const formData = this.emergencyContactForm.value;
-      if (this.actionLabel === 'Save') {
-        this.contactService
-          .AddEmergencyContact(formData, this.emp_id)
-          .subscribe(
-            (response: EmergencyContacts) => {
-              this.contactService.notify('Data Saved Successfully...');
-              // this.router.navigate(['/main/employee-form']);
-            },
-            (error: any) => {
-              if (error.status == 400 || error.status == 404) {
-                this.contactService.warn('Credentials already present');
-              }
-            }
-          );
-      }
-      if (this.actionLabel === 'Update') {
-        this.contactService
-          .updateEmergencyContact(formData, this.emp_id)
-          .subscribe(
-            (response: EmergencyContacts) => {
-              this.contactService.notify('Update Successfully...');
-              // this.router.navigate(['/main/employee-table']);
-            },
-            (error: any) => {
-              if (error.status == 400 || error.status == 404) {
-                this.contactService.warn('Credentials already present');
-              }
-            }
-          );
-      }
-    }
   }
 }

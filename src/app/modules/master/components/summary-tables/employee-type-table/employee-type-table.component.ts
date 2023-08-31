@@ -27,6 +27,7 @@ export class EmployeeTypeTableComponent {
   // employeeTypeHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
   //   columnsMetadata: [],
   // };
+  buttonVisible:Array<boolean> =[true ,true, true]
   employeeTypeHeaders: any;
   params: HttpParams = new HttpParams();
 

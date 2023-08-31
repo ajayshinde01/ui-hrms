@@ -1,8 +1,4 @@
-<app-datatable
-(buttonFunction)="action($event)"
-(deleteFunction)="actions($event)"
-[dataSource]="employeeVisaMetaData.content"
-(paginationParams)="searchFunction($event)"
-[headers]="employeeVisaHeaders.columnsMetadata"
->
+<app-datatable [buttonVisible]="buttonVisible" (buttonFunction)="action($event)" (deleteFunction)="actions($event)"
+  [dataSource]="employeeVisaMetaData.content" (paginationParams)="searchFunction($event)"
+  [headers]="employeeVisaHeaders.columnsMetadata">
 </app-datatable>

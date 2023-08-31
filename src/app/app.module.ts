@@ -1,24 +1,32 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InjectionToken, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { config } from 'rxjs';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from './modules/master/components/helper/popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { config } from 'rxjs';
+import { ToastrModule } from 'ngx-toastr';
+import { TokenInterceptor } from './modules/core/components/auth/token.interceptor';
+import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({
   declarations: [AppComponent],
-  providers: [{ provide: CONFIG, useValue: config }],
+  providers: [
+    { provide: CONFIG, useValue: config },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [PopupComponent],
   imports: [

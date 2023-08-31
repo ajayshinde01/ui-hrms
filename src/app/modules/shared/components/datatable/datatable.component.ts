@@ -11,6 +11,8 @@ import {
   ViewChild,
 } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 
 import { Pagination } from 'src/app/modules/master/models/pageable';
@@ -18,6 +20,7 @@ import { Pagination } from 'src/app/modules/master/models/pageable';
 import { HttpParams } from '@angular/common/http';
 
 import { DataTableService } from './dataTable.service';
+import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 
 // import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -30,6 +33,8 @@ import { DataTableService } from './dataTable.service';
 })
 export class DatatableComponent implements OnInit, OnChanges {
   @Input() dataSource!: Array<Object>;
+
+  @Input() buttonVisible: Array<boolean> = [false, false, false]
 
   @Input() headers!: Array<ColumnsMetadata>;
 
@@ -44,7 +49,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   @Output() paginationParams: EventEmitter<HttpParams> = new EventEmitter();
 
   @ViewChild('confrimationmodel') confrimationmodel!: ElementRef;
-  @ViewChild('confrimationmodel1') confrimationmodel1!: ElementRef;
 
   paginationList: Array<number> = [];
 
@@ -62,7 +66,7 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 
-  constructor(private dataTableService: DataTableService) {}
+  constructor(private dataTableService: DataTableService, private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setPagination();
@@ -114,54 +118,53 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   delete() {
     console.log('delete?');
-
     let data = { event: 'delete', data: {} };
-
     data.data = this.selectedValue;
-    console.log(data.data);
-
     return this.deleteFunction.emit(data);
   }
 
   buttonEvent(event: string) {
     let data = { event: event, data: {} };
-
     switch (event) {
       case 'add':
         return this.buttonFunction.emit(data);
-
         break;
 
       case 'edit':
         data.data = this.selectedValue;
-
         if (data.data == undefined)
           this.dataTableService.notify('Please select record to edit');
-
         return this.buttonFunction.emit(data);
-
         break;
 
       case 'delete':
-
-      console.log("this.selectedValue",this.selectedValue);
         data.data = this.selectedValue;
-
-       if (data.data == undefined)
+        if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
-       
         if (data.data != undefined) {
-          this.confrimationmodel.nativeElement.click();
-       }
+          this.handleDialog();
+        }
 
         break;
     }
   }
 
-  clickMethod() {
-    if(confirm("Are you sure to delete ")) {
-      console.log("Implement delete functionality here");
-    }
+  handleDialog() {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '450px',
+      panelClass: 'custom-dialog'
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User clicked Yes');
+        this.delete()
+      } else {
+        console.log('User clicked No');
+        // Perform the action you want after user clicks No or cancels the dialog
+      }
+    });
   }
 
   selectRow(rowData: any) {
@@ -181,10 +184,10 @@ export class DatatableComponent implements OnInit, OnChanges {
 
     this.pagination.sortKey
       ? (params = params.append(
-          'sort',
+        'sort',
 
-          `${this.pagination.sortKey},${this.pagination.sortType}`
-        ))
+        `${this.pagination.sortKey},${this.pagination.sortType}`
+      ))
       : true;
 
     this.pagination.serchingParmeter

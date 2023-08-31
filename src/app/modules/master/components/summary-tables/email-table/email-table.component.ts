@@ -12,22 +12,23 @@ import { EmailService } from '../../../services/email.service';
 @Component({
   selector: 'app-email-table',
   templateUrl: './email-table.component.html',
-  styleUrls: ['./email-table.component.scss']
+  styleUrls: ['./email-table.component.scss'],
 })
 export class EmailTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, false, false];
   matDialogRef: MatDialogRef<EmailFormComponent>;
 
   emailHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
 
-  emailMetaData: { content: Array<Email>; totalElements: number } = {
-    content: [],
+  // emailMetaData: { content: Array<Email>; totalElements: number } = {
+  //   content: [],
 
-    totalElements: 0,
-  };
+  //   totalElements: 0,
+  // };
+  emailMetaData:any
 
   params: HttpParams = new HttpParams();
 
@@ -56,7 +57,6 @@ export class EmailTableComponent {
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
         this.emailHeaders = response;
 
-        console.log(this.emailHeaders);
       },
 
       (error: any) => {
@@ -73,37 +73,37 @@ export class EmailTableComponent {
     const queryParam = { id: id };
 
     switch (type) {
-      //case 'delete':
-        // this.emailtemplateService
+      // case 'delete':
+      //   this.emailService
 
-        //   .deleteEmailTemplate(event['data'].id)
+      //     .deleteEmail(event['data'].id)
 
-        //   .subscribe(
-        //     (response: ApiResponse) => {
-        //       this.emailtemplateService.notify('EmailTemplate deleted successfully');
+      //     .subscribe(
+      //       (response: ApiResponse) => {
+      //         this.emailService.notify('Email deleted successfully');
 
-        //       this.searchFunction(this.params);
+      //         this.searchFunction(this.params);
 
-        //       const currentPage = Number(this.params.get('page'));
+      //         const currentPage = Number(this.params.get('page'));
 
-        //       if (
-        //         this.emailTemplateMetaData.content.length === 1 &&
-        //         currentPage > 0
-        //       ) {
-        //         const newPage = currentPage - 1;
+      //         if (
+      //           this.emailMetaData.content.length === 1 &&
+      //           currentPage > 0
+      //         ) {
+      //           const newPage = currentPage - 1;
 
-        //         this.params = this.params.set('page', newPage.toString());
+      //           this.params = this.params.set('page', newPage.toString());
 
-        //         this.searchFunction(this.params);
-        //       }
-        //     },
+      //           this.searchFunction(this.params);
+      //         }
+      //       },
 
-        //     (error: any) => {
-        //       console.error('DELETE-Department Request failed', error);
-        //     }
-        //   );
+      //       (error: any) => {
+      //         console.error('DELETE-Email Request failed', error);
+      //       }
+      //     );
 
-    //    break;
+      //  break;
 
       case 'add':
         this.OpenModal();
@@ -112,16 +112,16 @@ export class EmailTableComponent {
 
         break;
 
-  //     case 'edit':
-  //       this.OpenModalForEdit(id);
+      //     case 'edit':
+      //       this.OpenModalForEdit(id);
 
-  //       this.router.navigate(['/master/emailtemplatetable'], {
-  //         queryParams: queryParam,
-  //       });
+      //       this.router.navigate(['/master/emailtemplatetable'], {
+      //         queryParams: queryParam,
+      //       });
 
-  //       break;
-     }
-   }
+      //       break;
+    }
+  }
 
   searchFunction(params: HttpParams) {
     this.params = params;
@@ -130,43 +130,40 @@ export class EmailTableComponent {
 
       .search(params)
 
-      .subscribe(
-        (data: { content: Array<Email>; totalElements: number }) => {
-          console.log(data.content);
+      .subscribe((data: { content: Array<Email>; totalElements: number }) => {
+        console.log(data.content);
 
-          console.log(data.totalElements);
+        console.log(data.totalElements);
 
-          this.emailMetaData = data;
-        }
-      );
+        this.emailMetaData = data.content;
+      });
+  }
 
-}
+  OpenModal() {
+    this.matDialogRef = this.matDialog.open(EmailFormComponent, {
+      disableClose: true,
+    });
 
-OpenModal() {
-  this.matDialogRef = this.matDialog.open(EmailFormComponent, {
-    disableClose: true,
-  });
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
 
-  this.matDialogRef.afterClosed().subscribe((res: any) => {
-    this.searchFunction(this.params);
+      if (res == true) {
+      }
+    });
+  }
 
-    if (res == true) {
-    }
-  });
-}
+  OpenModalForEdit(id: number) {
+    this.matDialogRef = this.matDialog.open(EmailFormComponent, {
+      data: { id: id },
 
-OpenModalForEdit(id: number) {
-  this.matDialogRef = this.matDialog.open(EmailFormComponent, {
-    data: { id: id },
+      disableClose: true,
+    });
 
-    disableClose: true,
-  });
+    this.matDialogRef.afterClosed().subscribe((res: any) => {
+      this.searchFunction(this.params);
 
-  this.matDialogRef.afterClosed().subscribe((res: any) => {
-    this.searchFunction(this.params);
-
-    if (res == true) {
-    }
-  });
-}
+      if (res == true) {
+      }
+    });
+  }
 }

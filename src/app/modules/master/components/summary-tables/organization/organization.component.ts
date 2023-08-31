@@ -14,7 +14,7 @@ import { OrganizationFormComponent } from '../../forms/organization-form/organiz
 })
 export class OrganizationComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<OrganizationFormComponent>;
 
   organizationMetaData: {

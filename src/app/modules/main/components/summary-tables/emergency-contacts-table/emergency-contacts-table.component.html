@@ -1,9 +1,9 @@
 <app-datatable
+  [buttonVisible]="buttonVisible"
   (buttonFunction)="action($event)"
   (deleteFunction)="action($event)"
   (paginationParams)="searchFunction($event)"
-  [dataSource]="contactMetaData.content"
-  [headers]="contactHeaders.columnsMetadata"
-  [totalRecord]="contactMetaData.totalElements"
-  [masterName]="masterName"
+  [dataSource]="emergencyContactMetaData.content"
+  [headers]="emergencyContactHeaders.columnsMetadata"
+  [totalRecord]="emergencyContactMetaData.totalElements"
 ></app-datatable>

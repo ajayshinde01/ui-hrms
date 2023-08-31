@@ -13,7 +13,7 @@ export class EmergencyContactsService {
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
-  getcontactHeaders(): Observable<{
+  getEmergencyContactHeaders(): Observable<{
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
     return this.http.get<{ columnsMetadata: Array<ColumnsMetadata> }>(
@@ -42,7 +42,10 @@ export class EmergencyContactsService {
     );
   }
 
-  deleteContact(contactId: string, id: string): Observable<ApiResponse> {
+  deleteEmergencyContact(
+    contactId: number,
+    id: number
+  ): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       `http://192.168.1.16:7000/employee/contact/${id}/${contactId}?updatedBy=Admin`
     );
@@ -50,7 +53,7 @@ export class EmergencyContactsService {
 
   search(
     params: HttpParams,
-    id: string
+    id: number
   ): Observable<{ content: Array<EmergencyContacts>; totalElements: number }> {
     return this.http.get<{
       content: Array<EmergencyContacts>;
@@ -58,6 +61,15 @@ export class EmergencyContactsService {
     }>(`http://192.168.1.16:7000/employee/contact/${id}/search`, {
       params: params,
     });
+  }
+
+  getByEmployeeId(
+    employeeId: number,
+    contactId: number
+  ): Observable<EmergencyContacts> {
+    return this.http.get<EmergencyContacts>(
+      `http://192.168.1.16:7000/employee/contact/${employeeId}/${contactId}`
+    );
   }
 
   notify(message: string) {

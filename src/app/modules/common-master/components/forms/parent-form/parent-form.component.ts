@@ -26,7 +26,7 @@ export interface DialogData {
 })
 export class ParentFormComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-
+  buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<ChildFormComponent>;
 
   childMetaData: { content: Array<Parent>; totalElements: number } = {
@@ -66,7 +66,7 @@ export class ParentFormComponent {
   }
 
   getChildHeaders() {
-    this.parentService.getParentsHeaders().subscribe(
+    this.childService.getChildHeaders().subscribe(
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
         console.log('GET-HEADERS Request successful', response);
         this.childHeaders = response;
@@ -158,9 +158,9 @@ export class ParentFormComponent {
   }
 
   onSubmit() {
+    this.parentForm.get('code')?.enable();
     if (this.parentForm.valid) {
       const formData = this.parentForm.value;
-      this.parentForm.get('code')?.enable();
 
       this.parentService.createParent(formData).subscribe(
         (response: Parent) => {

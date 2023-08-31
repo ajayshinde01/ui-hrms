@@ -32,6 +32,8 @@ export class EducationalQualificationsTableComponent implements OnInit {
       columnsMetadata: [],
     };
   params: HttpParams = new HttpParams();
+  buttonVisible: Array<boolean> = [true, true, true];
+
   constructor(
     private educationalQualificationService: EducationalQualificationService,
     private router: Router,
@@ -138,7 +140,6 @@ export class EducationalQualificationsTableComponent implements OnInit {
     });
   }
   OpenModalForEdit(data: string, id: number) {
-    debugger;
     this.matDialogRef = this.matDialog.open(
       EducationalQualificationFormComponent,
       {

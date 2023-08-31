@@ -44,11 +44,12 @@
                 formControlName="qualificationLevel"
                 placeholder="Select"
               >
-                <mat-option value="Secondary">Secondary</mat-option>
-                <mat-option value="Higher Secondary"
-                  >Higher Secondary</mat-option
+                <mat-option>Select</mat-option>
+                <mat-option
+                  *ngFor="let qualificationLevel of qualificationLevels"
+                  [value]="qualificationLevel.code"
+                  >{{ qualificationLevel.value }}</mat-option
                 >
-                <mat-option value="Graduate">Graduate</mat-option>
               </mat-select>
             </div>
           </mat-form-field>
