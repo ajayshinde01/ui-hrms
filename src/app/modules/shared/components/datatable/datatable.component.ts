@@ -11,6 +11,8 @@ import {
   ViewChild,
 } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 
 import { Pagination } from 'src/app/modules/master/models/pageable';
@@ -18,6 +20,7 @@ import { Pagination } from 'src/app/modules/master/models/pageable';
 import { HttpParams } from '@angular/common/http';
 
 import { DataTableService } from './dataTable.service';
+import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 
 // import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -31,7 +34,7 @@ import { DataTableService } from './dataTable.service';
 export class DatatableComponent implements OnInit, OnChanges {
   @Input() dataSource!: Array<Object>;
 
-  @Input () buttonVisible: Array<boolean>=[false,false,false]
+  @Input() buttonVisible: Array<boolean> = [false, false, false]
 
   @Input() headers!: Array<ColumnsMetadata>;
 
@@ -63,7 +66,7 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 
-  constructor(private dataTableService: DataTableService) {}
+  constructor(private dataTableService: DataTableService, private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setPagination();
@@ -139,11 +142,29 @@ export class DatatableComponent implements OnInit, OnChanges {
         if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
         if (data.data != undefined) {
-          this.confrimationmodel.nativeElement.click();
+          this.handleDialog();
         }
 
         break;
     }
+  }
+
+  handleDialog() {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '450px',
+      panelClass: 'custom-dialog'
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User clicked Yes');
+        this.delete()
+      } else {
+        console.log('User clicked No');
+        // Perform the action you want after user clicks No or cancels the dialog
+      }
+    });
   }
 
   selectRow(rowData: any) {
@@ -163,10 +184,10 @@ export class DatatableComponent implements OnInit, OnChanges {
 
     this.pagination.sortKey
       ? (params = params.append(
-          'sort',
+        'sort',
 
-          `${this.pagination.sortKey},${this.pagination.sortType}`
-        ))
+        `${this.pagination.sortKey},${this.pagination.sortType}`
+      ))
       : true;
 
     this.pagination.serchingParmeter

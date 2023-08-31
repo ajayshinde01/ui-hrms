@@ -132,23 +132,22 @@ export class CustomValidators {
   }
 
   static validVisaDate(): ValidatorFn {
-    return (control: AbstractControl):  ValidationErrors | null => {
+    return (control: AbstractControl): ValidationErrors | null => {
       const today = new Date().getTime();
-  
+
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
       }
-  
+
       // return null if there's no errors
-      if(control.value.getTime() < today){
-         return { validVisaDate: true };
-      }else{
-        console.log("here");
+      if (control.value.getTime() < today) {
+        return { validVisaDate: true };
+      } else {
+        console.log('here');
       }
       return null;
     };
-    
   }
 
   static getErrorMessage(errorKey: string, fieldName: string): string {
@@ -198,6 +197,18 @@ export class CustomValidators {
       state: 'State',
       city: 'City',
       postcode: 'Post Code',
+
+      //educational qualification form
+      educationalQualification: 'Educational Qualification',
+      qualificationLevel: 'Qualification Level',
+      instituteName: 'School/University Name',
+      passingYear: 'Passing Year',
+      //work Experince
+      companyName: 'Comany Name',
+      designation: 'Designation',
+      fromDate: 'From Date',
+      toDate: 'To Date',
+      address: 'Address',
     };
 
     const errorMessages: { [key: string]: string } = {
