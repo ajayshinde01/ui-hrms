@@ -18,6 +18,8 @@ export class VisaDetailsTableComponent {
   emp_id:any;
   visa_id:any;
   employeeVisaHeaders: { columnsMetadata: Array<ColumnsMetadata> };
+  buttonVisible:Array<boolean> =[true ,true, true];
+
  // employeeVisaHeaders={columnsMetadata: Array<ColumnsMetadata>};
  /* employeeVisaHeaders = { columnsMetadata:
   [
@@ -191,8 +193,12 @@ export class VisaDetailsTableComponent {
 
    OpenModal() {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
+      width: '500px',
+      panelClass: 'my-dialog',
       disableClose: true,
     });
+
+    
 
    /* this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
@@ -204,8 +210,9 @@ export class VisaDetailsTableComponent {
 
   OpenModalForEdit(id: string) {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
-      data: { id: id },
-
+      data: { id: id , actionLabel: 'Save'},
+      width: '500px',
+      panelClass: 'my-dialog',
       disableClose: true,
     });
 

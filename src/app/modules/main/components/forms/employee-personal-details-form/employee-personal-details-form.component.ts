@@ -122,6 +122,7 @@ export class EmployeePersonalDetailsFormComponent {
         this.employee = response;
       },
       err => {
+        this.actionLabel === 'Update'
        console.log('oops',err);
       });
   }
@@ -198,9 +199,7 @@ export class EmployeePersonalDetailsFormComponent {
         this.employeeService.AddPersonalDetails(formData,this.emp_id).subscribe(
           (response: EmployeePersonalDetails) => {
             this.employeeService.notify('Data Saved Successfully...');
-            this.router.navigate(['/master/employee-form']);
-
-            
+            this.router.navigate(['/master/employee-form']);            
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {

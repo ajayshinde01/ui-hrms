@@ -1,4 +1,5 @@
 export interface Visa {
+    actionLabel: boolean;
     id: number;
     countryCode: String;
     visaNumber: String;

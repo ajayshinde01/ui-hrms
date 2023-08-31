@@ -1,4 +1,4 @@
-::ng-deep .modal{
+:host ::ng-deep .modal{
     --bs-modal-zindex: 1055;
     --bs-modal-width: 500px;
     --bs-modal-padding: 1rem;
@@ -32,3 +32,12 @@
     outline: 0;
 
 }
+
+:host::ng-deep .cdk-overlay-pane.my-dialog {
+    position: relative!important;
+  }
+
+  :host::ng-deep .cdk-overlay-pane.my-dialog .dialog-div-modal {
+    position: relative!important;
+    padding: 10px;
+  }

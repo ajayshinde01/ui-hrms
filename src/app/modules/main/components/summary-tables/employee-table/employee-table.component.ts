@@ -23,6 +23,7 @@ export class EmployeeTableComponent {
   };
 
   masterName: string = 'Employee';
+  buttonVisible:Array<boolean> =[true ,true, true];
 
   params: HttpParams = new HttpParams();
   constructor(

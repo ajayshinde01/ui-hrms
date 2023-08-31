@@ -131,27 +131,47 @@ export class CustomValidators {
     };
   }
 
-  static validVisaDate(): ValidatorFn {
-    return (control: AbstractControl):  ValidationErrors | null => {
-      const today = new Date().getTime();
+  // static validVisaDate(): ValidatorFn {
+  //   return (control: AbstractControl):  ValidationErrors | { [key: string]: any } | null => {
+  //     const value = control.value as Date;
+  //     console.log("visadate",value);
+  //     const today = new Date();//.getTime();
   
+  //     if (!(control && value)) {
+  //       // if there's no control or no value, that's ok
+  //       return null;
+  //     }
+  
+  //     // return null if there's no errors
+  //     if(value < today){
+  //       console.log("here1213");
+  //        return { checkVisaDate: true };
+  //     }else{
+  //       console.log("here");
+  //     }
+  //     return null;
+  //   };
+    
+  // }
+
+  static validVisaDate(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const today = new Date().getTime();
+      console.log("validVisaDate",control.value);
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
       }
   
       // return null if there's no errors
-      if(control.value.getTime() < today){
-         return { validVisaDate: true };
-      }else{
-        console.log("here");
-      }
-      return null;
+      return control.value.getTime() < today
+        ? { invalidDate: 'Visa Date should be a future date' }
+        : null;
     };
-    
   }
 
   static getErrorMessage(errorKey: string, fieldName: string): string {
+    console.log("errorKey",errorKey);
     const fieldNames: { [key: string]: string } = {
       confirmationDate: 'Confirmation Date',
       mobile: 'Mobile',
@@ -214,7 +234,7 @@ export class CustomValidators {
       validResignationDate: `Resignation Date should be a future date`,
       validRelievingDate: `Relieving Date should be a future date`,
       validEmailFormat: `Please enter valid email format`,
-      validVisaDate: `should be grater than today`,
+      checkVisaDate: `should be grater than today`,
       noticePeriodMaxLength: `Maximum 2 number are allowed`,
     };
     return errorMessages[errorKey] || 'Validation error';
