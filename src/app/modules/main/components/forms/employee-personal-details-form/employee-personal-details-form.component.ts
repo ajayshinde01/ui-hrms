@@ -6,6 +6,7 @@ import { EmployeeService } from 'src/app/modules/main/services/employee.service'
 //import { Employee } from 'src/app/modules/main/models/employee.model';
 import { EmployeePersonalDetails } from 'src/app/modules/main/models/employee-personal-details';
 import { CommonMaster } from 'src/app/modules/main/models/common-master.model';
+import { FileUploadService } from '../../../services/file-upload.service';
 
 @Component({
   selector: 'app-employee-personal-details-form',
@@ -27,12 +28,21 @@ export class EmployeePersonalDetailsFormComponent {
   @Input() inputFromParent : string;
   files: File[];
   FleSizeError: string;
+  url: any;
+  file_name: any;
+  viewPassportFile: any;
+  aadhar_url: any;
+  passport_file_url: any;
+  aadhar_file_url: any;
+  viewAadharFile: any;
+  viewPANFile: any;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     public employeeService: EmployeeService,
     private route: ActivatedRoute,
+    private fileUploadService: FileUploadService,
 
   ) {}
 
@@ -77,7 +87,7 @@ export class EmployeePersonalDetailsFormComponent {
       panCardNumber:['',[Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
       panCardName:[''],
       panCardFile:[''],
-      bankAccountNumber:['',[Validators.pattern('^\d{9,18}$')]],
+      bankAccountNumber:['',[Validators.pattern('^[0-9]{9,18}$')]],
       bankName:[''],
       ifscCode:['',[Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')]],
       uanNumber:[''],
@@ -89,6 +99,25 @@ export class EmployeePersonalDetailsFormComponent {
       orgCode: "AVI01"
 
     });
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.employeePersonalDetailsForm.get(controlName);
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.employeePersonalDetailsForm.get(controlName);
+
+    console.log('controlName' + controlName);
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+
+    return '';
   }
 
   collectQueryParams() {
@@ -111,6 +140,7 @@ export class EmployeePersonalDetailsFormComponent {
      } else {
        this.actionLabel = 'Save';
      }
+     console.log("emp_id action label",this.emp_id,this.actionLabel);
 
    }
 
@@ -120,8 +150,12 @@ export class EmployeePersonalDetailsFormComponent {
       .subscribe((response: EmployeePersonalDetails) => {
         this.employeePersonalDetailsForm.patchValue(response);
         this.employee = response;
+        this.viewPANFile=response["panCardFile"];
+        this.viewAadharFile=response["aadhaarFile"];
+        this.viewPassportFile=response["passportFile"];
       },
       err => {
+        this.actionLabel === 'Update'
        console.log('oops',err);
       });
   }
@@ -153,8 +187,22 @@ export class EmployeePersonalDetailsFormComponent {
   onPanFileSelect(event:any) {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
-      //this.employeeVisaDetailsForm.get('visaFile').setValue(this.files);
       console.log(this.files);
+      const panfile = event.target.files[0];
+      console.log('size', panfile.size);
+      console.log('type', panfile.type);
+      if(panfile.size > 2e+6){
+        this.FleSizeError='File is too large should not exceed Over 2MB';
+        console.log('File is too large. Over 2MB');
+      }   
+
+    if (panfile) {
+      this.fileUploadService.uploadImage(panfile).subscribe((res) => {
+        console.log('received response', res);
+        this.aadhar_file_url = res['message'];
+        this.viewPANFile=res['message'];
+      });
+    }
     }
   }
 
@@ -166,15 +214,18 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const file = event.target.files[0];
-      console.log('size', file.size);
-      console.log('type', file.type);
       if(file.size > 2e+6){
         this.FleSizeError='File is too large should not exceed Over 2MB';
         console.log('File is too large. Over 2MB');
       }
-   
-      //this.employeeVisaDetailsForm.get('visaFile').setValue(this.files);
-      console.log(this.files);
+
+      if (file) {
+        this.fileUploadService.uploadImage(file).subscribe((res) => {
+          this.passport_file_url = res['message'];
+          this.file_name = res['message'];
+          this.viewPassportFile=res['message'];
+        });
+      }
     }
   }
 
@@ -185,22 +236,35 @@ export class EmployeePersonalDetailsFormComponent {
   onAadharFileSelect(event:any) {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
-      //this.employeeVisaDetailsForm.get('visaFile').setValue(this.files);
-      console.log(this.files);
+      const aadharfile = event.target.files[0];
+      if(aadharfile.size > 2e+6){
+        this.FleSizeError='File is too large should not exceed Over 2MB';
+      }   
+
+    if (aadharfile) {
+      this.fileUploadService.uploadImage(aadharfile).subscribe((res) => {
+        this.aadhar_file_url = res['message'];
+       // this.file_name = res['message'];
+        this.viewAadharFile=res['message'];
+      });
     }
+  }
   }
 
   onSubmit() {
-    console.log("dfd",this.inputFromParent);
+   // console.log("dfd",this.inputFromParent);
     if (this.employeePersonalDetailsForm.valid) {
+      this.employeePersonalDetailsForm.value.passportFile=this.passport_file_url;
+      this.employeePersonalDetailsForm.value.aadhaarFile=this.aadhar_file_url;
+      this.employeePersonalDetailsForm.value.panCardFile=this.aadhar_file_url;
+
       const formData = this.employeePersonalDetailsForm.value;
+      
       if (this.actionLabel === 'Save') {
         this.employeeService.AddPersonalDetails(formData,this.emp_id).subscribe(
           (response: EmployeePersonalDetails) => {
             this.employeeService.notify('Data Saved Successfully...');
-            this.router.navigate(['/master/employee-form']);
-
-            
+            this.router.navigate(['/master/employee-form']);            
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {

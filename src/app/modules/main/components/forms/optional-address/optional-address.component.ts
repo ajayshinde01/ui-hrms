@@ -1,26 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonMaster } from '../../../models/common-master.model';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Employees } from '../../../models/employee.model';
 import { Address } from '../../../models/address.model';
+import { CommonMaster } from '../../../models/common-master.model';
 import { EmployeeService } from '../../../services/employee.service';
 import { AddressService } from '../../../services/address.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Params, Router, ActivatedRoute } from '@angular/router';
-import { Employees } from '../../../models/employee.model';
-import { mergeMap } from 'rxjs';
-import { state } from '@angular/animations';
 import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
-  selector: 'app-address',
-  templateUrl: './address.component.html',
-  styleUrls: ['./address.component.scss'],
+  selector: 'app-optional-address',
+  templateUrl: './optional-address.component.html',
+  styleUrls: ['./optional-address.component.scss'],
 })
-export class AddressComponent implements OnInit {
-  addressForm!: FormGroup;
+export class OptionalAddressComponent {
+  optionalAddressForm!: FormGroup;
   employee: Employees;
   address: Address;
-  addressType: string = 'PERMANENT';
   ownershipStatus: CommonMaster[] = [];
   countries: CommonMaster[] = [];
   states: CommonMaster[] = [];
@@ -28,6 +25,7 @@ export class AddressComponent implements OnInit {
   submitted: boolean = false;
   queryParams?: any;
   response: number;
+  addressType: string = 'CORRESPONDENCE';
   actionLabel: string;
   isDisabled: boolean = false;
 
@@ -41,7 +39,6 @@ export class AddressComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.initForm();
-    // this.getFetchAddressTypes();
     this.FetchOwnershipStatus();
     this.FetchCountries();
 
@@ -54,13 +51,12 @@ export class AddressComponent implements OnInit {
   }
 
   initForm() {
-    this.addressForm = this.formBuilder.group({
+    this.optionalAddressForm = this.formBuilder.group({
       id: [''],
-      addressType: ['', [Validators.required]],
+      addressType: [''],
       address1: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(100),
@@ -100,13 +96,12 @@ export class AddressComponent implements OnInit {
           Validators.pattern('^(?:[0-9]|1[0-2])$'),
         ],
       ],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      country: ['', [Validators.required]],
+      city: [''],
+      state: [''],
+      country: [''],
       postcode: [
         '',
         [
-          Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
@@ -178,8 +173,8 @@ export class AddressComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.addressForm.valid) {
-      const formData = this.addressForm.value;
+    if (this.optionalAddressForm.valid) {
+      const formData = this.optionalAddressForm.value;
       if (this.actionLabel === 'Save') {
         debugger;
         this.addressService
@@ -217,7 +212,7 @@ export class AddressComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Please fill valid address details');
+                this.addressService.warn('Please fill valid details');
               }
             }
           );
@@ -227,7 +222,7 @@ export class AddressComponent implements OnInit {
   getByIdAndAddressType(id: number, addressType: string) {
     this.addressService.getAddressById(id, addressType).subscribe(
       (response: Address) => {
-        this.addressForm.patchValue(response);
+        this.optionalAddressForm.patchValue(response);
         this.response = response.id;
         this.actionLabel = 'Update';
       },
@@ -238,12 +233,12 @@ export class AddressComponent implements OnInit {
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.addressForm.get(controlName);
+    const control = this.optionalAddressForm.get(controlName);
     return !!control && control.invalid && control.touched;
   }
 
   getErrorMessage(controlName: string): string {
-    const control = this.addressForm.get(controlName);
+    const control = this.optionalAddressForm.get(controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
       return CustomValidators.getErrorMessage(errorKey, controlName);

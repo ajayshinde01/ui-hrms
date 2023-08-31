@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { EmergencyContacts } from '../../../models/emergency-contacts.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import {
@@ -9,6 +9,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { EmergencyContactsService } from '../../../services/emergency-contacts.service';
+import { CustomValidators } from '../../../services/custom-validators.service';
 
 @Component({
   selector: 'app-emergency-contact',
@@ -52,9 +53,37 @@ export class EmergencyContactComponent implements OnInit {
   initForm() {
     this.emergencyContactForm = this.formBuilder.group({
       id: [''],
-      emergencyContactName: [''],
-      emergencyContactNumber: [''],
-      relation: [''],
+      emergencyContactName: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(50),
+          Validators.pattern('[A-Za-z ]+'),
+        ],
+      ],
+
+      emergencyContactNumber: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          Validators.pattern('^[0-9]{10,15}$'),
+        ],
+      ],
+      relation: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(50),
+          Validators.pattern('[A-Za-z ]+'),
+        ],
+      ],
       orgCode: ['AVI-01'],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
@@ -109,6 +138,24 @@ export class EmergencyContactComponent implements OnInit {
           );
       }
     }
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.emergencyContactForm.get(controlName);
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.emergencyContactForm.get(controlName);
+
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+
+    return '';
   }
 
   getById(id: number, emergencyContactId: number) {

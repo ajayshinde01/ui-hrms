@@ -17,6 +17,11 @@
     color: #ffffff;
     height: 35px;
     width: 150px;
+    margin-top: 10px;
+}
+
+.view_file{
+    margin-left: 10px;
 }
 
 .visa-btn{
@@ -25,4 +30,33 @@
     height: 35px;
     width: 100px;
     margin-left: 10px;
+}
+
+:host::ng-deep .cdk-overlay-pane.my-dialog {
+    position: relative!important;
+  }
+
+:host::ng-deep .close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    top:10px;
+    padding: 10px;
+    line-height: 14px;
+    min-width: auto;
+  }
+
+  :host::ng-deep .employee_visa_title{
+    padding:0px;
+  }
+
+  :host::ng-deep .cdk-overlay-pane.my-dialog .dialog-div-modal {
+    position: relative!important;
+    padding: 20px;
+  }
+
+  .profile-save-btn
+{
+  background-color: #534686;
+  border-color: #534686;
 }

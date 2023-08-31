@@ -132,23 +132,22 @@ export class CustomValidators {
   }
 
   static validVisaDate(): ValidatorFn {
-    return (control: AbstractControl):  ValidationErrors | null => {
+    return (control: AbstractControl): ValidationErrors | null => {
       const today = new Date().getTime();
-  
+
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
       }
-  
+
       // return null if there's no errors
-      if(control.value.getTime() < today){
-         return { validVisaDate: true };
-      }else{
-        console.log("here");
+      if (control.value.getTime() < today) {
+        return { validVisaDate: true };
+      } else {
+        console.log('here');
       }
       return null;
     };
-    
   }
 
   static getErrorMessage(errorKey: string, fieldName: string): string {
@@ -187,6 +186,33 @@ export class CustomValidators {
       countryCode: 'Country Code',
       visaNumber: 'Visa Number',
       validDate: 'Valid Date',
+
+      //employee person details form
+      maritalStatus: 'Marital Status',
+      bloodGroup: 'Blood Group',
+      familyBackground: 'Family Background',
+      healthDetails: 'Health Details',
+      cprNumber: 'CPR Number',
+      gosi: 'GOSI',
+      aadhaarNumber: 'Aadhaar Number',
+      aadhaarName: 'Aadhaar Name',
+      aadhaarFile: 'Aadhaar File',
+      passportNumber: 'Passport Number',
+      passportName: 'Passport Name',
+      passportIssueDate: 'Passport Issue Date',
+      passportValidity: 'Passport Validity',
+      passportFile: 'Passport File',
+      placeOfIssue: 'Place Of Issue',
+      panCardNumber: 'PAN Card Number',
+      panCardName: 'PAN Card Name',
+      panCardFile: 'PAN Card File',
+      bankAccountNumber: 'Bank Account Number',
+      bankName: 'Bank Name',
+      ifscCode: 'IFSC Code',
+      uanNumber: 'UAN Number',
+      pfNumber: 'PF Number',
+
+      //employee address form
       addressType: 'Address Type',
       address1: 'Address 1',
       address2: 'Address 2',
@@ -198,6 +224,24 @@ export class CustomValidators {
       state: 'State',
       city: 'City',
       postcode: 'Post Code',
+
+      //emegency contact form
+      emergencyContactName: 'Name',
+      emergencyContactNumber: 'Number',
+      relation: 'Relation',
+
+      //educational qualification form
+      educationalQualification: 'Educational Qualification',
+      qualificationLevel: 'Qualification Level',
+      instituteName: 'School/University Name',
+      passingYear: 'Passing Year',
+
+      //work Experince
+      companyName: 'Comany Name',
+      designation: 'Designation',
+      fromDate: 'From Date',
+      toDate: 'To Date',
+      address: 'Address',
     };
 
     const errorMessages: { [key: string]: string } = {

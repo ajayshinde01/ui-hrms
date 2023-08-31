@@ -27,6 +27,9 @@
             <div class="form-controls">
               <input matInput placeholder="" formControlName="companyName" />
             </div>
+            <mat-error *ngIf="isControlInvalid('companyName')">
+              {{ getErrorMessage("companyName") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -43,6 +46,9 @@
             <div class="form-controls">
               <input matInput placeholder="" formControlName="designation" />
             </div>
+            <mat-error *ngIf="isControlInvalid('designation')">
+              {{ getErrorMessage("designation") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -56,19 +62,15 @@
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input
-              matInput
-              formControlName="fromDate"
-              [matDatepicker]="fromDatePicker"
-              placeholder="Choose a date"
-            />
+            <input matInput formControlName="fromDate" [matDatepicker]="fromDatePicker" placeholder="Choose a date"
+              readonly />
 
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="fromDatePicker"
-            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
 
             <mat-datepicker #fromDatePicker></mat-datepicker>
+            <mat-error *ngIf="isControlInvalid('fromDate')">
+              {{ getErrorMessage("fromDate") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -82,18 +84,13 @@
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input
-              matInput
-              formControlName="toDate"
-              [matDatepicker]="toDatePicker"
-              placeholder="Choose a date"
-            />
+            <input matInput formControlName="toDate" [matDatepicker]="toDatePicker" placeholder="Choose a date"
+              readonly />
 
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="toDatePicker"
-            ></mat-datepicker-toggle>
-
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-error *ngIf="isControlInvalid('toDate')">
+              {{ getErrorMessage("toDate") }}
+            </mat-error>
             <mat-datepicker #toDatePicker></mat-datepicker>
           </mat-form-field>
         </div>
@@ -111,6 +108,9 @@
             <div class="form-controls">
               <input matInput placeholder="" formControlName="address" />
             </div>
+            <mat-error *ngIf="isControlInvalid('address')">
+              {{ getErrorMessage("address") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -122,20 +122,12 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="save-btn"
-                  (click)="onSubmit()"
-                  [disabled]="!workExperienceForm.valid"
-                >
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
+                  [disabled]="!workExperienceForm.valid">
                   {{ actionLabel }}
                 </button>
 
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="profile-save-btn dark"
-                  (click)="resetForm()"
-                >
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
                   Reset
                 </button>
               </div>

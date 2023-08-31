@@ -11,6 +11,9 @@
               {{ marital_status.value }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="isControlInvalid('maritalStatus')">
+          {{ getErrorMessage("maritalStatus") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -22,6 +25,9 @@
             {{ bg.value }}
         </mat-option>
           </mat-select>
+          <mat-error *ngIf="isControlInvalid('bloodGroup')">
+            {{ getErrorMessage("bloodGroup") }}
+          </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -32,6 +38,9 @@
           formControlName="cprNumber"
           placeholder="CPR Number"
         />
+        <mat-error *ngIf="isControlInvalid('cprNumber')">
+          {{ getErrorMessage("cprNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -40,14 +49,20 @@
     <div class="col-lg-4">
         <mat-label>Family Background</mat-label>
       <mat-form-field appearance="outline" color="primary">
-        <textarea matInput formControlName="familyBackground" placeholder="Family Background..."></textarea>
+        <textarea matInput rows="4" formControlName="familyBackground" placeholder="Family Background..."></textarea>
+        <mat-error *ngIf="isControlInvalid('familyBackground')">
+          {{ getErrorMessage("familyBackground") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
         <mat-label>Health Details</mat-label>
       <mat-form-field appearance="outline">
         
-        <textarea matInput formControlName="healthDetails" placeholder="Health Details..."></textarea>
+        <textarea matInput  rows="4" formControlName="healthDetails" placeholder="Health Details..."></textarea>
+        <mat-error *ngIf="isControlInvalid('healthDetails')">
+          {{ getErrorMessage("healthDetails") }}
+        </mat-error>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
       </mat-form-field>
     </div>
@@ -60,6 +75,9 @@
           formControlName="gosi"
           placeholder="GOSI"
         />
+        <mat-error *ngIf="isControlInvalid('gosi')">
+          {{ getErrorMessage("gosi") }}
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -75,6 +93,9 @@
           formControlName="passportNumber"
           placeholder="Passport Number"
         />
+        <mat-error *ngIf="isControlInvalid('passportNumber')">
+          {{ getErrorMessage("passportNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -86,6 +107,9 @@
             formControlName="passportName"
             placeholder="Passport Name"
           />
+          <mat-error *ngIf="isControlInvalid('passportName')">
+            {{ getErrorMessage("passportName") }}
+          </mat-error>
         </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -104,6 +128,9 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-hint>Hint</mat-hint>
+            <mat-error *ngIf="isControlInvalid('passportIssueDate')">
+              {{ getErrorMessage("passportIssueDate") }}
+            </mat-error>
           </mat-form-field>
     </div>
   </div>
@@ -125,6 +152,9 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
             <mat-hint>Hint</mat-hint>
+            <mat-error *ngIf="isControlInvalid('passportValidity')">
+              {{ getErrorMessage("passportValidity") }}
+            </mat-error>
           </mat-form-field>
     </div>
 
@@ -137,6 +167,9 @@
             formControlName="placeOfIssue"
             placeholder="Place Of Issue"
           />
+          <mat-error *ngIf="isControlInvalid('placeOfIssue')">
+            {{ getErrorMessage("placeOfIssue") }}
+          </mat-error>
         </mat-form-field>
     </div>
 
@@ -150,6 +183,7 @@
           (click)="openPassportFileInput(passportFileinput)"> Choose File </button>
             <input #passportFileinput type="file" name="passportFile" class="personalinfofileInput" accept="image/*,application/pdf" (change)="onPassportFileSelect($event)"
             >
+            <a [href]="viewPassportFile" *ngIf="viewPassportFile" target="_blank" class="view_file"><button type="button" mat-button class="upload-doc-btn"> View File </button></a>
             <mat-error *ngIf="FleSizeError">{{FleSizeError}}</mat-error>
         </div>
         
@@ -169,6 +203,9 @@
           formControlName="aadhaarNumber"
           placeholder="Aadhar Number"
         />
+        <mat-error *ngIf="isControlInvalid('aadhaarNumber')">
+          {{ getErrorMessage("aadhaarNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -180,6 +217,9 @@
             formControlName="aadhaarName"
             placeholder="Aadhar Name"
           />
+          <mat-error *ngIf="isControlInvalid('aadhaarName')">
+            {{ getErrorMessage("aadhaarName") }}
+          </mat-error>
         </mat-form-field>
     </div>
     <div class="col-lg-4 mt-2">
@@ -190,6 +230,7 @@
           (click)="openAadharFileInput(aadharfileInput)"> Choose File </button>
             <input #aadharfileInput type="file" name="aadharfileInput" class="personalinfofileInput" accept="image/*,application/pdf" (change)="onAadharFileSelect($event)"
             >
+            <a [href]="viewAadharFile" *ngIf="viewAadharFile" target="_blank" class="view_file"><button type="button" mat-button class="upload-doc-btn"> View File </button></a>
         </div>
     </div>
   </div>
@@ -206,6 +247,9 @@
           formControlName="panCardNumber"
           placeholder="PAN Number"
         />
+        <mat-error *ngIf="isControlInvalid('panCardNumber')">
+          {{ getErrorMessage("panCardNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -217,6 +261,9 @@
             formControlName="panCardName"
             placeholder="PAN Card Name"
           />
+          <mat-error *ngIf="isControlInvalid('panCardName')">
+            {{ getErrorMessage("panCardName") }}
+          </mat-error>
         </mat-form-field>
     </div>
     <div class="col-lg-4 mt-2">
@@ -227,6 +274,7 @@
         (click)="openPanFileInput(panfileInput)"> Choose File </button>
           <input #panfileInput type="file" name="panfileInput" class="personalinfofileInput"  accept="image/*,application/pdf" (change)="onPanFileSelect($event)"
           >
+          <a [href]="viewPANFile" *ngIf="viewPANFile" target="_blank" class="view_file"><button type="button" mat-button class="upload-doc-btn"> View File </button></a>
       </div>
   </div>
   </div>
@@ -242,6 +290,9 @@
           formControlName="uanNumber"
           placeholder="UAN Number"
         />
+        <mat-error *ngIf="isControlInvalid('uanNumber')">
+          {{ getErrorMessage("uanNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -253,6 +304,9 @@
             formControlName="pfNumber"
             placeholder="PF Number"
           />
+          <mat-error *ngIf="isControlInvalid('pfNumber')">
+            {{ getErrorMessage("pfNumber") }}
+          </mat-error>
         </mat-form-field>
     </div>
   </div>
@@ -269,6 +323,9 @@
           formControlName="bankAccountNumber"
           placeholder="BANK Account Number"
         />
+        <mat-error *ngIf="isControlInvalid('bankAccountNumber')">
+          {{ getErrorMessage("bankAccountNumber") }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -280,6 +337,9 @@
             formControlName="ifscCode"
             placeholder="IFSC Code / IBAN Number"
           />
+          <mat-error *ngIf="isControlInvalid('ifscCode')">
+            {{ getErrorMessage("ifscCode") }}
+          </mat-error>
         </mat-form-field>
     </div>
 
@@ -292,12 +352,15 @@
           formControlName="bankName"
           placeholder="BANK Name"
         />
+        <mat-error *ngIf="isControlInvalid('bankName')">
+          {{ getErrorMessage("bankName") }}
+        </mat-error>
       </mat-form-field>
   </div>
   </div>
   <div class="form-footer">
-    <button  class="btn btn-primary px-4 float-right profile-save-btn"  (click)="onSubmit()">
-      Save
+    <button  mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn"  (click)="onSubmit()">
+      {{ actionLabel }}
     </button>
 
   </div>

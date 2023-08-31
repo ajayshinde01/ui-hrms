@@ -31,17 +31,16 @@ export class EmployeeService {
   }
 
   AddPersonalDetails(employee: EmployeePersonalDetails, emp_id:number): Observable<EmployeePersonalDetails> {
-    console.log(employee);
     return this.http.post<EmployeePersonalDetails>(
       'http://192.168.1.16:7000/employee/personal-details/create/'+emp_id,
       employee
     );
   }
 
-  AddVisaDetails(visa: Visa, emp_id:number): Observable<Visa> {
+  AddVisaDetails(visa: Visa, emp_id:number): Observable<Visa>{//visa: Visa
     return this.http.post<Visa>(
       'http://192.168.1.16:7000/employee/visa/'+emp_id+'/add',
-      visa
+      visa     
     );
   }
 
@@ -122,9 +121,9 @@ export class EmployeeService {
     );
   }
 
-  deleteEmployeeVisa(employeeId: string): Observable<ApiResponse> {
+  deleteEmployeeVisa(visa_id:any, employeeId:any): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/visa/' + employeeId + '?updatedBy=Admin'
+      'http://192.168.1.16:7000/employee/visa/' + employeeId +'/' + visa_id +'?updatedBy=Admin'
     );
   }
 

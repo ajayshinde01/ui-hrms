@@ -1,16 +1,16 @@
-<form [formGroup]="addressForm">
+<form [formGroup]="optionalAddressForm">
   <!-- <div class="col-lg-4">
     <br />
     <mat-label>Address Type</mat-label>
     <mat-form-field appearance="outline" color="primary">
-      <input matInput formControlName="addressType" readonly />PERMANENT
+      <input matInput formControlName="addressType" readonly />CORRESPONDENCE
       <mat-error *ngIf="isControlInvalid('addressType')">
         {{ getErrorMessage("addressType") }}
       </mat-error>
     </mat-form-field>
   </div> -->
-  <br />
-  <h2>CORRESPONDENCE ADDRESS</h2>
+  <h2>PERMANENT ADDRESS</h2>
+
   <div class="row mm">
     <div class="col-lg-4">
       <mat-label>Address 1</mat-label>
@@ -154,11 +154,9 @@
       _ngcontent-ng-c812429062=""
       class="btn btn-primary px-4 float-right profile-save-btn address-details-save-btn"
       (click)="onSubmit()"
-      [disabled]="!addressForm.valid"
+      [disabled]="!optionalAddressForm.valid"
     >
       {{ actionLabel }}
     </button>
   </div>
 </form>
-<mat-divider></mat-divider>
-<app-optional-address></app-optional-address>

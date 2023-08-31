@@ -21,11 +21,10 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="emergencyContactName"
-              />
+              <input matInput formControlName="emergencyContactName" />
+              <mat-error *ngIf="isControlInvalid('emergencyContactName')">
+                {{ getErrorMessage("emergencyContactName") }}
+              </mat-error>
             </div>
           </mat-form-field>
         </div>
@@ -40,11 +39,10 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="emergencyContactNumber"
-              />
+              <input matInput formControlName="emergencyContactNumber" />
+              <mat-error *ngIf="isControlInvalid('emergencyContactNumber')">
+                {{ getErrorMessage("emergencyContactNumber") }}
+              </mat-error>
             </div>
           </mat-form-field>
         </div>
@@ -61,6 +59,9 @@
             <div class="form-controls">
               <input matInput formControlName="relation" />
             </div>
+            <mat-error *ngIf="isControlInvalid('relation')">
+              {{ getErrorMessage("relation") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <form [formGroup]="educationalDetailsForm">
-  <div class="container" style="width: 490px; height: 390px">
+  <div class="container" style="width: 490px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
           <mat-label>Educational Qualification</mat-label>
@@ -27,12 +27,15 @@
                 formControlName="educationalQualification"
               />
             </div>
+            <mat-error *ngIf="isControlInvalid('educationalQualification')">
+              {{ getErrorMessage("educationalQualification") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
           <mat-label>Qualification Level</mat-label>
@@ -52,12 +55,15 @@
                 >
               </mat-select>
             </div>
+            <mat-error *ngIf="isControlInvalid('qualificationLevel')">
+              {{ getErrorMessage("qualificationLevel") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 field-one">
           <mat-label>School/University</mat-label>
@@ -67,12 +73,15 @@
             <div class="form-controls">
               <input matInput placeholder="" formControlName="instituteName" />
             </div>
+            <mat-error *ngIf="isControlInvalid('instituteName')">
+              {{ getErrorMessage("instituteName") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
           <mat-label>Year Of Passing</mat-label>
@@ -80,16 +89,20 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
             <input
+              readonly
               matInput
               formControlName="passingYear"
               [matDatepicker]="picker"
-              placeholder="Choose a date"
+              placeholder="DD/MM/YYYY"
             />
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="isControlInvalid('passingYear')">
+              {{ getErrorMessage("passingYear") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -111,7 +124,7 @@
                 </button>
                 <button
                   _ngcontent-ng-c812429062=""
-                  class="profile-save-btn dark"
+                  class="educational-qualification-save-btn dark"
                   (click)="resetForm()"
                 >
                   Reset

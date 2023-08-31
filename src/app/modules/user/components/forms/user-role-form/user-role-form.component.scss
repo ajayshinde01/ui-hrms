@@ -93,12 +93,25 @@
   top: -13px;
 }
 
+:host::ng-deep.mat-mdc-input-element {
+  height: 85px;
+  width: 255px;
+  resize: none;
+}
+
 .validate-text {
   font-size: 9px;
   text-align: left;
   color: red;
   position: relative;
   left: -15px;
+}
+
+.validate-text-area {
+  font-size: 9px;
+  text-align: left;
+  color: red;
+  position: relative;
 }
 
 .example-form {

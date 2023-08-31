@@ -15,6 +15,7 @@ import { ApiResponse } from '../../../models/response';
 })
 export class VisaDetailsTableComponent {
   [x: string]: any;
+  buttonVisible: Array<boolean> = [true, true, true];
   emp_id: any;
   visa_id: any;
   employeeVisaHeaders: { columnsMetadata: Array<ColumnsMetadata> };
@@ -85,7 +86,7 @@ export class VisaDetailsTableComponent {
     private router: Router,
     private matDialog: MatDialog,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getHeaders();
@@ -110,13 +111,13 @@ export class VisaDetailsTableComponent {
 
   action(event: Data) {
     let type: string = event['event'];
-    let id: string = event['data'].id;
+    let id: any = event['data'].id;
 
     console.log('dataid', id);
     const queryParam = { id: id };
     switch (type) {
       case 'delete':
-        this.employeeService.deleteEmployeeVisa(id).subscribe(
+        this.employeeService.deleteEmployeeVisa(id, this.emp_id).subscribe(
           (response: ApiResponse) => {
             this.employeeService.notify(
               'Employee visa details Deleted successfully..!'
@@ -157,7 +158,7 @@ export class VisaDetailsTableComponent {
     const queryParam = { id: id };
     switch (type) {
       case 'delete':
-        this.employeeService.deleteEmployeeVisa(id).subscribe(
+        this.employeeService.deleteEmployeeVisa(id, this.emp_id).subscribe(
           (response: ApiResponse) => {
             this.employeeService.notify(
               'Employee visa details Deleted successfully..!'
@@ -196,10 +197,14 @@ export class VisaDetailsTableComponent {
 
   OpenModal() {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
+      width: '500px',
+      panelClass: 'my-dialog',
       disableClose: true,
     });
 
-    /* this.matDialogRef.afterClosed().subscribe((res: any) => {
+    
+
+   /* this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
 
       if (res == true) {
@@ -209,8 +214,9 @@ export class VisaDetailsTableComponent {
 
   OpenModalForEdit(id: string) {
     this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
-      data: { id: id },
-
+      data: { id: id , actionLabel: 'Save'},
+      width: '500px',
+      panelClass: 'my-dialog',
       disableClose: true,
     });
 
