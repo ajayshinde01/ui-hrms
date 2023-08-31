@@ -1,5 +1,5 @@
 <form [formGroup]="departmentForm">
-  <div class="container" style="width: 490px; height: 390px">
+  <div class="container" style="width: 490px; height: 420px">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -153,13 +153,15 @@
           <mat-label class="desc-label">Department Description</mat-label>
         </div>
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
+          <mat-form-field class="textarea-outline" appearance="outline">
             <div class="form-controls">
-              <input
+              <!-- <input
                 matInput
                 placeholder="Finance Department"
                 formControlName="departmentDescription"
-              />
+              /> -->
+              <textarea matInput placeholder="Finance Department" formControlName="departmentDescription">
+              </textarea>
               <div
                 *ngIf="
                   departmentForm.controls['departmentDescription']?.invalid &&
@@ -168,44 +170,44 @@
                 "
               >
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['required']"
                   >Please enter Department Description
                 </span>
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription'].errors?.['pattern']"
                   >Please enter valid Department Description</span
                 >
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['leadingSpace'] && !departmentForm.controls['departmentDescription'].errors?.['pattern'] && !departmentForm.controls['departmentDescription']?.errors?.['trailingSpace']"
                   >Leading space not allowed</span
                 >
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['whitespace']"
                   >Field can not be empty</span
                 >
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['blank']"
                   >No whitespaces are allowed</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentDescription'].errors?.['pattern'] && !departmentForm.controls['departmentDescription']?.errors?.['leadingSpace']"
                   >Trailing space not allowed</span
                 >
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['trailingSpace'] && !departmentForm.controls['departmentDescription'].errors?.['pattern'] && departmentForm.controls['departmentDescription']?.errors?.['leadingSpace']"
                   >Trailing, Leading spaces not allowed</span
                 >
 
                 <span
-                  class="validate-text"
+                  class="validate-text-description"
                   *ngIf="departmentForm.controls['departmentDescription']?.errors?.['descMaxLength'] && !departmentForm.controls['departmentDescription'].errors?.['pattern'] && !departmentForm.controls['departmentDescription']?.errors?.['leadingSpace']"
                   >Maximum 250 characters are allowed</span
                 >
@@ -222,7 +224,7 @@
           <mat-label>Organization Code</mat-label>
         </div>
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
+          <mat-form-field  appearance="outline" color="primary">
             <div class="form-controls">
               <input matInput placeholder="AVI-BHR" formControlName="orgCode" />
               <div

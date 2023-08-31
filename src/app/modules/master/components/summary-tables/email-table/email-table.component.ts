@@ -125,17 +125,15 @@ export class EmailTableComponent {
 
   searchFunction(params: HttpParams) {
     this.params = params;
-
     this.emailService
 
       .search(params)
 
       .subscribe((data: { content: Array<Email>; totalElements: number }) => {
-        console.log(data.content);
+        
 
-        console.log(data.totalElements);
-
-        this.emailMetaData = data.content;
+        this.emailMetaData = data.content
+        
       });
   }
 

@@ -121,3 +121,9 @@
   overflow-x: hidden;
 }
 
+
+:host ::ng-deep .ck.ck-editor__main>.ck-editor__editable {
+  border-color: var(--ck-color-base-border);
+  overflow-y: auto;
+  height:100px
+}

@@ -38,6 +38,7 @@ export class EmployeeTypeComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
+  orgCode=sessionStorage.getItem('orgCode')
 
   constructor(
     private _mdr: MatDialogRef<EmployeeTypeComponent>,
@@ -134,7 +135,7 @@ export class EmployeeTypeComponent {
       ],
 
       orgCode: [
-        '',
+        { value: this.orgCode, disabled: true },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -155,6 +156,7 @@ export class EmployeeTypeComponent {
   onSubmit() {
     if (this.employeeTypeForm.valid) {
       this.employeeTypeForm.get('employeeTypeId')?.enable();
+      this.employeeTypeForm.get('orgCode')?.enable();
       const formData = this.employeeTypeForm.value;
       formData.updatedBy = 'Admin';
 

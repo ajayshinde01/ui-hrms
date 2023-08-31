@@ -183,6 +183,7 @@
           (click)="openPassportFileInput(passportFileinput)"> Choose File </button>
             <input #passportFileinput type="file" name="passportFile" class="personalinfofileInput" accept="image/*,application/pdf" (change)="onPassportFileSelect($event)"
             >
+            <a [href]="viewPassportFile" *ngIf="viewPassportFile" target="_blank" class="view_file"><button type="button" mat-button class="upload-doc-btn"> View File </button></a>
             <mat-error *ngIf="FleSizeError">{{FleSizeError}}</mat-error>
         </div>
         
@@ -229,6 +230,7 @@
           (click)="openAadharFileInput(aadharfileInput)"> Choose File </button>
             <input #aadharfileInput type="file" name="aadharfileInput" class="personalinfofileInput" accept="image/*,application/pdf" (change)="onAadharFileSelect($event)"
             >
+            <a [href]="viewAadharFile" *ngIf="viewAadharFile" target="_blank" class="view_file"><button type="button" mat-button class="upload-doc-btn"> View File </button></a>
         </div>
     </div>
   </div>
@@ -272,6 +274,7 @@
         (click)="openPanFileInput(panfileInput)"> Choose File </button>
           <input #panfileInput type="file" name="panfileInput" class="personalinfofileInput"  accept="image/*,application/pdf" (change)="onPanFileSelect($event)"
           >
+          <a [href]="viewPANFile" *ngIf="viewPANFile" target="_blank" class="view_file"><button type="button" mat-button class="upload-doc-btn"> View File </button></a>
       </div>
   </div>
   </div>
@@ -356,8 +359,8 @@
   </div>
   </div>
   <div class="form-footer">
-    <button  class="btn btn-primary px-4 float-right profile-save-btn"  (click)="onSubmit()">
-      Save
+    <button  mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn"  (click)="onSubmit()">
+      {{ actionLabel }}
     </button>
 
   </div>

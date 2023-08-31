@@ -38,7 +38,7 @@ export class DepartmentComponent implements OnInit {
   queryParams?: Params;
   isDisabled: boolean = false;
   errorMessage: string = '';
-
+  orgCode=sessionStorage.getItem('orgCode')
   actionLabel: string = 'Save';
   constructor(
     private _mdr: MatDialogRef<DepartmentComponent>,
@@ -140,7 +140,7 @@ export class DepartmentComponent implements OnInit {
         ],
       ],
       orgCode: [
-        '',
+        { value: this.orgCode, disabled: true },
         [
           Validators.required,
           leadingSpaceValidator,
@@ -159,6 +159,7 @@ export class DepartmentComponent implements OnInit {
   onSubmit() {
     if (this.departmentForm.valid) {
       this.departmentForm.get('departmentId')?.enable();
+      this.departmentForm.get('orgCode')?.enable();
       const formData = this.departmentForm.value;
       formData.updatedBy = 'Admin';
 

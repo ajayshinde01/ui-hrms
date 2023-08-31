@@ -121,9 +121,9 @@ export class EmployeeService {
     );
   }
 
-  deleteEmployeeVisa(employeeId: string): Observable<ApiResponse> {
+  deleteEmployeeVisa(visa_id:any, employeeId:any): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
-      'http://192.168.1.16:7000/employee/visa/' + employeeId + '?updatedBy=Admin'
+      'http://192.168.1.16:7000/employee/visa/' + employeeId +'/' + visa_id +'?updatedBy=Admin'
     );
   }
 
