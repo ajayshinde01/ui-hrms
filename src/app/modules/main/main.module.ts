@@ -43,6 +43,7 @@ import { WorkExperienceTableComponent } from './components/summary-tables/work-e
 import { WorkExperienceFormComponent } from './components/forms/work-experience-form/work-experience-form.component';
 import { CertificationTableComponent } from './components/summary-tables/certification-table/certification-table.component';
 import { CertificationFormComponent } from './components/forms/certification-form/certification-form.component';
+import { OptionalAddressComponent } from './components/forms/optional-address/optional-address.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { CertificationFormComponent } from './components/forms/certification-for
     WorkExperienceFormComponent,
     CertificationTableComponent,
     CertificationFormComponent,
+    OptionalAddressComponent,
   ],
   imports: [
     CommonModule,
