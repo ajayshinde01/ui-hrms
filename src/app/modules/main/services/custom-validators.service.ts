@@ -139,6 +139,40 @@ export class CustomValidators {
     };
   }
 
+  static passportIssueDate(joiningDate: Date): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const selectedDate = new Date(value);
+      if (value && selectedDate >= new Date()) {
+        return { passportIssueDate: true };
+      }
+      return null;
+    };
+  }
+
+  static pastDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const selectedDate = new Date(value);
+      if (value && selectedDate >= new Date()) {
+        return { pastDate: true };
+      }
+      return null;
+    };
+  }
+
+
+  static valdiationOfPassport(joiningDate: Date): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const selectedDate = new Date(value);
+      if (value && selectedDate < new Date()) {
+        return { valdiationOfPassport: true };
+      }
+      return null;
+    };
+  }
+
   static noticePeriodMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
@@ -147,6 +181,21 @@ export class CustomValidators {
       if (value && value.toString().length > maxLength) {
         return {
           noticePeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  static maxLengthOfAddress(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value)
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          maxLengthOfAddress: `Maximum ${maxLength} characters are allowed.`,
         };
       }
 
@@ -234,7 +283,7 @@ export class CustomValidators {
   static getErrorMessage(errorKey: string, fieldName: string): string {
     const fieldNames: { [key: string]: string } = {
       confirmationDate: 'Confirmation Date',
-      mobile: 'Mobile',
+      mobile: 'Mobile Number',
       resignationDate: 'Resignation Date',
       relievingDate: 'Relieving Date',
       noticePeriod: 'Notice Period',
@@ -262,6 +311,7 @@ export class CustomValidators {
       division: 'Division',
       userId: 'UserId',
       email: 'Email',
+      phone: 'Phone',
 
       //employee Visa Form
       countryCode: 'Country Code',
@@ -347,7 +397,11 @@ export class CustomValidators {
       validAddressFormat: `Please enter valid Address`,
       addressPeriodMaxLength: `Maximum 50 character are allowed`,
       validCompanyFormat: `Please enter valid Company Name`,
-      validDesignationFormat: `Please enter valid Designation`
+      validDesignationFormat: `Please enter valid Designation`,
+      maxLengthOfAddress: `Maximum 50 character are allowed`,
+      passportIssueDate: `Date Of Issue should be a past date`,
+      valdiationOfPassport: `Valid Dateshould be a future date`,
+      pastDate: `${fieldNames[fieldName]} should be a past date`
 
     };
     return errorMessages[errorKey] || 'Validation error';

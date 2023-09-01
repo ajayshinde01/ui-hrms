@@ -44,6 +44,22 @@ import { WorkExperienceFormComponent } from './components/forms/work-experience-
 import { CertificationTableComponent } from './components/summary-tables/certification-table/certification-table.component';
 import { CertificationFormComponent } from './components/forms/certification-form/certification-form.component';
 import { OptionalAddressComponent } from './components/forms/optional-address/optional-address.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+export const MY_FORMATS = {
+
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'DDD MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'DDDD MMMM YYYY',
+  },
+
+};
 
 @NgModule({
   declarations: [
@@ -98,7 +114,8 @@ import { OptionalAddressComponent } from './components/forms/optional-address/op
     DepartmentService,
     AddressService,
     EmergencyContactsService,
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
   exports: [AlphabetOnlyDirective],
 })
-export class MainModule {}
+export class MainModule { }
