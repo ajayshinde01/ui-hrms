@@ -1,5 +1,5 @@
 <form [formGroup]="certificationsForm">
-  <div class="container" style="width: 490px; height: 390px">
+  <div class="container" style="width: 490px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -23,6 +23,9 @@
             <div class="form-controls">
               <input matInput placeholder="" formControlName="certification" />
             </div>
+            <mat-error *ngIf="isControlInvalid('certification')">
+              {{ getErrorMessage("certification") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -38,6 +41,9 @@
             <div class="form-controls">
               <input matInput placeholder="" formControlName="issuedBy" />
             </div>
+            <mat-error *ngIf="isControlInvalid('issuedBy')">
+              {{ getErrorMessage("issuedBy") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -61,6 +67,9 @@
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="isControlInvalid('dateOfCertification')">
+              {{ getErrorMessage("dateOfCertification") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <form [formGroup]="educationalDetailsForm">
-  <div class="container" style="width: 600px; height: auto">
+  <div class="container" style="width: 630px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -21,7 +21,11 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="educationalQualification" />
+              <input
+                matInput
+                placeholder=""
+                formControlName="educationalQualification"
+              />
             </div>
             <mat-error *ngIf="isControlInvalid('educationalQualification')">
               {{ getErrorMessage("educationalQualification") }}
@@ -39,10 +43,16 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <mat-select formControlName="qualificationLevel" placeholder="Select">
+              <mat-select
+                formControlName="qualificationLevel"
+                placeholder="Select"
+              >
                 <mat-option>Select</mat-option>
-                <mat-option *ngFor="let qualificationLevel of qualificationLevels" [value]="qualificationLevel.code">{{
-                  qualificationLevel.value }}</mat-option>
+                <mat-option
+                  *ngFor="let qualificationLevel of qualificationLevels"
+                  [value]="qualificationLevel.code"
+                  >{{ qualificationLevel.value }}</mat-option
+                >
               </mat-select>
             </div>
             <mat-error *ngIf="isControlInvalid('qualificationLevel')">
@@ -78,8 +88,17 @@
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input readonly matInput formControlName="passingYear" [matDatepicker]="picker" placeholder="DD/MM/YYYY" />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <input
+              readonly
+              matInput
+              formControlName="passingYear"
+              [matDatepicker]="picker"
+              placeholder="DD/MM/YYYY"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="isControlInvalid('passingYear')">
               {{ getErrorMessage("passingYear") }}
@@ -95,12 +114,19 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
-                  [disabled]="!educationalDetailsForm.valid">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!educationalDetailsForm.valid"
+                >
                   {{ actionLabel }}
                 </button>
-                <button _ngcontent-ng-c812429062="" class="educational-qualification-save-btn dark"
-                  (click)="resetForm()">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="educational-qualification-save-btn dark"
+                  (click)="resetForm()"
+                >
                   Reset
                 </button>
               </div>
