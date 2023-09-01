@@ -70,10 +70,9 @@
               <!--<mat-error *ngIf="isControlInvalid('validDate')">
           {{ getErrorMessage("validDate") }}
         </mat-error>-->
-              <mat-error *ngIf="employeeVisaDetailsForm.controls['validDate']?.errors">
-                {{ employeeVisaDetailsForm.controls['validDate'].errors?.['invalidDate'] }}
-              </mat-error>
-
+        <mat-error *ngIf="isControlInvalid('validDate')">
+          {{ getErrorMessage("validDate") }}
+        </mat-error>
             </mat-form-field>
           </div>
         </div>

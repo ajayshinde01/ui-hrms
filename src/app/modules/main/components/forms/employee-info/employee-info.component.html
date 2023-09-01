@@ -7,49 +7,25 @@
         <div class="profile-title">
           <div class="profile-section">
             <div id="avatar-container">
-              <img
-                id="avatar-photo"
-                #avatarImg
-                class="avatar-photo"
-                [src]="url && url !== '' ? url : 'assets/profile-img.png'"
-                (mouseenter)="showAddPhotoOverlay = true"
-                alt="avatar photo"
-              />
+              <img id="avatar-photo" #avatarImg class="avatar-photo"
+                [src]="url && url !== '' ? url : 'assets/profile-img.png'" (mouseenter)="showAddPhotoOverlay = true"
+                alt="avatar photo" />
 
-              <div
-                *ngIf="showAddPhotoOverlay"
-                id="add-photo-overlay"
-                class="avatar-photo"
-                (mouseleave)="showAddPhotoOverlay = false"
-              >
-                <button
-                  id="add-avatar-photo-button"
-                  class="center-positon-absolute"
-                  mat-icon-button
-                  (click)="openFileInput(fileInput)"
-                >
+              <div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"
+                (mouseleave)="showAddPhotoOverlay = false">
+                <button id="add-avatar-photo-button" class="center-positon-absolute" mat-icon-button
+                  (click)="openFileInput(fileInput)">
                   <mat-icon>add_a_photo</mat-icon>
                 </button>
 
-                <mat-icon
-                  id="remove-avatar-photo-button"
-                  *ngIf="url && url !== ''"
-                  (click)="removePhoto()"
-                  matTooltip="remove this photo"
-                  >close</mat-icon
-                >
+                <mat-icon id="remove-avatar-photo-button" *ngIf="url && url !== ''" (click)="removePhoto()"
+                  matTooltip="remove this photo">close</mat-icon>
               </div>
 
               <!-- Input file -->
 
-              <input
-                #fileInput
-                type="file"
-                (change)="uploadImage($event)"
-                name="avatar"
-                accept="image/png, image/jpeg"
-                style="display: none"
-              />
+              <input #fileInput type="file" (change)="uploadImage($event)" name="avatar" accept="image/png, image/jpeg"
+                style="display: none" />
             </div>
           </div>
         </div>
@@ -59,17 +35,13 @@
         <mat-label>Employee code</mat-label>
 
         <mat-form-field appearance="outline">
-          <input
-            matInput
-            formControlName="employeeCode"
-            placeholder="AVI-001"
-            oninput="this.value = this.value.toUpperCase()"
-          />
+          <input matInput formControlName="employeeCode" placeholder="AVI-001"
+            oninput="this.value = this.value.toUpperCase()" />
 
           <mat-error *ngIf="isControlInvalid('employeeCode')">
             <span class="validate-text">{{
               getErrorMessage("employeeCode")
-            }}</span>
+              }}</span>
           </mat-error>
         </mat-form-field>
 
@@ -81,7 +53,7 @@
           <mat-error *ngIf="isControlInvalid('middleName')">
             <span class="validate-text">{{
               getErrorMessage("middleName")
-            }}</span>
+              }}</span>
           </mat-error>
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
@@ -90,21 +62,10 @@
         <mat-label>Date Of Birthday</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="dateOfBirth"
-            [matDatepicker]="picker"
-            placeholder="Choose a date"
-            [max]="maxDob"
-            [min]="minDob"
-            (dateChange)="calculateAge($event)"
-            readonly
-          />
+          <input matInput formControlName="dateOfBirth" [matDatepicker]="picker" placeholder="Choose a date"
+            [max]="maxDob" [min]="minDob" (dateChange)="calculateAge($event)" readonly />
 
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -121,7 +82,7 @@
 
                 <mat-option *ngFor="let title of titles" [value]="title.code">{{
                   title.value
-                }}</mat-option>
+                  }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -135,7 +96,7 @@
               <mat-error *ngIf="isControlInvalid('firstName')">
                 <span class="validate-text">{{
                   getErrorMessage("firstName")
-                }}</span>
+                  }}</span>
               </mat-error>
 
               <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> oninput=this.value = this.value.Capitalize-->
@@ -213,7 +174,7 @@
 
             <mat-option *ngFor="let gender of genders" [value]="gender.code">{{
               gender.value
-            }}</mat-option>
+              }}</mat-option>
           </mat-select>
 
           <mat-error *ngIf="isControlInvalid('gender')">
@@ -226,19 +187,10 @@
         <mat-label>Date Of Joining</mat-label>
 
         <mat-form-field appearance="outline" class="">
-          <input
-            matInput
-            formControlName="dateOfJoining"
-            s
-            [matDatepicker]="picker1"
-            placeholder="Choose a date"
-            readonly
-          />
+          <input matInput formControlName="dateOfJoining" s [matDatepicker]="picker1" placeholder="Choose a date"
+            readonly />
 
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker1"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
 
           <mat-datepicker #picker1></mat-datepicker>
 
@@ -255,10 +207,7 @@
           <mat-select formControlName="id" placeholder="Select">
             <mat-option>Select</mat-option>
 
-            <mat-option
-              *ngFor="let division of divisions"
-              [value]="division.id"
-            >
+            <mat-option *ngFor="let division of divisions" [value]="division.id">
               {{ division.divisionName }}
             </mat-option>
           </mat-select>
@@ -280,7 +229,7 @@
 
             <mat-option *ngFor="let status of status" [value]="status.code">{{
               status.value
-            }}</mat-option>
+              }}</mat-option>
           </mat-select>
 
           <mat-error *ngIf="isControlInvalid('status')">
@@ -305,12 +254,8 @@
     <mat-divider></mat-divider>
 
     <div class="form-footer">
-      <button
-        _ngcontent-ng-c812429062=""
-        class="btn btn-primary px-4 float-right profile-save-btn"
-        (click)="onSubmit()"
-        [disabled]="!employeeForm.valid"
-      >
+      <button _ngcontent-ng-c812429062="" class="btn btn-primary px-4 float-right profile-save-btn" (click)="onSubmit()"
+        [disabled]="!employeeForm.valid">
         {{ actionLabel }}
       </button>
     </div>

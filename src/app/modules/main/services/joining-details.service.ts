@@ -16,7 +16,7 @@ import { CommonMaster } from '../models/common-master.model';
   providedIn: 'root',
 })
 export class JoiningDetailsService {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
   private dataSubject = new BehaviorSubject<string>('');
 
