@@ -1,5 +1,5 @@
 <form [formGroup]="workExperienceForm">
-  <div class="container" style="width: 520px; height: 430px">
+  <div class="container" style="width: 520px; height: 480px">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -81,12 +81,10 @@
         <div class="col-md-4 mt-2">
           <mat-label>To Date</mat-label>
         </div>
-
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
             <input matInput formControlName="toDate" [matDatepicker]="toDatePicker" placeholder="Choose a date"
               readonly />
-
             <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
             <mat-error *ngIf="isControlInvalid('toDate')">
               {{ getErrorMessage("toDate") }}
@@ -104,9 +102,13 @@
         </div>
 
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
-            <div class="form-controls">
-              <input matInput placeholder="" formControlName="address" />
+          <mat-form-field appearance="outline" color="primary" class="addressData">
+            <div class="form-controls" class="addressData">
+              <!-- <input matInput placeholder="" formControlName="address" /> -->
+
+              <textarea rows="3" matInput placeholder="Address" formControlName="address">
+
+              </textarea>
             </div>
             <mat-error *ngIf="isControlInvalid('address')">
               {{ getErrorMessage("address") }}

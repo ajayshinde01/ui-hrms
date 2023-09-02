@@ -107,7 +107,7 @@ export class VisaDetailsTableComponent implements OnInit {
     this.matDialogRef = this.matDialog.open(
       EmployeeVisaDetailsFormComponent,
       {
-        width: '500px',
+        width: '530px',
         panelClass: 'my-dialog',
         disableClose: true,
       }
@@ -125,7 +125,7 @@ export class VisaDetailsTableComponent implements OnInit {
       EmployeeVisaDetailsFormComponent,
       {
         data: { id: id, actionLabel: 'Save' },
-        width: '500px',
+        width: '530px',
         panelClass: 'my-dialog',
         disableClose: true,
       }
