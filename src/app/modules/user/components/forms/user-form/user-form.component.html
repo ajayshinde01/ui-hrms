@@ -335,7 +335,7 @@
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <mat-select placeholder="Select" formControlName="enabled">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let status of allUserStatus"
                   [value]="status.code"

@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { EmergencyContactsService } from '../../../services/emergency-contacts.service';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-emergency-contact',
@@ -30,12 +31,27 @@ export class EmergencyContactComponent implements OnInit {
     private contactService: EmergencyContactsService,
     private router: Router,
     private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.collectQueryParams();
+    const formControlNames = ['emergencyContactName'];
+
+    formControlNames.forEach((controlName) => {
+      this.emergencyContactForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.emergencyContactForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
 
   collectQueryParams() {

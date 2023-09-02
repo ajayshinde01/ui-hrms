@@ -13,6 +13,7 @@ import { blankValidator } from '../Validations/blankData.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { emailMaxLength } from '../Validations/emailMaxLength.validator';
 import { CommonMaster } from '../../../models/common-master.model';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-user-form',
@@ -38,7 +39,8 @@ export class UserFormComponent {
     private userService: UserService,
     private userRoleService: UserRoleService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,20 @@ export class UserFormComponent {
     this.initForm();
     this.getAllRoles();
     this.getAllUserStatus();
+    const formControlNames = ['firstName', 'lastName'];
+
+    formControlNames.forEach((controlName) => {
+      this.userForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.userForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
 
   collectQueryParams() {
