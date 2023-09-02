@@ -42,7 +42,7 @@
                 <span
                   class="validate-text"
                   *ngIf="departmentForm.controls['departmentId'].errors?.['pattern']"
-                  >Please enter Valid Department ID</span
+                  >Please enter valid Department ID</span
                 >
                 <span
                   class="validate-text"
@@ -160,7 +160,11 @@
                 placeholder="Finance Department"
                 formControlName="departmentDescription"
               /> -->
-              <textarea matInput placeholder="Finance Department" formControlName="departmentDescription">
+              <textarea
+                matInput
+                placeholder="Finance Department"
+                formControlName="departmentDescription"
+              >
               </textarea>
               <div
                 *ngIf="
@@ -224,7 +228,7 @@
           <mat-label>Organization Code</mat-label>
         </div>
         <div class="col-md-8">
-          <mat-form-field  appearance="outline" color="primary">
+          <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <input matInput placeholder="AVI-BHR" formControlName="orgCode" />
               <div

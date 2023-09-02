@@ -14,6 +14,7 @@ import { nameMaxLength } from 'src/app/modules/master/components/forms/Validatio
 import { trailingSpaceValidator } from 'src/app/modules/master/components/forms/Validations/trailingSpace.validator';
 import { whitespaceValidator } from 'src/app/modules/master/components/forms/Validations/whiteSpace.validator';
 import { blankValidator } from 'src/app/modules/master/components/forms/Validations/blankData.validator';
+import { Subscription } from 'rxjs';
 
 export interface DialogData {
   id: number;
@@ -45,6 +46,7 @@ export class ParentFormComponent {
   queryParams?: Params;
   isEdit: boolean = false;
   errorMessage: string = '';
+  private queryParamsSubscription: Subscription;
 
   isDisabled: boolean = false;
   id: number;
@@ -63,6 +65,7 @@ export class ParentFormComponent {
     let params = new HttpParams();
     params = params.set('page', 0);
     params = params.set('size', 10);
+    console.log('inside ngoInit', this.id);
   }
 
   getChildHeaders() {
@@ -84,11 +87,13 @@ export class ParentFormComponent {
       if (this.queryParams['id'] != undefined) {
         this.isEdit = true;
         this.isDisabled = true;
-        this.getById(this.queryParams['id']);
+        this.id = this.queryParams['id'];
+        this.getById(this.id);
       } else {
       }
     });
   }
+
   goBack() {
     this.router.navigate(['/common-master/parent']);
   }
@@ -113,7 +118,7 @@ export class ParentFormComponent {
           leadingSpaceValidator,
           trailingSpaceValidator,
           nameMaxLength,
-          Validators.pattern('^[a-zA-Z\\s\\_]+$'),
+          Validators.pattern('^[a-zA-Z\\s\\_.+-]+$'),
           whitespaceValidator,
         ],
       ],
@@ -125,7 +130,7 @@ export class ParentFormComponent {
           trailingSpaceValidator,
           nameMaxLength,
           blankValidator,
-          Validators.pattern('^[a-zA-Z\\s]+$'),
+          Validators.pattern('^[a-zA-Z\\s.+-]+$'),
         ],
       ],
       createdBy: [''],
@@ -206,8 +211,12 @@ export class ParentFormComponent {
         this.router.navigate(['/common-master/parentForm']);
         break;
       case 'edit':
-        this.OpenModal();
-        this.router.navigate(['/common-master/parentForm']);
+        console.log(this.id);
+        if (this.id != 0) {
+          this.OpenModal();
+          this.router.navigate(['/common-master/parentForm']);
+        } else this.childService.notify('Please select a record to edit');
+
         break;
     }
   }
@@ -241,6 +250,7 @@ export class ParentFormComponent {
 
     this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
+
       if (res == true) {
       }
     });

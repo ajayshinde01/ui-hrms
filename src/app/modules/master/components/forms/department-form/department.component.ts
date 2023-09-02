@@ -38,7 +38,7 @@ export class DepartmentComponent implements OnInit {
   queryParams?: Params;
   isDisabled: boolean = false;
   errorMessage: string = '';
-  orgCode=sessionStorage.getItem('orgCode')
+  orgCode = sessionStorage.getItem('orgCode');
   actionLabel: string = 'Save';
   constructor(
     private _mdr: MatDialogRef<DepartmentComponent>,
@@ -114,6 +114,7 @@ export class DepartmentComponent implements OnInit {
           trailingSpaceValidator,
           idMaxLength,
           Validators.pattern('^[a-zA-Z0-9\\s\\-]+$'),
+          whitespaceValidator,
         ],
       ],
       departmentName: [

@@ -81,30 +81,30 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(13),
-          Validators.pattern('^4[0-9]{12}(?:[0-9]{3})?$'),
+          CustomValidators.maxLength(20),
+          Validators.pattern('^[0-9]*$'),
         ],
       ],
       visaFile: [''],
-      validDate: ['', [this.validVisaDate()]], //, [this.validVisaDate()]],
+      validDate: ['', [Validators.required]], //, [this.validVisaDate()]],
     });
   }
 
-  validVisaDate(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const today = new Date().getTime();
-      console.log('validVisaDate', control.value);
-      if (!(control && control.value)) {
-        // if there's no control or no value, that's ok
-        return null;
-      }
+  //  validVisaDate(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } | null => {
+  //     const today = new Date().getTime();
+  //     console.log("validVisaDate",control.value);
+  //     if (!(control && control.value)) {
+  //       // if there's no control or no value, that's ok
+  //       return null;
+  //     }
 
-      // return null if there's no errors
-      return control.value.getTime() < today
-        ? { invalidDate: 'Visa Date should be a future date' }
-        : null;
-    };
-  }
+  //     // return null if there's no errors
+  //     return control.value.getTime() < today
+  //       ? { invalidDate: 'Visa Date should be a future date' }
+  //       : null;
+  //   };
+  // }
 
   dateValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -139,17 +139,13 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
 
   collectQueryParams() {
     /* this.route.queryParams.subscribe((params) => {
-        this.queryParams = params;
-  
-        if (this.queryParams['id'] != undefined) {
-          console.log(this.queryParams['id']);
-          this.actionLabel = 'Update';
-          this.getById(this.queryParams['id']);
-          this.isDisabled = true;
-        } else {
-          this.actionLabel = 'Save';
-        }
-      });*/
+       this.queryParams = params
+       if (this.queryParams['id'] != undefined) {
+         this.getById(this.queryParams['id']);
+       } else {
+         this.actionLabel = 'Save';
+       }
+     });*/
     if (this.data.id != undefined && this.data.actionLabel) {
       console.log(this.emp_id);
       this.actionLabel = 'Update';
@@ -238,15 +234,32 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         this.employeeService.AddVisaDetails(formData, this.emp_id).subscribe(
           (response: Visa) => {
             this.employeeService.notify('Data Saved Successfully...');
-            this.router.navigate(['/main/employee-form']);
             this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn(error.error.message);
+              this.employeeService.warn('Credentials already present');
             }
           }
         );
+      }
+
+      if (this.actionLabel === 'Update') {
+        console.log('test', this.employeeVisaDetailsForm.value);
+        this.employeeService
+          .updateEmployeevisa(formData, this.emp_id)
+          .subscribe(
+            (response: Visa) => {
+              this.employeeService.notify('Update Successfully...');
+
+              this.Close(true);
+            },
+            (error: any) => {
+              if (error.status == 400 || error.status == 404) {
+                this.employeeService.warn(error.error.message);
+              }
+            }
+          );
       }
       if (this.actionLabel === 'Update') {
         console.log('test', this.employeeVisaDetailsForm.value);
