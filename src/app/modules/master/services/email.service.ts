@@ -24,13 +24,25 @@ export class EmailService {
     params: HttpParams
   ): Observable<{ content: Array<Email>; totalElements: number }> {
     return this.http.get<{ content: Array<Email>; totalElements: number }>(
-      'http://192.168.1.16:7010/email/get',
+      'http://192.168.1.16:7010/email/get-all',
       {
         params: params,
       }
     );
   }
 
+  searchEmailById(id: string): Observable<Email> {
+    return this.http.get<Email>(
+      'http://192.168.1.16:7010/email/get?id=' + id
+    );
+  }
+
+  // updateEmail(id: string): Observable<Email> {
+  //   return this.http.put<Email>(
+  //     'http://192.168.1.16:7010/employee/division/update',
+  //     id
+  //   );
+  // }
       createEmail(formData:FormData): Observable<any> {
  
         const httpOptions = {

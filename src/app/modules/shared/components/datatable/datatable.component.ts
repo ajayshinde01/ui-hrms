@@ -137,6 +137,13 @@ export class DatatableComponent implements OnInit, OnChanges {
         return this.buttonFunction.emit(data);
         break;
 
+        case 'view':
+        data.data = this.selectedValue;
+        if (data.data == undefined)
+          this.dataTableService.notify('Please select record to view');
+        return this.buttonFunction.emit(data);
+        break;
+
       case 'delete':
         data.data = this.selectedValue;
         if (data.data == undefined)
