@@ -19,6 +19,7 @@ import { MatTab } from '@angular/material/tabs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Employees } from '../../../models/employee.model';
 import * as moment from 'moment';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 @Component({
   selector: 'app-employee-info',
   templateUrl: './employee-info.component.html',
@@ -58,7 +59,8 @@ export class EmployeeInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private divisionService: DivisionService,
     private fileUploadService: FileUploadService,
-    private http: HttpClient
+    private http: HttpClient,
+    private capitalService: FirstLetterCapitalService
   ) {}
   ngOnInit(): void {
     console.log('employee info');
@@ -93,6 +95,21 @@ export class EmployeeInfoComponent implements OnInit {
       today.getMonth(),
       today.getDate()
     );
+
+    const formControlNames = ['firstName', 'lastName', 'middleName'];
+
+    formControlNames.forEach((controlName) => {
+      this.employeeForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.employeeForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
 
   isControlInvalid(controlName: string): boolean {

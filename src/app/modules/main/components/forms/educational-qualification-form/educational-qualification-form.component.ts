@@ -7,6 +7,7 @@ import { EducationalQualification } from '../../../models/educational-qualificat
 import { CommonMaster } from '../../../models/common-master.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
 import * as moment from 'moment';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-educational-qualification-form',
@@ -28,6 +29,7 @@ export class EducationalQualificationFormComponent implements OnInit {
     private educationalQualificationService: EducationalQualificationService,
     private router: Router,
     private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -35,6 +37,20 @@ export class EducationalQualificationFormComponent implements OnInit {
     this.initForm();
     this.collectQueryParams();
     this.getEducationalQualifications();
+    const formControlNames = ['instituteName'];
+
+    formControlNames.forEach((controlName) => {
+      this.educationalDetailsForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.educationalDetailsForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
   getEducationalQualifications() {
     this.educationalQualificationService

@@ -7,6 +7,7 @@ import { Certification } from '../../../models/certification.model';
 import { CertificationService } from '../../../services/certification.service';
 import { CustomValidators } from '../../../services/custom-validators.service';
 import * as moment from 'moment';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-certification-form',
@@ -27,6 +28,7 @@ export class CertificationFormComponent implements OnInit {
     private certificationService: CertificationService,
     private router: Router,
     private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -34,6 +36,21 @@ export class CertificationFormComponent implements OnInit {
     debugger;
     this.initForm();
     this.collectQueryParams();
+
+    const formControlNames = ['certification', 'issuedBy'];
+
+    formControlNames.forEach((controlName) => {
+      this.certificationsForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.certificationsForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
 
   collectQueryParams() {

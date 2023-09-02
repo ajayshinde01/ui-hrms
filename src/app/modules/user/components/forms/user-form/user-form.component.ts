@@ -13,6 +13,7 @@ import { blankValidator } from '../Validations/blankData.validator';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
 import { emailMaxLength } from '../Validations/emailMaxLength.validator';
 import { CommonMaster } from '../../../models/common-master.model';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-user-form',
@@ -38,7 +39,8 @@ export class UserFormComponent {
     private userService: UserService,
     private userRoleService: UserRoleService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService
   ) {}
 
   ngOnInit(): void {
@@ -46,24 +48,19 @@ export class UserFormComponent {
     this.initForm();
     this.getAllRoles();
     this.getAllUserStatus();
-    this.userForm.get('firstName')?.valueChanges.subscribe((value: string) => {
-      if (value.length > 0) {
-        const firstLetter = value.charAt(0).toUpperCase();
-        const restOfValue = value.slice(1);
-        const newValue = firstLetter + restOfValue;
-        this.userForm
-          .get('firstName')
-          ?.setValue(newValue, { emitEvent: false });
-      }
-    });
+    const formControlNames = ['firstName', 'lastName'];
 
-    this.userForm.get('lastName')?.valueChanges.subscribe((value: string) => {
-      if (value.length > 0) {
-        const firstLetter = value.charAt(0).toUpperCase();
-        const restOfValue = value.slice(1);
-        const newValue = firstLetter + restOfValue;
-        this.userForm.get('lastName')?.setValue(newValue, { emitEvent: false });
-      }
+    formControlNames.forEach((controlName) => {
+      this.userForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.userForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
     });
   }
 
