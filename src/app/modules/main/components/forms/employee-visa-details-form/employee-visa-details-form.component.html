@@ -1,11 +1,10 @@
 <div class="container" style="width: 490px; height: auto">
   <form [formGroup]="employeeVisaDetailsForm">
-
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-between">
-            <h2 class="title" mat-dialog-title >Visa Details</h2>
+            <h2 class="title" mat-dialog-title>Visa Details</h2>
             <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
@@ -18,14 +17,17 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-3">
-          <mat-label>Country Code</mat-label>
+          <mat-label>Country Code<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <div class="form-controls">
             <mat-form-field color="primary" appearance="outline">
               <mat-select formControlName="countryCode" placeholder="Select">
                 <mat-option>Select</mat-option>
-                <mat-option *ngFor="let country_code of country_codes" [value]="country_code.value">
+                <mat-option
+                  *ngFor="let country_code of country_codes"
+                  [value]="country_code.value"
+                >
                   {{ country_code.value }}
                 </mat-option>
               </mat-select>
@@ -41,12 +43,16 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-3">
-          <mat-label>Visa Number</mat-label>
+          <mat-label>Visa Number<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <div class="form-controls">
             <mat-form-field appearance="outline" color="primary">
-              <input matInput formControlName="visaNumber" placeholder="Visa Number" />
+              <input
+                matInput
+                formControlName="visaNumber"
+                placeholder="Visa Number"
+              />
               <mat-error *ngIf="isControlInvalid('visaNumber')">
                 {{ getErrorMessage("visaNumber") }}
               </mat-error>
@@ -64,16 +70,24 @@
         <div class="col-md-8">
           <div class="form-controls">
             <mat-form-field appearance="outline" class="">
-              <input matInput formControlName="validDate" [matDatepicker]="picker" placeholder="" />
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <input
+                matInput
+                formControlName="validDate"
+                [matDatepicker]="picker"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <!--<mat-error *ngIf="isControlInvalid('validDate')">
           {{ getErrorMessage("validDate") }}
         </mat-error>-->
-              <mat-error *ngIf="employeeVisaDetailsForm.controls['validDate']?.errors">
+              <mat-error
+                *ngIf="employeeVisaDetailsForm.controls['validDate']?.errors"
+              >
                 {{ employeeVisaDetailsForm.controls['validDate'].errors?.['invalidDate'] }}
               </mat-error>
-
             </mat-form-field>
           </div>
         </div>
@@ -88,13 +102,33 @@
         <div class="col-md-9">
           <div class="form-controls">
             <div class="passport-file-upload">
-              <button id="add-passport-doc-btn" type="button" class="center-positon-absolute upload-doc-btn"
-                mat-icon-button (click)="openVisaFileInput(visaFile)"> Choose File </button>
-              <input #visaFile type="file" name="visaFile" class="visafileInput" accept="image/*,application/pdf"
-                (change)="onFileSelect($event)">
-              <a [href]="viewFile" *ngIf="viewFile" target="_blank" class="view_file"><button type="button" mat-button
-                  class="upload-doc-btn"> View File </button></a>
-              <mat-error *ngIf="FleSizeError">{{FleSizeError}}</mat-error>
+              <button
+                id="add-passport-doc-btn"
+                type="button"
+                class="center-positon-absolute upload-doc-btn"
+                mat-icon-button
+                (click)="openVisaFileInput(visaFile)"
+              >
+                Choose File
+              </button>
+              <input
+                #visaFile
+                type="file"
+                name="visaFile"
+                class="visafileInput"
+                accept="image/*,application/pdf"
+                (change)="onFileSelect($event)"
+              />
+              <a
+                [href]="viewFile"
+                *ngIf="viewFile"
+                target="_blank"
+                class="view_file"
+                ><button type="button" mat-button class="upload-doc-btn">
+                  View File
+                </button></a
+              >
+              <mat-error *ngIf="FleSizeError">{{ FleSizeError }}</mat-error>
             </div>
           </div>
         </div>
@@ -102,16 +136,24 @@
     </div>
 
     <div class="d-flex justify-content-end form-footer" mat-dialog-actions>
-      <button mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn" (click)="onSubmit()"
-        [disabled]="!employeeVisaDetailsForm.valid">
+      <button
+        mat-button
+        class="btn btn-primary px-4 float-right profile-save-btn visa-btn"
+        (click)="onSubmit()"
+        [disabled]="!employeeVisaDetailsForm.valid"
+      >
         {{ actionLabel }}
       </button>
 
-      <button mat-button class="btn dark visa-btn" type="button" (click)="onresetForm()">
+      <button
+        mat-button
+        class="btn dark visa-btn"
+        type="button"
+        (click)="onresetForm()"
+      >
         Reset
       </button>
     </div>
   </form>
-
 </div>
 <!--<button (click)="nextStep()">click here</button>-->

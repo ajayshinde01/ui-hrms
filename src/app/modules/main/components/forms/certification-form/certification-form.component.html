@@ -4,7 +4,9 @@
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-between">
-            <h2 class="title" mat-dialog-title>Certification</h2>
+            <h2 class="title" mat-dialog-title>
+              Certification<span style="color: red">*</span>
+            </h2>
             <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
@@ -16,12 +18,12 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Certification</mat-label>
+          <mat-label>Certification<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="certification" />
+              <input matInput formControlName="certification" />
             </div>
             <mat-error *ngIf="isControlInvalid('certification')">
               {{ getErrorMessage("certification") }}
@@ -34,12 +36,12 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label>Issued By</mat-label>
+          <mat-label>Issued By<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="issuedBy" />
+              <input matInput formControlName="issuedBy" />
             </div>
             <mat-error *ngIf="isControlInvalid('issuedBy')">
               {{ getErrorMessage("issuedBy") }}
@@ -52,7 +54,9 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Date Of Certification</mat-label>
+          <mat-label
+            >Date Of Certification<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">

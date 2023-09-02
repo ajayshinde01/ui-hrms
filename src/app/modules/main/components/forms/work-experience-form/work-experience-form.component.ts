@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { WorkExperience } from '../../../models/work-experience.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-work-experience-form',
@@ -110,10 +111,13 @@ export class WorkExperienceFormComponent implements OnInit {
         ],
       ],
 
-      fromDate: ['', [Validators.required]],
+      fromDate: ['', [
+        Validators.required,
+        CustomValidators.pastDate()]],
 
       toDate: ['', [
         Validators.required,
+        CustomValidators.pastDate(),
         this.graterWorkExperince()]],
 
       address: [
@@ -122,6 +126,7 @@ export class WorkExperienceFormComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLengthOfAddress(250),
           CustomValidators.validAddressFormat()
         ],
       ],
@@ -140,9 +145,15 @@ export class WorkExperienceFormComponent implements OnInit {
 
   onSubmit() {
     if (this.workExperienceForm.valid) {
-      const formData = this.workExperienceForm.value;
-      formData.createdBy = 'Admin';
-
+      const formData = {
+        ...this.workExperienceForm.value,
+        fromDate: moment(this.workExperienceForm.value.toDate)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+        toDate: moment(this.workExperienceForm.value.toDate)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD')
+      };
       if (this.actionLabel === 'Save') {
         this.workExperienceService
 

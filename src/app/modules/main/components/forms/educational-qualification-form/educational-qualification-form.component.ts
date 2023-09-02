@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EducationalQualification } from '../../../models/educational-qualification.model';
 import { CommonMaster } from '../../../models/common-master.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-educational-qualification-form',
@@ -86,7 +87,12 @@ export class EducationalQualificationFormComponent implements OnInit {
 
   onSubmit() {
     if (this.educationalDetailsForm.valid) {
-      const formData = this.educationalDetailsForm.value;
+      const formData = {
+        ...this.educationalDetailsForm.value,
+        confirmationDate: moment(this.educationalDetailsForm.value.passingYear)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+      };
 
       if (this.actionLabel === 'Save') {
         this.educationalQualificationService

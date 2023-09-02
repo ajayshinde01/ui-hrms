@@ -5,7 +5,9 @@
       <div class="company-details-form-div">
         <div class="row mm">
           <div class="col-lg-4" formGroupName="designation">
-            <mat-label class="mat-label">Designation</mat-label>
+            <mat-label class="mat-label"
+              >Designation<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -21,7 +23,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4" formGroupName="grade">
-            <mat-label class="mat-label">Grade</mat-label>
+            <mat-label class="mat-label"
+              >Grade<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -35,7 +39,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4" formGroupName="department">
-            <mat-label class="mat-label">Department</mat-label>
+            <mat-label class="mat-label"
+              >Department<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -53,7 +59,9 @@
         </div>
         <div class="row mm">
           <div class="col-lg-4" formGroupName="role">
-            <mat-label class="mat-label">Role</mat-label>
+            <mat-label class="mat-label"
+              >Role<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -67,7 +75,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <mat-label class="mat-label">Reviewer Manager</mat-label>
+            <mat-label class="mat-label"
+              >Reviewer Manager<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select
                 formControlName="reviewerManager"
@@ -87,7 +97,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <mat-label class="mat-label">Reporting Manager</mat-label>
+            <mat-label class="mat-label"
+              >Reporting Manager<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select
                 formControlName="reportingManager"
@@ -109,7 +121,9 @@
         </div>
         <div class="row mm">
           <div class="col-lg-4" formGroupName="employeeType">
-            <mat-label class="mat-label">Employee Type</mat-label>
+            <mat-label class="mat-label"
+              >Employee Type<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -125,7 +139,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <mat-label class="mat-label">Billable</mat-label>
+            <mat-label class="mat-label"
+              >Billable<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="billable" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -141,7 +157,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <mat-label class="mat-label">Probation</mat-label>
+            <mat-label class="mat-label"
+              >Probation<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="probation" placeholder="Select">
                 <mat-option>Select</mat-option>
@@ -159,13 +177,11 @@
         </div>
         <div class="row mm">
           <div class="col-lg-4">
-            <mat-label class="mat-label">Company Email</mat-label>
+            <mat-label class="mat-label"
+              >Company Email<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline">
-              <input
-                matInput
-                formControlName="companyEmail"
-                placeholder="e.g akshay.deshmukh@avisys.in"
-              />
+              <input matInput formControlName="companyEmail" />
               <mat-error *ngIf="isControlInvalid('companyEmail')">
                 <span class="validate-text">{{
                   getErrorMessage("companyEmail")
@@ -176,11 +192,7 @@
           <div class="col-lg-4">
             <mat-label class="mat-label">Client Email</mat-label>
             <mat-form-field appearance="outline">
-              <input
-                matInput
-                formControlName="clientEmail"
-                placeholder="e.g akshay.deshmukh@stc.in"
-              />
+              <input matInput formControlName="clientEmail" />
               <mat-error *ngIf="isControlInvalid('clientEmail')">
                 <span class="validate-text">{{
                   getErrorMessage("clientEmail")
@@ -189,7 +201,9 @@
             </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <mat-label class="mat-label">Default Shift</mat-label>
+            <mat-label class="mat-label"
+              >Default Shift<span style="color: red">*</span></mat-label
+            >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="shift" placeholder="Select">
                 <mat-option>Select</mat-option>

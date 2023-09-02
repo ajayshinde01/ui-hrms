@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Certification } from '../../../models/certification.model';
 import { CertificationService } from '../../../services/certification.service';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-certification-form',
@@ -79,7 +80,14 @@ export class CertificationFormComponent implements OnInit {
 
   onSubmit() {
     if (this.certificationsForm.valid) {
-      const formData = this.certificationsForm.value;
+      const formData = {
+        ...this.certificationsForm.value,
+        confirmationDate: moment(
+          this.certificationsForm.value.dateOfCertification
+        )
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+      };
 
       if (this.actionLabel === 'Save') {
         this.certificationService

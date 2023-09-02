@@ -15,6 +15,7 @@ import { TokenInterceptor } from './modules/core/components/auth/token.intercept
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 export const CONFIG = new InjectionToken<typeof config>('CONFIG');
 @NgModule({
@@ -45,10 +46,10 @@ export const CONFIG = new InjectionToken<typeof config>('CONFIG');
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-
+    MatMomentDateModule,
     ToastrModule.forRoot({
       positionClass: 'toast-center', // Set the position class to center
     }),
   ],
 })
-export class AppModule {}
+export class AppModule { }
