@@ -189,14 +189,17 @@ export class JoiningDetailsComponent implements OnInit {
         confirmationDate: moment(this.joiningForm.value.confirmationDate)
           .utcOffset(0, true)
           .format('YYYY-MM-DD'),
-        resignationDate: moment(this.joiningForm.value.resignationDate)
-          .utcOffset(0, true)
-          .format('YYYY-MM-DD'),
-        relievingDate: moment(this.joiningForm.value.relievingDate)
-          .utcOffset(0, true)
-          .format('YYYY-MM-DD')
+        resignationDate: this.joiningForm.value.resignationDate
+          ? moment(this.joiningForm.value.resignationDate)
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
+          : null, // Replace with your desired invalid date format
+        relievingDate: this.joiningForm.value.relievingDate
+          ? moment(this.joiningForm.value.relievingDate)
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
+          : null // Replace with your desired invalid date format
       };
-
 
       if (this.actionLabel === 'Save') {
         this.joiningDetailsService

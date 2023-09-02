@@ -47,18 +47,16 @@ import { OptionalAddressComponent } from './components/forms/optional-address/op
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 export const MY_FORMATS = {
-
   parse: {
     dateInput: 'DD/MM/YYYY',
   },
 
   display: {
     dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'DDD MMM YYYY',
+    monthYearLabel: 'DD MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'DDDD MMMM YYYY',
   },
-
 };
 
 @NgModule({
@@ -118,4 +116,4 @@ export const MY_FORMATS = {
   ],
   exports: [AlphabetOnlyDirective],
 })
-export class MainModule { }
+export class MainModule {}

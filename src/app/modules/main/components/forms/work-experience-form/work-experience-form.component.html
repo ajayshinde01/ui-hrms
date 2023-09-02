@@ -19,13 +19,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Company Name</mat-label>
+          <mat-label>Company Name<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="companyName" />
+              <input matInput formControlName="companyName" />
             </div>
             <mat-error *ngIf="isControlInvalid('companyName')">
               {{ getErrorMessage("companyName") }}
@@ -38,13 +38,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Designation</mat-label>
+          <mat-label>Designation<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="designation" />
+              <input matInput formControlName="designation" />
             </div>
             <mat-error *ngIf="isControlInvalid('designation')">
               {{ getErrorMessage("designation") }}
@@ -57,15 +57,23 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>From Date</mat-label>
+          <mat-label>From Date<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="fromDate" [matDatepicker]="fromDatePicker" placeholder="Choose a date"
-              readonly />
+            <input
+              matInput
+              formControlName="fromDate"
+              [matDatepicker]="fromDatePicker"
+              placeholder="DD/MM/YYYY"
+              readonly
+            />
 
-            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="fromDatePicker"
+            ></mat-datepicker-toggle>
 
             <mat-datepicker #fromDatePicker></mat-datepicker>
             <mat-error *ngIf="isControlInvalid('fromDate')">
@@ -79,15 +87,23 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>To Date</mat-label>
+          <mat-label>To Date<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="toDate" [matDatepicker]="toDatePicker" placeholder="Choose a date"
-              readonly />
+            <input
+              matInput
+              formControlName="toDate"
+              [matDatepicker]="toDatePicker"
+              placeholder="Choose a date"
+              readonly
+            />
 
-            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="toDatePicker"
+            ></mat-datepicker-toggle>
             <mat-error *ngIf="isControlInvalid('toDate')">
               {{ getErrorMessage("toDate") }}
             </mat-error>
@@ -100,13 +116,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Address</mat-label>
+          <mat-label>Address<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="address" />
+              <input matInput formControlName="address" />
             </div>
             <mat-error *ngIf="isControlInvalid('address')">
               {{ getErrorMessage("address") }}
@@ -122,12 +138,20 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
-                  [disabled]="!workExperienceForm.valid">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!workExperienceForm.valid"
+                >
                   {{ actionLabel }}
                 </button>
 
-                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
                   Reset
                 </button>
               </div>
