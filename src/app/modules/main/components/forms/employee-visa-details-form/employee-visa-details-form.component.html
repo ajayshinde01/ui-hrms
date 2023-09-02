@@ -1,5 +1,6 @@
 <div class="container" style="width: 510px; height: auto">
   <form [formGroup]="employeeVisaDetailsForm">
+
     <div class="container">
       <div class="row">
         <div class="col">
@@ -17,17 +18,14 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-3">
-          <mat-label>Country Code<span style="color: red">*</span></mat-label>
+          <mat-label>Country Code</mat-label>
         </div>
         <div class="col-md-8">
           <div class="form-controls">
             <mat-form-field color="primary" appearance="outline">
               <mat-select formControlName="countryCode" placeholder="Select">
                 <mat-option>Select</mat-option>
-                <mat-option
-                  *ngFor="let country_code of country_codes"
-                  [value]="country_code.value"
-                >
+                <mat-option *ngFor="let country_code of country_codes" [value]="country_code.value">
                   {{ country_code.value }}
                 </mat-option>
               </mat-select>
@@ -43,16 +41,12 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-3">
-          <mat-label>Visa Number<span style="color: red">*</span></mat-label>
+          <mat-label>Visa Number</mat-label>
         </div>
         <div class="col-md-8">
           <div class="form-controls">
             <mat-form-field appearance="outline" color="primary">
-              <input
-                matInput
-                formControlName="visaNumber"
-                placeholder="Visa Number"
-              />
+              <input matInput formControlName="visaNumber" placeholder="Visa Number" />
               <mat-error *ngIf="isControlInvalid('visaNumber')">
                 {{ getErrorMessage("visaNumber") }}
               </mat-error>
@@ -70,7 +64,6 @@
           <mat-form-field appearance="outline" class="">
             <input matInput formControlName="validDate" [matDatepicker]="validDatepicker" placeholder="DD/MM/YYYY"
               readonly>
-
             <mat-datepicker-toggle matIconSuffix [for]="validDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #validDatepicker></mat-datepicker>
             <mat-error *ngIf="isControlInvalid('validDate')">

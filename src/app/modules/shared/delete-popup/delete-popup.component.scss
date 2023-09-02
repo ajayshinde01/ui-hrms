@@ -1,8 +1,7 @@
 /* Styling for the popup container */
-.confimartion-footer{
+.confirmation-footer{
   display: flex;
   justify-content: flex-end;
- 
 }
 
 confimartion-footer.header{
@@ -12,7 +11,7 @@ confimartion-footer.header{
 .delete-box {
   background-color: #fff;
   border: 1px solid #ccc;
-  padding:30px;
+  padding:15px 15px 20px 15px;
   width: 450px;
 
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -41,11 +40,15 @@ confimartion-footer.header{
 }
 
 .yes-button {
-  background-color: #37307d;
+  background-color:#534686;
   color: #fff;
 }
 
 .no-button {
-  background-color:  #dc3545;
+  background-color:  #534686;
   color: #fff;
+}
+
+.header{
+  padding: 20px 0 20px 0;
 }

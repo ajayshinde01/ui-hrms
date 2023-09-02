@@ -67,21 +67,10 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         Validators.pattern('^[0-9]*$'),
       ]],
       visaFile: [''],
-      validDate: ['', [Validators.required, this.dateValidator()]],
+      validDate: ['', [Validators.required]],
     });
   }
 
-  dateValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const today = new Date().getTime();
-      if (!(control && control.value)) {
-        return null;
-      }
-      return control.value.getTime() < today
-        ? { invalidDate: 'Visa Date should be a future date' }
-        : null;
-    };
-  }
 
   getErrorMessage(controlName: string): string {
     const control = this.employeeVisaDetailsForm.get(controlName);

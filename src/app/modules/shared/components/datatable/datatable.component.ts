@@ -69,7 +69,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   constructor(
     private dataTableService: DataTableService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setPagination();
@@ -197,10 +197,10 @@ export class DatatableComponent implements OnInit, OnChanges {
 
     this.pagination.sortKey
       ? (params = params.append(
-          'sort',
+        'sort',
 
-          `${this.pagination.sortKey},${this.pagination.sortType}`
-        ))
+        `${this.pagination.sortKey},${this.pagination.sortType}`
+      ))
       : true;
 
     this.pagination.serchingParmeter
