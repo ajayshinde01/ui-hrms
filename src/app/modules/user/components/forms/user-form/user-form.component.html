@@ -16,7 +16,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>First Name </mat-label>
+          <mat-label>First Name<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -74,7 +74,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Last Name</mat-label>
+          <mat-label>Last Name<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -132,7 +132,9 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label class="desc-label">Email ID</mat-label>
+          <mat-label class="desc-label"
+            >Email ID<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -190,12 +192,29 @@
     <div class="form-group" *ngIf="!isDisabled">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Password</mat-label>
+          <mat-label>Password<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input type="password" matInput formControlName="password" />
+              <div class="input-container">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  matInput
+                  formControlName="password"
+                />
+                <button
+                  class="show"
+                  mat-icon-button
+                  matSuffix
+                  (click)="togglePasswordVisibility()"
+                  tabindex="-1"
+                >
+                  <mat-icon>
+                    {{ showPassword ? "visibility_off" : "visibility" }}
+                  </mat-icon>
+                </button>
+              </div>
               <div
                 *ngIf="
                   passwordControl?.invalid &&
@@ -238,16 +257,31 @@
     <div class="form-group" *ngIf="!isDisabled">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Confirm Password</mat-label>
+          <mat-label
+            >Confirm Password<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                type="password"
-                matInput
-                formControlName="confirmPassword"
-              />
+              <div class="input-container">
+                <input
+                  [type]="showConfirmPassword ? 'text' : 'password'"
+                  matInput
+                  formControlName="confirmPassword"
+                />
+                <button
+                  class="show"
+                  mat-icon-button
+                  matSuffix
+                  (click)="toggleConfPasswordVisibility()"
+                  tabindex="-1"
+                >
+                  <mat-icon>
+                    {{ showConfirmPassword ? "visibility_off" : "visibility" }}
+                  </mat-icon>
+                </button>
+              </div>
               <div
                 *ngIf="
                   confirmPasswordControl?.invalid &&

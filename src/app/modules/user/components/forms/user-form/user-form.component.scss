@@ -100,3 +100,23 @@
   position: relative;
   left: -15px;
 }
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center; /* Vertically center contents */
+}
+
+.input-container input {
+  flex-grow: 1; /* Allow the input to grow and fill the available space */
+}
+
+.show {
+  cursor: pointer;
+  position: absolute;
+  right: -2px; /* Adjust the right position as needed */
+  top: 67%;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent; /* Make the button background transparent */
+}
