@@ -1,4 +1,4 @@
-<div class="container" style="width: 490px; height: auto">
+<div class="container" style="width: 510px; height: auto">
   <form [formGroup]="employeeVisaDetailsForm">
     <div class="container">
       <div class="row">
@@ -61,97 +61,65 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group form-field">
+    <div class="form-group">
       <div class="row row-section">
-        <div class="col-md-4 field-one mt-3">
+        <div class="col-md-4 mt-2">
           <mat-label>Date Of Issue</mat-label>
         </div>
         <div class="col-md-8">
-          <div class="form-controls">
-            <mat-form-field appearance="outline" class="">
-              <input
-                matInput
-                formControlName="validDate"
-                [matDatepicker]="picker"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <!--<mat-error *ngIf="isControlInvalid('validDate')">
-          {{ getErrorMessage("validDate") }}
-        </mat-error>-->
-              <mat-error *ngIf="isControlInvalid('validDate')">
-                {{ getErrorMessage("validDate") }}
-              </mat-error>
-            </mat-form-field>
-          </div>
+          <mat-form-field appearance="outline" class="">
+            <input matInput formControlName="validDate" [matDatepicker]="validDatepicker" placeholder="DD/MM/YYYY"
+              readonly>
+
+            <mat-datepicker-toggle matIconSuffix [for]="validDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #validDatepicker></mat-datepicker>
+            <mat-error *ngIf="isControlInvalid('validDate')">
+              {{ getErrorMessage("validDate") }}
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
     </div>
 
     <div class="form-group form-field">
       <div class="row row-section">
-        <div class="col-md-3 mt-3">
-          <mat-label>Visa File</mat-label>
+        <div class="col-md-4 mt-2">
+          <mat-label>Date Of Issue</mat-label>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <div class="form-controls">
             <div class="passport-file-upload">
-              <button
-                id="add-passport-doc-btn"
-                type="button"
-                class="center-positon-absolute upload-doc-btn"
-                mat-icon-button
-                (click)="openVisaFileInput(visaFile)"
-              >
-                Choose File
-              </button>
-              <input
-                #visaFile
-                type="file"
-                name="visaFile"
-                class="visafileInput"
-                accept="image/*,application/pdf"
-                (change)="onFileSelect($event)"
-              />
-              <a
-                [href]="viewFile"
-                *ngIf="viewFile"
-                target="_blank"
-                class="view_file"
-                ><button type="button" mat-button class="upload-doc-btn">
-                  View File
-                </button></a
-              >
-              <mat-error *ngIf="FleSizeError">{{ FleSizeError }}</mat-error>
+              <button id="add-passport-doc-btn" type="button" class="center-positon-absolute upload-doc-btn"
+                mat-icon-button (click)="openVisaFileInput(visaFile)"> Choose File </button>
+              <input hidden #visaFile type="file" name="visaFile" class="visafileInput" accept="image/*,application/pdf"
+                (change)="onFileSelect($event)">
+              <a [href]="viewFile" *ngIf="viewFile" target="_blank" class="view_file"><button type="button" mat-button
+                  class="upload-doc-btn"> View File </button></a>
+              <mat-error *ngIf="fileSizeError">{{fileSizeError}}</mat-error>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div _ngcontent-ng-c812429062="" class="form-footer">
+      <mat-dialog-actions>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-end">
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
+                  [disabled]="!employeeVisaDetailsForm.valid">
+                  {{ actionLabel }}
+                </button>
 
-    <div class="d-flex justify-content-end form-footer" mat-dialog-actions>
-      <button
-        mat-button
-        class="btn btn-primary px-4 float-right profile-save-btn visa-btn"
-        (click)="onSubmit()"
-        [disabled]="!employeeVisaDetailsForm.valid"
-      >
-        {{ actionLabel }}
-      </button>
-
-      <button
-        mat-button
-        class="btn dark visa-btn"
-        type="button"
-        (click)="onresetForm()"
-      >
-        Reset
-      </button>
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
     </div>
   </form>
 </div>
-<!--<button (click)="nextStep()">click here</button>-->

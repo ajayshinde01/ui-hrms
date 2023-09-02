@@ -1,5 +1,5 @@
 <form [formGroup]="workExperienceForm">
-  <div class="container" style="width: 520px; height: 430px">
+  <div class="container" style="width: 520px; height: 480px">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -62,18 +62,10 @@
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input
-              matInput
-              formControlName="fromDate"
-              [matDatepicker]="fromDatePicker"
-              placeholder="DD/MM/YYYY"
-              readonly
-            />
+            <input matInput formControlName="fromDate" [matDatepicker]="fromDatePicker" placeholder="DD/MM/YYYY"
+              readonly />
 
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="fromDatePicker"
-            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
 
             <mat-datepicker #fromDatePicker></mat-datepicker>
             <mat-error *ngIf="isControlInvalid('fromDate')">
@@ -89,21 +81,11 @@
         <div class="col-md-4 mt-2">
           <mat-label>To Date<span style="color: red">*</span></mat-label>
         </div>
-
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input
-              matInput
-              formControlName="toDate"
-              [matDatepicker]="toDatePicker"
-              placeholder="Choose a date"
-              readonly
-            />
-
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="toDatePicker"
-            ></mat-datepicker-toggle>
+            <input matInput formControlName="toDate" [matDatepicker]="toDatePicker" placeholder="Choose a date"
+              readonly />
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
             <mat-error *ngIf="isControlInvalid('toDate')">
               {{ getErrorMessage("toDate") }}
             </mat-error>
@@ -120,9 +102,13 @@
         </div>
 
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary">
-            <div class="form-controls">
-              <input matInput formControlName="address" />
+          <mat-form-field appearance="outline" color="primary" class="addressData">
+            <div class="form-controls" class="addressData">
+              <!-- <input matInput placeholder="" formControlName="address" /> -->
+
+              <textarea rows="3" matInput placeholder="Address" formControlName="address">
+
+              </textarea>
             </div>
             <mat-error *ngIf="isControlInvalid('address')">
               {{ getErrorMessage("address") }}
@@ -138,20 +124,12 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="save-btn"
-                  (click)="onSubmit()"
-                  [disabled]="!workExperienceForm.valid"
-                >
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
+                  [disabled]="!workExperienceForm.valid">
                   {{ actionLabel }}
                 </button>
 
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="profile-save-btn dark"
-                  (click)="resetForm()"
-                >
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
                   Reset
                 </button>
               </div>
