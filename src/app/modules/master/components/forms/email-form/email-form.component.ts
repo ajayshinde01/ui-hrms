@@ -89,8 +89,10 @@ export class EmailFormComponent implements OnInit {
     this.emailForm = this.formBuilder.group({
       id: [''],
       to: ['',
+      
         [
 
+          
         ],],
       cc: ['',
         [
@@ -141,7 +143,7 @@ export class EmailFormComponent implements OnInit {
   getById(id: string) {
     this.isReadOnly = true;
     this.recordSelected = true;
-    this.emailForm.get('body')?.disable();
+  //this.emailForm.get('body')?.disable();
     this.emailService
       .searchEmailById(id)
       .subscribe((response: Email) => {
