@@ -113,7 +113,7 @@
 
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="title" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
 
                 <mat-option *ngFor="let title of titles" [value]="title.code">{{
                   title.value
@@ -205,7 +205,7 @@
 
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="gender" placeholder="Select">
-            <mat-option>Select</mat-option>
+            <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option *ngFor="let gender of genders" [value]="gender.code">{{
               gender.value
@@ -248,7 +248,7 @@
 
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="id" placeholder="Select">
-            <mat-option>Select</mat-option>
+            <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option
               *ngFor="let division of divisions"
@@ -271,7 +271,7 @@
 
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="status" placeholder="Select">
-            <mat-option>Select</mat-option>
+            <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option *ngFor="let status of status" [value]="status.code">{{
               status.value

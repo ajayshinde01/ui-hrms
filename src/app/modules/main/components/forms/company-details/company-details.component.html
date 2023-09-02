@@ -10,7 +10,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let designation of designations"
                   [value]="designation.id"
@@ -28,7 +28,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option *ngFor="let grade of grades" [value]="grade.id">{{
                   grade.gradeName
                 }}</mat-option>
@@ -44,7 +44,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let department of departments"
                   [value]="department.id"
@@ -64,7 +64,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option *ngFor="let role of roles" [value]="role.id">{{
                   role.roleName
                 }}</mat-option>
@@ -83,7 +83,7 @@
                 formControlName="reviewerManager"
                 placeholder="Select"
               >
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let employee of employees"
                   [value]="employee.firstName"
@@ -105,7 +105,7 @@
                 formControlName="reportingManager"
                 placeholder="Select"
               >
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let employee of employees"
                   [value]="employee.firstName"
@@ -126,7 +126,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="id" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let employeeType of employeeTypes"
                   [value]="employeeType.id"
@@ -144,7 +144,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="billable" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let billable of billables"
                   [value]="billable.code"
@@ -162,7 +162,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="probation" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let probation of probations"
                   [value]="probation.code"
@@ -206,7 +206,7 @@
             >
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="shift" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let defaultShift of defaultShifts"
                   [value]="defaultShift.code"

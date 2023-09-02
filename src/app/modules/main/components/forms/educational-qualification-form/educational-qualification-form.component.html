@@ -49,7 +49,7 @@
                 formControlName="qualificationLevel"
                 placeholder="Select"
               >
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let qualificationLevel of qualificationLevels"
                   [value]="qualificationLevel.code"

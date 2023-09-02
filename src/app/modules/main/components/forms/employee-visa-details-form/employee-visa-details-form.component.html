@@ -23,7 +23,7 @@
           <div class="form-controls">
             <mat-form-field color="primary" appearance="outline">
               <mat-select formControlName="countryCode" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let country_code of country_codes"
                   [value]="country_code.value"
@@ -68,10 +68,18 @@
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="validDate" [matDatepicker]="validDatepicker" placeholder="DD/MM/YYYY"
-              readonly>
+            <input
+              matInput
+              formControlName="validDate"
+              [matDatepicker]="validDatepicker"
+              placeholder="DD/MM/YYYY"
+              readonly
+            />
 
-            <mat-datepicker-toggle matIconSuffix [for]="validDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="validDatepicker"
+            ></mat-datepicker-toggle>
             <mat-datepicker #validDatepicker></mat-datepicker>
             <mat-error *ngIf="isControlInvalid('validDate')">
               {{ getErrorMessage("validDate") }}
@@ -89,13 +97,34 @@
         <div class="col-md-8">
           <div class="form-controls">
             <div class="passport-file-upload">
-              <button id="add-passport-doc-btn" type="button" class="center-positon-absolute upload-doc-btn"
-                mat-icon-button (click)="openVisaFileInput(visaFile)"> Choose File </button>
-              <input hidden #visaFile type="file" name="visaFile" class="visafileInput" accept="image/*,application/pdf"
-                (change)="onFileSelect($event)">
-              <a [href]="viewFile" *ngIf="viewFile" target="_blank" class="view_file"><button type="button" mat-button
-                  class="upload-doc-btn"> View File </button></a>
-              <mat-error *ngIf="fileSizeError">{{fileSizeError}}</mat-error>
+              <button
+                id="add-passport-doc-btn"
+                type="button"
+                class="center-positon-absolute upload-doc-btn"
+                mat-icon-button
+                (click)="openVisaFileInput(visaFile)"
+              >
+                Choose File
+              </button>
+              <input
+                hidden
+                #visaFile
+                type="file"
+                name="visaFile"
+                class="visafileInput"
+                accept="image/*,application/pdf"
+                (change)="onFileSelect($event)"
+              />
+              <a
+                [href]="viewFile"
+                *ngIf="viewFile"
+                target="_blank"
+                class="view_file"
+                ><button type="button" mat-button class="upload-doc-btn">
+                  View File
+                </button></a
+              >
+              <mat-error *ngIf="fileSizeError">{{ fileSizeError }}</mat-error>
             </div>
           </div>
         </div>
@@ -107,12 +136,20 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
-                  [disabled]="!employeeVisaDetailsForm.valid">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!employeeVisaDetailsForm.valid"
+                >
                   {{ actionLabel }}
                 </button>
 
-                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
                   Reset
                 </button>
               </div>

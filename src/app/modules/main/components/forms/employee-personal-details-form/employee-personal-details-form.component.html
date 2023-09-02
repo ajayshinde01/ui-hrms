@@ -5,6 +5,7 @@
       <mat-label>Marital Status</mat-label>
       <mat-form-field appearance="outline" color="primary">
         <mat-select formControlName="maritalStatus" placeholder="Select">
+          <mat-option [disabled]="true">Select</mat-option>
           <mat-option
             *ngFor="let marital_status of marital_statuses"
             [value]="marital_status.value"
@@ -21,6 +22,7 @@
       <mat-label>Blood Group</mat-label>
       <mat-form-field appearance="outline">
         <mat-select formControlName="bloodGroup" placeholder="Select">
+          <mat-option [disabled]="true">Select</mat-option>
           <mat-option *ngFor="let bg of blood_group" [value]="bg.value">
             {{ bg.value }}
           </mat-option>
