@@ -1,6 +1,7 @@
-::ng-deep .mat-mdc-tab-body-content {
+:host::ng-deep .mat-mdc-tab-body-content {
   overflow: hidden !important;
 }
+
 
 :host::ng-deep .mat-mdc-form-field {
   display: flex !important;
@@ -92,7 +93,7 @@ img {
 }
 
 .employee-form-div {
-  height: 90vh;
+  height: 84vh;
   overflow: auto;
   max-height: fit-content;
   /* display: flex;

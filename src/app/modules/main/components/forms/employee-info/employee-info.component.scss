@@ -1,3 +1,12 @@
+.formHeader h2{
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.scroll-container{
+  margin-bottom: 20px;
+}
+
 ::ng-deep .mat-mdc-tab-body-content {
   overflow: hidden !important;
 }
@@ -8,15 +17,22 @@
   //  margin-bottom: 15px;
 }
 
-:host::ng-deep .profile-title {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  border: 1px solid black;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
 
+:host::ng-deep .profile-title {
+
+  margin-top: 31px;
+
+  display: flex;
+
+  justify-content: center;
+
+  border: 1px solid black;
+
+  padding-top: 21px;
+
+  padding-bottom: 22px;
+
+}
 :host::ng-deep .profile-section img {
   height: 200px;
 }
