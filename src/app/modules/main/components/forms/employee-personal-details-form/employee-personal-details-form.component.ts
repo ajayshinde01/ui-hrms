@@ -1,5 +1,11 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { CustomValidators } from 'src/app/modules/main/services/custom-validators.service';
 import { EmployeeService } from 'src/app/modules/main/services/employee.service';
@@ -7,12 +13,12 @@ import { EmployeeService } from 'src/app/modules/main/services/employee.service'
 import { EmployeePersonalDetails } from 'src/app/modules/main/models/employee-personal-details';
 import { CommonMaster } from 'src/app/modules/main/models/common-master.model';
 import { FileUploadService } from '../../../services/file-upload.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-employee-personal-details-form',
   templateUrl: './employee-personal-details-form.component.html',
   styleUrls: ['./employee-personal-details-form.component.scss'],
-
 })
 export class EmployeePersonalDetailsFormComponent {
   employee: EmployeePersonalDetails;
@@ -42,9 +48,8 @@ export class EmployeePersonalDetailsFormComponent {
     private formBuilder: FormBuilder,
     public employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private fileUploadService: FileUploadService,
-
-  ) { }
+    private fileUploadService: FileUploadService
+  ) {}
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id'); // Replace 'paramName' with the actual query parameter name
@@ -54,7 +59,6 @@ export class EmployeePersonalDetailsFormComponent {
     this.fetchBloodGroup();
     this.collectQueryParams();
     this.todayDate = new Date();
-
   }
 
   initForm() {
@@ -62,114 +66,154 @@ export class EmployeePersonalDetailsFormComponent {
       id: [''],
       maritalStatus: [''],
       bloodGroup: [''],
-      familyBackground: [
-        ''
-      ],
+      familyBackground: [''],
       healthDetails: [''],
-      cprNumber: ['',
+      cprNumber: [
+        '',
         [
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(10),
           // Validators.pattern('^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$')
-        ]],//1610721012          
-      gosi: ['',
+        ],
+      ], //1610721012
+      gosi: [
+        '',
         [
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(9),
-          Validators.pattern('^[0-9]*$')]],
-      aadhaarNumber: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(16),
-        Validators.pattern('^[0-9]{12}$')]
+          Validators.pattern('^[0-9]*$'),
+        ],
       ],
-
-      aadhaarName: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace()
-      ]],
-      passportNumber: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(20),
-        Validators.pattern('^[A-Za-z0-9]*$')]],
-      aadhaarFile: [''],
-      passportName: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace()
-      ]],
-      passportIssueDate: ['', [CustomValidators.passportIssueDate(this.todayDate)]],
-      passportValidity: ['', [CustomValidators.valdiationOfPassport(this.todayDate)]],
-      passportFile: [''],
-      placeOfIssue: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace()
-      ]],
-      panCardNumber: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(10),
-        // Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')
-      ]],
-      panCardName: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace()
-      ]],
-      panCardFile: [''],
-      bankAccountNumber: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(17),
-        Validators.pattern('^[0-9]{9,18}$')
-      ]],
-      bankName: [''],
-      ifscCode: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(11),
-        Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$')
-      ]],
-      uanNumber: ['',
+      aadhaarNumber: [
+        '',
         [
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(12)
-        ]
+          CustomValidators.maxLength(16),
+          Validators.pattern('^[0-9]{12}$'),
+        ],
       ],
-      pfNumber: ['', [
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(22),
-        //  Validators.pattern('^[A-Z]{2}[\s\/]?[A-Z]{3}[\s\/]?[0-9]{7}[\s\/]?[0-9]{3}[\s\/]?[0-9]{7}$')
-      ]],
+
+      aadhaarName: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
+      passportNumber: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(20),
+          Validators.pattern('^[A-Za-z0-9]*$'),
+        ],
+      ],
+      aadhaarFile: [''],
+      passportName: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
+      passportIssueDate: [
+        '',
+        [CustomValidators.passportIssueDate(this.todayDate)],
+      ],
+      passportValidity: [
+        '',
+        [CustomValidators.valdiationOfPassport(this.todayDate)],
+      ],
+      passportFile: [''],
+      placeOfIssue: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
+      panCardNumber: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(10),
+          // Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')
+        ],
+      ],
+      panCardName: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+        ],
+      ],
+      panCardFile: [''],
+      bankAccountNumber: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(17),
+          Validators.pattern('^[0-9]{9,18}$'),
+        ],
+      ],
+      bankName: [''],
+      ifscCode: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(11),
+          Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$'),
+        ],
+      ],
+      uanNumber: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(12),
+        ],
+      ],
+      pfNumber: [
+        '',
+        [
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.whitespaceValidator(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(22),
+          //  Validators.pattern('^[A-Z]{2}[\s\/]?[A-Z]{3}[\s\/]?[0-9]{7}[\s\/]?[0-9]{3}[\s\/]?[0-9]{7}$')
+        ],
+      ],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: "AVI01"
-
+      orgCode: 'AVI01',
     });
   }
 
   validIssueDate(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const today = new Date().getTime();
-      console.log("validIssueDate", control.value);
+      console.log('validIssueDate', control.value);
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
@@ -185,7 +229,7 @@ export class EmployeePersonalDetailsFormComponent {
   validpassportValidityDate(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const today = new Date().getTime();
-      console.log("validpassportValidityDate", control.value);
+      console.log('validpassportValidityDate', control.value);
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
@@ -237,46 +281,48 @@ export class EmployeePersonalDetailsFormComponent {
     } else {
       // this.actionLabel = 'Save';
     }
-    console.log("emp_id action label", this.emp_id, this.actionLabel);
-
+    console.log('emp_id action label', this.emp_id, this.actionLabel);
   }
 
   getById(id: string) {
-    this.employeeService
-      .searchPersonalDetailsById(this.emp_id)
-      .subscribe((response: EmployeePersonalDetails) => {
+    this.employeeService.searchPersonalDetailsById(this.emp_id).subscribe(
+      (response: EmployeePersonalDetails) => {
         this.employeePersonalDetailsForm.patchValue(response);
         console.log(response);
         this.employee = response;
-        this.viewPANFile = response["panCardFile"];
-        this.viewAadharFile = response["aadhaarFile"];
-        this.viewPassportFile = response["passportFile"];
+        this.viewPANFile = response['panCardFile'];
+        this.viewAadharFile = response['aadhaarFile'];
+        this.viewPassportFile = response['passportFile'];
         this.actionLabel = 'Update';
       },
-        err => {
-          this.actionLabel === 'Save';
-          console.log('oops', err);
-        });
+      (err) => {
+        this.actionLabel === 'Save';
+        console.log('oops', err);
+      }
+    );
   }
 
-
   nextStep() {
-    console.log("sdfdsf", this.selectedIndex);
+    console.log('sdfdsf', this.selectedIndex);
     this.selectedIndex = 2;
   }
 
   fetchMaritalStatus() {
-    this.employeeService.getMaritalStatus().subscribe((Response: Array<CommonMaster>) => {
-      this.marital_statuses = Response;
-      // console.log(this.marital_statuses);
-    })
+    this.employeeService
+      .getMaritalStatus()
+      .subscribe((Response: Array<CommonMaster>) => {
+        this.marital_statuses = Response;
+        // console.log(this.marital_statuses);
+      });
   }
 
   fetchBloodGroup() {
-    this.employeeService.getBloodGroup().subscribe((Response: Array<CommonMaster>) => {
-      this.blood_group = Response;
-      console.log(this.blood_group);
-    })
+    this.employeeService
+      .getBloodGroup()
+      .subscribe((Response: Array<CommonMaster>) => {
+        this.blood_group = Response;
+        console.log(this.blood_group);
+      });
   }
 
   openPanFileInput(panfileInput: any) {
@@ -290,7 +336,7 @@ export class EmployeePersonalDetailsFormComponent {
       const panfile = event.target.files[0];
       console.log('size', panfile.size);
       console.log('type', panfile.type);
-      if (panfile.size > 2e+6) {
+      if (panfile.size > 2e6) {
         this.FleSizeError = 'File is too large should not exceed Over 2MB';
         console.log('File is too large. Over 2MB');
       }
@@ -313,7 +359,7 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const file = event.target.files[0];
-      if (file.size > 2e+6) {
+      if (file.size > 2e6) {
         this.FleSizeError = 'File is too large should not exceed Over 2MB';
         console.log('File is too large. Over 2MB');
       }
@@ -336,7 +382,7 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const aadharfile = event.target.files[0];
-      if (aadharfile.size > 2e+6) {
+      if (aadharfile.size > 2e6) {
         this.FleSizeError = 'File is too large should not exceed Over 2MB';
       }
 
@@ -353,38 +399,50 @@ export class EmployeePersonalDetailsFormComponent {
   onSubmit() {
     // console.log("dfd",this.inputFromParent);
     if (this.employeePersonalDetailsForm.valid) {
-      this.employeePersonalDetailsForm.value.passportFile = this.passport_file_url;
+      const formData = {
+        ...this.employeePersonalDetailsForm.value,
+        confirmationDate: moment(
+          this.employeePersonalDetailsForm.value.passportIssueDate
+        )
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+      };
+
+      this.employeePersonalDetailsForm.value.passportFile =
+        this.passport_file_url;
       this.employeePersonalDetailsForm.value.aadhaarFile = this.aadhar_file_url;
       this.employeePersonalDetailsForm.value.panCardFile = this.aadhar_file_url;
 
-      const formData = this.employeePersonalDetailsForm.value;
-
       if (this.actionLabel === 'Save') {
-        this.employeeService.AddPersonalDetails(formData, this.emp_id).subscribe(
-          (response: EmployeePersonalDetails) => {
-            this.employeeService.notify('Data Saved Successfully...');
-            this.router.navigate(['/master/employee-form']);
-            this.actionLabel = 'Update';
-          },
-          (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+        this.employeeService
+          .AddPersonalDetails(formData, this.emp_id)
+          .subscribe(
+            (response: EmployeePersonalDetails) => {
+              this.employeeService.notify('Data Saved Successfully...');
+              this.router.navigate(['/master/employee-form']);
+              this.actionLabel = 'Update';
+            },
+            (error: any) => {
+              if (error.status == 400 || error.status == 404) {
+                this.employeeService.warn('Credentials already present');
+              }
             }
-          }
-        );
+          );
       }
       if (this.actionLabel === 'Update') {
-        this.employeeService.updateEmployeePersonalDetails(formData, this.emp_id).subscribe(
-          (response: EmployeePersonalDetails) => {
-            this.employeeService.notify('Update Successfully...');
-            this.router.navigate(['/main/employee-table']);
-          },
-          (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+        this.employeeService
+          .updateEmployeePersonalDetails(formData, this.emp_id)
+          .subscribe(
+            (response: EmployeePersonalDetails) => {
+              this.employeeService.notify('Update Successfully...');
+              this.router.navigate(['/main/employee-table']);
+            },
+            (error: any) => {
+              if (error.status == 400 || error.status == 404) {
+                this.employeeService.warn('Credentials already present');
+              }
             }
-          }
-        );
+          );
       }
     }
   }

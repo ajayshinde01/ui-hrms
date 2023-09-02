@@ -19,13 +19,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Company Name</mat-label>
+          <mat-label>Company Name<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="companyName" />
+              <input matInput formControlName="companyName" />
             </div>
             <mat-error *ngIf="isControlInvalid('companyName')">
               {{ getErrorMessage("companyName") }}
@@ -38,13 +38,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Designation</mat-label>
+          <mat-label>Designation<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="designation" />
+              <input matInput formControlName="designation" />
             </div>
             <mat-error *ngIf="isControlInvalid('designation')">
               {{ getErrorMessage("designation") }}
@@ -57,12 +57,12 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>From Date</mat-label>
+          <mat-label>From Date<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="fromDate" [matDatepicker]="fromDatePicker" placeholder="Choose a date"
+            <input matInput formControlName="fromDate" [matDatepicker]="fromDatePicker" placeholder="DD/MM/YYYY"
               readonly />
 
             <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
@@ -79,7 +79,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>To Date</mat-label>
+          <mat-label>To Date<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
@@ -98,7 +98,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Address</mat-label>
+          <mat-label>Address<span style="color: red">*</span></mat-label>
         </div>
 
         <div class="col-md-8">

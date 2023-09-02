@@ -79,7 +79,6 @@ export class UserRoleFormComponent {
           trailingSpaceValidator,
           blankValidator,
           descMaxLength,
-          Validators.pattern('^[a-zA-Z0-9\\s_\\-!@&()_{}[\\]|;:",.?]+$'),
         ],
       ],
     });

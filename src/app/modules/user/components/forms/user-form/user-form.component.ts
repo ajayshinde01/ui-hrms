@@ -29,6 +29,8 @@ export class UserFormComponent {
   isDisabled: boolean = false;
   allUserStatus: CommonMaster[] = [];
   enabled: String = '';
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private _mdr: MatDialogRef<UserFormComponent>,
@@ -261,5 +263,13 @@ export class UserFormComponent {
   resetForm() {
     this.collectQueryParams();
     this.initForm();
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }

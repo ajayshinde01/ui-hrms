@@ -30,7 +30,11 @@ export class CustomValidators {
   static maxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (typeof value === 'string' && value && value.toString().length > maxLength) {
+      if (
+        typeof value === 'string' &&
+        value &&
+        value.toString().length > maxLength
+      ) {
         return { maxLength: `Maximum ${maxLength} characters are allowed.` };
       }
       return null;
@@ -102,6 +106,18 @@ export class CustomValidators {
     };
   }
 
+  static pastDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const selectedDate = new Date(value);
+      const currentDate = new Date();
+      if (value && selectedDate >= currentDate) {
+        return { pastDate: true };
+      }
+      return null;
+    };
+  }
+
   static sixMonthsAfterJoining(joiningDate: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
@@ -121,7 +137,7 @@ export class CustomValidators {
   static validNoticePeriod(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value)
+      console.log(value);
       if (value && !/^\d+$/.test(value)) {
         return { validNoticePeriod: true };
       }
@@ -150,18 +166,6 @@ export class CustomValidators {
     };
   }
 
-  static pastDate(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value as string;
-      const selectedDate = new Date(value);
-      if (value && selectedDate >= new Date()) {
-        return { pastDate: true };
-      }
-      return null;
-    };
-  }
-
-
   static valdiationOfPassport(joiningDate: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
@@ -176,7 +180,7 @@ export class CustomValidators {
   static noticePeriodMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value)
+      console.log(value);
 
       if (value && value.toString().length > maxLength) {
         return {
@@ -188,10 +192,54 @@ export class CustomValidators {
     };
   }
 
+  static educationalQualificationMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          educationalQualificationMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  static instituteNameMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          instituteNameMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  static MaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          maxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
   static maxLengthOfAddress(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value)
+      console.log(value);
 
       if (value && value.toString().length > maxLength) {
         return {
@@ -206,7 +254,7 @@ export class CustomValidators {
   static designationPeriodMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value)
+      console.log(value);
 
       if (value && value.toString().length > maxLength) {
         return {
@@ -221,7 +269,7 @@ export class CustomValidators {
   static addressPeriodMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value)
+      console.log(value);
 
       if (value && value.toString().length > maxLength) {
         return {
@@ -233,12 +281,39 @@ export class CustomValidators {
     };
   }
 
+  static issuedByMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
 
+      if (value && value.toString().length > maxLength) {
+        return {
+          issuedByMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
 
+      return null;
+    };
+  }
+
+  static certificationMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          certificationMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
   static maxLengthOfCompany(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value)
+      console.log(value);
 
       if (value && value.toString().length > maxLength) {
         return {
@@ -281,6 +356,7 @@ export class CustomValidators {
   }
 
   static getErrorMessage(errorKey: string, fieldName: string): string {
+    console.log(errorKey);
     const fieldNames: { [key: string]: string } = {
       confirmationDate: 'Confirmation Date',
       mobile: 'Mobile Number',
@@ -373,6 +449,11 @@ export class CustomValidators {
       fromDate: 'From Date',
       toDate: 'To Date',
       address: 'Address',
+
+      //certification
+      certification: 'Certification',
+      issuedBy: 'Issued By',
+      dateOfCertification: 'Date Of Certification',
     };
 
     const errorMessages: { [key: string]: string } = {
@@ -398,11 +479,15 @@ export class CustomValidators {
       addressPeriodMaxLength: `Maximum 50 character are allowed`,
       validCompanyFormat: `Please enter valid Company Name`,
       validDesignationFormat: `Please enter valid Designation`,
+      educationalQualificationMaxLength: `Educational Qualification should not exceed 50 characters`,
+      instituteNameMaxLength: `Institutee Name should not exceed 100 characters`,
+      pastDate: `${fieldNames[fieldName]} should be less than current date`,
+      issuedByMaxLength: `Issued By should not exceed 100 characters`,
+      certificationMaxLength: `Certification should not exceed 100 characters`,
       maxLengthOfAddress: `Maximum 50 character are allowed`,
       passportIssueDate: `Date Of Issue should be a past date`,
       valdiationOfPassport: `Valid Dateshould be a future date`,
-      pastDate: `${fieldNames[fieldName]} should be a past date`
-
+      ageLessThan18: `${fieldNames[fieldName]} should be greater or equal to 18 years `,
     };
     return errorMessages[errorKey] || 'Validation error';
   }
