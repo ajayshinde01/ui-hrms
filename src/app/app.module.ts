@@ -52,4 +52,4 @@ export const CONFIG = new InjectionToken<typeof config>('CONFIG');
     }),
   ],
 })
-export class AppModule { }
+export class AppModule {}
