@@ -1,6 +1,4 @@
-
-
-.upload-doc-btn{
+.upload-doc-btn {
   background-color: #534686;
   color: #ffffff;
   height: 35px;
@@ -8,11 +6,11 @@
   margin-top: 10px;
 }
 
-.view_file{
+.view_file {
   margin-left: 10px;
 }
 
-.visa-btn{
+.visa-btn {
   background-color: #534686;
   color: #ffffff;
   height: 35px;
@@ -118,4 +116,8 @@
   height: 40px;
   /* padding: 12px; */
   top: -13px;
+}
+
+mat-label {
+  font-weight: 550;
 }
