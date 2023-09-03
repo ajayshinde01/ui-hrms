@@ -141,8 +141,9 @@ export class CompanyDetailsComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern(
@@ -153,8 +154,9 @@ export class CompanyDetailsComponent implements OnInit {
       clientEmail: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern(

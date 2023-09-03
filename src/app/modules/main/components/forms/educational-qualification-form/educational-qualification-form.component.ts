@@ -74,8 +74,9 @@ export class EducationalQualificationFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.educationalQualificationMaxLength(50),
           Validators.pattern('^[A-Za-z\\s.-]{1,50}'),
@@ -86,6 +87,7 @@ export class EducationalQualificationFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.instituteNameMaxLength(100),

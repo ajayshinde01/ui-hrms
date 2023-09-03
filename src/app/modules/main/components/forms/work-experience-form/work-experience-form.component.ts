@@ -113,6 +113,7 @@ export class WorkExperienceFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLengthOfCompany(50),
@@ -124,6 +125,7 @@ export class WorkExperienceFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.designationPeriodMaxLength(100),
@@ -146,6 +148,7 @@ export class WorkExperienceFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLengthOfAddress(250),

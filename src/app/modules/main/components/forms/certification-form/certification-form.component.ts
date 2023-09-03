@@ -67,6 +67,7 @@ export class CertificationFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.certificationMaxLength(100),
@@ -77,6 +78,7 @@ export class CertificationFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.issuedByMaxLength(100),

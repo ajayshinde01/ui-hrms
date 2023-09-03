@@ -73,6 +73,7 @@ export class EmergencyContactComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
@@ -84,8 +85,9 @@ export class EmergencyContactComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           Validators.pattern('^[0-9]{10,15}$'),
         ],
@@ -94,6 +96,7 @@ export class EmergencyContactComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),

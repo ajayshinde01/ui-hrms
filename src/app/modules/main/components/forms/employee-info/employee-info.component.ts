@@ -1,3 +1,4 @@
+import { leadingSpaceValidator } from 'src/app/modules/master/components/forms/Validations/leadingSpace.validator';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
@@ -178,8 +179,9 @@ export class EmployeeInfoComponent implements OnInit {
         { value: '', disabled: this.isDisabled },
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(10),
           Validators.pattern('^[A-Z0-9\\s\\-]+$'),
@@ -188,8 +190,9 @@ export class EmployeeInfoComponent implements OnInit {
       middleName: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern('^[A-Za-z]*$'),
@@ -201,8 +204,9 @@ export class EmployeeInfoComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern('^[A-Za-z]*$'),
@@ -213,8 +217,9 @@ export class EmployeeInfoComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern('^[A-Za-z]*$'),
@@ -234,8 +239,9 @@ export class EmployeeInfoComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(15),
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
@@ -246,8 +252,9 @@ export class EmployeeInfoComponent implements OnInit {
       phone: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(10),
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
@@ -258,8 +265,9 @@ export class EmployeeInfoComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern(

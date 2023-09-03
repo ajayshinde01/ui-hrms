@@ -71,8 +71,9 @@ export class EmployeePersonalDetailsFormComponent {
       cprNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(10),
           // Validators.pattern('^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$')
@@ -81,8 +82,9 @@ export class EmployeePersonalDetailsFormComponent {
       gosi: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(9),
           Validators.pattern('^[0-9]*$'),
@@ -91,8 +93,9 @@ export class EmployeePersonalDetailsFormComponent {
       aadhaarNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(16),
           Validators.pattern('^[0-9]{12}$'),
@@ -102,16 +105,18 @@ export class EmployeePersonalDetailsFormComponent {
       aadhaarName: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
       passportNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(20),
           Validators.pattern('^[A-Za-z0-9]*$'),
@@ -121,8 +126,9 @@ export class EmployeePersonalDetailsFormComponent {
       passportName: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
@@ -138,16 +144,18 @@ export class EmployeePersonalDetailsFormComponent {
       placeOfIssue: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
       panCardNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(10),
           // Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')
@@ -156,8 +164,9 @@ export class EmployeePersonalDetailsFormComponent {
       panCardName: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
@@ -165,8 +174,9 @@ export class EmployeePersonalDetailsFormComponent {
       bankAccountNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(17),
           Validators.pattern('^[0-9]{9,18}$'),
@@ -176,8 +186,9 @@ export class EmployeePersonalDetailsFormComponent {
       ifscCode: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(11),
           Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$'),
@@ -186,8 +197,9 @@ export class EmployeePersonalDetailsFormComponent {
       uanNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(12),
         ],
@@ -195,8 +207,9 @@ export class EmployeePersonalDetailsFormComponent {
       pfNumber: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(22),
           //  Validators.pattern('^[A-Z]{2}[\s\/]?[A-Z]{3}[\s\/]?[0-9]{7}[\s\/]?[0-9]{3}[\s\/]?[0-9]{7}$')
