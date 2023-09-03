@@ -17,7 +17,10 @@
                   >{{ designation.designationName }}</mat-option
                 >
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('designation.id')">
+              <mat-error
+                *ngIf="isControlInvalid('designation.id')"
+                class="validate-text"
+              >
                 Please enter Designation
               </mat-error>
             </mat-form-field>
@@ -33,7 +36,10 @@
                   grade.gradeName
                 }}</mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('grade.id')">
+              <mat-error
+                *ngIf="isControlInvalid('grade.id')"
+                class="validate-text"
+              >
                 Please enter Grade
               </mat-error>
             </mat-form-field>
@@ -51,7 +57,10 @@
                   >{{ department.departmentName }}</mat-option
                 >
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('department.id')">
+              <mat-error
+                *ngIf="isControlInvalid('department.id')"
+                class="validate-text"
+              >
                 Please enter Department
               </mat-error>
             </mat-form-field>
@@ -69,7 +78,10 @@
                   role.roleName
                 }}</mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('role.id')">
+              <mat-error
+                *ngIf="isControlInvalid('role.id')"
+                class="validate-text"
+              >
                 Please enter Role
               </mat-error>
             </mat-form-field>
@@ -91,7 +103,10 @@
                   {{ employee.firstName }} {{ employee.lastName }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('reviewerManager')">
+              <mat-error
+                *ngIf="isControlInvalid('reviewerManager')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("reviewerManager") }}
               </mat-error>
             </mat-form-field>
@@ -113,7 +128,10 @@
                   {{ employee.firstName }} {{ employee.lastName }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('reportingManager')">
+              <mat-error
+                *ngIf="isControlInvalid('reportingManager')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("reportingManager") }}
               </mat-error>
             </mat-form-field>
@@ -133,7 +151,10 @@
                   >{{ employeeType.type }}</mat-option
                 >
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('employeeType.id')">
+              <mat-error
+                *ngIf="isControlInvalid('employeeType.id')"
+                class="validate-text"
+              >
                 Please enter Employee Type
               </mat-error>
             </mat-form-field>
@@ -151,7 +172,10 @@
                   >{{ billable.value }}</mat-option
                 >
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('billable')">
+              <mat-error
+                *ngIf="isControlInvalid('billable')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("billable") }}
               </mat-error>
             </mat-form-field>
@@ -169,7 +193,10 @@
                   >{{ probation.value }}</mat-option
                 >
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('probation')">
+              <mat-error
+                *ngIf="isControlInvalid('probation')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("probation") }}
               </mat-error>
             </mat-form-field>
@@ -213,7 +240,10 @@
                   >{{ defaultShift.value }}</mat-option
                 >
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('shift')">
+              <mat-error
+                *ngIf="isControlInvalid('shift')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("shift") }}
               </mat-error>
             </mat-form-field>

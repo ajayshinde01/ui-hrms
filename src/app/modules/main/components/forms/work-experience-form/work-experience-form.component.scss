@@ -106,3 +106,11 @@
 mat-label {
   font-weight: 550;
 }
+
+.validate-text {
+  font-size: 12px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
+}

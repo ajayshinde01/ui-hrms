@@ -24,7 +24,10 @@
 
           <mat-datepicker #confirmationDatePicker></mat-datepicker>
 
-          <mat-error *ngIf="isControlInvalid('confirmationDate')">
+          <mat-error
+            *ngIf="isControlInvalid('confirmationDate')"
+            class="validate-text"
+          >
             {{ getErrorMessage("confirmationDate") }}
           </mat-error>
         </mat-form-field>
@@ -36,7 +39,10 @@
         <mat-form-field appearance="outline" class="">
           <input matInput type="number" formControlName="noticePeriod" />
 
-          <mat-error *ngIf="isControlInvalid('noticePeriod')">
+          <mat-error
+            *ngIf="isControlInvalid('noticePeriod')"
+            class="validate-text"
+          >
             {{ getErrorMessage("noticePeriod") }}
           </mat-error>
         </mat-form-field>
@@ -63,7 +69,10 @@
 
           <mat-datepicker #resignationDatePicker></mat-datepicker>
 
-          <mat-error *ngIf="isControlInvalid('resignationDate')">
+          <mat-error
+            *ngIf="isControlInvalid('resignationDate')"
+            class="validate-text"
+          >
             {{ getErrorMessage("resignationDate") }}
           </mat-error>
         </mat-form-field>
@@ -88,7 +97,10 @@
 
           <mat-datepicker #relievingDatePicker></mat-datepicker>
 
-          <mat-error *ngIf="isControlInvalid('relievingDate')">
+          <mat-error
+            *ngIf="isControlInvalid('relievingDate')"
+            class="validate-text"
+          >
             {{ getErrorMessage("relievingDate") }}
           </mat-error>
         </mat-form-field>

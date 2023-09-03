@@ -1,202 +1,421 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CommonMaster } from '../../../models/common-master.model';
+
 import { Address } from '../../../models/address.model';
+
 import { EmployeeService } from '../../../services/employee.service';
+
 import { AddressService } from '../../../services/address.service';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { HttpClient } from '@angular/common/http';
+
 import { Params, Router, ActivatedRoute } from '@angular/router';
+
 import { Employees } from '../../../models/employee.model';
-import { mergeMap } from 'rxjs';
+
+import { forkJoin, mergeMap } from 'rxjs';
+
 import { state } from '@angular/animations';
+
 import { CustomValidators } from '../../../services/custom-validators.service';
+
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-address',
+
   templateUrl: './address.component.html',
+
   styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit {
-  addressForm!: FormGroup;
+  permanentAddressForm!: FormGroup;
+
+  correspondenceAddressForm!: FormGroup;
+
   employee: Employees;
+
   address: Address;
-  addressType: string = 'PERMANENT';
+
+  addressType: string;
+
+  corrId: number;
+
   ownershipStatus: CommonMaster[] = [];
-  countries: CommonMaster[] = [];
-  states: CommonMaster[] = [];
-  cities: CommonMaster[] = [];
+
+  corresCountries: CommonMaster[] = [];
+
+  permCountries: CommonMaster[] = [];
+
+  permStates: CommonMaster[] = [];
+
+  corrStates: CommonMaster[] = [];
+
+  corresCities: CommonMaster[] = [];
+
+  permCities: CommonMaster[] = [];
+
   submitted: boolean = false;
+
   queryParams?: any;
+
   response: number;
+
   actionLabel: string;
-  isDisabled: boolean = false;
 
   constructor(
     public employeeService: EmployeeService,
+
     public addressService: AddressService,
+
     private formBuilder: FormBuilder,
+
     private router: Router,
+
     private route: ActivatedRoute,
+
     private http: HttpClient
   ) {}
+
   ngOnInit(): void {
     this.initForm();
+
     // this.getFetchAddressTypes();
+
     this.FetchOwnershipStatus();
+
     this.FetchCountries();
 
     this.route.queryParams.subscribe((params: any) => {
       this.queryParams = params;
-      this.getByIdAndAddressType(this.queryParams['id'], this.addressType);
-      this.getCities();
-      this.getStates();
+
+      // this.getByIdAndAddressType(this.queryParams['id'], this.addressType);
+
+      this.getAllAddressById(this.queryParams['id']);
     });
   }
 
   initForm() {
-    this.addressForm = this.formBuilder.group({
+    this.permanentAddressForm = this.formBuilder.group({
       id: [''],
-      addressType: ['', [Validators.required]],
+
+      addressType: ['permanent'],
+
       address1: [
         '',
+
         [
           Validators.required,
+
           CustomValidators.noLeadingSpace(),
+
           CustomValidators.noTrailingSpace(),
+
           CustomValidators.maxLength(100),
+
           Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
         ],
       ],
+
       address2: [
         '',
+
         [
           CustomValidators.noLeadingSpace(),
+
           CustomValidators.noTrailingSpace(),
+
           CustomValidators.maxLength(100),
+
           Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
         ],
       ],
+
       landmark: [
         '',
+
         [CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
       ],
+
       tenureYear: [
         '',
+
         [
-          CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
-          CustomValidators.noTrailingSpace(),
+
           CustomValidators.maxLength(2),
+
           Validators.pattern('^[0-9]{1,2}$'),
         ],
       ],
+
       tenureMonth: [
         '',
+
         [
           CustomValidators.noLeadingSpace(),
+
           CustomValidators.whitespaceValidator(),
+
           CustomValidators.noTrailingSpace(),
+
           CustomValidators.maxLength(2),
-          Validators.pattern('^(?:[0-9]|1[0-2])$'),
+
+          Validators.pattern('^(?:0?[1-9]|1[0-1])$'),
         ],
       ],
+
       city: ['', [Validators.required]],
+
       state: ['', [Validators.required]],
+
       country: ['', [Validators.required]],
+
       postcode: [
         '',
+
         [
           Validators.required,
+
           CustomValidators.noLeadingSpace(),
+
           CustomValidators.whitespaceValidator(),
+
           CustomValidators.noTrailingSpace(),
+
           CustomValidators.maxLength(6),
+
           Validators.pattern('^[0-9]{6}$'),
         ],
       ],
+
       ownershipStatus: ['', [Validators.required]],
+
       orgCode: ['AVI-IND'],
+
       createdBy: ['Admin'],
+
       updatedBy: ['Admin'],
+
       createdAt: [null],
+
+      updatedAt: [null],
+    });
+
+    this.correspondenceAddressForm = this.formBuilder.group({
+      id: [''],
+
+      addressType: ['correspondence'],
+
+      address1: [
+        '',
+
+        [
+          CustomValidators.noLeadingSpace(),
+
+          CustomValidators.noTrailingSpace(),
+
+          CustomValidators.maxLength(100),
+
+          Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
+        ],
+      ],
+
+      address2: [
+        '',
+
+        [
+          CustomValidators.noLeadingSpace(),
+
+          CustomValidators.noTrailingSpace(),
+
+          CustomValidators.maxLength(100),
+
+          Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
+        ],
+      ],
+
+      landmark: [
+        '',
+
+        [CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
+      ],
+
+      tenureYear: [
+        '',
+
+        [
+          CustomValidators.whitespaceValidator(),
+
+          CustomValidators.maxLength(2),
+
+          Validators.pattern('^[0-9]{1,2}$'),
+        ],
+      ],
+
+      tenureMonth: [
+        '',
+
+        [
+          CustomValidators.whitespaceValidator(),
+
+          CustomValidators.maxLength(2),
+
+          Validators.pattern('^(?:0?[1-9]|1[0-1])$'),
+        ],
+      ],
+
+      city: [''],
+
+      state: [''],
+
+      country: [''],
+
+      postcode: [
+        '',
+
+        [
+          CustomValidators.noLeadingSpace(),
+
+          CustomValidators.whitespaceValidator(),
+
+          CustomValidators.noTrailingSpace(),
+
+          CustomValidators.maxLength(6),
+
+          Validators.pattern('^[0-9]{6}$'),
+        ],
+      ],
+
+      ownershipStatus: [''],
+
+      orgCode: ['AVI-IND'],
+
+      createdBy: ['Admin'],
+
+      updatedBy: ['Admin'],
+
+      createdAt: [null],
+
       updatedAt: [null],
     });
   }
 
-  onCountrySelectionChange(event: any) {
-    console.log('onSelect');
-    const Code = event.value; // Get the selected country code from the event
-    this.FetchStates(Code); // Call FetchStates with the selected country code
+  onCopyAddress() {
+    if (this.permanentAddressForm.valid) {
+      forkJoin({
+        corrStates: this.addressService.getState(
+          this.permanentAddressForm.controls['country'].value
+        ),
+
+        corresCity: this.addressService.getCity(
+          this.permanentAddressForm.controls['state'].value
+        ),
+      }).subscribe((response) => {
+        this.corrStates = response.corrStates;
+
+        this.corresCities = response.corresCity;
+      });
+
+      this.correspondenceAddressForm.patchValue(
+        this.permanentAddressForm.value
+      );
+
+      this.correspondenceAddressForm.value.addressType = 'correspondence';
+
+      this.correspondenceAddressForm.value.id = this.corrId;
+
+      debugger;
+    }
   }
 
-  onStateSelectionChange(event: any) {
+  onPermanentCountryChange(event: any) {
     const code = event.value;
-    this.FetchCities(code);
+
+    this.addressService.getState(code).subscribe((Response: CommonMaster[]) => {
+      this.permStates = Response;
+    });
+  }
+
+  onPermanentStatesChange(event: any) {
+    const code = event.value;
+
+    this.addressService.getCity(code).subscribe((Response: CommonMaster[]) => {
+      this.permCities = Response;
+    });
+  }
+
+  onCorrespondenceCountryChange(event: any) {
+    const code = event.value;
+
+    this.addressService.getState(code).subscribe((Response: CommonMaster[]) => {
+      this.corrStates = Response;
+    });
+  }
+
+  onCorrespondenceStatesChange(event: any) {
+    const code = event.value;
+
+    this.addressService.getCity(code).subscribe((Response: CommonMaster[]) => {
+      this.corresCities = Response;
+    });
   }
 
   FetchOwnershipStatus() {
     this.addressService
+
       .getOwnershipStatus()
+
       .subscribe((Response: CommonMaster[]) => {
         this.ownershipStatus = Response;
+
         console.log(this.ownershipStatus);
       });
   }
 
   FetchCountries() {
-    this.addressService.getCountry().subscribe((Response: CommonMaster[]) => {
-      this.countries = Response;
-      console.log(this.countries);
-    });
-  }
+    forkJoin({
+      corrCountries: this.addressService.getCountry(),
 
-  FetchStates(Code: string) {
-    this.addressService.getState(Code).subscribe((Response: CommonMaster[]) => {
-      this.states = Response;
-      console.log(this.states);
-    });
-  }
-  getStates() {
-    this.addressService.allState().subscribe((Response: CommonMaster[]) => {
-      this.states = Response;
-      console.log(this.states);
-    });
-  }
+      permCountries: this.addressService.getCountry(),
+    }).subscribe((response) => {
+      this.corresCountries = response.corrCountries;
 
-  getCities() {
-    this.addressService.allCity().subscribe((Response: CommonMaster[]) => {
-      this.cities = Response;
-      console.log(this.cities);
-    });
-  }
-
-  FetchCities(code: string) {
-    this.addressService.getCity(code).subscribe((Response: CommonMaster[]) => {
-      this.cities = Response;
-      console.log(this.cities);
+      this.permCountries = response.permCountries;
     });
   }
 
   onSubmit() {
-    if (this.addressForm.valid) {
-      const formData = this.addressForm.value;
+    if (this.permanentAddressForm.valid) {
+      const formDataArray = [
+        this.permanentAddressForm.value,
+
+        this.correspondenceAddressForm.value,
+      ];
+
       if (this.actionLabel === 'Save') {
-        debugger;
         this.addressService
-          .createAddress(formData, this.queryParams.id)
+
+          .createAddress(formDataArray, this.queryParams.id)
+
           .subscribe(
-            (response: Address) => {
+            (response: Address[]) => {
               this.addressService.notify('Save Successfully...');
+
               this.actionLabel = 'Update';
-              this.response = response.id;
-              this.queryParams = {
-                id: this.queryParams.id,
-                actionLabel: 'Update',
-              };
+
+              this.permanentAddressForm.patchValue(response[0]);
+
+              this.correspondenceAddressForm.patchValue(response[1]);
+
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
               });
             },
+
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
                 this.addressService.warn('Please fill address details');
@@ -204,17 +423,21 @@ export class AddressComponent implements OnInit {
             }
           );
       }
+
       if (this.actionLabel === 'Update') {
-        formData.id = this.response;
         this.addressService
-          .updateAddress(formData, this.queryParams.id)
+
+          .updateAddress(formDataArray, this.queryParams.id)
+
           .subscribe(
-            (response: Address) => {
+            (response: Address[]) => {
               this.addressService.notify('Update Successfully...');
+
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
               });
             },
+
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
                 this.addressService.warn('Please fill valid address details');
@@ -224,13 +447,37 @@ export class AddressComponent implements OnInit {
       }
     }
   }
-  getByIdAndAddressType(id: number, addressType: string) {
-    this.addressService.getAddressById(id, addressType).subscribe(
-      (response: Address) => {
-        this.addressForm.patchValue(response);
-        this.response = response.id;
+
+  getAllAddressById(id: number) {
+    this.addressService.getAllAddressById(id).subscribe(
+      (response: Address[]) => {
+        forkJoin({
+          permStates: this.addressService.getState(response[0].country),
+
+          corresStates: this.addressService.getState(response[1].country),
+
+          permCities: this.addressService.getCity(response[0].state),
+
+          corresCities: this.addressService.getCity(response[1].state),
+        }).subscribe((res) => {
+          this.permStates = res.permStates;
+
+          this.corrStates = res.corresStates;
+
+          this.permCities = res.permCities;
+
+          this.corresCities = res.corresCities;
+        });
+
+        this.permanentAddressForm.patchValue(response[0]);
+
+        this.correspondenceAddressForm.patchValue(response[1]);
+
+        this.corrId = response[1].id;
+
         this.actionLabel = 'Update';
       },
+
       (error) => {
         this.actionLabel = 'Save';
       }
@@ -238,16 +485,20 @@ export class AddressComponent implements OnInit {
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.addressForm.get(controlName);
+    const control = this.permanentAddressForm.get(controlName);
+
     return !!control && control.invalid && control.touched;
   }
 
   getErrorMessage(controlName: string): string {
-    const control = this.addressForm.get(controlName);
+    const control = this.permanentAddressForm.get(controlName);
+
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
+
       return CustomValidators.getErrorMessage(errorKey, controlName);
     }
+
     return '';
   }
 }

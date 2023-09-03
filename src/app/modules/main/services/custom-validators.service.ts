@@ -417,6 +417,7 @@ export class CustomValidators {
       userId: 'UserId',
       email: 'Email',
       phone: 'Phone',
+      title: 'Title',
 
       //employee Visa Form
       countryCode: 'Country Code',

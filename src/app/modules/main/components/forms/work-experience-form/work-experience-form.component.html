@@ -27,7 +27,10 @@
             <div class="form-controls">
               <input matInput formControlName="companyName" />
             </div>
-            <mat-error *ngIf="isControlInvalid('companyName')">
+            <mat-error
+              *ngIf="isControlInvalid('companyName')"
+              class="validate-text"
+            >
               {{ getErrorMessage("companyName") }}
             </mat-error>
           </mat-form-field>
@@ -46,7 +49,10 @@
             <div class="form-controls">
               <input matInput formControlName="designation" />
             </div>
-            <mat-error *ngIf="isControlInvalid('designation')">
+            <mat-error
+              *ngIf="isControlInvalid('designation')"
+              class="validate-text"
+            >
               {{ getErrorMessage("designation") }}
             </mat-error>
           </mat-form-field>
@@ -62,13 +68,24 @@
 
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="fromDate" [matDatepicker]="fromDatePicker" placeholder="DD/MM/YYYY"
-              readonly />
+            <input
+              matInput
+              formControlName="fromDate"
+              [matDatepicker]="fromDatePicker"
+              placeholder="DD/MM/YYYY"
+              readonly
+            />
 
-            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="fromDatePicker"
+            ></mat-datepicker-toggle>
 
             <mat-datepicker #fromDatePicker></mat-datepicker>
-            <mat-error *ngIf="isControlInvalid('fromDate')">
+            <mat-error
+              *ngIf="isControlInvalid('fromDate')"
+              class="validate-text"
+            >
               {{ getErrorMessage("fromDate") }}
             </mat-error>
           </mat-form-field>
@@ -83,10 +100,18 @@
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="toDate" [matDatepicker]="toDatePicker" placeholder="Choose a date"
-              readonly />
-            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
-            <mat-error *ngIf="isControlInvalid('toDate')">
+            <input
+              matInput
+              formControlName="toDate"
+              [matDatepicker]="toDatePicker"
+              placeholder="Choose a date"
+              readonly
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="toDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-error *ngIf="isControlInvalid('toDate')" class="validate-text">
               {{ getErrorMessage("toDate") }}
             </mat-error>
             <mat-datepicker #toDatePicker></mat-datepicker>
@@ -102,15 +127,26 @@
         </div>
 
         <div class="col-md-8">
-          <mat-form-field appearance="outline" color="primary" class="addressData">
+          <mat-form-field
+            appearance="outline"
+            color="primary"
+            class="addressData"
+          >
             <div class="form-controls" class="addressData">
               <!-- <input matInput placeholder="" formControlName="address" /> -->
 
-              <textarea rows="3" matInput placeholder="Address" formControlName="address">
-
+              <textarea
+                rows="3"
+                matInput
+                placeholder="Address"
+                formControlName="address"
+              >
               </textarea>
             </div>
-            <mat-error *ngIf="isControlInvalid('address')">
+            <mat-error
+              *ngIf="isControlInvalid('address')"
+              class="validate-text"
+            >
               {{ getErrorMessage("address") }}
             </mat-error>
           </mat-form-field>
@@ -124,12 +160,20 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
-                  [disabled]="!workExperienceForm.valid">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!workExperienceForm.valid"
+                >
                   {{ actionLabel }}
                 </button>
 
-                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
                   Reset
                 </button>
               </div>

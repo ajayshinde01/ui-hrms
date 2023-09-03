@@ -113,7 +113,10 @@
 
             <mat-datepicker #birthDatePicker></mat-datepicker>
 
-            <mat-error *ngIf="isControlInvalid('dateOfBirth')">
+            <mat-error
+              class="validate-text"
+              *ngIf="isControlInvalid('dateOfBirth')"
+            >
               {{ getErrorMessage("dateOfBirth") }}
             </mat-error>
           </mat-form-field>
@@ -121,7 +124,7 @@
 
         <div class="col-lg-4">
           <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
               <mat-label>Title<span style="color: red">*</span></mat-label>
 
               <mat-form-field appearance="outline" color="primary">
@@ -138,10 +141,15 @@
                     >{{ title.value }}</mat-option
                   >
                 </mat-select>
+                <mat-error *ngIf="isControlInvalid('title')">
+                  <span class="validate-text">{{
+                    getErrorMessage("title")
+                  }}</span>
+                </mat-error>
               </mat-form-field>
             </div>
 
-            <div class="col-lg-9">
+            <div class="col-lg-8">
               <mat-label>First Name<span style="color: red">*</span></mat-label>
 
               <mat-form-field appearance="outline">
@@ -176,6 +184,10 @@
 
           <mat-form-field appearance="outline">
             <input matInput formControlName="age" readonly tabindex="7" />
+
+            <mat-error *ngIf="isControlInvalid('age')">
+              <span class="validate-text">{{ getErrorMessage("age") }}</span>
+            </mat-error>
 
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
@@ -239,7 +251,7 @@
               >
             </mat-select>
 
-            <mat-error *ngIf="isControlInvalid('gender')">
+            <mat-error class="validate-text" *ngIf="isControlInvalid('gender')">
               {{ getErrorMessage("gender") }}
             </mat-error>
           </mat-form-field>
@@ -267,7 +279,10 @@
 
             <mat-datepicker #picker1></mat-datepicker>
 
-            <mat-error *ngIf="isControlInvalid('dateOfJoining')">
+            <mat-error
+              class="validate-text"
+              *ngIf="isControlInvalid('dateOfJoining')"
+            >
               {{ getErrorMessage("dateOfJoining") }}
             </mat-error>
           </mat-form-field>
@@ -290,6 +305,7 @@
 
             <mat-error>
               <span
+                class="validate-text"
                 *ngIf="employeeForm.get('division.id')?.hasError('required')"
                 >Please enter Division</span
               >
@@ -315,7 +331,7 @@
               }}</mat-option>
             </mat-select>
 
-            <mat-error *ngIf="isControlInvalid('status')">
+            <mat-error class="validate-text" *ngIf="isControlInvalid('status')">
               {{ getErrorMessage("status") }}
             </mat-error>
           </mat-form-field>

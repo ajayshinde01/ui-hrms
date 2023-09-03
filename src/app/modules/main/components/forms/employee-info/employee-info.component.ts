@@ -242,7 +242,7 @@ export class EmployeeInfoComponent implements OnInit {
       age: ['', Validators.required],
       status: ['', Validators.required],
       division: this.formBuilder.group({
-        id: [''],
+        id: ['', Validators.required],
       }),
       orgCode: ['AVI01'],
       mobile: [
@@ -432,6 +432,8 @@ export class EmployeeInfoComponent implements OnInit {
       .subscribe((response: Employees) => {
         this.employeeForm.patchValue(response);
         this.url = response.profileImage;
+        const parts = this.url.split('=');
+        this.photo = parts[1];
         //this.photo =this.url;
         if (this.url != undefined) {
           //  const filepath=tst.split('/').pop()[0];
@@ -442,10 +444,12 @@ export class EmployeeInfoComponent implements OnInit {
 
   uploadImage(event: any) {
     const file = event.target.files[0];
+
     if (file) {
       this.fileUploadService.uploadImage(file).subscribe((res) => {
         console.log('received response', res);
         this.url = res['message'];
+        this.employeeForm.controls['profileImage'].setValue(res['message']);
         this.photo = res['file'];
         console.log('photo', this.photo);
       });

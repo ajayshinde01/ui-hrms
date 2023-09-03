@@ -28,14 +28,26 @@ mat-label {
 }
 
 .upload-doc-btn:hover {
+  background-color: #534686;
+  border-color: #534686;
   transform: scale(1.05);
 }
 
 .profile-save-btn:hover {
+  background-color: #534686;
+  border-color: #534686;
   transform: scale(1.05);
 }
 
 .main-div {
   padding-left: 10px;
   margin-bottom: 20px;
+}
+
+.validate-text {
+  font-size: 12px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
 }
