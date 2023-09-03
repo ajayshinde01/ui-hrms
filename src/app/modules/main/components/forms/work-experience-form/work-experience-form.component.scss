@@ -89,7 +89,7 @@
   border-radius: 8px;
 }
 
-.addressData{
+.addressData {
   height: 105px !important;
 }
 :host::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
@@ -101,4 +101,8 @@
   height: 40px;
   /* padding: 12px; */
   top: -13px;
+}
+
+mat-label {
+  font-weight: 550;
 }

@@ -27,6 +27,35 @@ export class CustomValidators {
     };
   }
 
+  static noWhiteSpace(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const val = value.trim();
+      if (typeof value === 'string' && value && val.includes(' ')) {
+        return { whitespace: true };
+      }
+      return null;
+    };
+  }
+
+  static noLeadingTrailingSpace(): ValidatorFn {
+    debugger;
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      const condition = /^\s+$/.test(value);
+      if (
+        typeof value === 'string' &&
+        value &&
+        !condition &&
+        value.startsWith(' ') &&
+        value.endsWith(' ')
+      ) {
+        return { leadingTrailingSpace: true };
+      }
+      return null;
+    };
+  }
+
   static maxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
@@ -459,10 +488,11 @@ export class CustomValidators {
     const errorMessages: { [key: string]: string } = {
       required: `Please enter ${fieldNames[fieldName]}`,
       pattern: `Please enter valid ${fieldNames[fieldName]}`,
-      leadingSpace: `Leading spaces not allowed in ${fieldNames[fieldName]}`,
-      trailingSpace: `Trailing spaces not allowed in ${fieldNames[fieldName]}`,
+      leadingTrailingSpace: `Trailing, Leading spaces not allowed`,
+      leadingSpace: `Leading spaces not allowed`,
+      trailingSpace: `Trailing spaces not allowed`,
       maxLength: `${fieldNames[fieldName]} should not exceed limit.`,
-      whitespace: `No whitespaces allowed in ${fieldNames[fieldName]}`,
+      whitespace: `No whitespaces allowed`,
       validDateFormat: `${fieldNames[fieldName]} should be in DD/MM/YYYY format`,
       futureDate: `Please enter a future date for ${fieldNames[fieldName]}`,
       sixMonthsAfterJoining: `Confirmation Date should be at least 6 months after Joining Date`,

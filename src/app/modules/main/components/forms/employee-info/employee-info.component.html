@@ -77,9 +77,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-label
-          ><b>Middle Name</b><span style="color: red">*</span></mat-label
-        >
+        <mat-label>Middle Name</mat-label>
 
         <mat-form-field appearance="outline">
           <input matInput formControlName="middleName" tabindex="4" />
@@ -326,7 +324,7 @@
         class="btn btn-primary px-4 float-right profile-save-btn"
         (click)="onSubmit()"
         [disabled]="!employeeForm.valid"
-        tabIndex="15"
+        tabindex="15"
       >
         {{ actionLabel }}
       </button>

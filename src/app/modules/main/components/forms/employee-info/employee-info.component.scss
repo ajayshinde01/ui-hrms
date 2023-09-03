@@ -1,9 +1,9 @@
-.formHeader h2{
+.formHeader h2 {
   margin-top: 25px;
   margin-bottom: 10px;
 }
 
-.scroll-container{
+.scroll-container {
   margin-bottom: 20px;
 }
 
@@ -17,9 +17,7 @@
   //  margin-bottom: 15px;
 }
 
-
 :host::ng-deep .profile-title {
-
   margin-top: 31px;
 
   display: flex;
@@ -31,7 +29,6 @@
   padding-top: 21px;
 
   padding-bottom: 22px;
-
 }
 :host::ng-deep .profile-section img {
   height: 200px;
@@ -198,4 +195,8 @@ img {
 .go-back {
   background-color: #534686;
   border-color: #534686;
+}
+
+mat-label {
+  font-weight: 550;
 }
