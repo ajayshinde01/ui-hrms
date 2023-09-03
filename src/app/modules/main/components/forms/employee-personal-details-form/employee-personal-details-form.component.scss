@@ -22,6 +22,20 @@
   background-color: #534686;
   border-color: #534686;
 }
+
 mat-label {
   font-weight: 550;
+}
+
+.upload-doc-btn:hover {
+  transform: scale(1.05);
+}
+
+.profile-save-btn:hover {
+  transform: scale(1.05);
+}
+
+.main-div {
+  padding-left: 10px;
+  margin-bottom: 20px;
 }
