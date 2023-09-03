@@ -15,9 +15,8 @@ export class FileUploadService {
   }
 
   removeImage(file: String): Observable<any> {
-
-    return this.http.delete('http://192.168.1.16:7010/file/delete?file='+file);
+    return this.http.delete(
+      'http://192.168.1.16:7010/file/delete?file=' + file
+    );
   }
-
-
 }

@@ -1,6 +1,12 @@
 import { leadingSpaceValidator } from 'src/app/modules/master/components/forms/Validations/leadingSpace.validator';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -21,6 +27,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Employees } from '../../../models/employee.model';
 import * as moment from 'moment';
 import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
+import { DeletePopupComponent } from 'src/app/modules/shared/delete-popup/delete-popup.component';
 @Component({
   selector: 'app-employee-info',
   templateUrl: './employee-info.component.html',
@@ -52,7 +59,8 @@ export class EmployeeInfoComponent implements OnInit {
   clickedTabIndex: number;
   minDob: Date;
   errorMessage: any;
-
+  cardDivHeight: any = '';
+  cardHeights!: number;
   constructor(
     public employeeService: EmployeeService,
     private formBuilder: FormBuilder,
@@ -61,11 +69,13 @@ export class EmployeeInfoComponent implements OnInit {
     private divisionService: DivisionService,
     private fileUploadService: FileUploadService,
     private http: HttpClient,
-    private capitalService: FirstLetterCapitalService
+    private capitalService: FirstLetterCapitalService,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();
+    this.cardHeight();
     this.fetchDivisions();
     this.fetchTitles();
     this.fetchGender();
@@ -302,6 +312,33 @@ export class EmployeeInfoComponent implements OnInit {
     fileInput.click();
     this.showAddPhotoOverlay = false;
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.cardHeight();
+  }
+
+  cardHeight() {
+    this.cardHeights = window.innerHeight;
+
+    this.cardDivHeight = this.cardHeights - 80;
+  }
+
+  handleDialog() {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '450px',
+      panelClass: 'custom-dialog',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('User clicked Yes');
+        this.removePhoto();
+      } else {
+        console.log('User clicked No');
+        // Perform the action you want after user clicks No or cancels the dialog
+      }
+    });
+  }
 
   removePhoto() {
     //this.avatarImgElement.nativeElement.src = '';
@@ -310,10 +347,11 @@ export class EmployeeInfoComponent implements OnInit {
     console.log('received request', this.photo);
     // let photoUpdated1=this.photo;
     if (this.url) {
-      this.fileUploadService.removeImage(this.url).subscribe((res) => {
+      this.fileUploadService.removeImage(this.photo).subscribe((res) => {
         console.log('received response', res);
         //this.url = res['message'];
         this.url = 'assets/profile-img.png';
+        console.log('Delete image');
       });
     }
   }
