@@ -43,6 +43,7 @@ import { EmailFormComponent } from './components/forms/email-form/email-form.com
 import { EmailTableComponent } from './components/summary-tables/email-table/email-table.component';
 import { EmailService } from './services/email.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     SharedModule,
     MatFormFieldModule,
     HttpClientModule,
+    MatIconModule,
     MatDialogModule,
     MatButtonModule,
     MatInputModule,

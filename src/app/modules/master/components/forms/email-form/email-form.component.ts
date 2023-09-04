@@ -36,6 +36,9 @@ export class EmailFormComponent implements OnInit {
   isReadOnly: boolean = false;
   recordSelected: boolean = false;
 
+// data:any={
+// name:''
+// }
 
   errorMessage: string = '';
   isFieldHidden: boolean = false;
@@ -81,8 +84,14 @@ export class EmailFormComponent implements OnInit {
 
     return iconMap[fileType] || 'fas fa-file';
   }
+  fileUpload(fileInput:any)
+  {
+    fileInput.click(); 
+  }
+
   createEmail(event: any) {
     this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile,"sioudfygshuid089syudvhn ")
   }
 
   initForm() {
@@ -91,7 +100,7 @@ export class EmailFormComponent implements OnInit {
       to: ['',
       
         [
-          Validators.required
+          Validators.required,
 
           
         ],],
@@ -108,6 +117,7 @@ export class EmailFormComponent implements OnInit {
       body: ['',Validators.required],
       file: [''],
       startTime: ['']
+      // name:[this.data.name]
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 
 import { CommonMaster } from '../../../models/common-master.model';
 
@@ -46,6 +46,8 @@ export class AddressComponent implements OnInit {
 
   corrId: number;
 
+  checked: boolean = false;
+
   ownershipStatus: CommonMaster[] = [];
 
   corresCountries: CommonMaster[] = [];
@@ -80,7 +82,7 @@ export class AddressComponent implements OnInit {
     private route: ActivatedRoute,
 
     private http: HttpClient
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -98,6 +100,10 @@ export class AddressComponent implements OnInit {
 
       this.getAllAddressById(this.queryParams['id']);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.onCopyAddress();
   }
 
   initForm() {
@@ -167,7 +173,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.maxLength(2),
 
-          Validators.pattern('^(?:0?[1-9]|1[0-1])$'),
+          Validators.pattern('^(?:0?[0-9]|1[0-1])$'),
         ],
       ],
 
@@ -189,7 +195,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.noTrailingSpace(),
 
-          CustomValidators.maxLength(6),
+          CustomValidators.postCodeMaxLength(6),
 
           Validators.pattern('^[0-9]{6}$'),
         ],
@@ -275,7 +281,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.maxLength(2),
 
-          Validators.pattern('^(?:0?[1-9]|1[0-1])$'),
+          Validators.pattern('^(?:0?[0-9]|1[0-1])$'),
         ],
       ],
 
@@ -296,7 +302,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.noTrailingSpace(),
 
-          CustomValidators.maxLength(6),
+          CustomValidators.postCodeMaxLength(6),
 
           Validators.pattern('^[0-9]{6}$'),
         ],
@@ -314,33 +320,32 @@ export class AddressComponent implements OnInit {
 
       updatedAt: [null],
     });
+
+    this.permanentAddressForm.valueChanges.subscribe((values) => {
+      // Automatically uncheck the checkbox when any field changes
+      this.checked = false;
+    });
   }
 
   onCopyAddress() {
+    this.checked = true;
     if (this.permanentAddressForm.valid) {
       forkJoin({
         corrStates: this.addressService.getState(
           this.permanentAddressForm.controls['country'].value
         ),
-
         corresCity: this.addressService.getCity(
           this.permanentAddressForm.controls['state'].value
         ),
       }).subscribe((response) => {
         this.corrStates = response.corrStates;
-
         this.corresCities = response.corresCity;
       });
-
       this.correspondenceAddressForm.patchValue(
         this.permanentAddressForm.value
       );
-
       this.correspondenceAddressForm.value.addressType = 'correspondence';
-
       this.correspondenceAddressForm.value.id = this.corrId;
-
-      debugger;
     }
   }
 

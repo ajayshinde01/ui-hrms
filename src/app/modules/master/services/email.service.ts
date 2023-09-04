@@ -53,6 +53,7 @@ export class EmailService {
         };
   
     return this.http.post('http://192.168.1.16:7010/email/send', formData);
+    // return this.http.post('http://192.168.1.16:7010/email/schedule', formData);
   }
   
   
@@ -63,6 +64,7 @@ export class EmailService {
   //       '?updatedBy=Admin'
   //   );
   // }
+
   notify(message: string) {
     const toastrConfig: Partial<IndividualConfig> = {
       timeOut: 2500,

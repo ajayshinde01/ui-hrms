@@ -184,7 +184,7 @@ export class EmployeeTypeComponent {
         this.employeeTypeService.updateEmployee(formData).subscribe(
           (response: Employee) => {
             this.employeeTypeService.notify(
-              'Employee Type updated Successfully'
+              'Employee Type updated successfully'
             );
             this.Close(true);
 
