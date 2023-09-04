@@ -95,6 +95,7 @@
     cursor: pointer;
     background-color: #534686;
     color: white;
+    margin-right: 34px;
   }
   
   :host ::ng-deep .mat-mdc-text-field-wrapper {
@@ -158,5 +159,7 @@
   height: 600px; /* Adjust the height as needed */
 }
 
-
+mat-label {
+  font-weight: 550;
+}
 
