@@ -109,7 +109,6 @@ export class EmployeePersonalDetailsFormComponent {
         [
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],

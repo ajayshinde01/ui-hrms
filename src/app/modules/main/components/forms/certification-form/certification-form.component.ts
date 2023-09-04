@@ -32,10 +32,10 @@ export class CertificationFormComponent implements OnInit {
     private route: ActivatedRoute,
     private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    debugger;
+
     this.initForm();
     this.collectQueryParams();
 
@@ -154,7 +154,7 @@ export class CertificationFormComponent implements OnInit {
   }
 
   getById(id: number, certificationsId: number) {
-    debugger;
+
     this.certificationService.getByEmployeeId(id, certificationsId).subscribe(
       (response) => {
         this.certificationsForm.patchValue(response);

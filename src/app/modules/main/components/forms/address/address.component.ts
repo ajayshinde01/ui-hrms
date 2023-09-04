@@ -80,7 +80,7 @@ export class AddressComponent implements OnInit {
     private route: ActivatedRoute,
 
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
