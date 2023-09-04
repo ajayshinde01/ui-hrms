@@ -94,7 +94,7 @@
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
           </mat-form-field>
 
-          <mat-label>Birth Date<span style="color: red">*</span></mat-label>
+          <mat-label>Date Of Birth <span style="color: red">*</span></mat-label>
 
           <mat-form-field appearance="outline" class="">
             <input
@@ -141,11 +141,11 @@
                     >{{ title.value }}</mat-option
                   >
                 </mat-select>
-                <mat-error *ngIf="isControlInvalid('title')">
+                <!--<mat-error *ngIf="isControlInvalid('title')">
                   <span class="validate-text">{{
                     getErrorMessage("title")
                   }}</span>
-                </mat-error>
+                </mat-error>-->
               </mat-form-field>
             </div>
 

@@ -140,3 +140,12 @@ mat-label {
   position: relative; /* Or absolute or fixed depending on your layout */
   left: -15px;
 }
+
+.dialog-action-btn{
+  justify-content:flex-end;
+  padding:0px;
+}
+
+.host::ng-deep .card-title b {
+  font-weight: normal !important;
+}
