@@ -237,8 +237,7 @@ export class ParentFormComponent {
       this.parentForm.patchValue(response);
       this.parent = response;
       this.parent.masterName = response.masterName;
-      console.log('Master Name', this.parent.masterName);
-      console.log(this.parent);
+
       this.searchFunction(this.params);
     });
   }
