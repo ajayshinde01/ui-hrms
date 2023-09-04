@@ -173,7 +173,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.maxLength(2),
 
-          Validators.pattern('^(?:0?[1-9]|1[0-1])$'),
+          Validators.pattern('^(?:0?[0-9]|1[0-1])$'),
         ],
       ],
 
@@ -281,7 +281,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.maxLength(2),
 
-          Validators.pattern('^(?:0?[1-9]|1[0-1])$'),
+          Validators.pattern('^(?:0?[0-9]|1[0-1])$'),
         ],
       ],
 
@@ -302,7 +302,7 @@ export class AddressComponent implements OnInit {
 
           CustomValidators.noTrailingSpace(),
 
-          CustomValidators.maxLength(6),
+          CustomValidators.postCodeMaxLength(6),
 
           Validators.pattern('^[0-9]{6}$'),
         ],
