@@ -210,8 +210,11 @@
 
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('addressc')">
-          {{ getErrorMessage("addressc") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('address1')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("address1") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -224,8 +227,11 @@
 
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('address2')">
-          {{ getErrorMessage("address2") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('address2')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("address2") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -238,8 +244,11 @@
 
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('landmark')">
-          {{ getErrorMessage("landmark") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('landmark')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("landmark") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -258,8 +267,11 @@
 
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('tenureYear')">
-          {{ getErrorMessage("tenureYear") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('tenureYear')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("tenureYear") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -272,8 +284,11 @@
 
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('tenureMonth')">
-          {{ getErrorMessage("tenureMonth") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('tenureMonth')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("tenureMonth") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -286,8 +301,11 @@
 
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('postcode')">
-          {{ getErrorMessage("postcode") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('postcode')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("postcode") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -310,8 +328,11 @@
           >
         </mat-select>
 
-        <mat-error *ngIf="isControlInvalid('country')">
-          {{ getErrorMessage("country") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('country')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("country") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -334,8 +355,11 @@
           }}</mat-option>
         </mat-select>
 
-        <mat-error *ngIf="isControlInvalid('state')">
-          {{ getErrorMessage("state") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('state')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("state") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -352,8 +376,11 @@
           }}</mat-option>
         </mat-select>
 
-        <mat-error *ngIf="isControlInvalid('city')">
-          {{ getErrorMessage("city") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('city')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("city") }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -372,8 +399,11 @@
           >
         </mat-select>
 
-        <mat-error *ngIf="isControlInvalid('ownershipStatus')">
-          {{ getErrorMessage("ownershipStatus") }}
+        <mat-error
+          *ngIf="isControlInvalidCorrespondenceAddress('ownershipStatus')"
+          class="validate-text"
+        >
+          {{ getErrorMessageCorrespondenceAddress("ownershipStatus") }}
         </mat-error>
       </mat-form-field>
     </div>
