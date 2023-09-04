@@ -124,7 +124,7 @@ export class EmergencyContactComponent implements OnInit {
             (response: EmergencyContacts) => {
               console.log('POST-SCOPE Request successful', response);
               this.contactService.notify(
-                'Emergency Contact Added Successfully..!'
+                'Emergency Contact Added Successfully'
               );
               this.Close(true);
             },
@@ -145,7 +145,9 @@ export class EmergencyContactComponent implements OnInit {
           .subscribe(
             (response: EmergencyContacts) => {
               console.log('PUT-SCOPE Request successful', response);
-              this.contactService.notify('Emergency Contact successfully..!');
+              this.contactService.notify(
+                'Emergency Contact Updated Successfully'
+              );
               // this.router.navigate(['/main/educational-qualification']);
               this.Close(true);
             },
