@@ -25,9 +25,9 @@ export class VisaDetailsTableComponent implements OnInit {
     content: Array<Visa>;
     totalElements: number;
   } = {
-      content: [],
-      totalElements: 0,
-    };
+    content: [],
+    totalElements: 0,
+  };
   params: HttpParams = new HttpParams();
 
   constructor(
@@ -35,7 +35,7 @@ export class VisaDetailsTableComponent implements OnInit {
 
     private matDialog: MatDialog,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getHeaders();
@@ -66,9 +66,7 @@ export class VisaDetailsTableComponent implements OnInit {
       case 'delete':
         this.employeeService.deleteEmployeeVisa(id, this.emp_id).subscribe(
           (response: ApiResponse) => {
-            this.employeeService.notify(
-              'Employee visa details Deleted successfully..!'
-            );
+            this.employeeService.notify('Visa Details deleted successfully');
             const currentPage = Number(this.params.get('page'));
             if (
               this.visaDetailsMetaData.content.length === 1 &&

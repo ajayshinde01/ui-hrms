@@ -415,7 +415,7 @@ export class AddressComponent implements OnInit {
 
           .subscribe(
             (response: Address[]) => {
-              this.addressService.notify('Save Successfully...');
+              this.addressService.notify('Address added successfully');
 
               this.actionLabel = 'Update';
 
@@ -430,7 +430,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Please fill address details');
+                this.addressService.warn('Address already present');
               }
             }
           );
@@ -443,7 +443,7 @@ export class AddressComponent implements OnInit {
 
           .subscribe(
             (response: Address[]) => {
-              this.addressService.notify('Update Successfully...');
+              this.addressService.notify('Address updated successfully');
 
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
@@ -452,7 +452,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Please fill valid address details');
+                this.addressService.warn('Address already present');
               }
             }
           );

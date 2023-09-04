@@ -1,422 +1,427 @@
-<form [formGroup]="permanentAddressForm">
-  <br />
+<div class="main-div">
+  <form [formGroup]="permanentAddressForm">
+    <br />
 
-  <h2 class="head-name">PERMANENT<span style="color: red">*</span></h2>
+    <h2 class="head-name">PERMANENT<span style="color: red">*</span></h2>
 
-  <div class="row mm">
-    <div class="col-lg-4">
-      <mat-label>Address 1<span style="color: red">*</span></mat-label>
+    <div class="row mm">
+      <div class="col-lg-4">
+        <mat-label>Address 1<span style="color: red">*</span></mat-label>
 
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="address1" />
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="address1" />
 
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-        <mat-error *ngIf="isControlInvalid('address1')" class="validate-text">
-          {{ getErrorMessage("address1") }}
-        </mat-error>
-      </mat-form-field>
+          <mat-error *ngIf="isControlInvalid('address1')" class="validate-text">
+            {{ getErrorMessage("address1") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Address 2</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="address2" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error *ngIf="isControlInvalid('address2')" class="validate-text">
+            {{ getErrorMessage("address2") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Landmark</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="landmark" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error *ngIf="isControlInvalid('landmark')" class="validate-text">
+            {{ getErrorMessage("landmark") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
     </div>
 
-    <div class="col-lg-4">
-      <mat-label>Address 2</mat-label>
+    <div class="row mm">
+      <div class="col-lg-2 mm address_tenure">
+        <mat-label>Address Tenure </mat-label>
+      </div>
 
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="address2" />
+      <div class="col-lg-1">
+        <mat-label>Years</mat-label>
 
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+        <mat-form-field appearance="outline">
+          <input type="number" matInput formControlName="tenureYear" />
 
-        <mat-error *ngIf="isControlInvalid('address2')" class="validate-text">
-          {{ getErrorMessage("address2") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-    <div class="col-lg-4">
-      <mat-label>Landmark</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="landmark" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error *ngIf="isControlInvalid('landmark')" class="validate-text">
-          {{ getErrorMessage("landmark") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div class="row mm">
-    <div class="col-lg-2 mm address_tenure">
-      <mat-label>Address Tenure </mat-label>
-    </div>
-
-    <div class="col-lg-1">
-      <mat-label>Years</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input type="number" matInput formControlName="tenureYear" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error *ngIf="isControlInvalid('tenureYear')" class="validate-text">
-          {{ getErrorMessage("tenureYear") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-1">
-      <mat-label>Months</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input type="number" matInput formControlName="tenureMonth" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalid('tenureMonth')"
-          class="validate-text"
-        >
-          {{ getErrorMessage("tenureMonth") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Post Code<span style="color: red">*</span></mat-label>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="postcode" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error *ngIf="isControlInvalid('postcode')" class="validate-text">
-          {{ getErrorMessage("postcode") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Country<span style="color: red">*</span></mat-label>
-
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select
-          formControlName="country"
-          placeholder="Select"
-          (selectionChange)="onPermanentCountryChange($event)"
-        >
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option
-            *ngFor="let country of permCountries"
-            [value]="country.code"
-            >{{ country.value }}</mat-option
+          <mat-error
+            *ngIf="isControlInvalid('tenureYear')"
+            class="validate-text"
           >
-        </mat-select>
+            {{ getErrorMessage("tenureYear") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-        <mat-error *ngIf="isControlInvalid('country')" class="validate-text">
-          {{ getErrorMessage("country") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
+      <div class="col-lg-1">
+        <mat-label>Months</mat-label>
 
-  <div class="row mm">
-    <div class="col-lg-4">
-      <mat-label>State<span style="color: red">*</span></mat-label>
+        <mat-form-field appearance="outline">
+          <input type="number" matInput formControlName="tenureMonth" />
 
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select
-          formControlName="state"
-          placeholder="Select"
-          (selectionChange)="onPermanentStatesChange($event)"
-        >
-          <mat-option [disabled]="true">Select</mat-option>
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-          <mat-option *ngFor="let state of permStates" [value]="state.code">{{
-            state.value
-          }}</mat-option>
-        </mat-select>
-
-        <mat-error *ngIf="isControlInvalid('state')" class="validate-text">
-          {{ getErrorMessage("state") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>City<span style="color: red">*</span></mat-label>
-
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select formControlName="city" placeholder="Select">
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option *ngFor="let city of permCities" [value]="city.code">{{
-            city.value
-          }}</mat-option>
-        </mat-select>
-
-        <mat-error *ngIf="isControlInvalid('city')" class="validate-text">
-          {{ getErrorMessage("city") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Ownership Status<span style="color: red">*</span></mat-label>
-
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select formControlName="ownershipStatus" placeholder="Select">
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option
-            *ngFor="let owner of ownershipStatus"
-            [value]="owner.code"
-            >{{ owner.value }}</mat-option
+          <mat-error
+            *ngIf="isControlInvalid('tenureMonth')"
+            class="validate-text"
           >
-        </mat-select>
+            {{ getErrorMessage("tenureMonth") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-        <mat-error
-          *ngIf="isControlInvalid('ownershipStatus')"
-          class="validate-text"
-        >
-          {{ getErrorMessage("ownershipStatus") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-</form>
+      <div class="col-lg-4">
+        <mat-label>Post Code<span style="color: red">*</span></mat-label>
 
-<mat-divider></mat-divider>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="postcode" />
 
-<form [formGroup]="correspondenceAddressForm">
-  <br />
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
-  <div>
-    <h2 class="inline head-name">CORRESPONDENCE</h2>
+          <mat-error *ngIf="isControlInvalid('postcode')" class="validate-text">
+            {{ getErrorMessage("postcode") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-    <mat-checkbox color="primary" (change)="onCopyAddress()"
-      >Same as above</mat-checkbox
-    >
-  </div>
+      <div class="col-lg-4">
+        <mat-label>Country<span style="color: red">*</span></mat-label>
 
-  <div class="row mm">
-    <div class="col-lg-4">
-      <mat-label>Address 1</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="address1" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('address1')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("address1") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Address 2</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="address2" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('address2')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("address2") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Landmark</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="landmark" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('landmark')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("landmark") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div class="row mm">
-    <div class="col-lg-2 mm address_tenure">
-      <mat-label>Address Tenure </mat-label>
-    </div>
-
-    <div class="col-lg-1">
-      <mat-label>Years</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input type="number" matInput formControlName="tenureYear" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('tenureYear')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("tenureYear") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-1">
-      <mat-label>Months</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input type="number" matInput formControlName="tenureMonth" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('tenureMonth')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("tenureMonth") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Post Code</mat-label>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="postcode" />
-
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('postcode')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("postcode") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Country</mat-label>
-
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select
-          formControlName="country"
-          placeholder="Select"
-          (selectionChange)="onCorrespondenceCountryChange($event)"
-        >
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option
-            *ngFor="let country of corresCountries"
-            [value]="country.code"
-            >{{ country.value }}</mat-option
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select
+            formControlName="country"
+            placeholder="Select"
+            (selectionChange)="onPermanentCountryChange($event)"
           >
-        </mat-select>
+            <mat-option [disabled]="true">Select</mat-option>
 
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('country')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("country") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
+            <mat-option
+              *ngFor="let country of permCountries"
+              [value]="country.code"
+              >{{ country.value }}</mat-option
+            >
+          </mat-select>
 
-  <div class="row mm">
-    <div class="col-lg-4">
-      <mat-label>State</mat-label>
-
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select
-          formControlName="state"
-          placeholder="Select"
-          (selectionChange)="onCorrespondenceStatesChange($event)"
-        >
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option *ngFor="let state of corrStates" [value]="state.code">{{
-            state.value
-          }}</mat-option>
-        </mat-select>
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('state')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("state") }}
-        </mat-error>
-      </mat-form-field>
+          <mat-error *ngIf="isControlInvalid('country')" class="validate-text">
+            {{ getErrorMessage("country") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
     </div>
 
-    <div class="col-lg-4">
-      <mat-label>City</mat-label>
+    <div class="row mm">
+      <div class="col-lg-4">
+        <mat-label>State<span style="color: red">*</span></mat-label>
 
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select formControlName="city" placeholder="Select">
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option *ngFor="let city of corresCities" [value]="city.code">{{
-            city.value
-          }}</mat-option>
-        </mat-select>
-
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('city')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("city") }}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4">
-      <mat-label>Ownership Status</mat-label>
-
-      <mat-form-field appearance="outline" color="primary">
-        <mat-select formControlName="ownershipStatus" placeholder="Select">
-          <mat-option [disabled]="true">Select</mat-option>
-
-          <mat-option
-            *ngFor="let owner of ownershipStatus"
-            [value]="owner.code"
-            >{{ owner.value }}</mat-option
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select
+            formControlName="state"
+            placeholder="Select"
+            (selectionChange)="onPermanentStatesChange($event)"
           >
-        </mat-select>
+            <mat-option [disabled]="true">Select</mat-option>
 
-        <mat-error
-          *ngIf="isControlInvalidCorrespondenceAddress('ownershipStatus')"
-          class="validate-text"
-        >
-          {{ getErrorMessageCorrespondenceAddress("ownershipStatus") }}
-        </mat-error>
-      </mat-form-field>
+            <mat-option *ngFor="let state of permStates" [value]="state.code">{{
+              state.value
+            }}</mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="isControlInvalid('state')" class="validate-text">
+            {{ getErrorMessage("state") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>City<span style="color: red">*</span></mat-label>
+
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select formControlName="city" placeholder="Select">
+            <mat-option [disabled]="true">Select</mat-option>
+
+            <mat-option *ngFor="let city of permCities" [value]="city.code">{{
+              city.value
+            }}</mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="isControlInvalid('city')" class="validate-text">
+            {{ getErrorMessage("city") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Ownership Status<span style="color: red">*</span></mat-label>
+
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select formControlName="ownershipStatus" placeholder="Select">
+            <mat-option [disabled]="true">Select</mat-option>
+
+            <mat-option
+              *ngFor="let owner of ownershipStatus"
+              [value]="owner.code"
+              >{{ owner.value }}</mat-option
+            >
+          </mat-select>
+
+          <mat-error
+            *ngIf="isControlInvalid('ownershipStatus')"
+            class="validate-text"
+          >
+            {{ getErrorMessage("ownershipStatus") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
     </div>
-  </div>
+  </form>
 
-  <div class="form-footer main-div">
-    <button
-      _ngcontent-ng-c812429062=""
-      class="btn btn-primary px-4 float-right address-details-save-btn"
-      (click)="onSubmit()"
-      [disabled]="!permanentAddressForm.valid"
-    >
-      {{ actionLabel }}
-    </button>
-  </div>
-</form>
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="correspondenceAddressForm">
+    <br />
+
+    <div>
+      <h2 class="inline head-name">CORRESPONDENCE</h2>
+
+      <mat-checkbox color="primary" (change)="onCopyAddress()"
+        >Same as above</mat-checkbox
+      >
+    </div>
+
+    <div class="row mm">
+      <div class="col-lg-4">
+        <mat-label>Address 1</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="address1" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('address1')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("address1") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Address 2</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="address2" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('address2')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("address2") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Landmark</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="landmark" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('landmark')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("landmark") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mm">
+      <div class="col-lg-2 mm address_tenure">
+        <mat-label>Address Tenure </mat-label>
+      </div>
+
+      <div class="col-lg-1">
+        <mat-label>Years</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input type="number" matInput formControlName="tenureYear" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('tenureYear')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("tenureYear") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-1">
+        <mat-label>Months</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input type="number" matInput formControlName="tenureMonth" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('tenureMonth')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("tenureMonth") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Post Code</mat-label>
+
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="postcode" />
+
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('postcode')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("postcode") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Country</mat-label>
+
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select
+            formControlName="country"
+            placeholder="Select"
+            (selectionChange)="onCorrespondenceCountryChange($event)"
+          >
+            <mat-option [disabled]="true">Select</mat-option>
+
+            <mat-option
+              *ngFor="let country of corresCountries"
+              [value]="country.code"
+              >{{ country.value }}</mat-option
+            >
+          </mat-select>
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('country')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("country") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mm">
+      <div class="col-lg-4">
+        <mat-label>State</mat-label>
+
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select
+            formControlName="state"
+            placeholder="Select"
+            (selectionChange)="onCorrespondenceStatesChange($event)"
+          >
+            <mat-option [disabled]="true">Select</mat-option>
+
+            <mat-option *ngFor="let state of corrStates" [value]="state.code">{{
+              state.value
+            }}</mat-option>
+          </mat-select>
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('state')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("state") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>City</mat-label>
+
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select formControlName="city" placeholder="Select">
+            <mat-option [disabled]="true">Select</mat-option>
+
+            <mat-option *ngFor="let city of corresCities" [value]="city.code">{{
+              city.value
+            }}</mat-option>
+          </mat-select>
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('city')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("city") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-label>Ownership Status</mat-label>
+
+        <mat-form-field appearance="outline" color="primary">
+          <mat-select formControlName="ownershipStatus" placeholder="Select">
+            <mat-option [disabled]="true">Select</mat-option>
+
+            <mat-option
+              *ngFor="let owner of ownershipStatus"
+              [value]="owner.code"
+              >{{ owner.value }}</mat-option
+            >
+          </mat-select>
+
+          <mat-error
+            *ngIf="isControlInvalidCorrespondenceAddress('ownershipStatus')"
+            class="validate-text"
+          >
+            {{ getErrorMessageCorrespondenceAddress("ownershipStatus") }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <button
+        _ngcontent-ng-c812429062=""
+        class="btn btn-primary px-4 float-right address-details-save-btn"
+        (click)="onSubmit()"
+        [disabled]="!permanentAddressForm.valid"
+      >
+        {{ actionLabel }}
+      </button>
+    </div>
+  </form>
+</div>
