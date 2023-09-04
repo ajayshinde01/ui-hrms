@@ -6,17 +6,11 @@
       <mat-form-field appearance="outline" color="primary">
         <mat-select formControlName="maritalStatus" placeholder="Select">
           <mat-option [disabled]="true">Select</mat-option>
-          <mat-option
-            *ngFor="let marital_status of marital_statuses"
-            [value]="marital_status.value"
-          >
+          <mat-option *ngFor="let marital_status of marital_statuses" [value]="marital_status.value">
             {{ marital_status.value }}
           </mat-option>
         </mat-select>
-        <mat-error
-          *ngIf="isControlInvalid('maritalStatus')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('maritalStatus')" class="validate-text">
           {{ getErrorMessage("maritalStatus") }}
         </mat-error>
       </mat-form-field>
@@ -50,15 +44,8 @@
     <div class="col-lg-4">
       <mat-label>Family Background</mat-label>
       <mat-form-field appearance="outline" color="primary">
-        <textarea
-          matInput
-          rows="4"
-          formControlName="familyBackground"
-        ></textarea>
-        <mat-error
-          *ngIf="isControlInvalid('familyBackground')"
-          class="validate-text"
-        >
+        <textarea matInput rows="4" formControlName="familyBackground"></textarea>
+        <mat-error *ngIf="isControlInvalid('familyBackground')" class="validate-text">
           {{ getErrorMessage("familyBackground") }}
         </mat-error>
       </mat-form-field>
@@ -67,10 +54,7 @@
       <mat-label>Health Details</mat-label>
       <mat-form-field appearance="outline">
         <textarea matInput rows="4" formControlName="healthDetails"></textarea>
-        <mat-error
-          *ngIf="isControlInvalid('healthDetails')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('healthDetails')" class="validate-text">
           {{ getErrorMessage("healthDetails") }}
         </mat-error>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
@@ -92,15 +76,8 @@
     <div class="col-lg-4">
       <mat-label>Passport Number</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="passportNumber"
-          placeholder="A2096457"
-        />
-        <mat-error
-          *ngIf="isControlInvalid('passportNumber')"
-          class="validate-text"
-        >
+        <input matInput formControlName="passportNumber" placeholder="A2096457" />
+        <mat-error *ngIf="isControlInvalid('passportNumber')" class="validate-text">
           {{ getErrorMessage("passportNumber") }}
         </mat-error>
       </mat-form-field>
@@ -109,10 +86,7 @@
       <mat-label>Passport Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="passportName" />
-        <mat-error
-          *ngIf="isControlInvalid('passportName')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('passportName')" class="validate-text">
           {{ getErrorMessage("passportName") }}
         </mat-error>
       </mat-form-field>
@@ -120,19 +94,11 @@
     <div class="col-lg-4">
       <mat-label>Date Of Issue</mat-label>
       <mat-form-field appearance="outline" class="">
-        <input
-          matInput
-          formControlName="passportIssueDate"
-          [matDatepicker]="picker"
-          placeholder="DD/MM/YYYY"
-          readonly
-        />
+        <input matInput formControlName="passportIssueDate" [matDatepicker]="picker" placeholder="DD/MM/YYYY"
+          readonly />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error
-          *ngIf="isControlInvalid('passportIssueDate')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('passportIssueDate')" class="validate-text">
           {{ getErrorMessage("passportIssueDate") }}
         </mat-error>
       </mat-form-field>
@@ -143,21 +109,10 @@
     <div class="col-lg-4">
       <mat-label>Valid Upto</mat-label>
       <mat-form-field appearance="outline" class="">
-        <input
-          matInput
-          formControlName="passportValidity"
-          [matDatepicker]="picker1"
-          readonly
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker1"
-        ></mat-datepicker-toggle>
+        <input matInput formControlName="passportValidity" [matDatepicker]="picker1" readonly />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
-        <mat-error
-          *ngIf="isControlInvalid('passportValidity')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('passportValidity')" class="validate-text">
           {{ getErrorMessage("passportValidity") }}
         </mat-error>
       </mat-form-field>
@@ -167,10 +122,7 @@
       <mat-label>Place Of Issue</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="placeOfIssue" />
-        <mat-error
-          *ngIf="isControlInvalid('placeOfIssue')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('placeOfIssue')" class="validate-text">
           {{ getErrorMessage("placeOfIssue") }}
         </mat-error>
       </mat-form-field>
@@ -182,34 +134,19 @@
       <!--</mat-form-field> -->
 
       <div class="passport-file-upload">
-        <button
-          id="add-passport-doc-btn"
-          class="center-positon-absolute upload-doc-btn"
-          mat-icon-button
-          (click)="openPassportFileInput(passportFileinput)"
-        >
+        <button id="add-passport-doc-btn" class="center-positon-absolute upload-doc-btn" mat-icon-button
+          (click)="openPassportFileInput(passportFileinput)">
           Choose File
         </button>
-        <input
-          #passportFileinput
-          type="file"
-          name="passportFile"
-          class="personalinfofileInput"
-          accept="image/*,application/pdf"
-          (change)="onPassportFileSelect($event)"
-        />
-        <a
-          [href]="viewPassportFile"
-          *ngIf="viewPassportFile"
-          target="_blank"
-          class="view_file"
-          ><button type="button" mat-button class="upload-doc-btn">
+        <input #passportFileinput type="file" name="passportFile" class="personalinfofileInput"
+          accept="image/*,application/pdf" (change)="onPassportFileSelect($event)" />
+        <a [href]="viewPassportFile" *ngIf="viewPassportFile" target="_blank" class="view_file"><button type="button"
+            mat-button class="upload-doc-btn">
             View File
-          </button></a
-        >
+          </button></a>
         <mat-error *ngIf="FleSizeError" class="validate-text">{{
           FleSizeError
-        }}</mat-error>
+          }}</mat-error>
       </div>
     </div>
   </div>
@@ -222,10 +159,7 @@
       <mat-label>Aadhar Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="aadhaarNumber" />
-        <mat-error
-          *ngIf="isControlInvalid('aadhaarNumber')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('aadhaarNumber')" class="validate-text">
           {{ getErrorMessage("aadhaarNumber") }}
         </mat-error>
       </mat-form-field>
@@ -234,10 +168,7 @@
       <mat-label>Aadhar Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="aadhaarName" />
-        <mat-error
-          *ngIf="isControlInvalid('aadhaarName')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('aadhaarName')" class="validate-text">
           {{ getErrorMessage("aadhaarName") }}
         </mat-error>
       </mat-form-field>
@@ -246,31 +177,16 @@
       <mat-label>File Upload</mat-label>
       <!--</mat-form-field> -->
       <div class="aadhar-file-upload">
-        <button
-          id="add-passport-doc-btn"
-          class="center-positon-absolute upload-doc-btn"
-          mat-icon-button
-          (click)="openAadharFileInput(aadharfileInput)"
-        >
+        <button id="add-passport-doc-btn" class="center-positon-absolute upload-doc-btn" mat-icon-button
+          (click)="openAadharFileInput(aadharfileInput)">
           Choose File
         </button>
-        <input
-          #aadharfileInput
-          type="file"
-          name="aadharfileInput"
-          class="personalinfofileInput"
-          accept="image/*,application/pdf"
-          (change)="onAadharFileSelect($event)"
-        />
-        <a
-          [href]="viewAadharFile"
-          *ngIf="viewAadharFile"
-          target="_blank"
-          class="view_file"
-          ><button type="button" mat-button class="upload-doc-btn">
+        <input #aadharfileInput type="file" name="aadharfileInput" class="personalinfofileInput"
+          accept="image/*,application/pdf" (change)="onAadharFileSelect($event)" />
+        <a [href]="viewAadharFile" *ngIf="viewAadharFile" target="_blank" class="view_file"><button type="button"
+            mat-button class="upload-doc-btn">
             View File
-          </button></a
-        >
+          </button></a>
       </div>
     </div>
   </div>
@@ -282,10 +198,7 @@
       <mat-label>PAN Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="panCardNumber" />
-        <mat-error
-          *ngIf="isControlInvalid('panCardNumber')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('panCardNumber')" class="validate-text">
           {{ getErrorMessage("panCardNumber") }}
         </mat-error>
       </mat-form-field>
@@ -294,10 +207,7 @@
       <mat-label>PAN Card Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="panCardName" />
-        <mat-error
-          *ngIf="isControlInvalid('panCardName')"
-          class="validate-text"
-        >
+        <mat-error *ngIf="isControlInvalid('panCardName')" class="validate-text">
           {{ getErrorMessage("panCardName") }}
         </mat-error>
       </mat-form-field>
@@ -306,31 +216,16 @@
       <mat-label>File Upload</mat-label>
       <!--</mat-form-field> -->
       <div class="aadhar-file-upload">
-        <button
-          id="add-passport-doc-btn"
-          class="center-positon-absolute upload-doc-btn"
-          mat-icon-button
-          (click)="openPanFileInput(panfileInput)"
-        >
+        <button id="add-passport-doc-btn" class="center-positon-absolute upload-doc-btn" mat-icon-button
+          (click)="openPanFileInput(panfileInput)">
           Choose File
         </button>
-        <input
-          #panfileInput
-          type="file"
-          name="panfileInput"
-          class="personalinfofileInput"
-          accept="image/*,application/pdf"
-          (change)="onPanFileSelect($event)"
-        />
-        <a
-          [href]="viewPANFile"
-          *ngIf="viewPANFile"
-          target="_blank"
-          class="view_file"
-          ><button type="button" mat-button class="upload-doc-btn">
+        <input #panfileInput type="file" name="panfileInput" class="personalinfofileInput"
+          accept="image/*,application/pdf" (change)="onPanFileSelect($event)" />
+        <a [href]="viewPANFile" *ngIf="viewPANFile" target="_blank" class="view_file"><button type="button" mat-button
+            class="upload-doc-btn">
             View File
-          </button></a
-        >
+          </button></a>
       </div>
     </div>
   </div>
@@ -349,11 +244,7 @@
     <div class="col-lg-4">
       <mat-label>PF Number</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="pfNumber"
-          placeholder="TNMAS12071991231234567"
-        />
+        <input matInput formControlName="pfNumber" placeholder="TNMAS12071991231234567" />
         <mat-error *ngIf="isControlInvalid('pfNumber')" class="validate-text">
           {{ getErrorMessage("pfNumber") }}
         </mat-error>
@@ -367,15 +258,8 @@
     <div class="col-lg-4">
       <mat-label>BANK Account Number</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="bankAccountNumber"
-          placeholder="635802010014976"
-        />
-        <mat-error
-          *ngIf="isControlInvalid('bankAccountNumber')"
-          class="validate-text"
-        >
+        <input matInput formControlName="bankAccountNumber" placeholder="635802010014976" />
+        <mat-error *ngIf="isControlInvalid('bankAccountNumber')" class="validate-text">
           {{ getErrorMessage("bankAccountNumber") }}
         </mat-error>
       </mat-form-field>
@@ -401,11 +285,7 @@
     </div>
   </div>
   <div class="form-footer">
-    <button
-      mat-button
-      class="btn btn-primary px-4 float-right profile-save-btn visa-btn"
-      (click)="onSubmit()"
-    >
+    <button mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn" (click)="onSubmit()">
       {{ actionLabel }}
     </button>
   </div>

@@ -73,7 +73,7 @@ export class EmployeeInfoComponent implements OnInit {
     private http: HttpClient,
     private capitalService: FirstLetterCapitalService,
     private dialog: MatDialog
-  ) {}
+  ) { }
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();
@@ -461,7 +461,6 @@ export class EmployeeInfoComponent implements OnInit {
   calculateAge(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       this.selectedDate = control.value as Date;
-      debugger;
       if (this.selectedDate) {
         const today = new Date();
         const birthDate = new Date(this.selectedDate);
