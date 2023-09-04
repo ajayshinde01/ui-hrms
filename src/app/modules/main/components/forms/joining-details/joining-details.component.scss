@@ -3,6 +3,10 @@
   border: #534686;
 }
 
+::ng-deep .mat-mdc-button-touch-target:focus {
+ background-color: red!important;
+}
+
 mat-label {
   font-weight: 550;
 }

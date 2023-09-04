@@ -184,7 +184,9 @@ export class CompanyDetailsComponent implements OnInit {
           .createComapanyDetails(formData, this.queryParams.id)
           .subscribe(
             (response: CompanyDetails) => {
-              this.companyDetailsService.notify('Data Saved Successfully...');
+              this.companyDetailsService.notify(
+                'Company Details added successfully'
+              );
               this.actionLabel = 'Update';
               this.response = response.id;
 
@@ -194,7 +196,7 @@ export class CompanyDetailsComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn('Credentials already present');
+                this.employeeService.warn('Company Details already present');
               }
             }
           );
@@ -206,7 +208,9 @@ export class CompanyDetailsComponent implements OnInit {
           .updateCompanyDetails(formData, this.queryParams.id)
           .subscribe(
             (response: CompanyDetails) => {
-              this.companyDetailsService.notify('Update Successfully...');
+              this.companyDetailsService.notify(
+                'Company Details updated successfully'
+              );
               this.queryParams.actionLabel = 'Update';
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
@@ -214,7 +218,9 @@ export class CompanyDetailsComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.companyDetailsService.warn('Credentials already present');
+                this.companyDetailsService.warn(
+                  'Company Details already present'
+                );
               }
             }
           );

@@ -72,7 +72,7 @@ export class UserRoleTableComponent {
       case 'delete':
         this.userRoleService.deleteRole(id).subscribe(
           (response: ApiResponse) => {
-            this.userRoleService.notify('Role Deleted successfully..!');
+            this.userRoleService.notify('Role deleted successfully');
             const currentPage = Number(this.params.get('page'));
             if (this.roleMetaData.content.length === 1 && currentPage > 0) {
               const newPage = currentPage - 1;

@@ -71,7 +71,7 @@ export class UserTableComponent implements OnInit {
       case 'delete':
         this.userService.deleteUser(id).subscribe(
           (response: ApiResponse) => {
-            this.userService.notify('User Deleted successfully..!');
+            this.userService.notify('User deleted successfully');
             const currentPage = Number(this.params.get('page'));
             if (this.userMetaData.content.length === 1 && currentPage > 0) {
               const newPage = currentPage - 1;

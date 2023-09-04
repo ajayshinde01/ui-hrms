@@ -181,7 +181,7 @@ export class DivisionComponent {
         formData.updatedBy = 'Admin';
         this.divisionService.updateDivision(formData).subscribe(
           (response: Division) => {
-            this.divisionService.notify('Division updated  Successfully');
+            this.divisionService.notify('Division updated successfully');
             this.Close(true);
           },
           (error: any) => {

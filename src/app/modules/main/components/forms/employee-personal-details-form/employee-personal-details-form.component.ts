@@ -51,7 +51,7 @@ export class EmployeePersonalDetailsFormComponent {
     public employeeService: EmployeeService,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id'); // Replace 'paramName' with the actual query parameter name
@@ -77,7 +77,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(10),
+          //  CustomValidators.maxLength(10),
+          Validators.maxLength(10),
           // Validators.pattern('^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$')
         ],
       ], //1610721012
@@ -88,7 +89,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(9),
+          // CustomValidators.maxLength(9),
+          Validators.maxLength(9),
           Validators.pattern('^[0-9]*$'),
         ],
       ],
@@ -99,7 +101,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(16),
+          //CustomValidators.maxLength(16),
+          Validators.maxLength(16),
           Validators.pattern('^[0-9]{12}$'),
         ],
       ],
@@ -109,7 +112,6 @@ export class EmployeePersonalDetailsFormComponent {
         [
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
@@ -120,7 +122,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(20),
+          // CustomValidators.maxLength(20),
+          Validators.maxLength(20),
           Validators.pattern('^[A-Za-z0-9]*$'),
         ],
       ],
@@ -130,7 +133,6 @@ export class EmployeePersonalDetailsFormComponent {
         [
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
@@ -159,8 +161,9 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(10),
-          // Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')
+          //CustomValidators.maxLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}'),
         ],
       ],
       panCardName: [
@@ -168,7 +171,6 @@ export class EmployeePersonalDetailsFormComponent {
         [
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
         ],
       ],
@@ -180,7 +182,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(17),
+          // CustomValidators.maxLength(17),
+          Validators.maxLength(17),
           Validators.pattern('^[0-9]{9,18}$'),
         ],
       ],
@@ -192,7 +195,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(11),
+          //CustomValidators.maxLength(11),
+          Validators.maxLength(11),
           Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$'),
         ],
       ],
@@ -203,7 +207,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(12),
+          // CustomValidators.maxLength(12),
+          Validators.maxLength(12),
         ],
       ],
       pfNumber: [
@@ -213,7 +218,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(22),
+          //CustomValidators.maxLength(22),
+          Validators.maxLength(22),
           //  Validators.pattern('^[A-Z]{2}[\s\/]?[A-Z]{3}[\s\/]?[0-9]{7}[\s\/]?[0-9]{3}[\s\/]?[0-9]{7}$')
         ],
       ],
@@ -221,7 +227,7 @@ export class EmployeePersonalDetailsFormComponent {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: this.orgCode,
+      orgCode: { value: this.orgCode },
     });
   }
 
@@ -351,9 +357,9 @@ export class EmployeePersonalDetailsFormComponent {
       const panfile = event.target.files[0];
       console.log('size', panfile.size);
       console.log('type', panfile.type);
-      if (panfile.size > 1e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 1MB';
-        console.log('File is too large. Over 1MB');
+      if (panfile.size > 2e6) {
+        this.FleSizeError = 'File is too large should not exceed Over 2MB';
+        console.log('File is too large. Over 2MB');
       }
 
       if (panfile) {
@@ -361,13 +367,7 @@ export class EmployeePersonalDetailsFormComponent {
           console.log('received response', res);
           this.aadhar_file_url = res['message'];
           this.viewPANFile = res['message'];
-          this.FleSizeError = '';
-        },
-          (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.fileUploadService.warn(error.error.message);
-            }
-          });
+        });
       }
     }
   }
@@ -381,8 +381,8 @@ export class EmployeePersonalDetailsFormComponent {
       this.files = event.target.files[0];
       const file = event.target.files[0];
       if (file.size > 2e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 1MB';
-        console.log('File is too large. Over 1MB');
+        this.FleSizeError = 'File is too large should not exceed Over 2MB';
+        console.log('File is too large. Over 2MB');
       }
 
       if (file) {
@@ -390,13 +390,7 @@ export class EmployeePersonalDetailsFormComponent {
           this.passport_file_url = res['message'];
           this.file_name = res['message'];
           this.viewPassportFile = res['message'];
-          this.FleSizeError = '';
-        },
-          (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.fileUploadService.warn(error.error.message);
-            }
-          });
+        });
       }
     }
   }
@@ -409,21 +403,16 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const aadharfile = event.target.files[0];
-      if (aadharfile.size > 1e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 1MB';
+      if (aadharfile.size > 2e6) {
+        this.FleSizeError = 'File is too large should not exceed Over 2MB';
       }
+
       if (aadharfile) {
         this.fileUploadService.uploadImage(aadharfile).subscribe((res) => {
           this.aadhar_file_url = res['message'];
           // this.file_name = res['message'];
           this.viewAadharFile = res['message'];
-          this.FleSizeError = '';
-        },
-          (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.fileUploadService.warn(error.error.message);
-            }
-          });
+        });
       }
     }
   }
@@ -450,13 +439,21 @@ export class EmployeePersonalDetailsFormComponent {
           .AddPersonalDetails(formData, this.emp_id)
           .subscribe(
             (response: EmployeePersonalDetails) => {
-              this.employeeService.notify('Data Saved Successfully...');
+              this.employeeService.notify(
+                'Employee Personal Details added successfully'
+              );
               this.router.navigate(['/master/employee-form']);
               this.actionLabel = 'Update';
             },
             (error: any) => {
-              if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn('Credentials already present');
+              if (
+                error.status == 400 ||
+                error.status == 404 ||
+                error.status == 500
+              ) {
+                this.employeeService.warn(
+                  'Employee Personal Details already present'
+                );
               }
             }
           );
@@ -466,12 +463,20 @@ export class EmployeePersonalDetailsFormComponent {
           .updateEmployeePersonalDetails(formData, this.emp_id)
           .subscribe(
             (response: EmployeePersonalDetails) => {
-              this.employeeService.notify('Update Successfully...');
+              this.employeeService.notify(
+                'Employee Personal Details updated successfully'
+              );
               this.router.navigate(['/main/employee-table']);
             },
             (error: any) => {
-              if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn('Credentials already present');
+              if (
+                error.status == 400 ||
+                error.status == 404 ||
+                error.status == 500
+              ) {
+                this.employeeService.warn(
+                  'Employee Personal Details already present'
+                );
               }
             }
           );

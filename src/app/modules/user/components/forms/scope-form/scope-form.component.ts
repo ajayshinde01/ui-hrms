@@ -112,7 +112,7 @@ export class ScopeFormComponent {
           (response: Scope) => {
             console.log('POST-SCOPE Request successful', response);
             this.router.navigate(['/user/scope-table']);
-            this.scopeService.notify('Scope Added successfully..!');
+            this.scopeService.notify('Scope added successfully');
             this.Close(true);
           },
           (error: any) => {
@@ -127,7 +127,7 @@ export class ScopeFormComponent {
         this.scopeService.updateScope(formData).subscribe(
           (response: Scope) => {
             console.log('PUT-SCOPE Request successful', response);
-            this.scopeService.notify('Scope Updated successfully..!');
+            this.scopeService.notify('Scope updated successfully');
             this.router.navigate(['/user/scope-table']);
             this.Close(true);
           },

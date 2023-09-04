@@ -153,7 +153,7 @@ export class EmailTableComponent {
   }
 
   OpenModalForEdit(data: string) {
-    this.isViewMode = true;
+    // this.isViewMode = true;
     this.matDialogRef = this.matDialog.open(EmailFormComponent, {
       data: { id: data },
 

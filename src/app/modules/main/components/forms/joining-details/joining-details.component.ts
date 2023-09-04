@@ -47,7 +47,7 @@ export class JoiningDetailsComponent implements OnInit {
     private joiningDetailsService: JoiningDetailsService,
 
     private employeeService: EmployeeService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -182,13 +182,13 @@ export class JoiningDetailsComponent implements OnInit {
           .format('YYYY-MM-DD'),
         resignationDate: this.joiningForm.value.resignationDate
           ? moment(this.joiningForm.value.resignationDate)
-            .utcOffset(0, true)
-            .format('YYYY-MM-DD')
+              .utcOffset(0, true)
+              .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
         relievingDate: this.joiningForm.value.relievingDate
           ? moment(this.joiningForm.value.relievingDate)
-            .utcOffset(0, true)
-            .format('YYYY-MM-DD')
+              .utcOffset(0, true)
+              .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
       };
 
@@ -197,7 +197,9 @@ export class JoiningDetailsComponent implements OnInit {
           .createJoiningDetails(this.queryParams.id, formData)
           .subscribe(
             (response: JoiningDetails) => {
-              this.joiningDetailsService.notify('Data Saved Successfully...');
+              this.joiningDetailsService.notify(
+                'Joining Details added successfully'
+              );
 
               this.actionLabel = 'Update';
 
@@ -210,7 +212,9 @@ export class JoiningDetailsComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.joiningDetailsService.warn('Credentials already present');
+                this.joiningDetailsService.warn(
+                  'Joining Details already present'
+                );
               }
             }
           );
@@ -224,7 +228,9 @@ export class JoiningDetailsComponent implements OnInit {
           .updateJoiningDetails(this.queryParams.id, formData)
           .subscribe(
             (response: JoiningDetails) => {
-              this.joiningDetailsService.notify('Data Saved Successfully...');
+              this.joiningDetailsService.notify(
+                'Joining Details updated successfully'
+              );
 
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
@@ -233,7 +239,9 @@ export class JoiningDetailsComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.joiningDetailsService.warn('Credentials already present');
+                this.joiningDetailsService.warn(
+                  'Joining Details already present'
+                );
               }
             }
           );

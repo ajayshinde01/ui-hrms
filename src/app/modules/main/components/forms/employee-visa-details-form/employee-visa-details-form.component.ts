@@ -55,7 +55,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id');
@@ -158,21 +158,22 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         this.fileSizeError = '';
       }
       if (file) {
-        this.fileUploadService.uploadImage(file).subscribe((res) => {
-          console.log('Received response', res);
-          this.url = res['message'];
-          this.file_name = res['message'];
-          this.viewFile = res['message'];
-        },
+        this.fileUploadService.uploadImage(file).subscribe(
+          (res) => {
+            console.log('Received response', res);
+            this.url = res['message'];
+            this.file_name = res['message'];
+            this.viewFile = res['message'];
+          },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
               this.fileUploadService.warn(error.error.message);
             }
-          });
+          }
+        );
       }
     }
   }
-
 
   onSubmit() {
     if (this.employeeVisaDetailsForm.valid) {
@@ -181,12 +182,12 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.employeeService.AddVisaDetails(formData, this.emp_id).subscribe(
           (response: Visa) => {
-            this.employeeService.notify('Data Saved Successfully...');
+            this.employeeService.notify('Visa Details added successfully');
             this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn('Visa Details already present');
             }
           }
         );
@@ -196,12 +197,12 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           .updateEmployeevisa(formData, this.emp_id)
           .subscribe(
             (response: Visa) => {
-              this.employeeService.notify('Update Successfully...');
+              this.employeeService.notify('Visa Details updated successfully');
               this.Close(true);
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn(error.error.message);
+                this.employeeService.warn('Visa Details already present');
               }
             }
           );

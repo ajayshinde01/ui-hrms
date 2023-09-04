@@ -55,7 +55,7 @@ export class WorkExperienceFormComponent implements OnInit {
     private capitalService: FirstLetterCapitalService,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.collectQueryParams();
@@ -190,14 +190,16 @@ export class WorkExperienceFormComponent implements OnInit {
               console.log('POST Request successful', response);
 
               this.workExperienceService.notify(
-                'Work Experience Added Successfully'
+                'Work Experience added successfully'
               );
 
               this.closeDialog(true);
             },
-
             (error: any) => {
               console.error('POST Request failed', error);
+              this.workExperienceService.notify(
+                'Work Experience already present'
+              );
             }
           );
       }
@@ -213,14 +215,16 @@ export class WorkExperienceFormComponent implements OnInit {
               console.log('PUT Request successful', response);
 
               this.workExperienceService.notify(
-                'Work Experience Updated Successfully'
+                'Work Experience updated successfully'
               );
 
               this.closeDialog(true);
             },
-
             (error: any) => {
               console.error('PUT Request failed', error);
+              this.workExperienceService.notify(
+                'Work Experience already present'
+              );
             }
           );
       }
@@ -267,7 +271,7 @@ export class WorkExperienceFormComponent implements OnInit {
   }
 
   getById(id: number, workExperienceId: number) {
-    // Retrieve the work experience by ID and populate the form fields
+
 
     this.workExperienceService
 
