@@ -73,7 +73,7 @@ export class EmployeeInfoComponent implements OnInit {
     private http: HttpClient,
     private capitalService: FirstLetterCapitalService,
     private dialog: MatDialog
-  ) {}
+  ) { }
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();

@@ -20,14 +20,14 @@ export class VisaDetailsTableComponent implements OnInit {
   emp_id: any;
   masterName: string = 'Visa Details';
   visa_id: any;
-  visaDetailsHeaders: any;
+  visaDetailsHeaders: any = '';
   visaDetailsMetaData: {
     content: Array<Visa>;
     totalElements: number;
   } = {
-    content: [],
-    totalElements: 0,
-  };
+      content: [],
+      totalElements: 0,
+    };
   params: HttpParams = new HttpParams();
 
   constructor(
@@ -35,7 +35,7 @@ export class VisaDetailsTableComponent implements OnInit {
 
     private matDialog: MatDialog,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getHeaders();
@@ -50,7 +50,6 @@ export class VisaDetailsTableComponent implements OnInit {
     this.employeeService.getEmployeeVisaHeaders().subscribe(
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
         this.visaDetailsHeaders = response;
-        console.log(this.visaDetailsHeaders);
       },
       (error: any) => {
         console.error('GET Request failed', error);

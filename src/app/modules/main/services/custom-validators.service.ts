@@ -165,7 +165,6 @@ export class CustomValidators {
   static validNoticePeriod(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value);
       if (value && !/^\d+$/.test(value)) {
         return { validNoticePeriod: true };
       }
@@ -208,8 +207,6 @@ export class CustomValidators {
   static noticePeriodMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      console.log(value);
-
       if (value && value.toString().length > maxLength) {
         return {
           noticePeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,

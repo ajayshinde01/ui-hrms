@@ -55,7 +55,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id');
@@ -152,7 +152,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       this.files = event.target.files[0];
       console.log(this.files);
       const file = event.target.files[0];
-      if (file.size > 2e6) {
+      if (file.size > 1e6) {
         this.fileSizeError = 'File is too large should not exceed Over 1MB';
       } else {
         this.fileSizeError = '';
@@ -163,10 +163,16 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           this.url = res['message'];
           this.file_name = res['message'];
           this.viewFile = res['message'];
-        });
+        },
+          (error: any) => {
+            if (error.status == 400 || error.status == 404) {
+              this.fileUploadService.warn(error.error.message);
+            }
+          });
       }
     }
   }
+
 
   onSubmit() {
     if (this.employeeVisaDetailsForm.valid) {

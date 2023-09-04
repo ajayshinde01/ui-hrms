@@ -213,9 +213,6 @@ export class DatatableComponent implements OnInit, OnChanges {
     this.pagination.serchingParmeter
       ? (params = params.append('keyword', this.pagination.serchingParmeter!))
       : true;
-
-    console.log(params);
-
     this.paginationParams.emit(params);
   }
 
