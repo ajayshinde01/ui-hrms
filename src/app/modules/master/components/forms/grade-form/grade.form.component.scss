@@ -15,6 +15,9 @@
 .mat-mdc-dialog-surface mdc-dialog__surface {
   overflow: hidden;
 }
+mat-label {
+  font-weight: 550;
+}
 
 .save-btn:hover {
   transform: scale(1.1);

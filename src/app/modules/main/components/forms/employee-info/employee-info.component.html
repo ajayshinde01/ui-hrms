@@ -1,6 +1,6 @@
 <div class="main-div">
   <div class="formHeader">
-    <h2>EMPLOYEE INFO</h2>
+    <h2 class="head-name">EMPLOYEE INFO</h2>
   </div>
 
   <form [formGroup]="employeeForm">
@@ -71,6 +71,7 @@
               formControlName="employeeCode"
               oninput="this.value = this.value.toUpperCase()"
               tabindex="1"
+              [readonly]="isDisabled"
             />
 
             <mat-error *ngIf="isControlInvalid('employeeCode')">
@@ -340,6 +341,7 @@
 
       <mat-divider></mat-divider>
 
+      <h2 class="head-name">USER DETAILS</h2>
       <div class="row mm">
         <div class="col-lg-4">
           <mat-label>User Id</mat-label>

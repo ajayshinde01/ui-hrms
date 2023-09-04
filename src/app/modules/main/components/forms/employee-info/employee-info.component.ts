@@ -432,6 +432,7 @@ export class EmployeeInfoComponent implements OnInit {
     this.employeeService
       .searchEmployeeById(id)
       .subscribe((response: Employees) => {
+        this.isDisabled = true;
         this.employeeForm.patchValue(response);
         this.url = response.profileImage;
         const parts = this.url.split('=');
@@ -461,7 +462,6 @@ export class EmployeeInfoComponent implements OnInit {
   calculateAge(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       this.selectedDate = control.value as Date;
-      debugger;
       if (this.selectedDate) {
         const today = new Date();
         const birthDate = new Date(this.selectedDate);

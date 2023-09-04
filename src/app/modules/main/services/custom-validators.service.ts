@@ -39,7 +39,6 @@ export class CustomValidators {
   }
 
   static noLeadingTrailingSpace(): ValidatorFn {
-    debugger;
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
       const condition = /^\s+$/.test(value);
