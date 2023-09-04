@@ -122,7 +122,7 @@ export class EmailFormComponent implements OnInit {
       formData.append('mailRequest', blob);
 
       if (this.actionLabel === 'Send') {
-        //this.emailForm.get('body')?.enable();
+
         this.emailService.createEmail(formData).subscribe(
           (response: Email) => {
             this.emailService.notify('Email added successfully');

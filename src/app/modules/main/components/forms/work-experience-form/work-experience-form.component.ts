@@ -1,6 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -10,6 +16,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { WorkExperience } from '../../../models/work-experience.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import * as moment from 'moment';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-work-experience-form',
@@ -43,6 +51,7 @@ export class WorkExperienceFormComponent implements OnInit {
     private router: Router,
 
     private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService,
 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -51,15 +60,25 @@ export class WorkExperienceFormComponent implements OnInit {
     this.collectQueryParams();
 
     this.initForm();
+    const formControlNames = ['companyName', 'designation'];
+
+    formControlNames.forEach((controlName) => {
+      this.workExperienceForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.workExperienceForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
 
   collectQueryParams() {
-    debugger;
-
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
-
-      debugger;
 
       if (
         this.data['workExperienceId'] != undefined &&
@@ -96,6 +115,8 @@ export class WorkExperienceFormComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLengthOfCompany(50),
+          CustomValidators.validCompanyFormat(),
         ],
       ],
 
@@ -104,14 +125,22 @@ export class WorkExperienceFormComponent implements OnInit {
         [
           Validators.required,
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.designationPeriodMaxLength(100),
+          CustomValidators.validDesignationFormat(),
         ],
       ],
 
-      fromDate: ['', [Validators.required]],
+      fromDate: ['', [Validators.required, CustomValidators.pastDate()]],
 
-      toDate: ['', [Validators.required]],
+      toDate: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.pastDate(),
+          this.graterWorkExperince(),
+        ],
+      ],
 
       address: [
         '',
@@ -119,6 +148,8 @@ export class WorkExperienceFormComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLengthOfAddress(250),
+          CustomValidators.validAddressFormat(),
         ],
       ],
 
@@ -136,9 +167,15 @@ export class WorkExperienceFormComponent implements OnInit {
 
   onSubmit() {
     if (this.workExperienceForm.valid) {
-      const formData = this.workExperienceForm.value;
-      formData.createdBy = 'Admin';
-
+      const formData = {
+        ...this.workExperienceForm.value,
+        fromDate: moment(this.workExperienceForm.value.toDate)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+        toDate: moment(this.workExperienceForm.value.toDate)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+      };
       if (this.actionLabel === 'Save') {
         this.workExperienceService
 
@@ -184,6 +221,27 @@ export class WorkExperienceFormComponent implements OnInit {
           );
       }
     }
+  }
+
+  graterWorkExperince(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const value = control.value as Date;
+      console.log(value);
+      if (control.touched) {
+        if (value != null) {
+          const fromdate = this.workExperienceForm.get('fromDate')?.value;
+          console.log(fromdate);
+          if (fromdate == null) {
+            return { fromdate: true };
+          }
+          if (fromdate > value) {
+            return { graterWorkExperince: true };
+          }
+        }
+      }
+
+      return null;
+    };
   }
 
   isControlInvalid(controlName: string): boolean {

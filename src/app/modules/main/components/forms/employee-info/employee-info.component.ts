@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { CommonMaster } from 'src/app/modules/main/models/common-master.model';
@@ -12,7 +18,8 @@ import { FileUploadService } from 'src/app/modules/main/services/file-upload.ser
 import { MatTab } from '@angular/material/tabs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Employees } from '../../../models/employee.model';
-
+import * as moment from 'moment';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 @Component({
   selector: 'app-employee-info',
   templateUrl: './employee-info.component.html',
@@ -52,7 +59,8 @@ export class EmployeeInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private divisionService: DivisionService,
     private fileUploadService: FileUploadService,
-    private http: HttpClient
+    private http: HttpClient,
+    private capitalService: FirstLetterCapitalService
   ) {}
   ngOnInit(): void {
     console.log('employee info');
@@ -87,6 +95,21 @@ export class EmployeeInfoComponent implements OnInit {
       today.getMonth(),
       today.getDate()
     );
+
+    const formControlNames = ['firstName', 'lastName', 'middleName'];
+
+    formControlNames.forEach((controlName) => {
+      this.employeeForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.employeeForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -198,7 +221,7 @@ export class EmployeeInfoComponent implements OnInit {
           //Validators.pattern('^[A-Za-z\\d][A-Za-z\\d _.-]*[A-Za-z\\d]$|^$'),
         ],
       ],
-      dateOfBirth: ['', Validators.required], // [{ value: '', disabled: this.isAgeDisabled }],
+      dateOfBirth: ['', [Validators.required, this.calculateAge()]], // [{ value: '', disabled: this.isAgeDisabled }],
       gender: ['', Validators.required],
       dateOfJoining: ['', Validators.required],
       age: ['', Validators.required],
@@ -263,7 +286,7 @@ export class EmployeeInfoComponent implements OnInit {
 
     // save the image in the back end database
     // and get the photo url
-   // this.photo = 'xxxx';
+    // this.photo = 'xxxx';
     this.photoUpdated.emit(this.photo);
   }
 
@@ -312,9 +335,18 @@ export class EmployeeInfoComponent implements OnInit {
   }
   onSubmit() {
     if (this.employeeForm.valid) {
-      const formData = this.employeeForm.value;
-      this.employeeForm.value.profileImage=this.url;
-      console.log("employeeForm",this.employeeForm.value);
+      const formData = {
+        ...this.employeeForm.value,
+        confirmationDate: moment(this.employeeForm.value.dateOfBirth)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+        resignationDate: moment(this.employeeForm.value.dateOfJoining)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+      };
+
+      this.employeeForm.value.profileImage = this.url;
+      console.log('employeeForm', this.employeeForm.value);
       if (this.actionLabel === 'Save') {
         this.employeeService.createEmployee(formData).subscribe(
           (response: Employees) => {
@@ -354,12 +386,11 @@ export class EmployeeInfoComponent implements OnInit {
       .subscribe((response: Employees) => {
         this.employeeForm.patchValue(response);
         this.url = response.profileImage;
-         //this.photo =this.url; 
-         if(this.url !=undefined){
-       //  const filepath=tst.split('/').pop()[0];
+        //this.photo =this.url;
+        if (this.url != undefined) {
+          //  const filepath=tst.split('/').pop()[0];
         }
-      //   console.log("filename",filename);
-
+        //   console.log("filename",filename);
       });
   }
 
@@ -370,21 +401,29 @@ export class EmployeeInfoComponent implements OnInit {
         console.log('received response', res);
         this.url = res['message'];
         this.photo = res['file'];
-        console.log("photo",this.photo);
+        console.log('photo', this.photo);
       });
     }
   }
-  calculateAge(event: any) {
-    console.log(event.value);
-    this.selectedDate = event.value;
-    if (this.selectedDate) {
-      const today = new Date();
-      const birthDate = new Date(this.selectedDate);
-      const ageTimeSpan = today.getTime() - birthDate.getTime();
-      this.age = Math.floor(ageTimeSpan / (1000 * 60 * 60 * 24 * 365.25));
-      this.employeeForm?.get('age')?.setValue(this.age);
-      this.isAgeDisabled = true;
-      console.log(this.isAgeDisabled);
-    }
+
+  calculateAge(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      this.selectedDate = control.value as Date;
+      debugger;
+      if (this.selectedDate) {
+        const today = new Date();
+        const birthDate = new Date(this.selectedDate);
+        const ageTimeSpan = today.getTime() - birthDate.getTime();
+        this.age = Math.floor(ageTimeSpan / (1000 * 60 * 60 * 24 * 365.25));
+        if (this.age <= 18) {
+          this.employeeForm?.get('age')?.setValue('');
+          return { ageLessThan18: true };
+        }
+        this.employeeForm?.get('age')?.setValue(this.age);
+        this.isAgeDisabled = true;
+        console.log(this.isAgeDisabled);
+      }
+      return null;
+    };
   }
 }

@@ -8,18 +8,13 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-
 import { CustomValidators } from '../../../services/custom-validators.service';
-
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import { JoiningDetails } from '../../../models/joining-details.model';
-
 import { JoiningDetailsService } from '../../../services/joining-details.service';
-
 import { EmployeeService } from '../../../services/employee.service';
-
 import { Employees } from '../../../models/employee.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-joining-details',
@@ -95,22 +90,16 @@ export class JoiningDetailsComponent implements OnInit {
       noticePeriod: [
         '',
         [
-          Validators.required,
-          CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
-          CustomValidators.noTrailingSpace(),
           CustomValidators.noticePeriodMaxLength(2),
           CustomValidators.validNoticePeriod(),
+          Validators.required,
         ],
       ],
 
       resignationDate: [
         '',
         [
-          Validators.required,
-
           CustomValidators.validResignationDate(currentDate),
-
           CustomValidators.futureDate(),
         ],
       ],
@@ -118,10 +107,7 @@ export class JoiningDetailsComponent implements OnInit {
       relievingDate: [
         '',
         [
-          Validators.required,
-
           CustomValidators.validRelievingDate(currentDate),
-
           CustomValidators.futureDate(),
         ],
       ],
@@ -198,7 +184,22 @@ export class JoiningDetailsComponent implements OnInit {
 
   onSubmit() {
     if (this.joiningForm.valid) {
-      const formData: JoiningDetails = this.joiningForm.value;
+      const formData = {
+        ...this.joiningForm.value,
+        confirmationDate: moment(this.joiningForm.value.confirmationDate)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+        resignationDate: this.joiningForm.value.resignationDate
+          ? moment(this.joiningForm.value.resignationDate)
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
+          : null, // Replace with your desired invalid date format
+        relievingDate: this.joiningForm.value.relievingDate
+          ? moment(this.joiningForm.value.relievingDate)
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
+          : null // Replace with your desired invalid date format
+      };
 
       if (this.actionLabel === 'Save') {
         this.joiningDetailsService

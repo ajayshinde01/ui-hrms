@@ -1,7 +1,10 @@
+<div class="formHeader">
+  <h2>EMPLOYEE INFO</h2>
+</div>
+
 <form [formGroup]="employeeForm">
   <div class="scroll-container">
     <!-- !! Employee Info !!-->
-
     <div class="row mb-2 mt-4">
       <div class="col-lg-4">
         <div class="profile-title">
@@ -56,13 +59,12 @@
       </div>
 
       <div class="col-lg-4">
-        <mat-label>Employee code</mat-label>
+        <mat-label>Employee Code<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline">
           <input
             matInput
             formControlName="employeeCode"
-            placeholder="AVI-001"
             oninput="this.value = this.value.toUpperCase()"
           />
 
@@ -73,7 +75,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-label>Middle Name</mat-label>
+        <mat-label>Middle Name<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline">
           <input matInput formControlName="middleName" />
@@ -87,37 +89,34 @@
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         </mat-form-field>
 
-        <mat-label>Date Of Birthday</mat-label>
-
+        <mat-label>Birth Date<span style="color: red">*</span></mat-label>
         <mat-form-field appearance="outline" class="">
           <input
             matInput
             formControlName="dateOfBirth"
-            [matDatepicker]="picker"
-            placeholder="Choose a date"
-            [max]="maxDob"
-            [min]="minDob"
-            (dateChange)="calculateAge($event)"
+            [matDatepicker]="birthDatePicker"
+            placeholder="DD/MM/YYYY"
             readonly
           />
-
           <mat-datepicker-toggle
             matSuffix
-            [for]="picker"
+            [for]="birthDatePicker"
           ></mat-datepicker-toggle>
-
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #birthDatePicker></mat-datepicker>
+          <mat-error *ngIf="isControlInvalid('dateOfBirth')">
+            {{ getErrorMessage("dateOfBirth") }}
+          </mat-error>
         </mat-form-field>
       </div>
 
       <div class="col-lg-4">
         <div class="row">
           <div class="col-lg-3">
-            <mat-label>Title</mat-label>
+            <mat-label>Title<span style="color: red">*</span></mat-label>
 
             <mat-form-field appearance="outline" color="primary">
               <mat-select formControlName="title" placeholder="Select">
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
 
                 <mat-option *ngFor="let title of titles" [value]="title.code">{{
                   title.value
@@ -127,7 +126,7 @@
           </div>
 
           <div class="col-lg-9">
-            <mat-label>First Name</mat-label>
+            <mat-label>First Name<span style="color: red">*</span></mat-label>
 
             <mat-form-field appearance="outline">
               <input matInput formControlName="firstName" />
@@ -143,7 +142,7 @@
           </div>
         </div>
 
-        <mat-label>Last Name</mat-label>
+        <mat-label>Last Name<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline">
           <input matInput formControlName="lastName" />
@@ -155,7 +154,7 @@
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
         </mat-form-field>
 
-        <mat-label>Age</mat-label>
+        <mat-label>Age<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline">
           <input matInput formControlName="age" readonly />
@@ -167,7 +166,7 @@
 
     <div class="row mm">
       <div class="col-lg-4">
-        <mat-label>Email</mat-label>
+        <mat-label>Email<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline" color="primary">
           <input type="email" matInput formControlName="email" />
@@ -179,7 +178,7 @@
       </div>
 
       <div class="col-lg-4">
-        <mat-label>Mobile Number</mat-label>
+        <mat-label>Mobile Number<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline" class="">
           <input matInput formControlName="mobile" />
@@ -205,11 +204,11 @@
 
     <div class="row mm">
       <div class="col-lg-4">
-        <mat-label>Gender</mat-label>
+        <mat-label>Gender<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="gender" placeholder="Select">
-            <mat-option>Select</mat-option>
+            <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option *ngFor="let gender of genders" [value]="gender.code">{{
               gender.value
@@ -223,15 +222,14 @@
       </div>
 
       <div class="col-lg-4">
-        <mat-label>Date Of Joining</mat-label>
+        <mat-label>Date Of Joining<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline" class="">
           <input
             matInput
             formControlName="dateOfJoining"
-            s
             [matDatepicker]="picker1"
-            placeholder="Choose a date"
+            placeholder="DD/MM/YYYY"
             readonly
           />
 
@@ -249,11 +247,11 @@
       </div>
 
       <div class="col-lg-4" formGroupName="division">
-        <mat-label>Division</mat-label>
+        <mat-label>Division<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="id" placeholder="Select">
-            <mat-option>Select</mat-option>
+            <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option
               *ngFor="let division of divisions"
@@ -272,11 +270,11 @@
 
     <div class="row mm">
       <div class="col-lg-4">
-        <mat-label>Status</mat-label>
+        <mat-label>Status<span style="color: red">*</span></mat-label>
 
         <mat-form-field appearance="outline" color="primary">
           <mat-select formControlName="status" placeholder="Select">
-            <mat-option>Select</mat-option>
+            <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option *ngFor="let status of status" [value]="status.code">{{
               status.value

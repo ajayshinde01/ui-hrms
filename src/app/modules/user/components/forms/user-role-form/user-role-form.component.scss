@@ -49,7 +49,7 @@
 }
 
 .field-one {
-  margin-top: 3px;
+  margin-top: 1px;
 }
 .profile-save-btn {
   cursor: pointer;
@@ -97,6 +97,7 @@
   height: 85px;
   width: 255px;
   resize: none;
+  border-radius: 5px;
 }
 
 .validate-text {
@@ -107,13 +108,6 @@
   left: -15px;
 }
 
-.validate-text-area {
-  font-size: 9px;
-  text-align: left;
-  color: red;
-  position: relative;
-}
-
 .example-form {
   min-width: 150px;
   max-width: 500px;
@@ -122,4 +116,21 @@
 
 .example-full-width {
   width: 100%;
+}
+
+:host::ng-deep.mat-mdc-form-field.textarea-outline {
+  height: 100px;
+}
+
+.validate-text-description {
+  font-size: 9px;
+  text-align: left;
+  color: red;
+  position: relative;
+  left: -15px;
+  bottom: -20px;
+}
+
+mat-label {
+  font-weight: 550;
 }

@@ -1,10 +1,12 @@
 <form [formGroup]="emergencyContactForm">
-  <div class="container" style="width: 490px; height: 390px">
+  <div class="container" style="width: 490px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-between">
-            <h2 class="title" mat-dialog-title>Emergency Contact</h2>
+            <h2 class="title" mat-dialog-title>
+              Emergency Contact
+            </h2>
             <button class="close-btn" (click)="Close(false)">
               <i style="font-size: 12px" class="fa">&#xf00d;</i>
             </button>
@@ -16,7 +18,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Emergency Contact Name</mat-label>
+          <mat-label>Emergency Contact Name<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -34,7 +36,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Emergency Contact Number</mat-label>
+          <mat-label>Emergency Contact Number<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -73,19 +75,11 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="save-btn"
-                  (click)="onSubmit()"
-                  [disabled]="!emergencyContactForm.valid"
-                >
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
+                  [disabled]="!emergencyContactForm.valid">
                   {{ actionLabel }}
                 </button>
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="profile-save-btn dark"
-                  (click)="resetForm()"
-                >
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
                   Reset
                 </button>
               </div>

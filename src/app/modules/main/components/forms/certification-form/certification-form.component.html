@@ -1,5 +1,5 @@
 <form [formGroup]="certificationsForm">
-  <div class="container" style="width: 490px; height: 390px">
+  <div class="container" style="width: 490px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -16,13 +16,16 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Certification</mat-label>
+          <mat-label>Certification<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="certification" />
+              <input matInput formControlName="certification" />
             </div>
+            <mat-error *ngIf="isControlInvalid('certification')">
+              {{ getErrorMessage("certification") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -31,13 +34,16 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label>Issued By</mat-label>
+          <mat-label>Issued By<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="issuedBy" />
+              <input matInput formControlName="issuedBy" />
             </div>
+            <mat-error *ngIf="isControlInvalid('issuedBy')">
+              {{ getErrorMessage("issuedBy") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -46,7 +52,9 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Date Of Certification</mat-label>
+          <mat-label
+            >Date Of Certification<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
@@ -61,6 +69,9 @@
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="isControlInvalid('dateOfCertification')">
+              {{ getErrorMessage("dateOfCertification") }}
+            </mat-error>
           </mat-form-field>
         </div>
       </div>

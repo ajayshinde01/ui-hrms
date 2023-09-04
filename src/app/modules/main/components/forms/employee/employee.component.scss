@@ -1,4 +1,4 @@
-::ng-deep .mat-mdc-tab-body-content {
+:host::ng-deep .mat-mdc-tab-body-content {
   overflow: hidden !important;
 }
 
@@ -92,7 +92,7 @@ img {
 }
 
 .employee-form-div {
-  height: 90vh;
+  height: 84vh;
   overflow: auto;
   max-height: fit-content;
   /* display: flex;
@@ -182,4 +182,8 @@ img {
 .go-back {
   background-color: #534686;
   border-color: #534686;
+}
+
+mat-label {
+  font-weight: 550;
 }

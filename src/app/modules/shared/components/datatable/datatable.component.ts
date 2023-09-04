@@ -34,7 +34,7 @@ import { DeletePopupComponent } from '../../delete-popup/delete-popup.component'
 export class DatatableComponent implements OnInit, OnChanges {
   @Input() dataSource!: Array<Object>;
 
-  @Input() buttonVisible: Array<boolean> = [false, false, false]
+  @Input() buttonVisible: Array<boolean> = [false, false, false];
 
   @Input() headers!: Array<ColumnsMetadata>;
 
@@ -66,10 +66,14 @@ export class DatatableComponent implements OnInit, OnChanges {
 
   pagination: Pagination = { pageSize: 10, pageNumber: 0 };
 
-  constructor(private dataTableService: DataTableService, private dialog: MatDialog) { }
+  constructor(
+    private dataTableService: DataTableService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setPagination();
+    this.selectedValue = '';
   }
 
   ngOnInit(): void {
@@ -131,7 +135,12 @@ export class DatatableComponent implements OnInit, OnChanges {
         break;
 
       case 'edit':
-        data.data = this.selectedValue;
+        if (this.selectedValue != '') {
+          data.data = this.selectedValue;
+        } else {
+          this.dataTableService.notify('Please select record to edit');
+          break;
+        }
         if (data.data == undefined)
           this.dataTableService.notify('Please select record to edit');
         return this.buttonFunction.emit(data);
@@ -145,7 +154,12 @@ export class DatatableComponent implements OnInit, OnChanges {
         break;
 
       case 'delete':
-        data.data = this.selectedValue;
+        if (this.selectedValue != '') {
+          data.data = this.selectedValue;
+        } else {
+          this.dataTableService.notify('Please select record to delete');
+          break;
+        }
         if (data.data == undefined)
           this.dataTableService.notify('Please select record to delete');
         if (data.data != undefined) {
@@ -159,14 +173,13 @@ export class DatatableComponent implements OnInit, OnChanges {
   handleDialog() {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '450px',
-      panelClass: 'custom-dialog'
-
+      panelClass: 'custom-dialog',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log('User clicked Yes');
-        this.delete()
+        this.delete();
       } else {
         console.log('User clicked No');
         // Perform the action you want after user clicks No or cancels the dialog

@@ -1,5 +1,5 @@
 <form [formGroup]="educationalDetailsForm">
-  <div class="container" style="width: 490px; height: auto">
+  <div class="container" style="width: 630px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -16,16 +16,16 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Educational Qualification</mat-label>
+          <mat-label
+            >Educational Qualification<span style="color: red"
+              >*</span
+            ></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input
-                matInput
-                placeholder=""
-                formControlName="educationalQualification"
-              />
+              <input matInput formControlName="educationalQualification" />
             </div>
             <mat-error *ngIf="isControlInvalid('educationalQualification')">
               {{ getErrorMessage("educationalQualification") }}
@@ -38,7 +38,9 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Qualification Level</mat-label>
+          <mat-label
+            >Qualification Level<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -47,7 +49,7 @@
                 formControlName="qualificationLevel"
                 placeholder="Select"
               >
-                <mat-option>Select</mat-option>
+                <mat-option [disabled]="true">Select</mat-option>
                 <mat-option
                   *ngFor="let qualificationLevel of qualificationLevels"
                   [value]="qualificationLevel.code"
@@ -66,12 +68,14 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label>School/University</mat-label>
+          <mat-label
+            >School/University<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="instituteName" />
+              <input matInput formControlName="instituteName" />
             </div>
             <mat-error *ngIf="isControlInvalid('instituteName')">
               {{ getErrorMessage("instituteName") }}
@@ -84,7 +88,9 @@
     <div class="form-group form-field">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Year Of Passing</mat-label>
+          <mat-label
+            >Year Of Passing<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">

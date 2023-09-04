@@ -6,6 +6,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EducationalQualification } from '../../../models/educational-qualification.model';
 import { CommonMaster } from '../../../models/common-master.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
+import * as moment from 'moment';
+import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first-letter-capital.service';
 
 @Component({
   selector: 'app-educational-qualification-form',
@@ -27,6 +29,7 @@ export class EducationalQualificationFormComponent implements OnInit {
     private educationalQualificationService: EducationalQualificationService,
     private router: Router,
     private route: ActivatedRoute,
+    private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -34,6 +37,20 @@ export class EducationalQualificationFormComponent implements OnInit {
     this.initForm();
     this.collectQueryParams();
     this.getEducationalQualifications();
+    const formControlNames = ['instituteName'];
+
+    formControlNames.forEach((controlName) => {
+      this.educationalDetailsForm
+        .get(controlName)
+        ?.valueChanges.subscribe((value: string) => {
+          if (value.length > 0) {
+            const newValue = this.capitalService.capitalizeFirstLetter(value);
+            this.educationalDetailsForm
+              .get(controlName)
+              ?.setValue(newValue, { emitEvent: false });
+          }
+        });
+    });
   }
   getEducationalQualifications() {
     this.educationalQualificationService
@@ -60,8 +77,8 @@ export class EducationalQualificationFormComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.whitespaceValidator(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(50),
-          Validators.pattern('^[a-zA-Z.-]{1,50}$'),
+          CustomValidators.educationalQualificationMaxLength(50),
+          Validators.pattern('^[A-Za-z\\s.-]{1,50}'),
         ],
       ],
       qualificationLevel: ['', Validators.required],
@@ -71,8 +88,8 @@ export class EducationalQualificationFormComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(100),
-          Validators.pattern('^[a-zA-Z.-]{1,100}$'),
+          CustomValidators.instituteNameMaxLength(100),
+          Validators.pattern('^[A-Za-z\\s.-]{1,100}'),
         ],
       ],
       passingYear: ['', Validators.required],
@@ -86,7 +103,12 @@ export class EducationalQualificationFormComponent implements OnInit {
 
   onSubmit() {
     if (this.educationalDetailsForm.valid) {
-      const formData = this.educationalDetailsForm.value;
+      const formData = {
+        ...this.educationalDetailsForm.value,
+        confirmationDate: moment(this.educationalDetailsForm.value.passingYear)
+          .utcOffset(0, true)
+          .format('YYYY-MM-DD'),
+      };
 
       if (this.actionLabel === 'Save') {
         this.educationalQualificationService
