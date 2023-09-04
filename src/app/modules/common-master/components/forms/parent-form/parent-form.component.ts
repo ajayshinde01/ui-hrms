@@ -46,6 +46,7 @@ export class ParentFormComponent {
   queryParams?: Params;
   isEdit: boolean = false;
   errorMessage: string = '';
+  dataTableHeight = '1';
   private queryParamsSubscription: Subscription;
 
   isDisabled: boolean = false;
@@ -236,8 +237,7 @@ export class ParentFormComponent {
       this.parentForm.patchValue(response);
       this.parent = response;
       this.parent.masterName = response.masterName;
-      console.log('Master Name', this.parent.masterName);
-      console.log(this.parent);
+
       this.searchFunction(this.params);
     });
   }

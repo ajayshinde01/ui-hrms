@@ -1,5 +1,5 @@
 <form [formGroup]="emergencyContactForm">
-  <div class="container" style="width: 490px; height: auto">
+  <div class="container" style="width: 500px; height: auto">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -16,18 +16,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label
-            >Emergency Contact Name<span style="color: red">*</span></mat-label
-          >
+          <mat-label>Emergency Contact Name<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <input matInput formControlName="emergencyContactName" />
-              <mat-error
-                *ngIf="isControlInvalid('emergencyContactName')"
-                class="validate-text"
-              >
+              <mat-error *ngIf="isControlInvalid('emergencyContactName')" class="validate-text">
                 {{ getErrorMessage("emergencyContactName") }}
               </mat-error>
             </div>
@@ -39,20 +34,13 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label
-            >Emergency Contact Number<span style="color: red"
-              >*</span
-            ></mat-label
-          >
+          <mat-label>Emergency Contact Number<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <input matInput formControlName="emergencyContactNumber" />
-              <mat-error
-                *ngIf="isControlInvalid('emergencyContactNumber')"
-                class="validate-text"
-              >
+              <mat-error *ngIf="isControlInvalid('emergencyContactNumber')" class="validate-text">
                 {{ getErrorMessage("emergencyContactNumber") }}
               </mat-error>
             </div>
@@ -71,10 +59,7 @@
             <div class="form-controls">
               <input matInput formControlName="relation" />
             </div>
-            <mat-error
-              *ngIf="isControlInvalid('relation')"
-              class="validate-text"
-            >
+            <mat-error *ngIf="isControlInvalid('relation')" class="validate-text">
               {{ getErrorMessage("relation") }}
             </mat-error>
           </mat-form-field>
@@ -87,20 +72,12 @@
         <div class="container">
           <div class="row">
             <div class="col">
-              <div class="d-flex justify-content-end">
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="save-btn"
-                  (click)="onSubmit()"
-                  [disabled]="!emergencyContactForm.valid"
-                >
+              <div class="d-flex justify-content-end save-reset-button-container">
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
+                  [disabled]="!emergencyContactForm.valid">
                   {{ actionLabel }}
                 </button>
-                <button
-                  _ngcontent-ng-c812429062=""
-                  class="profile-save-btn dark"
-                  (click)="resetForm()"
-                >
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
                   Reset
                 </button>
               </div>

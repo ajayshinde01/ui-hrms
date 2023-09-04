@@ -5,7 +5,7 @@
         <div class="col-lg-8">
           <div class="card">
             <div class="title-container">
-              <h2 class="card-title"><b>COMMON MASTER</b></h2>
+              <h2 class="card-title">COMMON MASTER</h2>
               <button class="btn btn-warrning go-back" (click)="goBack()">
                 Back
               </button>
@@ -144,7 +144,10 @@
                 <div class="col-lg-6">
                   <div class="row">
                     <div class="col-lg-3">
-                      <mat-label class="dd">Master Name</mat-label>
+                      <mat-label class="dd"
+                        >Master Name
+                        <span style="color: red">*</span></mat-label
+                      >
                     </div>
                     <div class="col-lg-9">
                       <mat-form-field appearance="outline" color="primary">
@@ -211,7 +214,9 @@
                 <div class="col-lg-6">
                   <div class="row">
                     <div class="col-lg-3">
-                      <mat-label class="dd">Value</mat-label>
+                      <mat-label class="dd"
+                        >Value <span style="color: red">*</span></mat-label
+                      >
                     </div>
                     <div class="col-lg-9">
                       <mat-form-field appearance="outline" color="primary">
@@ -361,10 +366,12 @@
                 Reset
               </button>
             </div>
+            <hr *ngIf="isEdit" />
 
             <app-datatable
               *ngIf="isEdit"
               [buttonVisible]="buttonVisible"
+              [dataTableHeight]="dataTableHeight"
               [dataSource]="childMetaData.content"
               [headers]="childHeaders.columnsMetadata"
               [totalRecord]="childMetaData.totalElements"

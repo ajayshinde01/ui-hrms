@@ -1,3 +1,7 @@
+.save-reset-button-container{
+  padding-right: 15px;
+}
+
 .col-md-4 mt-2 {
   margin-right: 50px;
 }
@@ -30,7 +34,7 @@
   width: 25px;
   height: 20px;
   font-size: 8px;
-  margin-top: 8%;
+  margin-top: 6%;
   border-radius: 7px;
   border: none;
   margin-right: -30px;
@@ -52,8 +56,8 @@
 }
 .justify-content-end {
   justify-content: flex-end !important;
-  width: 99%;
   margin-top: -30px;
+  margin-bottom: 2%;
 }
 .action-btn {
   margin: 3px;
@@ -81,7 +85,7 @@
   cursor: pointer;
   background-color: #534686;
   color: white;
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 .dark {

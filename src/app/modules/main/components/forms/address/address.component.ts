@@ -80,7 +80,7 @@ export class AddressComponent implements OnInit {
     private route: ActivatedRoute,
 
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -112,6 +112,7 @@ export class AddressComponent implements OnInit {
         [
           Validators.required,
 
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.noTrailingSpace(),
@@ -126,12 +127,10 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.noTrailingSpace(),
-
           CustomValidators.maxLength(100),
-
           Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
         ],
       ],
@@ -139,7 +138,11 @@ export class AddressComponent implements OnInit {
       landmark: [
         '',
 
-        [CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
+        [
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+        ],
       ],
 
       tenureYear: [
@@ -158,8 +161,6 @@ export class AddressComponent implements OnInit {
         '',
 
         [
-          CustomValidators.noLeadingSpace(),
-
           CustomValidators.whitespaceValidator(),
 
           CustomValidators.noTrailingSpace(),
@@ -181,7 +182,7 @@ export class AddressComponent implements OnInit {
 
         [
           Validators.required,
-
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.whitespaceValidator(),
@@ -196,7 +197,7 @@ export class AddressComponent implements OnInit {
 
       ownershipStatus: ['', [Validators.required]],
 
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 
@@ -216,6 +217,7 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.noTrailingSpace(),
@@ -230,6 +232,7 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.noTrailingSpace(),
@@ -250,6 +253,9 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
 
           CustomValidators.maxLength(2),
@@ -262,6 +268,9 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
 
           CustomValidators.maxLength(2),
@@ -280,6 +289,7 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.whitespaceValidator(),
@@ -294,7 +304,7 @@ export class AddressComponent implements OnInit {
 
       ownershipStatus: [''],
 
-      orgCode: ['AVI-IND'],
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 
@@ -405,7 +415,7 @@ export class AddressComponent implements OnInit {
 
           .subscribe(
             (response: Address[]) => {
-              this.addressService.notify('Save Successfully...');
+              this.addressService.notify('Address added successfully');
 
               this.actionLabel = 'Update';
 
@@ -420,7 +430,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Please fill address details');
+                this.addressService.warn('Address already present');
               }
             }
           );
@@ -433,7 +443,7 @@ export class AddressComponent implements OnInit {
 
           .subscribe(
             (response: Address[]) => {
-              this.addressService.notify('Update Successfully...');
+              this.addressService.notify('Address updated successfully');
 
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
@@ -442,7 +452,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Please fill valid address details');
+                this.addressService.warn('Address already present');
               }
             }
           );
@@ -494,6 +504,24 @@ export class AddressComponent implements OnInit {
 
   getErrorMessage(controlName: string): string {
     const control = this.permanentAddressForm.get(controlName);
+
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+
+    return '';
+  }
+
+  isControlInvalidCorrespondenceAddress(controlName: string): boolean {
+    const control = this.correspondenceAddressForm.get(controlName);
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessageCorrespondenceAddress(controlName: string): string {
+    const control = this.correspondenceAddressForm.get(controlName);
 
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];

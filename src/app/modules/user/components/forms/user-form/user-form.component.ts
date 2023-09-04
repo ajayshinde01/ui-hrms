@@ -222,7 +222,7 @@ export class UserFormComponent {
           (response: User) => {
             console.log('POST-USER Request successful', response);
             this.router.navigate(['/user/user-table']);
-            this.userService.notify('User Added successfully..!');
+            this.userService.notify('User added successfully');
             this.Close(true);
           },
           (error: any) => {
@@ -237,7 +237,7 @@ export class UserFormComponent {
         this.userService.updateUser(formData).subscribe(
           (response: User) => {
             console.log('PUT-USER Request successful', response);
-            this.userService.notify('User Updated successfully..!');
+            this.userService.notify('User updated successfully');
             this.router.navigate(['/user/user-table']);
             this.Close(true);
           },

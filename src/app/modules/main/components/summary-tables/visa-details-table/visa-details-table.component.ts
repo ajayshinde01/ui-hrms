@@ -20,7 +20,7 @@ export class VisaDetailsTableComponent implements OnInit {
   emp_id: any;
   masterName: string = 'Visa Details';
   visa_id: any;
-  visaDetailsHeaders: any;
+  visaDetailsHeaders: any = '';
   visaDetailsMetaData: {
     content: Array<Visa>;
     totalElements: number;
@@ -50,7 +50,6 @@ export class VisaDetailsTableComponent implements OnInit {
     this.employeeService.getEmployeeVisaHeaders().subscribe(
       (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
         this.visaDetailsHeaders = response;
-        console.log(this.visaDetailsHeaders);
       },
       (error: any) => {
         console.error('GET Request failed', error);
@@ -67,9 +66,7 @@ export class VisaDetailsTableComponent implements OnInit {
       case 'delete':
         this.employeeService.deleteEmployeeVisa(id, this.emp_id).subscribe(
           (response: ApiResponse) => {
-            this.employeeService.notify(
-              'Employee visa details Deleted successfully..!'
-            );
+            this.employeeService.notify('Visa Details deleted successfully');
             const currentPage = Number(this.params.get('page'));
             if (
               this.visaDetailsMetaData.content.length === 1 &&

@@ -69,7 +69,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     this.employeeVisaDetailsForm = this.formBuilder.group({
       id: [''],
       countryCode: ['', Validators.required],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       visaNumber: [
         '',
         [
@@ -152,18 +152,25 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       this.files = event.target.files[0];
       console.log(this.files);
       const file = event.target.files[0];
-      if (file.size > 2e6) {
+      if (file.size > 1e6) {
         this.fileSizeError = 'File is too large should not exceed Over 1MB';
       } else {
         this.fileSizeError = '';
       }
       if (file) {
-        this.fileUploadService.uploadImage(file).subscribe((res) => {
-          console.log('Received response', res);
-          this.url = res['message'];
-          this.file_name = res['message'];
-          this.viewFile = res['message'];
-        });
+        this.fileUploadService.uploadImage(file).subscribe(
+          (res) => {
+            console.log('Received response', res);
+            this.url = res['message'];
+            this.file_name = res['message'];
+            this.viewFile = res['message'];
+          },
+          (error: any) => {
+            if (error.status == 400 || error.status == 404) {
+              this.fileUploadService.warn(error.error.message);
+            }
+          }
+        );
       }
     }
   }
@@ -175,12 +182,12 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.employeeService.AddVisaDetails(formData, this.emp_id).subscribe(
           (response: Visa) => {
-            this.employeeService.notify('Data Saved Successfully...');
+            this.employeeService.notify('Visa Details added successfully');
             this.Close(true);
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Credentials already present');
+              this.employeeService.warn('Visa Details already present');
             }
           }
         );
@@ -190,12 +197,12 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           .updateEmployeevisa(formData, this.emp_id)
           .subscribe(
             (response: Visa) => {
-              this.employeeService.notify('Update Successfully...');
+              this.employeeService.notify('Visa Details updated successfully');
               this.Close(true);
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn(error.error.message);
+                this.employeeService.warn('Visa Details already present');
               }
             }
           );

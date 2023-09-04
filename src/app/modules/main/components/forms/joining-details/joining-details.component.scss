@@ -3,6 +3,10 @@
   border: #534686;
 }
 
+::ng-deep .mat-mdc-button-touch-target:focus {
+ background-color: red!important;
+}
+
 mat-label {
   font-weight: 550;
 }
@@ -24,4 +28,8 @@ mat-label {
   color: red;
   position: relative; /* Or absolute or fixed depending on your layout */
   left: -15px;
+}
+
+.head-name {
+  color: #534686;
 }

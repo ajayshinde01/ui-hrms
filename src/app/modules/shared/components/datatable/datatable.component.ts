@@ -34,6 +34,8 @@ import { DeletePopupComponent } from '../../delete-popup/delete-popup.component'
 export class DatatableComponent implements OnInit, OnChanges {
   @Input() dataSource!: Array<Object>;
 
+  @Input() dataTableHeight = '';
+
   @Input() buttonVisible: Array<boolean> = [false, false, false];
 
   @Input() headers!: Array<ColumnsMetadata>;
@@ -69,7 +71,7 @@ export class DatatableComponent implements OnInit, OnChanges {
   constructor(
     private dataTableService: DataTableService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setPagination();
@@ -90,6 +92,9 @@ export class DatatableComponent implements OnInit, OnChanges {
     this.cardHeights = window.innerHeight;
 
     this.cardDivHeight = this.cardHeights - 101;
+    if (this.dataTableHeight) {
+      this.cardDivHeight = this.cardHeights - 430;
+    }
   }
 
   getValue(rowObj: any, mappedBy: String) {
@@ -213,18 +218,15 @@ export class DatatableComponent implements OnInit, OnChanges {
 
     this.pagination.sortKey
       ? (params = params.append(
-        'sort',
+          'sort',
 
-        `${this.pagination.sortKey},${this.pagination.sortType}`
-      ))
+          `${this.pagination.sortKey},${this.pagination.sortType}`
+        ))
       : true;
 
     this.pagination.serchingParmeter
       ? (params = params.append('keyword', this.pagination.serchingParmeter!))
       : true;
-
-    console.log(params);
-
     this.paginationParams.emit(params);
   }
 

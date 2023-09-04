@@ -97,7 +97,7 @@ export class EducationalQualificationFormComponent implements OnInit {
         ],
       ],
       passingYear: ['', Validators.required],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
@@ -122,7 +122,7 @@ export class EducationalQualificationFormComponent implements OnInit {
               console.log('POST-SCOPE Request successful', response);
               // this.router.navigate(['/main/educational-qualification']);
               this.educationalQualificationService.notify(
-                'Educational Qualification Added Successfully..!'
+                'Educational Qualification added successfully'
               );
               this.Close(true);
             },
@@ -130,7 +130,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
                 this.educationalQualificationService.warn(
-                  'Educational Qualification Already Present'
+                  'Educational Qualification already present'
                 );
               }
 
@@ -146,7 +146,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             (response: EducationalQualification) => {
               console.log('PUT-SCOPE Request successful', response);
               this.educationalQualificationService.notify(
-                'Educational Qualification added successfully..!'
+                'Educational Qualification updated successfully'
               );
               // this.router.navigate(['/main/educational-qualification']);
               this.Close(true);
@@ -154,7 +154,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             (error: any) => {
               if (error.status == 404) {
                 this.educationalQualificationService.warn(
-                  'Scope already present'
+                  'Educational Qualification already present'
                 );
               }
 

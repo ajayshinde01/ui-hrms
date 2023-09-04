@@ -75,7 +75,7 @@ export class JoiningDetailsComponent implements OnInit {
     const currentDate = new Date();
 
     this.joiningForm = this.formBuilder.group({
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 
@@ -132,12 +132,8 @@ export class JoiningDetailsComponent implements OnInit {
   getNgModuleById(id: number) {
     this.joiningDetailsService.getByEmployeeId(id).subscribe(
       (response: JoiningDetails) => {
-        console.log(response);
-
         this.joiningForm.patchValue(response, { emitEvent: false });
-
         this.response = response.id;
-
         this.actionLabel = 'Update';
       },
 
@@ -149,14 +145,8 @@ export class JoiningDetailsComponent implements OnInit {
 
   checkMonthValidation(seletedDate: Date): boolean {
     if (this.joinDate != undefined) {
-      console.log(seletedDate);
-
       const sixMonthsLater = new Date(this.joinDate.toString());
-
       sixMonthsLater.setMonth(sixMonthsLater.getMonth() + 6);
-
-      console.log(sixMonthsLater);
-
       if (seletedDate < sixMonthsLater) {
         return true;
       }
@@ -207,7 +197,9 @@ export class JoiningDetailsComponent implements OnInit {
           .createJoiningDetails(this.queryParams.id, formData)
           .subscribe(
             (response: JoiningDetails) => {
-              this.joiningDetailsService.notify('Data Saved Successfully...');
+              this.joiningDetailsService.notify(
+                'Joining Details added successfully'
+              );
 
               this.actionLabel = 'Update';
 
@@ -220,7 +212,9 @@ export class JoiningDetailsComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.joiningDetailsService.warn('Credentials already present');
+                this.joiningDetailsService.warn(
+                  'Joining Details already present'
+                );
               }
             }
           );
@@ -234,7 +228,9 @@ export class JoiningDetailsComponent implements OnInit {
           .updateJoiningDetails(this.queryParams.id, formData)
           .subscribe(
             (response: JoiningDetails) => {
-              this.joiningDetailsService.notify('Data Saved Successfully...');
+              this.joiningDetailsService.notify(
+                'Joining Details updated successfully'
+              );
 
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
@@ -243,7 +239,9 @@ export class JoiningDetailsComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.joiningDetailsService.warn('Credentials already present');
+                this.joiningDetailsService.warn(
+                  'Joining Details already present'
+                );
               }
             }
           );
