@@ -108,7 +108,7 @@ export class UserRoleFormComponent {
           (response: UserRole) => {
             console.log('POST-ROLE Request successful', response);
             this.router.navigate(['/user/user-role-table']);
-            this.userRoleService.notify('Role Added successfully..!');
+            this.userRoleService.notify('Role added successfully');
             this.Close(true);
           },
           (error: any) => {
@@ -123,7 +123,7 @@ export class UserRoleFormComponent {
         this.userRoleService.updateRole(formData).subscribe(
           (response: UserRole) => {
             console.log('PUT-ROLE Request successful', response);
-            this.userRoleService.notify('Role Updated successfully..!');
+            this.userRoleService.notify('Role updated successfully');
             this.router.navigate(['/user/user-role-table']);
             this.Close(true);
           },
