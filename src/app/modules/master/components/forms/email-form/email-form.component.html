@@ -314,7 +314,7 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()" enctype="multipart/form-data">
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"   [disabled]="!emailForm.valid" enctype="multipart/form-data">
                   {{actionLabel}}
                 </button>
                 <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
