@@ -110,6 +110,7 @@ export class AddressComponent implements OnInit {
         [
           Validators.required,
 
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.noTrailingSpace(),
@@ -124,12 +125,10 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.noTrailingSpace(),
-
           CustomValidators.maxLength(100),
-
           Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
         ],
       ],
@@ -137,7 +136,7 @@ export class AddressComponent implements OnInit {
       landmark: [
         '',
 
-        [CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
+        [ CustomValidators.noLeadingTrailingSpace(),CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
       ],
 
       tenureYear: [
@@ -156,7 +155,6 @@ export class AddressComponent implements OnInit {
         '',
 
         [
-          CustomValidators.noLeadingSpace(),
 
           CustomValidators.whitespaceValidator(),
 
@@ -179,7 +177,7 @@ export class AddressComponent implements OnInit {
 
         [
           Validators.required,
-
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.whitespaceValidator(),
