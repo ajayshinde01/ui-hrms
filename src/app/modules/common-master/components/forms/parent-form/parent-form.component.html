@@ -366,7 +366,7 @@
                 Reset
               </button>
             </div>
-            <hr />
+            <hr *ngIf="isEdit" />
 
             <app-datatable
               *ngIf="isEdit"
