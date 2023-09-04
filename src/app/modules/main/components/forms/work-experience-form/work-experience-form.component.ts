@@ -165,7 +165,7 @@ export class WorkExperienceFormComponent implements OnInit {
 
       updatedAt: [null],
 
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
     });
   }
 
@@ -196,10 +196,12 @@ export class WorkExperienceFormComponent implements OnInit {
               this.closeDialog(true);
             },
             (error: any) => {
-              if (error.status == 400 || error.status == 404) {
-                this.workExperienceService.warn(error.error.message);
-              }
-            });
+              console.error('POST Request failed', error);
+              this.workExperienceService.notify(
+                'Work Experience already present'
+              );
+            }
+          );
       }
 
       if (this.actionLabel === 'Update') {
@@ -219,10 +221,12 @@ export class WorkExperienceFormComponent implements OnInit {
               this.closeDialog(true);
             },
             (error: any) => {
-              if (error.status == 400 || error.status == 404) {
-                this.workExperienceService.warn(error.error.message);
-              }
-            });
+              console.error('PUT Request failed', error);
+              this.workExperienceService.notify(
+                'Work Experience already present'
+              );
+            }
+          );
       }
     }
   }

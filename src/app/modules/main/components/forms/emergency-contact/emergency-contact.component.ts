@@ -105,7 +105,7 @@ export class EmergencyContactComponent implements OnInit {
           Validators.pattern('[A-Za-z ]+'),
         ],
       ],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
@@ -124,14 +124,14 @@ export class EmergencyContactComponent implements OnInit {
             (response: EmergencyContacts) => {
               console.log('POST-SCOPE Request successful', response);
               this.contactService.notify(
-                'Emergency Contact Added Successfully..!'
+                'Emergency Contact added successfully'
               );
               this.Close(true);
             },
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.contactService.warn('Emergency Contact Already Present');
+                this.contactService.warn('Emergency Contact already present');
               }
 
               console.error('POST Request failed', error);
@@ -145,13 +145,15 @@ export class EmergencyContactComponent implements OnInit {
           .subscribe(
             (response: EmergencyContacts) => {
               console.log('PUT-SCOPE Request successful', response);
-              this.contactService.notify('Emergency Contact successfully..!');
+              this.contactService.notify(
+                'Emergency Contact updated successfully'
+              );
               // this.router.navigate(['/main/educational-qualification']);
               this.Close(true);
             },
             (error: any) => {
               if (error.status == 404) {
-                this.contactService.warn('Scope already present');
+                this.contactService.warn('Emergency Contact already present');
               }
 
               console.error('PUT Request failed', error);

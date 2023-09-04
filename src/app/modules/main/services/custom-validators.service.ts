@@ -382,6 +382,7 @@ export class CustomValidators {
 
   static getErrorMessage(errorKey: string, fieldName: string): string {
     console.log(errorKey);
+    console.log(errorKey);
     const fieldNames: { [key: string]: string } = {
       confirmationDate: 'Confirmation Date',
       mobile: 'Mobile Number',

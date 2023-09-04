@@ -33,3 +33,22 @@
 
   left: -15px;
 }
+
+mat-label {
+  font-weight: 550;
+}
+
+.address-details-save-btn:hover {
+  background-color: #534686;
+  border-color: #534686;
+  transform: scale(1.05);
+}
+
+.main-div {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.head-name {
+  color: #534686;
+}

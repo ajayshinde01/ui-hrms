@@ -73,7 +73,7 @@ export class EmployeeInfoComponent implements OnInit {
     private http: HttpClient,
     private capitalService: FirstLetterCapitalService,
     private dialog: MatDialog
-  ) { }
+  ) {}
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();
@@ -246,7 +246,7 @@ export class EmployeeInfoComponent implements OnInit {
       division: this.formBuilder.group({
         id: ['', Validators.required],
       }),
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       mobile: [
         '',
         [
@@ -398,7 +398,7 @@ export class EmployeeInfoComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.employeeService.createEmployee(formData).subscribe(
           (response: Employees) => {
-            this.employeeService.notify('Data Saved Successfully...');
+            this.employeeService.notify('Employee Info added successfully');
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Save' },
             });
@@ -408,7 +408,7 @@ export class EmployeeInfoComponent implements OnInit {
           (error: any) => {
             console.log('errormessage' + JSON.stringify(error.error.message));
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn(error.error.message);
+              this.employeeService.warn('Employee Info already present');
             }
           }
         );
@@ -416,12 +416,14 @@ export class EmployeeInfoComponent implements OnInit {
       if (this.actionLabel === 'Update') {
         this.employeeService.updateEmployee(formData).subscribe(
           (response: Employees) => {
-            this.employeeService.notify('Update Successfully...');
-            this.router.navigate(['/main/employee-table']);
+            this.employeeService.notify('Employee Info updated successfully');
+            this.router.navigate(['/main/employee-info'], {
+              queryParams: { id: response.id, actionLabel: 'Update' },
+            });
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn(error.error.message);
+              this.employeeService.warn('Employee Info already present');
             }
           }
         );
@@ -432,6 +434,7 @@ export class EmployeeInfoComponent implements OnInit {
     this.employeeService
       .searchEmployeeById(id)
       .subscribe((response: Employees) => {
+        this.isDisabled = true;
         this.employeeForm.patchValue(response);
         this.url = response.profileImage;
         const parts = this.url.split('=');

@@ -35,7 +35,6 @@ export class CertificationFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.initForm();
     this.collectQueryParams();
 
@@ -91,7 +90,7 @@ export class CertificationFormComponent implements OnInit {
         '',
         [Validators.required, CustomValidators.pastDate()],
       ],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
@@ -116,14 +115,14 @@ export class CertificationFormComponent implements OnInit {
           .subscribe(
             (response: Certification) => {
               this.certificationService.notify(
-                'Certification Added Successfully..!'
+                'Certification added successfully'
               );
               this.Close(true);
             },
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.certificationService.warn('Certification Already Present');
+                this.certificationService.warn('Certification already present');
               }
 
               console.error('POST Request failed', error);
@@ -137,7 +136,7 @@ export class CertificationFormComponent implements OnInit {
           .subscribe(
             (response: Certification) => {
               this.certificationService.notify(
-                'Certification added successfully..!'
+                'Certification updated successfully'
               );
               this.Close(true);
             },

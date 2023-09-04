@@ -1,5 +1,5 @@
 <form [formGroup]="organizationForm">
-  <div class="container" style="width: 490px; height: 260px">
+  <div class="container" style="width: 500px; height: 260px">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -16,7 +16,9 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Organization Code </mat-label>
+          <mat-label
+            >Organization Code <span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -86,7 +88,9 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Organization Name</mat-label>
+          <mat-label class="desc-label"
+            >Organization Name<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -159,7 +163,11 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label class="desc-label">Organization Description</mat-label>
+          <mat-label class="desc-label"
+            >Organization Description<span style="color: red"
+              >*</span
+            ></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">

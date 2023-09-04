@@ -71,7 +71,7 @@ export class ScopeTableComponent {
       case 'delete':
         this.scopeService.deleteScope(id).subscribe(
           (response: ApiResponse) => {
-            this.scopeService.notify('Scope Deleted successfully..!');
+            this.scopeService.notify('Scope deleted successfully');
             const currentPage = Number(this.params.get('page'));
             if (this.scopeMetaData.content.length === 1 && currentPage > 0) {
               const newPage = currentPage - 1;
