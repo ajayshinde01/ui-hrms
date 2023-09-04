@@ -38,6 +38,8 @@ export class CompanyDetailsComponent implements OnInit {
   actionLabel: String;
   companyDetailsId: number;
   response: number;
+  orgCode = sessionStorage.getItem('orgCode');
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -165,7 +167,7 @@ export class CompanyDetailsComponent implements OnInit {
         ],
       ],
       shift: ['', Validators.required],
-      orgCode: ['AVI01'],
+      orgCode: { value: this.orgCode },
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

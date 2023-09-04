@@ -36,6 +36,8 @@ export class EmployeePersonalDetailsFormComponent {
   FleSizeError: string;
   url: any;
   file_name: any;
+  orgCode = sessionStorage.getItem('orgCode');
+
   viewPassportFile: any;
   aadhar_url: any;
   passport_file_url: any;
@@ -219,7 +221,7 @@ export class EmployeePersonalDetailsFormComponent {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: 'AVI01',
+      orgCode: { value: this.orgCode },
     });
   }
 

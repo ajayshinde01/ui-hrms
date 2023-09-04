@@ -20,6 +20,8 @@ export class EmergencyContactsTableComponent {
   buttonVisible: Array<boolean> = [true, true, true];
   queryParams?: any;
 
+  masterName: string = 'Emergency Contacts';
+
   matDialogRef: MatDialogRef<EmergencyContactComponent>;
   id: number;
   // contactHeaders: any;

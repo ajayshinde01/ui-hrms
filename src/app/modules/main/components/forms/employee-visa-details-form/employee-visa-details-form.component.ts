@@ -31,6 +31,8 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   @Input() inputFromParent: string;
   employeeVisaDetailsForm!: FormGroup;
   queryParams?: Params;
+  orgCode = sessionStorage.getItem('orgCode');
+
   isDisabled: boolean = false;
   country_codes: CommonMaster[] = [];
   actionLabel: string = 'Save';
@@ -67,7 +69,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     this.employeeVisaDetailsForm = this.formBuilder.group({
       id: [''],
       countryCode: ['', Validators.required],
-      orgCode: ['AVI-123'],
+      orgCode: { value: this.orgCode },
       visaNumber: [
         '',
         [

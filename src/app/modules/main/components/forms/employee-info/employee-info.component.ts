@@ -58,6 +58,8 @@ export class EmployeeInfoComponent implements OnInit {
   selectedIndex: number = 0;
   clickedTabIndex: number;
   minDob: Date;
+  orgCode = sessionStorage.getItem('orgCode');
+
   errorMessage: any;
   cardDivHeight: any = '';
   cardHeights!: number;
@@ -244,7 +246,7 @@ export class EmployeeInfoComponent implements OnInit {
       division: this.formBuilder.group({
         id: ['', Validators.required],
       }),
-      orgCode: ['AVI01'],
+      orgCode: { value: this.orgCode },
       mobile: [
         '',
         [

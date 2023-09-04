@@ -164,8 +164,7 @@ select {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
 }
-a
-.mandatory {
+a .mandatory {
   color: red;
 }
 
@@ -1906,7 +1905,6 @@ body {
   z-index: 1030;
 }
 
-
 #navbar-wrapper .navbar {
   padding: 3px 30px;
 }
@@ -1959,6 +1957,11 @@ ul.dropdown-menu.show {
   font-size: 13px;
   margin-top: 4%;
   margin-right: 2%;
+  margin-left: 1%;
+}
+
+.logout-button:hover {
+  transform: scale(1.1);
 }
 
 .search-box {
@@ -2146,7 +2149,7 @@ span.language {
 
   border-bottom: 7px solid white;
 
-  content: "";
+  //content: "";
 
   top: 37px;
 
@@ -2154,7 +2157,7 @@ span.language {
 
   right: -18px;
 
-  z-index: 2;
+  // z-index: 2;
 }
 
 .us-name {
