@@ -1,6 +1,6 @@
-<form [formGroup]="employeePersonalDetailsForm">
+<form [formGroup]="employeePersonalDetailsForm" class="main-div">
   <div class="row mm mt-4">
-    <h2 class="card-title employee_info_title">Personal Details</h2>
+    <h2 class="card-title employee_info_title">PERSONAL DETAILS</h2>
     <div class="col-lg-4">
       <mat-label>Marital Status</mat-label>
       <mat-form-field appearance="outline" color="primary">
@@ -13,7 +13,10 @@
             {{ marital_status.value }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="isControlInvalid('maritalStatus')">
+        <mat-error
+          *ngIf="isControlInvalid('maritalStatus')"
+          class="validate-text"
+        >
           {{ getErrorMessage("maritalStatus") }}
         </mat-error>
       </mat-form-field>
@@ -27,7 +30,7 @@
             {{ bg.value }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="isControlInvalid('bloodGroup')">
+        <mat-error *ngIf="isControlInvalid('bloodGroup')" class="validate-text">
           {{ getErrorMessage("bloodGroup") }}
         </mat-error>
       </mat-form-field>
@@ -36,7 +39,7 @@
       <mat-label>CPR Number</mat-label>
       <mat-form-field appearance="outline" color="primary">
         <input matInput formControlName="cprNumber" placeholder="1234567890" />
-        <mat-error *ngIf="isControlInvalid('cprNumber')">
+        <mat-error *ngIf="isControlInvalid('cprNumber')" class="validate-text">
           {{ getErrorMessage("cprNumber") }}
         </mat-error>
       </mat-form-field>
@@ -52,7 +55,10 @@
           rows="4"
           formControlName="familyBackground"
         ></textarea>
-        <mat-error *ngIf="isControlInvalid('familyBackground')">
+        <mat-error
+          *ngIf="isControlInvalid('familyBackground')"
+          class="validate-text"
+        >
           {{ getErrorMessage("familyBackground") }}
         </mat-error>
       </mat-form-field>
@@ -61,7 +67,10 @@
       <mat-label>Health Details</mat-label>
       <mat-form-field appearance="outline">
         <textarea matInput rows="4" formControlName="healthDetails"></textarea>
-        <mat-error *ngIf="isControlInvalid('healthDetails')">
+        <mat-error
+          *ngIf="isControlInvalid('healthDetails')"
+          class="validate-text"
+        >
           {{ getErrorMessage("healthDetails") }}
         </mat-error>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
@@ -71,7 +80,7 @@
       <mat-label>GOSI</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="gosi" placeholder="123456789" />
-        <mat-error *ngIf="isControlInvalid('gosi')">
+        <mat-error *ngIf="isControlInvalid('gosi')" class="validate-text">
           {{ getErrorMessage("gosi") }}
         </mat-error>
       </mat-form-field>
@@ -88,7 +97,10 @@
           formControlName="passportNumber"
           placeholder="A2096457"
         />
-        <mat-error *ngIf="isControlInvalid('passportNumber')">
+        <mat-error
+          *ngIf="isControlInvalid('passportNumber')"
+          class="validate-text"
+        >
           {{ getErrorMessage("passportNumber") }}
         </mat-error>
       </mat-form-field>
@@ -97,7 +109,10 @@
       <mat-label>Passport Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="passportName" />
-        <mat-error *ngIf="isControlInvalid('passportName')">
+        <mat-error
+          *ngIf="isControlInvalid('passportName')"
+          class="validate-text"
+        >
           {{ getErrorMessage("passportName") }}
         </mat-error>
       </mat-form-field>
@@ -114,7 +129,10 @@
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="isControlInvalid('passportIssueDate')">
+        <mat-error
+          *ngIf="isControlInvalid('passportIssueDate')"
+          class="validate-text"
+        >
           {{ getErrorMessage("passportIssueDate") }}
         </mat-error>
       </mat-form-field>
@@ -136,7 +154,10 @@
           [for]="picker1"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
-        <mat-error *ngIf="isControlInvalid('passportValidity')">
+        <mat-error
+          *ngIf="isControlInvalid('passportValidity')"
+          class="validate-text"
+        >
           {{ getErrorMessage("passportValidity") }}
         </mat-error>
       </mat-form-field>
@@ -146,7 +167,10 @@
       <mat-label>Place Of Issue</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="placeOfIssue" />
-        <mat-error *ngIf="isControlInvalid('placeOfIssue')">
+        <mat-error
+          *ngIf="isControlInvalid('placeOfIssue')"
+          class="validate-text"
+        >
           {{ getErrorMessage("placeOfIssue") }}
         </mat-error>
       </mat-form-field>
@@ -183,7 +207,9 @@
             View File
           </button></a
         >
-        <mat-error *ngIf="FleSizeError">{{ FleSizeError }}</mat-error>
+        <mat-error *ngIf="FleSizeError" class="validate-text">{{
+          FleSizeError
+        }}</mat-error>
       </div>
     </div>
   </div>
@@ -196,7 +222,10 @@
       <mat-label>Aadhar Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="aadhaarNumber" />
-        <mat-error *ngIf="isControlInvalid('aadhaarNumber')">
+        <mat-error
+          *ngIf="isControlInvalid('aadhaarNumber')"
+          class="validate-text"
+        >
           {{ getErrorMessage("aadhaarNumber") }}
         </mat-error>
       </mat-form-field>
@@ -205,7 +234,10 @@
       <mat-label>Aadhar Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="aadhaarName" />
-        <mat-error *ngIf="isControlInvalid('aadhaarName')">
+        <mat-error
+          *ngIf="isControlInvalid('aadhaarName')"
+          class="validate-text"
+        >
           {{ getErrorMessage("aadhaarName") }}
         </mat-error>
       </mat-form-field>
@@ -250,7 +282,10 @@
       <mat-label>PAN Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="panCardNumber" />
-        <mat-error *ngIf="isControlInvalid('panCardNumber')">
+        <mat-error
+          *ngIf="isControlInvalid('panCardNumber')"
+          class="validate-text"
+        >
           {{ getErrorMessage("panCardNumber") }}
         </mat-error>
       </mat-form-field>
@@ -259,7 +294,10 @@
       <mat-label>PAN Card Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="panCardName" />
-        <mat-error *ngIf="isControlInvalid('panCardName')">
+        <mat-error
+          *ngIf="isControlInvalid('panCardName')"
+          class="validate-text"
+        >
           {{ getErrorMessage("panCardName") }}
         </mat-error>
       </mat-form-field>
@@ -303,7 +341,7 @@
       <mat-label>UAN Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="uanNumber" />
-        <mat-error *ngIf="isControlInvalid('uanNumber')">
+        <mat-error *ngIf="isControlInvalid('uanNumber')" class="validate-text">
           {{ getErrorMessage("uanNumber") }}
         </mat-error>
       </mat-form-field>
@@ -316,7 +354,7 @@
           formControlName="pfNumber"
           placeholder="TNMAS12071991231234567"
         />
-        <mat-error *ngIf="isControlInvalid('pfNumber')">
+        <mat-error *ngIf="isControlInvalid('pfNumber')" class="validate-text">
           {{ getErrorMessage("pfNumber") }}
         </mat-error>
       </mat-form-field>
@@ -334,7 +372,10 @@
           formControlName="bankAccountNumber"
           placeholder="635802010014976"
         />
-        <mat-error *ngIf="isControlInvalid('bankAccountNumber')">
+        <mat-error
+          *ngIf="isControlInvalid('bankAccountNumber')"
+          class="validate-text"
+        >
           {{ getErrorMessage("bankAccountNumber") }}
         </mat-error>
       </mat-form-field>
@@ -343,7 +384,7 @@
       <mat-label>IFSC Code / IBAN Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="ifscCode" placeholder="SBIN0125620" />
-        <mat-error *ngIf="isControlInvalid('ifscCode')">
+        <mat-error *ngIf="isControlInvalid('ifscCode')" class="validate-text">
           {{ getErrorMessage("ifscCode") }}
         </mat-error>
       </mat-form-field>
@@ -353,7 +394,7 @@
       <mat-label>BANK Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="bankName" />
-        <mat-error *ngIf="isControlInvalid('bankName')">
+        <mat-error *ngIf="isControlInvalid('bankName')" class="validate-text">
           {{ getErrorMessage("bankName") }}
         </mat-error>
       </mat-form-field>

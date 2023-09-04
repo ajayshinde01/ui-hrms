@@ -10,6 +10,17 @@
   margin-left: 10px;
 }
 
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
 .visa-btn {
   background-color: #534686;
   color: #ffffff;
@@ -120,4 +131,12 @@
 
 mat-label {
   font-weight: 550;
+}
+
+.validate-text {
+  font-size: 12px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
 }

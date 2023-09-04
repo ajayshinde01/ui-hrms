@@ -48,6 +48,17 @@
   margin-bottom: 20px;
 }
 
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
 .justify-content-between {
   justify-content: space-between !important;
 
@@ -155,4 +166,12 @@
 
 mat-label {
   font-weight: 550;
+}
+
+.validate-text {
+  font-size: 12px;
+  text-align: left;
+  color: red;
+  position: relative; /* Or absolute or fixed depending on your layout */
+  left: -15px;
 }

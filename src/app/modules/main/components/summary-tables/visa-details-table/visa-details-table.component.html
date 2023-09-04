@@ -1,5 +1,12 @@
 <div class="table-container">
-  <app-datatable [buttonVisible]="buttonVisible" (buttonFunction)="action($event)" (deleteFunction)="action($event)"
-    (paginationParams)="searchFunction($event)" [dataSource]="visaDetailsMetaData.content"
-    [headers]="visaDetailsHeaders.columnsMetadata" [totalRecord]="visaDetailsMetaData.totalElements"></app-datatable>
+  <app-datatable
+    [buttonVisible]="buttonVisible"
+    (buttonFunction)="action($event)"
+    (deleteFunction)="action($event)"
+    (paginationParams)="searchFunction($event)"
+    [dataSource]="visaDetailsMetaData.content"
+    [headers]="visaDetailsHeaders.columnsMetadata"
+    [totalRecord]="visaDetailsMetaData.totalElements"
+    [masterName]="masterName"
+  ></app-datatable>
 </div>

@@ -17,6 +17,8 @@ import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first
 export class EducationalQualificationFormComponent implements OnInit {
   educationalDetailsForm!: FormGroup;
   submitted: boolean = false;
+  orgCode = sessionStorage.getItem('orgCode');
+
   queryParams: Params;
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
@@ -74,8 +76,9 @@ export class EducationalQualificationFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.educationalQualificationMaxLength(50),
           Validators.pattern('^[A-Za-z\\s.-]{1,50}'),
@@ -86,6 +89,7 @@ export class EducationalQualificationFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.instituteNameMaxLength(100),
@@ -93,7 +97,7 @@ export class EducationalQualificationFormComponent implements OnInit {
         ],
       ],
       passingYear: ['', Validators.required],
-      orgCode: ['AVI-01'],
+      orgCode: { value: this.orgCode },
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

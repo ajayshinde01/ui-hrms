@@ -38,6 +38,8 @@ export class CompanyDetailsComponent implements OnInit {
   actionLabel: String;
   companyDetailsId: number;
   response: number;
+  orgCode = sessionStorage.getItem('orgCode');
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -141,8 +143,9 @@ export class CompanyDetailsComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern(
@@ -153,8 +156,9 @@ export class CompanyDetailsComponent implements OnInit {
       clientEmail: [
         '',
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern(
@@ -163,7 +167,7 @@ export class CompanyDetailsComponent implements OnInit {
         ],
       ],
       shift: ['', Validators.required],
-      orgCode: ['AVI01'],
+      orgCode: { value: this.orgCode },
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

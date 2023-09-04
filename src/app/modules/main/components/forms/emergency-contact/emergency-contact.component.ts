@@ -19,6 +19,8 @@ import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first
 })
 export class EmergencyContactComponent implements OnInit {
   emergencyContactForm!: FormGroup;
+  orgCode = sessionStorage.getItem('orgCode');
+
   submitted: boolean = false;
   queryParams: Params;
   actionLabel: string = 'Save';
@@ -73,6 +75,7 @@ export class EmergencyContactComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
@@ -84,8 +87,9 @@ export class EmergencyContactComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-          CustomValidators.whitespaceValidator(),
+          CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           Validators.pattern('^[0-9]{10,15}$'),
         ],
@@ -94,13 +98,14 @@ export class EmergencyContactComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLength(50),
           Validators.pattern('[A-Za-z ]+'),
         ],
       ],
-      orgCode: ['AVI-01'],
+      orgCode: { value: this.orgCode },
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

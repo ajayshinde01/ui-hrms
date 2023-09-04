@@ -1,6 +1,16 @@
 import { Component, ElementRef, Inject, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { Visa } from 'src/app/modules/main/models/visa.model';
@@ -13,7 +23,7 @@ import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
 @Component({
   selector: 'app-employee-visa-details-form',
   templateUrl: './employee-visa-details-form.component.html',
-  styleUrls: ['./employee-visa-details-form.component.scss']
+  styleUrls: ['./employee-visa-details-form.component.scss'],
 })
 export class EmployeeVisaDetailsFormComponent implements OnInit {
   params: HttpParams = new HttpParams();
@@ -21,6 +31,8 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   @Input() inputFromParent: string;
   employeeVisaDetailsForm!: FormGroup;
   queryParams?: Params;
+  orgCode = sessionStorage.getItem('orgCode');
+
   isDisabled: boolean = false;
   country_codes: CommonMaster[] = [];
   actionLabel: string = 'Save';
@@ -43,7 +55,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id');
@@ -57,20 +69,23 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     this.employeeVisaDetailsForm = this.formBuilder.group({
       id: [''],
       countryCode: ['', Validators.required],
-      orgCode: ['AVI-123'],
-      visaNumber: ['', [
-        Validators.required,
-        CustomValidators.noLeadingSpace(),
-        CustomValidators.whitespaceValidator(),
-        CustomValidators.noTrailingSpace(),
-        CustomValidators.maxLength(20),
-        Validators.pattern('^[0-9]*$'),
-      ]],
+      orgCode: { value: this.orgCode },
+      visaNumber: [
+        '',
+        [
+          Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noWhiteSpace(),
+          CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(20),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
       visaFile: [''],
       validDate: ['', [Validators.required]],
     });
   }
-
 
   getErrorMessage(controlName: string): string {
     const control = this.employeeVisaDetailsForm.get(controlName);
@@ -99,25 +114,29 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   getById(id: string) {
     if (this.data != null) {
       this.visaid = this.data.id;
-      this.employeeService
-        .searchVisaById(this.emp_id, this.visaid)
-        .subscribe((response: Visa) => {
+      this.employeeService.searchVisaById(this.emp_id, this.visaid).subscribe(
+        (response: Visa) => {
           this.employeeVisaDetailsForm.patchValue(response);
-          this.employeeVisaDetailsForm.controls["countryCode"].patchValue(response.countryCode);
+          this.employeeVisaDetailsForm.controls['countryCode'].patchValue(
+            response.countryCode
+          );
           this.visa = response;
           this.viewFile = response['visaFile'];
         },
-          err => {
-            this.actionLabel = 'Update';
-            console.log('Oops', err);
-          });
+        (err) => {
+          this.actionLabel = 'Update';
+          console.log('Oops', err);
+        }
+      );
     }
   }
 
   fetchCountryCode() {
-    this.employeeService.getCountryCode().subscribe((Response: Array<CommonMaster>) => {
-      this.country_codes = Response;
-    })
+    this.employeeService
+      .getCountryCode()
+      .subscribe((Response: Array<CommonMaster>) => {
+        this.country_codes = Response;
+      });
   }
 
   Close(isUpdate: boolean) {
@@ -133,7 +152,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
       this.files = event.target.files[0];
       console.log(this.files);
       const file = event.target.files[0];
-      if (file.size > 2e+6) {
+      if (file.size > 2e6) {
         this.fileSizeError = 'File is too large should not exceed Over 1MB';
       } else {
         this.fileSizeError = '';
@@ -167,17 +186,19 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         );
       }
       if (this.actionLabel === 'Update') {
-        this.employeeService.updateEmployeevisa(formData, this.emp_id).subscribe(
-          (response: Visa) => {
-            this.employeeService.notify('Update Successfully...');
-            this.Close(true);
-          },
-          (error: any) => {
-            if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn(error.error.message);
+        this.employeeService
+          .updateEmployeevisa(formData, this.emp_id)
+          .subscribe(
+            (response: Visa) => {
+              this.employeeService.notify('Update Successfully...');
+              this.Close(true);
+            },
+            (error: any) => {
+              if (error.status == 400 || error.status == 404) {
+                this.employeeService.warn(error.error.message);
+              }
             }
-          }
-        );
+          );
       }
     }
   }

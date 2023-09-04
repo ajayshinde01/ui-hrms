@@ -40,6 +40,7 @@ export class WorkExperienceFormComponent implements OnInit {
   workExperienceId: number;
 
   employeeId: number;
+  orgCode = sessionStorage.getItem('orgCode');
 
   constructor(
     private dialogRef: MatDialogRef<WorkExperienceFormComponent>,
@@ -113,6 +114,7 @@ export class WorkExperienceFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLengthOfCompany(50),
@@ -124,6 +126,7 @@ export class WorkExperienceFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.designationPeriodMaxLength(100),
@@ -146,6 +149,7 @@ export class WorkExperienceFormComponent implements OnInit {
         '',
         [
           Validators.required,
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.maxLengthOfAddress(250),
@@ -161,7 +165,7 @@ export class WorkExperienceFormComponent implements OnInit {
 
       updatedAt: [null],
 
-      orgCode: ['AVI01'],
+      orgCode: { value: this.orgCode },
     });
   }
 

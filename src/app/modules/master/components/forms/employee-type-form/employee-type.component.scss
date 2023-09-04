@@ -458,6 +458,17 @@
   justify-content: flex-end !important;
   width: 99%;
 }
+
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
 .action-btn {
   margin: 3px;
   height: 30px;

@@ -15,6 +15,16 @@
   margin-left: -11px;
   margin-top: 10px;
 }
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
 .close-btn {
   width: 25px;
   height: 20px;
@@ -83,7 +93,7 @@
 
 :host::ng-deep .mat-mdc-text-field-wrapper {
   // border:1px solid red !important;
-  width: 256px !important;
+  width: 270px !important;
   height: 35px !important;
   font-size: 14px;
   border-radius: 8px;
@@ -99,6 +109,11 @@
   top: -13px;
 }
 
+:host::ng-deep.mat-mdc-form-field-error {
+  display: block;
+  margin-left: -17px;
+  width: 271px !important;
+}
 mat-label {
   font-weight: 550;
 }

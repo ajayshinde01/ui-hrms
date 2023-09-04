@@ -92,7 +92,7 @@ img {
 }
 
 .employee-form-div {
-  height: 84vh;
+  height: 89vh;
   overflow: auto;
   max-height: fit-content;
   /* display: flex;
@@ -182,6 +182,13 @@ img {
 .go-back {
   background-color: #534686;
   border-color: #534686;
+}
+
+.profile-save-btn,
+.go-back:hover {
+  background-color: #534686;
+  border-color: #534686;
+  transform: scale(1.05);
 }
 
 mat-label {

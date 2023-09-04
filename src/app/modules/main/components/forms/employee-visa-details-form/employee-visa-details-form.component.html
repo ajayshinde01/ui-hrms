@@ -31,7 +31,10 @@
                   {{ country_code.value }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlInvalid('countryCode')">
+              <mat-error
+                *ngIf="isControlInvalid('countryCode')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("countryCode") }}
               </mat-error>
             </mat-form-field>
@@ -53,7 +56,10 @@
                 formControlName="visaNumber"
                 placeholder="Visa Number"
               />
-              <mat-error *ngIf="isControlInvalid('visaNumber')">
+              <mat-error
+                *ngIf="isControlInvalid('visaNumber')"
+                class="validate-text"
+              >
                 {{ getErrorMessage("visaNumber") }}
               </mat-error>
             </mat-form-field>
@@ -81,7 +87,10 @@
               [for]="validDatepicker"
             ></mat-datepicker-toggle>
             <mat-datepicker #validDatepicker></mat-datepicker>
-            <mat-error *ngIf="isControlInvalid('validDate')">
+            <mat-error
+              *ngIf="isControlInvalid('validDate')"
+              class="validate-text"
+            >
               {{ getErrorMessage("validDate") }}
             </mat-error>
           </mat-form-field>
@@ -124,7 +133,9 @@
                   View File
                 </button></a
               >
-              <mat-error *ngIf="fileSizeError">{{ fileSizeError }}</mat-error>
+              <mat-error *ngIf="fileSizeError" class="validate-text">{{
+                fileSizeError
+              }}</mat-error>
             </div>
           </div>
         </div>

@@ -5,15 +5,31 @@
 .col-lg-2 {
   flex-basis: 10%; /* Adjust the width percentage as needed */
 }
+
 .col-lg-1 {
   flex-basis: 11.5%; /* Adjust the width percentage as needed */
 }
 
 :host ::ng-deep .address-details-save-btn {
   background-color: #534686;
+
   border: #534686;
 }
 
-mat-label {
-  font-weight: 550;
+.inline {
+  display: inline;
+
+  margin-right: 10px; /* Add some spacing between elements */
+}
+
+.validate-text {
+  font-size: 12px;
+
+  text-align: left;
+
+  color: red;
+
+  position: relative; /* Or absolute or fixed depending on your layout */
+
+  left: -15px;
 }

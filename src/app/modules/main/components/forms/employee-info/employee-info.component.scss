@@ -146,13 +146,14 @@ img {
   top: 10%; //5
   right: 8%; //5
   z-index: 3;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.57);
+  color: black;
+  background-color: transparent;
   border-radius: 12px;
 }
 
 #remove-avatar-photo-button:hover {
-  background-color: #e74c3c;
+  color: #e74c3c;
+  background-color: transparent;
 }
 
 .center-positon-absolute {
@@ -199,4 +200,26 @@ img {
 
 mat-label {
   font-weight: 550;
+}
+
+.profile-save-btn:hover {
+  background-color: #534686;
+  border-color: #534686;
+  transform: scale(1.05);
+}
+
+.main-div {
+  padding-left: 10px;
+}
+
+.validate-text {
+  font-size: 12px;
+
+  text-align: left;
+
+  color: red;
+
+  position: relative; /* Or absolute or fixed depending on your layout */
+
+  left: -15px;
 }

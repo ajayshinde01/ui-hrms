@@ -1,9 +1,8 @@
-
 .validate-text {
   font-size: 9px;
   text-align: left;
   color: red;
-  position: relative; 
+  position: relative;
   left: -15px;
 }
 
@@ -15,6 +14,18 @@
 }
 .mat-mdc-dialog-surface mdc-dialog__surface {
   overflow: hidden;
+}
+
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
 }
 .row-section {
   margin-left: 15px;
