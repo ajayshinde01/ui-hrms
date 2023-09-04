@@ -47,7 +47,7 @@ export class JoiningDetailsComponent implements OnInit {
     private joiningDetailsService: JoiningDetailsService,
 
     private employeeService: EmployeeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -75,7 +75,7 @@ export class JoiningDetailsComponent implements OnInit {
     const currentDate = new Date();
 
     this.joiningForm = this.formBuilder.group({
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 
@@ -132,12 +132,8 @@ export class JoiningDetailsComponent implements OnInit {
   getNgModuleById(id: number) {
     this.joiningDetailsService.getByEmployeeId(id).subscribe(
       (response: JoiningDetails) => {
-        console.log(response);
-
         this.joiningForm.patchValue(response, { emitEvent: false });
-
         this.response = response.id;
-
         this.actionLabel = 'Update';
       },
 
@@ -149,14 +145,8 @@ export class JoiningDetailsComponent implements OnInit {
 
   checkMonthValidation(seletedDate: Date): boolean {
     if (this.joinDate != undefined) {
-      console.log(seletedDate);
-
       const sixMonthsLater = new Date(this.joinDate.toString());
-
       sixMonthsLater.setMonth(sixMonthsLater.getMonth() + 6);
-
-      console.log(sixMonthsLater);
-
       if (seletedDate < sixMonthsLater) {
         return true;
       }
@@ -192,13 +182,13 @@ export class JoiningDetailsComponent implements OnInit {
           .format('YYYY-MM-DD'),
         resignationDate: this.joiningForm.value.resignationDate
           ? moment(this.joiningForm.value.resignationDate)
-              .utcOffset(0, true)
-              .format('YYYY-MM-DD')
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
         relievingDate: this.joiningForm.value.relievingDate
           ? moment(this.joiningForm.value.relievingDate)
-              .utcOffset(0, true)
-              .format('YYYY-MM-DD')
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
       };
 

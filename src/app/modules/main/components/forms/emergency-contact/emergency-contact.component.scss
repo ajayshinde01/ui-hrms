@@ -12,39 +12,28 @@
 
 .row-section {
   margin-left: 15px;
-
   //margin-top: 5px;
 }
 
 .title {
   margin-left: -11px;
-
   margin-top: 10px;
 }
 
 .close-btn {
   width: 25px;
-
   height: 20px;
-
   font-size: 8px;
-
   margin-top: 8%;
-
   border-radius: 7px;
-
   border: none;
-
   margin-right: -30px;
 }
 
 .line {
   width: 100%;
-
   border-bottom: 1px solid black;
-
   margin-top: 20px;
-
   margin-bottom: 20px;
 }
 
@@ -61,31 +50,22 @@
 
 .justify-content-between {
   justify-content: space-between !important;
-
   height: 50px;
-
   width: 95%;
-
   margin-top: -10px;
-
   // border-bottom: 1px solid black;
-
   // margin-bottom: 30px;
-
   // padding-bottom: 10px;
 }
 
 .justify-content-end {
   justify-content: flex-end !important;
-
   width: 99%;
 }
 
 .action-btn {
   margin: 3px;
-
   height: 30px;
-
   //background-color: gray;
 }
 
@@ -99,79 +79,62 @@
 
 .profile-save-btn {
   cursor: pointer;
-
   background-color: blue;
-
   color: white;
-
   margin-right: 3px;
 }
 
 .save-btn {
   width: 60px;
-
   height: 30px;
-
   border-radius: 5px;
-
   cursor: pointer;
-
   background-color: #534686;
-
   color: white;
-
   margin-right: 4px;
 }
 
 .dark {
   width: 60px;
-
   height: 30px;
-
   border-radius: 5px;
-
   cursor: pointer;
-
   background-color: #534686;
-
   color: white;
 }
 
 :host::ng-deep .mat-mdc-text-field-wrapper {
   // border:1px solid red !important;
-
   width: 256px !important;
-
   height: 35px !important;
-
   font-size: 14px;
-
   border-radius: 8px;
 }
 
 :host::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
   .mat-mdc-form-field-infix {
-  padding-top: 10px !important;
+  padding-top: 6px !important;
 }
 
 :host::ng-deep.mat-mdc-icon-button.mat-mdc-button-base {
   width: 40px;
-
   height: 40px;
-
   /* padding: 12px; */
-
   top: -13px;
+}
+
+.validate-text {
+  font-size: 11px;
+
+  text-align: left;
+
+  color: red;
+
+  position: relative; /* Or absolute or fixed depending on your layout */
+
+  left: -15px;
 }
 
 mat-label {
   font-weight: 550;
-}
-
-.validate-text {
-  font-size: 12px;
-  text-align: left;
-  color: red;
-  position: relative; /* Or absolute or fixed depending on your layout */
-  left: -15px;
 }

@@ -73,7 +73,7 @@ export class EmployeeInfoComponent implements OnInit {
     private http: HttpClient,
     private capitalService: FirstLetterCapitalService,
     private dialog: MatDialog
-  ) {}
+  ) { }
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();
@@ -246,7 +246,7 @@ export class EmployeeInfoComponent implements OnInit {
       division: this.formBuilder.group({
         id: ['', Validators.required],
       }),
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       mobile: [
         '',
         [
@@ -417,7 +417,9 @@ export class EmployeeInfoComponent implements OnInit {
         this.employeeService.updateEmployee(formData).subscribe(
           (response: Employees) => {
             this.employeeService.notify('Update Successfully...');
-            this.router.navigate(['/main/employee-table']);
+            this.router.navigate(['/main/employee-info'], {
+              queryParams: { id: response.id, actionLabel: 'Update' },
+            });
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
@@ -432,6 +434,7 @@ export class EmployeeInfoComponent implements OnInit {
     this.employeeService
       .searchEmployeeById(id)
       .subscribe((response: Employees) => {
+        this.isDisabled = true;
         this.employeeForm.patchValue(response);
         this.url = response.profileImage;
         const parts = this.url.split('=');
@@ -461,7 +464,6 @@ export class EmployeeInfoComponent implements OnInit {
   calculateAge(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       this.selectedDate = control.value as Date;
-      debugger;
       if (this.selectedDate) {
         const today = new Date();
         const birthDate = new Date(this.selectedDate);

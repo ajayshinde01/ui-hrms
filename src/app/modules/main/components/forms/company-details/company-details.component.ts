@@ -167,7 +167,7 @@ export class CompanyDetailsComponent implements OnInit {
         ],
       ],
       shift: ['', Validators.required],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

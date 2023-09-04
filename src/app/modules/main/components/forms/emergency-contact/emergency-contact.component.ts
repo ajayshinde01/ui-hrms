@@ -105,7 +105,7 @@ export class EmergencyContactComponent implements OnInit {
           Validators.pattern('[A-Za-z ]+'),
         ],
       ],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

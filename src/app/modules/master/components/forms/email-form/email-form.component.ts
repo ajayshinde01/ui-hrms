@@ -91,19 +91,21 @@ export class EmailFormComponent implements OnInit {
       to: ['',
       
         [
+          Validators.required
 
           
         ],],
       cc: ['',
         [
-
+          Validators.required
         ]],
       subject: ['',
         [
+          Validators.required
         ]],
-      dateTime: [''],
-      timeZone: ['Asia/Kolkata'],
-      body: [''],
+      dateTime: ['',Validators.required],
+      timeZone: ['Asia/Kolkata',Validators.required],
+      body: ['',Validators.required],
       file: [''],
       startTime: ['']
     });

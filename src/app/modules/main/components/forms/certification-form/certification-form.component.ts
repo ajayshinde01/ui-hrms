@@ -35,7 +35,6 @@ export class CertificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.initForm();
     this.collectQueryParams();
 
@@ -91,7 +90,7 @@ export class CertificationFormComponent implements OnInit {
         '',
         [Validators.required, CustomValidators.pastDate()],
       ],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
