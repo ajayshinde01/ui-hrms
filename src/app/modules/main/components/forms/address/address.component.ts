@@ -217,6 +217,7 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.noTrailingSpace(),
@@ -231,6 +232,7 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.noTrailingSpace(),
@@ -251,6 +253,9 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
 
           CustomValidators.maxLength(2),
@@ -263,6 +268,9 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
 
           CustomValidators.maxLength(2),
@@ -281,6 +289,7 @@ export class AddressComponent implements OnInit {
         '',
 
         [
+          CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
 
           CustomValidators.whitespaceValidator(),
@@ -495,6 +504,24 @@ export class AddressComponent implements OnInit {
 
   getErrorMessage(controlName: string): string {
     const control = this.permanentAddressForm.get(controlName);
+
+    if (control && control.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+
+      return CustomValidators.getErrorMessage(errorKey, controlName);
+    }
+
+    return '';
+  }
+
+  isControlInvalidCorrespondenceAddress(controlName: string): boolean {
+    const control = this.correspondenceAddressForm.get(controlName);
+
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessageCorrespondenceAddress(controlName: string): string {
+    const control = this.correspondenceAddressForm.get(controlName);
 
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
