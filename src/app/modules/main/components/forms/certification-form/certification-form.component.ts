@@ -35,7 +35,6 @@ export class CertificationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.initForm();
     this.collectQueryParams();
 

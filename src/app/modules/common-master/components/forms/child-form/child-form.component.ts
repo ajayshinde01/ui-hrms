@@ -74,7 +74,7 @@ export class ChildFormComponent {
         ],
       ],
       value: [
-        { value: '', disabled: false },
+        '',
         [
           Validators.required,
           leadingSpaceValidator,
@@ -160,13 +160,12 @@ export class ChildFormComponent {
     }
   }
   getById(id: number) {
-    this.childService
-      .searchChildById(this.data.id)
-      .subscribe((response: Parent) => {
-        this.childForm.patchValue(response);
-        //this.child = response;
-        this.masterName = this.childForm.value.masterName;
-      });
+    this.childService.searchChildById(id).subscribe((response: Parent) => {
+      debugger;
+      this.childForm.patchValue(response);
+      // this.childForm.patchValue(value);
+      this.masterName = this.childForm.value.masterName;
+    });
   }
 
   Close(isUpdate: boolean) {
