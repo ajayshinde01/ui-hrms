@@ -36,6 +36,8 @@ export class AddressComponent implements OnInit {
 
   correspondenceAddressForm!: FormGroup;
 
+  orgCode = sessionStorage.getItem('orgCode');
+
   employee: Employees;
 
   address: Address;
@@ -194,7 +196,7 @@ export class AddressComponent implements OnInit {
 
       ownershipStatus: ['', [Validators.required]],
 
-      orgCode: ['AVI-IND'],
+      orgCode: { value: this.orgCode },
 
       createdBy: ['Admin'],
 

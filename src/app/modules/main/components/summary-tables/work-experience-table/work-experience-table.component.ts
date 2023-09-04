@@ -32,6 +32,8 @@ export class WorkExperienceTableComponent implements OnInit {
 
   id: number;
 
+  masterName: string = 'Work Experience';
+
   workExperienceHeaders: any;
 
   workExperiencesMetaData: {

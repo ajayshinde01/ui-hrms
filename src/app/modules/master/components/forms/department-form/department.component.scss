@@ -1,21 +1,30 @@
-
 .validate-text {
   font-size: 9px;
   text-align: left;
   color: red;
   position: relative; /* Or absolute or fixed depending on your layout */
   left: -15px;
-
 }
-.validate-text-description{
+.validate-text-description {
   font-size: 9px;
   text-align: left;
   color: red;
   position: relative; /* Or absolute or fixed depending on your layout */
   left: -15px;
-  bottom:-20px
+  bottom: -20px;
 }
 
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
 
 .col-md-4 mt-2 {
   margin-right: 50px;
@@ -29,7 +38,6 @@
 }
 .row-section {
   margin-left: 15px;
-
 }
 .title {
   margin-left: -11px;
@@ -92,17 +100,16 @@
 }
 
 :host::ng-deep .mat-mdc-text-field-wrapper {
-
   width: 256px !important;
   height: 35px !important;
   font-size: 14px;
   border-radius: 8px;
 }
-:host::ng-deep.mat-mdc-form-field.textarea-outline{
-  height:100px
-} 
-:host::ng-deep.mat-mdc-form-field.textarea-outline textarea{
-  resize:none
+:host::ng-deep.mat-mdc-form-field.textarea-outline {
+  height: 100px;
+}
+:host::ng-deep.mat-mdc-form-field.textarea-outline textarea {
+  resize: none;
 }
 :host::ng-deep.mat-mdc-text-field-wrapper.mdc-text-field--outlined
   .mat-mdc-form-field-infix {

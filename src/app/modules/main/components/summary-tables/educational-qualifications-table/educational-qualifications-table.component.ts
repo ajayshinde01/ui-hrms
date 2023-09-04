@@ -27,6 +27,7 @@ export class EducationalQualificationsTableComponent implements OnInit {
     content: [],
     totalElements: 0,
   };
+  masterName: string = 'Educational Qualification';
   educationalQualificationHeaders: { columnsMetadata: Array<ColumnsMetadata> } =
     {
       columnsMetadata: [],

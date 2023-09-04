@@ -12,6 +12,7 @@ export class EmployeeComponent implements OnInit {
   actionLabel: string;
   id: number;
   emp_id: number = 0;
+  orgCode = sessionStorage.getItem('orgCode');
 
   cardDivHeight: any = '';
 

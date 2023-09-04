@@ -33,6 +33,7 @@ export class JoiningDetailsComponent implements OnInit {
   joinDate: String;
 
   selectedDate: Date;
+  orgCode = sessionStorage.getItem('orgCode');
 
   response: number;
 
@@ -46,7 +47,7 @@ export class JoiningDetailsComponent implements OnInit {
     private joiningDetailsService: JoiningDetailsService,
 
     private employeeService: EmployeeService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -74,7 +75,7 @@ export class JoiningDetailsComponent implements OnInit {
     const currentDate = new Date();
 
     this.joiningForm = this.formBuilder.group({
-      orgCode: ['AVI01'],
+      orgCode: { value: this.orgCode },
 
       createdBy: ['Admin'],
 
@@ -191,14 +192,14 @@ export class JoiningDetailsComponent implements OnInit {
           .format('YYYY-MM-DD'),
         resignationDate: this.joiningForm.value.resignationDate
           ? moment(this.joiningForm.value.resignationDate)
-            .utcOffset(0, true)
-            .format('YYYY-MM-DD')
+              .utcOffset(0, true)
+              .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
         relievingDate: this.joiningForm.value.relievingDate
           ? moment(this.joiningForm.value.relievingDate)
-            .utcOffset(0, true)
-            .format('YYYY-MM-DD')
-          : null // Replace with your desired invalid date format
+              .utcOffset(0, true)
+              .format('YYYY-MM-DD')
+          : null, // Replace with your desired invalid date format
       };
 
       if (this.actionLabel === 'Save') {
@@ -227,7 +228,7 @@ export class JoiningDetailsComponent implements OnInit {
 
       if (this.actionLabel === 'Update') {
         formData.id = this.response;
-        formData.updatedBy = "Admin"
+        formData.updatedBy = 'Admin';
 
         this.joiningDetailsService
           .updateJoiningDetails(this.queryParams.id, formData)

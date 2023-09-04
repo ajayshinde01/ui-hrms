@@ -21,6 +21,8 @@ export class CertificationFormComponent implements OnInit {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   certificationsId: number;
+  orgCode = sessionStorage.getItem('orgCode');
+
   employeeId: number;
   constructor(
     private _mdr: MatDialogRef<CertificationFormComponent>,
@@ -89,7 +91,7 @@ export class CertificationFormComponent implements OnInit {
         '',
         [Validators.required, CustomValidators.pastDate()],
       ],
-      orgCode: ['AVI-01'],
+      orgCode: { value: this.orgCode },
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

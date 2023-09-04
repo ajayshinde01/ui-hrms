@@ -18,15 +18,16 @@ export class VisaDetailsTableComponent implements OnInit {
   buttonVisible: Array<boolean> = [true, true, true];
   matDialogRef: MatDialogRef<EmployeeVisaDetailsFormComponent>;
   emp_id: any;
+  masterName: string = 'Visa Details';
   visa_id: any;
   visaDetailsHeaders: any;
   visaDetailsMetaData: {
     content: Array<Visa>;
     totalElements: number;
   } = {
-      content: [],
-      totalElements: 0,
-    };
+    content: [],
+    totalElements: 0,
+  };
   params: HttpParams = new HttpParams();
 
   constructor(
@@ -34,7 +35,7 @@ export class VisaDetailsTableComponent implements OnInit {
 
     private matDialog: MatDialog,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getHeaders();
@@ -104,14 +105,11 @@ export class VisaDetailsTableComponent implements OnInit {
   }
 
   openModal() {
-    this.matDialogRef = this.matDialog.open(
-      EmployeeVisaDetailsFormComponent,
-      {
-        width: '530px',
-        panelClass: 'my-dialog',
-        disableClose: true,
-      }
-    );
+    this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
+      width: '530px',
+      panelClass: 'my-dialog',
+      disableClose: true,
+    });
     this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
       if (res == true) {
@@ -121,15 +119,12 @@ export class VisaDetailsTableComponent implements OnInit {
   }
 
   openModalForEdit(id: string) {
-    this.matDialogRef = this.matDialog.open(
-      EmployeeVisaDetailsFormComponent,
-      {
-        data: { id: id, actionLabel: 'Save' },
-        width: '530px',
-        panelClass: 'my-dialog',
-        disableClose: true,
-      }
-    );
+    this.matDialogRef = this.matDialog.open(EmployeeVisaDetailsFormComponent, {
+      data: { id: id, actionLabel: 'Save' },
+      width: '530px',
+      panelClass: 'my-dialog',
+      disableClose: true,
+    });
     this.matDialogRef.afterClosed().subscribe((res: any) => {
       this.searchFunction(this.params);
       if (res == true) {

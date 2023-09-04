@@ -48,6 +48,17 @@
   margin-bottom: 20px;
 }
 
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.dark:hover {
+  transform: scale(1.1);
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
 .justify-content-between {
   justify-content: space-between !important;
 

@@ -19,6 +19,8 @@ import { FirstLetterCapitalService } from 'src/app/modules/shared/services/first
 })
 export class EmergencyContactComponent implements OnInit {
   emergencyContactForm!: FormGroup;
+  orgCode = sessionStorage.getItem('orgCode');
+
   submitted: boolean = false;
   queryParams: Params;
   actionLabel: string = 'Save';
@@ -103,7 +105,7 @@ export class EmergencyContactComponent implements OnInit {
           Validators.pattern('[A-Za-z ]+'),
         ],
       ],
-      orgCode: ['AVI-01'],
+      orgCode: { value: this.orgCode },
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

@@ -30,12 +30,13 @@ export class RoleFormComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
-  orgCode=sessionStorage.getItem('orgCode')
+  orgCode = sessionStorage.getItem('orgCode');
   params: HttpParams = new HttpParams();
   roleMetaData: { content: Array<Role>; totalElements: number } = {
     content: [],
     totalElements: 0,
   };
+  id: string = '';
 
   constructor(
     private _mdr: MatDialogRef<RoleFormComponent>,
@@ -49,7 +50,6 @@ export class RoleFormComponent {
     //this.searchFunction(this.params);
   }
   ngOnInit(): void {
-    
     this.collectQueryParams();
     this.initForm();
     this.roleForm.get('roleId')?.valueChanges.subscribe((value: string) => {
@@ -119,8 +119,6 @@ export class RoleFormComponent {
         ],
       ],
       orgCode: [
-   
-
         { value: this.orgCode, disabled: true },
         [
           Validators.required,
@@ -188,6 +186,7 @@ export class RoleFormComponent {
   getById(id: string) {
     this.roleService.searchRoleById(id).subscribe((response: Role) => {
       console.log('GET-SEARCH BY ID Request successful', response);
+      this.id = response.roleId;
       this.roleForm.patchValue(response);
       this.role = response;
     });
@@ -198,6 +197,9 @@ export class RoleFormComponent {
   }
   resetForm() {
     this.collectQueryParams();
+    // if (this.actionLabel == 'Update') {
+    //   this.roleForm.patchValue(this.role);
+    // } else this.roleForm.patchValue({ roleId: null, roleName: null });
     this.initForm();
   }
 }

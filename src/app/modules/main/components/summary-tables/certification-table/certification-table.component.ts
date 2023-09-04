@@ -24,6 +24,7 @@ export class CertificationTableComponent {
     content: [],
     totalElements: 0,
   };
+  masterName: string = 'Certifications';
   certificationsHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
