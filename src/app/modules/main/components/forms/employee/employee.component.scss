@@ -194,3 +194,7 @@ img {
 mat-label {
   font-weight: 550;
 }
+.card {
+  height: var(--cardHeight);
+  overflow-y: auto;
+}

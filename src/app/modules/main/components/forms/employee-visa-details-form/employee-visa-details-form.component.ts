@@ -69,7 +69,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     this.employeeVisaDetailsForm = this.formBuilder.group({
       id: [''],
       countryCode: ['', Validators.required],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       visaNumber: [
         '',
         [

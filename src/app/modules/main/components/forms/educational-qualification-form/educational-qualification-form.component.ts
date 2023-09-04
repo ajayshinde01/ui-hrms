@@ -97,7 +97,7 @@ export class EducationalQualificationFormComponent implements OnInit {
         ],
       ],
       passingYear: ['', Validators.required],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],

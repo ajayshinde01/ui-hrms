@@ -165,7 +165,7 @@ export class WorkExperienceFormComponent implements OnInit {
 
       updatedAt: [null],
 
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
     });
   }
 

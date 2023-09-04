@@ -138,7 +138,11 @@ export class AddressComponent implements OnInit {
       landmark: [
         '',
 
-        [ CustomValidators.noLeadingTrailingSpace(),CustomValidators.noLeadingSpace(), CustomValidators.noTrailingSpace()],
+        [
+          CustomValidators.noLeadingTrailingSpace(),
+          CustomValidators.noLeadingSpace(),
+          CustomValidators.noTrailingSpace(),
+        ],
       ],
 
       tenureYear: [
@@ -157,7 +161,6 @@ export class AddressComponent implements OnInit {
         '',
 
         [
-
           CustomValidators.whitespaceValidator(),
 
           CustomValidators.noTrailingSpace(),
@@ -194,7 +197,7 @@ export class AddressComponent implements OnInit {
 
       ownershipStatus: ['', [Validators.required]],
 
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 
@@ -292,7 +295,7 @@ export class AddressComponent implements OnInit {
 
       ownershipStatus: [''],
 
-      orgCode: ['AVI-IND'],
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 

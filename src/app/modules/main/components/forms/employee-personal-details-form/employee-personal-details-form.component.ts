@@ -221,7 +221,7 @@ export class EmployeePersonalDetailsFormComponent {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
     });
   }
 

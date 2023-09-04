@@ -75,7 +75,7 @@ export class JoiningDetailsComponent implements OnInit {
     const currentDate = new Date();
 
     this.joiningForm = this.formBuilder.group({
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
 
       createdBy: ['Admin'],
 

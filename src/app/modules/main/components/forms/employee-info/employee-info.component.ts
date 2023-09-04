@@ -246,7 +246,7 @@ export class EmployeeInfoComponent implements OnInit {
       division: this.formBuilder.group({
         id: ['', Validators.required],
       }),
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
       mobile: [
         '',
         [
@@ -417,7 +417,9 @@ export class EmployeeInfoComponent implements OnInit {
         this.employeeService.updateEmployee(formData).subscribe(
           (response: Employees) => {
             this.employeeService.notify('Update Successfully...');
-            this.router.navigate(['/main/employee-table']);
+            this.router.navigate(['/main/employee-info'], {
+              queryParams: { id: response.id, actionLabel: 'Update' },
+            });
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
