@@ -440,6 +440,8 @@ a:focus {
   margin: 0;
   padding: 0;
   list-style: none;
+  overflow: auto;
+
 }
 
 .sidebar-nav > li {
@@ -1810,6 +1812,10 @@ button[disabled] {
 .darker {
   border-color: #ccc;
   background-color: #ddd;
+}
+
+#sidebar-wrapper{
+  overflow-y: hidden;
 }
 
 .template-date {
