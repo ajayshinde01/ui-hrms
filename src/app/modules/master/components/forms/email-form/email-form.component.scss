@@ -6,6 +6,15 @@
     position: relative; 
     left: -15px;
   }
+  .validate-text-description{
+    font-size: 9px;
+    text-align: left;
+    color: red;
+    position: relative; /* Or absolute or fixed depending on your layout */
+    left: -15px;
+    bottom:-20px
+  }
+  
   .col-md-4 mt-2 {
     margin-right: 50px;
   }
@@ -139,5 +148,15 @@
   overflow-x: hidden;
   overflow-y: hidden;
 }
+.form-container {
+  width: 800px;
+  height: 660px;
+}
+
+.form-container.selected {
+  width: 800px; /* Adjust the width as needed */
+  height: 600px; /* Adjust the height as needed */
+}
+
 
 

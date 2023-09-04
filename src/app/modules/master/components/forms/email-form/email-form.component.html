@@ -1,5 +1,6 @@
+
 <form [formGroup]="emailForm">
-  <div class="container" style="width: 800px; height: 660px">
+  <div class="container form-container" [class.selected]="recordSelected">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -25,6 +26,7 @@
               matInput
               placeholder=""
               formControlName="to"
+  [readonly]="isReadOnly"
             />
             <div
             *ngIf="
@@ -32,6 +34,7 @@
             emailForm.controls['to']?.touched &&
             emailForm.controls['to']?.errors
           "
+
           >
             <span
               class="validate-text"
@@ -40,7 +43,7 @@
             </span>
             <span
               class="validate-text"
-              *ngIf="emailForm?.errors?.['pattern']"
+              *ngIf="emailForm.controls['to']?.errors?.['pattern']"
               >Please enter valid email id
             </span>
             <span
@@ -63,13 +66,56 @@
               *ngIf="emailForm?.errors?.['trailingSpace'] && !emailForm?.errors?.['pattern'] && emailForm?.errors?.['leadingSpace']"
               >Trailing, Leading spaces not allowed</span
             >
-            <span
+            <!-- <span
               class="validate-text"
               *ngIf="emailForm?.errors?.['emailMaxLength'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['leadingSpace']"
               >Email id should not exceed 40 characters</span
-            >
+            > -->
           </div>
-
+         
+          <!-- <div
+                *ngIf="
+                  emailControl?.invalid &&
+                  emailControl?.touched &&
+                  emailControl?.errors
+                "
+              >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['required']"
+                  >Please enter Email ID
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['pattern']"
+                  >Please enter valid Email ID
+                </span>
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['leadingSpace'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['trailingSpace']"
+                  >Leading space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['whitespace'] && !emailControl?.errors?.['leadingSpace'] && !emailControl?.errors?.['trailingSpace']  && !emailControl?.errors?.['pattern']"
+                  >No whitespaces are allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['trailingSpace'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['leadingSpace']"
+                  >Trailing space not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['trailingSpace'] && !emailControl?.errors?.['pattern'] && emailControl?.errors?.['leadingSpace']"
+                  >Trailing, Leading spaces not allowed</span
+                >
+                <span
+                  class="validate-text"
+                  *ngIf="emailControl?.errors?.['emailMaxLength'] && !emailControl?.errors?.['pattern'] && !emailControl?.errors?.['leadingSpace']"
+                  >Email ID should not exceed 40 characters</span
+                >
+              </div> -->
 
 
             </div>
@@ -92,6 +138,7 @@
               matInput
               placeholder=""
               formControlName="cc"
+              [readonly]="isReadOnly"
             />
             <div
             *ngIf="
@@ -152,7 +199,7 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="" formControlName="subject" />
+              <input matInput placeholder="" formControlName="subject"   [readonly]="isReadOnly"/>
               <div
               *ngIf="
                 emailForm.controls['subject']?.invalid &&
@@ -214,27 +261,28 @@
 
 
 
-    <div class="form-group">
+    <div class="form-group"  *ngIf="!recordSelected">
       <div class="row row-section">
         <div class="col-md-2 mt-2">
           <mat-label>DateTime</mat-label>
         </div>
         <div class="col-md-8">
           <div class="form-controls">
-            <input type="datetime-local" formControlName="dateTime">
+            <input type="datetime-local" formControlName="dateTime"   >
+       
           </div>
 
         </div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" *ngIf="!recordSelected">
       <div class="row row-section">
         <div class="col-md-2 mt-2">
           <mat-label>Upload File</mat-label>
         </div>
         <div class="col-md-8">
-          <input type="file" formControlName="file" #fileInput multiple (change)="createEmail($event)">
+          <input type="file" formControlName="file" #fileInput multiple (change)="createEmail($event)"   [readonly]="isReadOnly">
           <ng-container *ngIf="selectedFile">
             <i [class]="getFileIconClass(selectedFile.type)"></i>
           </ng-container>
@@ -250,7 +298,7 @@
         </div>
         <div class="col-md-8">
           <div class="form-controls">
-            <ckeditor [disabled]="false" [editor]="Editor" formControlName="body" #ckeditorEleRef >
+            <ckeditor [disabled]="false" [editor]="Editor" formControlName="body" #ckeditorEleRef   >
 
             </ckeditor>
           </div>

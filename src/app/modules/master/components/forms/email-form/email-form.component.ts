@@ -33,7 +33,10 @@ export class EmailFormComponent implements OnInit {
   email: Email;
   submitted: boolean = false;
   queryParams?: Params;
-  isDisabled: boolean = false;
+  isReadOnly: boolean = false;
+  recordSelected: boolean = false;
+
+
   errorMessage: string = '';
   isFieldHidden: boolean = false;
   selectedFile: File;
@@ -59,12 +62,12 @@ export class EmailFormComponent implements OnInit {
       this.queryParams = params;
 
       if (this.queryParams['id'] != undefined) {
-        console.log(this.queryParams['id']);
-        this.actionLabel = 'Update';
-        //  this.getById(this.queryParams['id']);
-        this.isDisabled = true;
+
+        this.getById(this.queryParams['id']);
+        // this.isDisabled=true;
       } else {
         this.actionLabel = 'Send';
+
       }
     });
   }
@@ -85,39 +88,19 @@ export class EmailFormComponent implements OnInit {
   initForm() {
     this.emailForm = this.formBuilder.group({
       id: [''],
-      to: ['', 
-      [
-        Validators.required,
-        leadingSpaceValidator,
-        trailingSpaceValidator,
-        blankValidator,
-        whitespaceValidator,
-        emailMaxLength,
-        Validators.pattern(
-          '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
-        ),
-      ],],
-      cc: ['', 
-      [
-        Validators.required,
-        leadingSpaceValidator,
-        trailingSpaceValidator,
-        blankValidator,
-        whitespaceValidator,
-        emailMaxLength,
-        Validators.pattern(
-          '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
-        ),
-      ]],
+      to: ['',
+      
+        [
+
+          
+        ],],
+      cc: ['',
+        [
+
+        ]],
       subject: ['',
-      [
-        Validators.required,
-        leadingSpaceValidator,
-        trailingSpaceValidator,
-        nameMaxLength,
-        blankValidator,
-        Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
-      ] ],
+        [
+        ]],
       dateTime: [''],
       timeZone: ['Asia/Kolkata'],
       body: [''],
@@ -139,6 +122,7 @@ export class EmailFormComponent implements OnInit {
       formData.append('mailRequest', blob);
 
       if (this.actionLabel === 'Send') {
+
         this.emailService.createEmail(formData).subscribe(
           (response: Email) => {
             this.emailService.notify('Email added successfully');
@@ -152,19 +136,25 @@ export class EmailFormComponent implements OnInit {
           }
         );
       }
+
     }
   }
 
-  // getById(id: number) {
-  //   this.emailTemplateService
-  //     .searchEmailTemplateById(id)
-  //     .subscribe((response: EmailTemplate) => {
-  //       this.emailTemplateForm.patchValue(response);
-  //       this.emailtemplate = response;
-  //     });
-  // }
+  getById(id: string) {
+    this.isReadOnly = true;
+    this.recordSelected = true;
+  //this.emailForm.get('body')?.disable();
+    this.emailService
+      .searchEmailById(id)
+      .subscribe((response: Email) => {
+        this.emailForm.patchValue(response);
+        this.email = response;
+
+      });
+  }
 
   Close(isUpdate: boolean) {
+    this.isReadOnly = false;
     this._mdr.close(isUpdate);
   }
 

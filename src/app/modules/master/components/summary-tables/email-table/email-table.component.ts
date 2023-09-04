@@ -16,12 +16,13 @@ import { EmailService } from '../../../services/email.service';
 })
 export class EmailTableComponent {
   @Output() sendDataEvnt = new EventEmitter<number>();
-  buttonVisible: Array<boolean> = [true, false, false];
+  buttonVisible: Array<boolean> = [true, false, false,true];
   matDialogRef: MatDialogRef<EmailFormComponent>;
 
   emailHeaders: { columnsMetadata: Array<ColumnsMetadata> } = {
     columnsMetadata: [],
   };
+
 
   // emailMetaData: { content: Array<Email>; totalElements: number } = {
   //   content: [],
@@ -29,6 +30,7 @@ export class EmailTableComponent {
   //   totalElements: 0,
   // };
   emailMetaData:any
+  isViewMode: boolean = false;
 
   params: HttpParams = new HttpParams();
 
@@ -68,7 +70,7 @@ export class EmailTableComponent {
   action(event: Data) {
     let type: string = event['event'];
 
-    let id: number = event['data'].id;
+    let id: string = event['data'].id;
 
     const queryParam = { id: id };
 
@@ -112,14 +114,14 @@ export class EmailTableComponent {
 
         break;
 
-      //     case 'edit':
-      //       this.OpenModalForEdit(id);
+          case 'view':
+            this.OpenModalForEdit(id);
+            
+            this.router.navigate(['/master/emailtable'], {
+              queryParams: queryParam,
+            });
 
-      //       this.router.navigate(['/master/emailtemplatetable'], {
-      //         queryParams: queryParam,
-      //       });
-
-      //       break;
+            break;
     }
   }
 
@@ -150,9 +152,10 @@ export class EmailTableComponent {
     });
   }
 
-  OpenModalForEdit(id: number) {
+  OpenModalForEdit(data: string) {
+    this.isViewMode = true;
     this.matDialogRef = this.matDialog.open(EmailFormComponent, {
-      data: { id: id },
+      data: { id: data },
 
       disableClose: true,
     });
