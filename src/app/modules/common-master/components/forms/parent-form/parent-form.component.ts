@@ -46,6 +46,7 @@ export class ParentFormComponent {
   queryParams?: Params;
   isEdit: boolean = false;
   errorMessage: string = '';
+  dataTableHeight = '1';
   private queryParamsSubscription: Subscription;
 
   isDisabled: boolean = false;

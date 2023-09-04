@@ -366,10 +366,12 @@
                 Reset
               </button>
             </div>
+            <hr *ngIf="isEdit" />
 
             <app-datatable
               *ngIf="isEdit"
               [buttonVisible]="buttonVisible"
+              [dataTableHeight]="dataTableHeight"
               [dataSource]="childMetaData.content"
               [headers]="childHeaders.columnsMetadata"
               [totalRecord]="childMetaData.totalElements"
