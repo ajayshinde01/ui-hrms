@@ -167,7 +167,7 @@ export class DepartmentComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.departmentService.createDepartment(formData).subscribe(
           (response: Department) => {
-            this.departmentService.notify('Department added Successfully');
+            this.departmentService.notify('Department added successfully');
 
             this.Close(true);
           },
@@ -183,7 +183,7 @@ export class DepartmentComponent implements OnInit {
         formData.updatedBy = 'Admin';
         this.departmentService.updateDepartment(formData).subscribe(
           (response: Department) => {
-            this.departmentService.notify('Department updated Successfully');
+            this.departmentService.notify('Department updated successfully');
 
             this.Close(true);
           },

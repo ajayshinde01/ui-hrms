@@ -263,7 +263,7 @@
 
     <div class="form-group"  *ngIf="!recordSelected">
       <div class="row row-section">
-        <div class="col-md-2 mt-2">
+        <div class="col-md-2 mt-1">
           <mat-label>DateTime<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
@@ -276,28 +276,60 @@
       </div>
     </div>
 
-    <div class="form-group" *ngIf="!recordSelected">
+    <!-- <div class="form-group" *ngIf="!recordSelected">
       <div class="row row-section">
         <div class="col-md-2 mt-2">
           <mat-label>Upload File</mat-label>
         </div>
         <div class="col-md-8">
           <input type="file" formControlName="file" #fileInput multiple (change)="createEmail($event)"   [readonly]="isReadOnly">
+       
           <ng-container *ngIf="selectedFile">
             <i [class]="getFileIconClass(selectedFile.type)"></i>
           </ng-container>
         </div>
       </div>
+    </div> -->
+
+    <div class="form-group mt-3" *ngIf="!recordSelected">
+      <div class="row row-section">
+        <div class="col-md-2 mt-2">
+          <mat-label>Upload File</mat-label>
+        </div>
+        <div class="col-md-8">
+          <div class="passport-file-upload">
+            <button
+            id="add-passport-doc-btn"
+            class="center-positon-absolute upload-doc-btn"
+            mat-icon-button
+            (click)="fileUpload(fileInput)"
+          >
+           Choose File
+          </button>
+            <input type="file" class="personalinfofileInput" formControlName="file" #fileInput multiple (change)="createEmail($event)"   [readonly]="isReadOnly">
+         
+            <ng-container *ngIf="selectedFile">
+              <i class="icon-name" [class]="getFileIconClass(selectedFile.type)">{{selectedFile.name}}</i>
+              <!-- <p>{{selectedFile.name}}</p> -->
+            </ng-container>
+          </div>
+        
+
+
+        </div>
+      </div>
     </div>
+
+   
 
 
     <div class="form-group">
       <div class="row row-section">
-        <div class="col-md-2 mt-2">
+        <div class="col-md-2 mt-4">
           <mat-label>Content<span style="color: red">*</span></mat-label>
         </div>
         <div class="col-md-8">
-          <div class="form-controls">
+          <div class="form-controls mt-3">
             <ckeditor [disabled]="false" [editor]="Editor" formControlName="body" #ckeditorEleRef   >
 
             </ckeditor>
@@ -314,10 +346,10 @@
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-end">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"   [disabled]="!emailForm.valid" enctype="multipart/form-data">
+                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"  *ngIf="!recordSelected" [disabled]="!emailForm.valid" enctype="multipart/form-data">
                   {{actionLabel}}
                 </button>
-                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" *ngIf="!recordSelected" (click)="resetForm()">
                   Reset
                 </button>
               </div>

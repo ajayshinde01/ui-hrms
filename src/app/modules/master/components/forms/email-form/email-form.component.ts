@@ -84,8 +84,14 @@ export class EmailFormComponent implements OnInit {
 
     return iconMap[fileType] || 'fas fa-file';
   }
+  fileUpload(fileInput:any)
+  {
+    fileInput.click(); 
+  }
+
   createEmail(event: any) {
     this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile,"sioudfygshuid089syudvhn ")
   }
 
   initForm() {

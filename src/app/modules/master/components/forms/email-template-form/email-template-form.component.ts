@@ -123,7 +123,7 @@ export class EmailTemplateFormComponent implements OnInit {
           Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ],
       ],
-      content: [''],
+      content: ['',Validators.required],
       createdBy: ['Admin'],
       updatedBy: ['Admin'],
       createdAt: [null],
