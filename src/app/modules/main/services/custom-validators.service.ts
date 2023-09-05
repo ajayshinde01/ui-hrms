@@ -231,6 +231,37 @@ export class CustomValidators {
       return null;
     };
   }
+
+  static companyEmailMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          companyEmailMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  static clientEmailMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          clientEmailMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
+
   static postCodeMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
@@ -531,6 +562,8 @@ export class CustomValidators {
       passportIssueDate: `Date Of Issue should be a past date`,
       valdiationOfPassport: `Valid Dateshould be a future date`,
       ageLessThan18: `${fieldNames[fieldName]} should be greater or equal to 18 years `,
+      clientEmailMaxLength: `Client Email should not exceed 40 characters`,
+      companyEmailMaxLength: `Company Email should not exceed 40 characters`,
     };
     return errorMessages[errorKey] || 'Validation error';
   }
