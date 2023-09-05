@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 import { CommonMaster } from '../../../models/common-master.model';
 
@@ -31,7 +31,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
   styleUrls: ['./address.component.scss'],
 })
-export class AddressComponent implements OnInit {
+export class AddressComponent implements OnInit, OnChanges {
   permanentAddressForm!: FormGroup;
 
   correspondenceAddressForm!: FormGroup;
@@ -97,18 +97,16 @@ export class AddressComponent implements OnInit {
 
     this.route.queryParams.subscribe((params: any) => {
       this.queryParams = params;
+      this.checked = false;
 
       // this.getByIdAndAddressType(this.queryParams['id'], this.addressType);
 
       this.getAllAddressById(this.queryParams['id']);
     });
   }
-
   ngOnChanges(changes: SimpleChanges): void {
-    // this.initForm();
+    console.log('on change met');
     this.getAllAddressById(this.queryParams['id']);
-    debugger;
-    this.onCopyAddress();
   }
 
   initForm() {
@@ -335,7 +333,7 @@ export class AddressComponent implements OnInit {
 
   onCopyAddress() {
     this.checked = true;
-    this.isDisabled = true;
+    this.isDisabled = !this.isDisabled;
     if (this.permanentAddressForm.valid) {
       forkJoin({
         corrStates: this.addressService.getState(
@@ -351,7 +349,7 @@ export class AddressComponent implements OnInit {
       this.correspondenceAddressForm.patchValue(
         this.permanentAddressForm.value
       );
-      this.getAllAddressById(this.queryParams['id']);
+      // this.getAllAddressById(this.queryParams['id']);
       this.correspondenceAddressForm.value.addressType = 'correspondence';
       this.correspondenceAddressForm.value.id = this.corrId;
       debugger;
