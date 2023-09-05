@@ -26,7 +26,7 @@ export class OrganizationFormComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
- 
+
   params: HttpParams = new HttpParams();
 
   constructor(
@@ -138,7 +138,7 @@ export class OrganizationFormComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.organizationService.warn('Credentials already present');
+              this.organizationService.warn(error.error.message);
             }
             console.error('PUT Request failed', error);
           }

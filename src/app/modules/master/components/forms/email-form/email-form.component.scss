@@ -35,7 +35,7 @@
     width: 25px;
     height: 20px;
     font-size: 8px;
-    margin-top: 6%;
+    margin-top: 5%;
     border-radius: 7px;
     border: none;
     margin-right: -30px;
@@ -87,6 +87,7 @@
     background-color: #534686;
     color: white;
     margin-right: 4px;
+    border:none;
   }
   
   .dark {
@@ -97,8 +98,9 @@
     background-color: #534686;
     color: white;
     margin-right: 34px;
+    border:none;
   }
-  
+
   :host ::ng-deep .mat-mdc-text-field-wrapper {
 
     width: 560px !important;
@@ -157,7 +159,7 @@
 
 .form-container.selected {
   width: 800px; /* Adjust the width as needed */
-  height: 560px; /* Adjust the height as needed */
+  height: 580px; /* Adjust the height as needed */
 }
 
 mat-label {

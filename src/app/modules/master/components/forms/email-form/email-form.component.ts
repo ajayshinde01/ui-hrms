@@ -18,7 +18,7 @@ import { Email } from '../../../models/email';
 import { EmailService } from '../../../services/email.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
-import { emailMaxLength } from 'src/app/modules/user/components/forms/Validations/emailMaxLength.validator';
+
 @Component({
   selector: 'app-email-form',
   templateUrl: './email-form.component.html',
@@ -100,13 +100,29 @@ export class EmailFormComponent implements OnInit {
       to: ['',
       
         [
-          Validators.required,
+      
+          // Validators.required,
+          // leadingSpaceValidator,
+          // trailingSpaceValidator,
+          // blankValidator,
+          // whitespaceValidator,
+          // Validators.pattern(
+          //   '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
+          // )
 
           
         ],],
       cc: ['',
         [
-          Validators.required
+         
+          // Validators.required,
+          // leadingSpaceValidator,
+          // trailingSpaceValidator,
+          // blankValidator,
+          // whitespaceValidator,
+          // Validators.pattern(
+          //   '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
+          // )
         ]],
       subject: ['',
         [
