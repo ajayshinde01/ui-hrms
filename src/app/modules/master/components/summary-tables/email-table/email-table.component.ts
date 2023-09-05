@@ -24,13 +24,13 @@ export class EmailTableComponent {
   };
 
 
-  // emailMetaData: { content: Array<Email>; totalElements: number } = {
-  //   content: [],
+  emailMetaData: { content: Array<Email>; totalElements: number } = {
+    content: [],
 
-  //   totalElements: 0,
-  // };
-  emailMetaData:any
-  isViewMode: boolean = false;
+    totalElements: 0,
+  };
+  //emailMetaData:any
+   isViewMode: boolean = false;
 
   params: HttpParams = new HttpParams();
 
@@ -125,18 +125,36 @@ export class EmailTableComponent {
     }
   }
 
+  // searchFunction(params: HttpParams) {
+  //   this.params = params;
+  //   this.emailService
+
+  //     .search(params)
+
+  //     .subscribe((data: { content: Array<Email>; totalElements: number }) => {
+        
+
+  //       this.emailMetaData = data.content;
+        
+  //     });
+  // }
+
   searchFunction(params: HttpParams) {
     this.params = params;
+
     this.emailService
 
       .search(params)
 
-      .subscribe((data: { content: Array<Email>; totalElements: number }) => {
-        
+      .subscribe(
+        (data: { content: Array<Email>; totalElements: number }) => {
+          console.log(data.content);
 
-        this.emailMetaData = data.content
-        
-      });
+          console.log(data.totalElements);
+
+          this.emailMetaData = data;
+        }
+      );
   }
 
   OpenModal() {
@@ -153,7 +171,7 @@ export class EmailTableComponent {
   }
 
   OpenModalForEdit(data: string) {
-    // this.isViewMode = true;
+     this.isViewMode = true;
     this.matDialogRef = this.matDialog.open(EmailFormComponent, {
       data: { id: data },
 

@@ -15,6 +15,7 @@ import { blankValidator } from '../Validations/blankData.validator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+
 @Component({
   selector: 'app-email-template-form',
   templateUrl: './email-template-form.component.html',
@@ -31,9 +32,14 @@ export class EmailTemplateFormComponent implements OnInit {
   queryParams?: Params;
   isDisabled: boolean = false;
   errorMessage: string = '';
-  
+// data:any={
+//   empName:'Developers',
+//   companyName:'Avisys Services Pvt. Ltd.',
+//   team:'CRM'
+// }
 
   actionLabel: string = 'Save';
+  
   constructor(
     private _mdr: MatDialogRef<EmailTemplateFormComponent>,
     @Inject(MAT_DIALOG_DATA) data: string,
@@ -43,6 +49,7 @@ export class EmailTemplateFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
@@ -128,6 +135,10 @@ export class EmailTemplateFormComponent implements OnInit {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
+      // email:'aniket.vaishampayan@avisys.in',
+      // empName:[this.data.empName],
+      // companyName:[this.data.companyName],
+      // team:[this.data.team],
     });
   }
 
@@ -140,10 +151,11 @@ export class EmailTemplateFormComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.emailTemplateService.createEmailTemplate(formData).subscribe(
           (response: EmailTemplate) => {
+            
             this.emailTemplateService.notify(
               'Email template added successfully'
             );
-
+  
             this.Close(true);
           },
           (error: any) => {
@@ -158,6 +170,7 @@ export class EmailTemplateFormComponent implements OnInit {
         //  formData.updatedBy = 'Admin';
         this.emailTemplateService.updateEmailTemplateById(formData).subscribe(
           (response: EmailTemplate) => {
+       
             this.emailTemplateService.notify(
               'Email template updated successfully'
             );
@@ -173,6 +186,7 @@ export class EmailTemplateFormComponent implements OnInit {
       }
     }
   }
+  
   getById(id: number) {
     this.emailTemplateService
       .searchEmailTemplateById(id)
