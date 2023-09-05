@@ -1,9 +1,9 @@
 <div class="main-div">
   <form [formGroup]="permanentAddressForm">
     <br />
-
-    <h2 class="head-name">PERMANENT<span style="color: red">*</span></h2>
-
+    <div class="formHeader">
+      <span>PERMANENT<span style="color: red">*</span></span>
+    </div>
     <div class="row mm">
       <div class="col-lg-4">
         <mat-label>Address 1<span style="color: red">*</span></mat-label>
@@ -198,7 +198,7 @@
     <br />
 
     <div>
-      <h2 class="inline head-name">CORRESPONDENCE</h2>
+      <span class="formHeader">CORRESPONDENCE</span>
 
       <mat-checkbox
         color="primary"

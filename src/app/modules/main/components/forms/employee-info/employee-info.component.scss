@@ -1,6 +1,8 @@
-.formHeader h2 {
+.formHeader {
   margin-top: 25px;
   margin-bottom: 10px;
+  font-size: larger;
+  color: #534686;
 }
 
 .scroll-container {
@@ -221,5 +223,11 @@ mat-label {
 }
 
 .head-name {
+  margin-bottom: 15px;
   color: #534686;
+  font-size: medium;
+}
+
+.user-id {
+  margin-top: 10px;
 }
