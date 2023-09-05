@@ -85,6 +85,11 @@ mat-label {
   margin-top: 3px;
 }
 
+.custom-placeholder::placeholder {
+  font-weight: 350;
+  color: grey;
+}
+
 .save-btn {
   width: 60px;
   height: 30px;

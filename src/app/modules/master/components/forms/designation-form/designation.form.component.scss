@@ -98,6 +98,10 @@ mat-label {
   color: white;
   margin-right: 3px;
 }
+.custom-placeholder::placeholder {
+  font-weight: 350;
+  color: grey;
+}
 
 .save-btn {
   width: 60px;
