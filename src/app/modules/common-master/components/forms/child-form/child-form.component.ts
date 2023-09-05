@@ -81,7 +81,7 @@ export class ChildFormComponent {
           trailingSpaceValidator,
           nameMaxLength,
           blankValidator,
-          Validators.pattern('^[a-zA-Z0-9\\s.+-]+$'),
+          Validators.pattern('^[a-zA-Z\\s.+-]+$'),
         ],
       ],
       createdBy: ['Admin'],
@@ -117,6 +117,9 @@ export class ChildFormComponent {
 
   get masterNameControl() {
     return this.childForm.get('masterName');
+  }
+  get valueControl() {
+    return this.childForm.get('value');
   }
 
   onSubmit() {
@@ -161,10 +164,9 @@ export class ChildFormComponent {
   }
   getById(id: number) {
     this.childService.searchChildById(id).subscribe((response: Parent) => {
-      debugger;
+      this.childForm.get('value')?.setValue(response.value);
       this.childForm.patchValue(response);
-      // this.childForm.patchValue(value);
-      this.masterName = this.childForm.value.masterName;
+      this.child = response;
     });
   }
 

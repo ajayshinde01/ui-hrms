@@ -231,6 +231,20 @@ export class CustomValidators {
       return null;
     };
   }
+  static postCodeMaxLength(maxLength: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as string;
+      console.log(value);
+
+      if (value && value.toString().length > maxLength) {
+        return {
+          postCodeMaxLength: `Maximum ${maxLength} characters are allowed.`,
+        };
+      }
+
+      return null;
+    };
+  }
 
   static instituteNameMaxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -508,6 +522,7 @@ export class CustomValidators {
       validCompanyFormat: `Please enter valid Company Name`,
       validDesignationFormat: `Please enter valid Designation`,
       educationalQualificationMaxLength: `Educational Qualification should not exceed 50 characters`,
+      postCodeMaxLength: `Postcode should not exceed 6 characters`,
       instituteNameMaxLength: `Institutee Name should not exceed 100 characters`,
       pastDate: `${fieldNames[fieldName]} should be less than current date`,
       issuedByMaxLength: `Issued By should not exceed 100 characters`,

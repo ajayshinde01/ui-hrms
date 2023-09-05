@@ -25,9 +25,9 @@ export class WorkExperienceTableComponent implements OnInit {
     content: Array<WorkExperience>;
     totalElements: number;
   } = {
-      content: [],
-      totalElements: 0,
-    };
+    content: [],
+    totalElements: 0,
+  };
   params: HttpParams = new HttpParams();
 
   constructor(
@@ -35,7 +35,7 @@ export class WorkExperienceTableComponent implements OnInit {
     private route: ActivatedRoute,
     private matDialog: MatDialog,
     private toastrService: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -49,16 +49,14 @@ export class WorkExperienceTableComponent implements OnInit {
   }
 
   getHeaders() {
-    this.workExperienceService
-      .fetchWorkExperienceHeaders()
-      .subscribe(
-        (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
-          this.workExperienceHeaders = response;
-        },
-        (error: any) => {
-          console.error('GET Request failed', error);
-        }
-      );
+    this.workExperienceService.fetchWorkExperienceHeaders().subscribe(
+      (response: { columnsMetadata: Array<ColumnsMetadata> }) => {
+        this.workExperienceHeaders = response;
+      },
+      (error: any) => {
+        console.error('GET Request failed', error);
+      }
+    );
   }
 
   action(event: any) {
@@ -72,8 +70,13 @@ export class WorkExperienceTableComponent implements OnInit {
           .deleteWorkExperience(event['data'].id, this.id)
           .subscribe(
             (response: ApiResponse) => {
-              console.log('DELETE-Work Experience Request successful', response);
-              this.toastrService.success('Work Experience deleted successfully');
+              console.log(
+                'DELETE-Work Experience Request successful',
+                response
+              );
+              this.toastrService.success(
+                'Work Experience deleted successfully'
+              );
               this.searchFunction(this.params);
               const currentPage = Number(this.params.get('page'));
               if (

@@ -59,7 +59,7 @@ export class EmployeeInfoComponent implements OnInit {
   clickedTabIndex: number;
   minDob: Date;
   orgCode = sessionStorage.getItem('orgCode');
-
+  employeeId: number;
   errorMessage: any;
   cardDivHeight: any = '';
   cardHeights!: number;
@@ -73,7 +73,7 @@ export class EmployeeInfoComponent implements OnInit {
     private http: HttpClient,
     private capitalService: FirstLetterCapitalService,
     private dialog: MatDialog
-  ) { }
+  ) {}
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();
@@ -89,6 +89,7 @@ export class EmployeeInfoComponent implements OnInit {
       if (this.queryParams['id'] != undefined) {
         console.log(this.queryParams['id']);
         this.actionLabel = 'Update';
+        this.employeeId = this.queryParams['id'];
         this.getById(this.queryParams['id']);
         this.isDisabled = true;
       } else {
@@ -350,8 +351,17 @@ export class EmployeeInfoComponent implements OnInit {
     // let photoUpdated1=this.photo;
     if (this.url) {
       this.fileUploadService.removeImage(this.photo).subscribe((res) => {
-        console.log('received response', res);
-        //this.url = res['message'];
+        console.log('received response', this.employeeId);
+        if (this.employeeId != undefined) {
+          this.employeeService.deleteProfileImage(this.employeeId).subscribe(
+            (response) => {
+              this.employeeForm.controls['profileImage'].setValue('');
+            },
+            (error) => {
+              this.url = 'assets/profile-img.png';
+            }
+          );
+        }
         this.url = 'assets/profile-img.png';
         console.log('Delete image');
       });
@@ -385,10 +395,10 @@ export class EmployeeInfoComponent implements OnInit {
     if (this.employeeForm.valid) {
       const formData = {
         ...this.employeeForm.value,
-        confirmationDate: moment(this.employeeForm.value.dateOfBirth)
+        dateOfBirth: moment(this.employeeForm.value.dateOfBirth)
           .utcOffset(0, true)
           .format('YYYY-MM-DD'),
-        resignationDate: moment(this.employeeForm.value.dateOfJoining)
+        dateOfJoining: moment(this.employeeForm.value.dateOfJoining)
           .utcOffset(0, true)
           .format('YYYY-MM-DD'),
       };
@@ -398,7 +408,7 @@ export class EmployeeInfoComponent implements OnInit {
       if (this.actionLabel === 'Save') {
         this.employeeService.createEmployee(formData).subscribe(
           (response: Employees) => {
-            this.employeeService.notify('Data Saved Successfully...');
+            this.employeeService.notify('Employee Info added successfully');
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Save' },
             });
@@ -408,7 +418,7 @@ export class EmployeeInfoComponent implements OnInit {
           (error: any) => {
             console.log('errormessage' + JSON.stringify(error.error.message));
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn(error.error.message);
+              this.employeeService.warn('Employee Info already present');
             }
           }
         );
@@ -416,14 +426,14 @@ export class EmployeeInfoComponent implements OnInit {
       if (this.actionLabel === 'Update') {
         this.employeeService.updateEmployee(formData).subscribe(
           (response: Employees) => {
-            this.employeeService.notify('Update Successfully...');
+            this.employeeService.notify('Employee Info updated successfully');
             this.router.navigate(['/main/employee-info'], {
               queryParams: { id: response.id, actionLabel: 'Update' },
             });
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn(error.error.message);
+              this.employeeService.warn('Employee Info already present');
             }
           }
         );

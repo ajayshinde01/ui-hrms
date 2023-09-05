@@ -1,3 +1,7 @@
+.save-reset-button-container{
+  padding-right: 15px;
+}
+
 .col-md-4 mt-2 {
   margin-right: 50px;
 }
@@ -52,7 +56,6 @@
 }
 .justify-content-end {
   justify-content: flex-end !important;
-  width: 97%;
   margin-top: -30px;
   margin-bottom: 2%;
 }
@@ -82,7 +85,7 @@
   cursor: pointer;
   background-color: #534686;
   color: white;
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 .dark {

@@ -16,7 +16,7 @@ import { ColumnsMetadata } from '../models/columns-metadata';
   providedIn: 'root',
 })
 export class WorkExperienceService {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
   fetchWorkExperienceHeaders(): Observable<{
     columnsMetadata: Array<ColumnsMetadata>;
@@ -98,15 +98,11 @@ export class WorkExperienceService {
     );
   }
 
-  notifySuccess(message: string) {
-    this.toastrService.success(message); // Display success notification
-  }
-
-  notifyError(message: string) {
-    this.toastrService.error(message); // Display error notification
-  }
-
   notify(message: string) {
-    this.toastrService.success(message); // Display success notification
+    this.toastrService.success(message);
+  }
+
+  warn(message: string) {
+    this.toastrService.warning(message);
   }
 }
