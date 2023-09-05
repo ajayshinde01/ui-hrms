@@ -33,7 +33,7 @@ export class EducationalQualificationFormComponent implements OnInit {
     private route: ActivatedRoute,
     private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -80,7 +80,7 @@ export class EducationalQualificationFormComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.educationalQualificationMaxLength(50),
+          CustomValidators.maxLength(50),
           Validators.pattern('^[A-Za-z\\s.-]{1,50}'),
         ],
       ],
@@ -92,7 +92,7 @@ export class EducationalQualificationFormComponent implements OnInit {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.instituteNameMaxLength(100),
+          CustomValidators.maxLength(100),
           Validators.pattern('^[A-Za-z\\s.-]{1,100}'),
         ],
       ],
@@ -193,7 +193,8 @@ export class EducationalQualificationFormComponent implements OnInit {
     const control = this.educationalDetailsForm.get(controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
     return '';
   }

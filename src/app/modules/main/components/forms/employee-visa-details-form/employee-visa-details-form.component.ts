@@ -55,7 +55,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id');
@@ -91,7 +91,8 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     const control = this.employeeVisaDetailsForm.get(controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
     return '';
   }

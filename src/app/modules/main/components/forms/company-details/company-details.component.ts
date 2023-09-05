@@ -51,7 +51,7 @@ export class CompanyDetailsComponent implements OnInit {
     private departmentService: DepartmentService,
     private employeeTypeService: EmployeeTypeService,
     private gradeService: GradeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -147,7 +147,7 @@ export class CompanyDetailsComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.companyEmailMaxLength(40),
+          CustomValidators.maxLength(40),
           Validators.pattern(
             '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
           ),
@@ -160,7 +160,7 @@ export class CompanyDetailsComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.clientEmailMaxLength(40),
+          CustomValidators.maxLength(40),
           Validators.pattern(
             '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
           ),
@@ -250,7 +250,8 @@ export class CompanyDetailsComponent implements OnInit {
     const control = this.companyDetailsForm.get(controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
     return '';
   }
