@@ -85,7 +85,7 @@
         <input
           matInput
           formControlName="passportNumber"
-          placeholder="A2096457"
+          placeholder="A2096457" (input)="update($event)"
         />
         <mat-error
           *ngIf="isControlInvalid('passportNumber')  && !employeePersonalDetailsForm.controls['passportNumber'].hasError('maxlength')"
@@ -105,6 +105,7 @@
         <mat-error *ngIf="isControlInvalid('passportName')" class="validate-text">
           {{ getErrorMessage("passportName") }}
         </mat-error>
+        
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -346,7 +347,7 @@
     </div>
   </div>
   <div class="form-footer">
-    <button mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn" (click)="onSubmit()">
+    <button mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn" (click)="onSubmit()" [disabled]="!employeePersonalDetailsForm.valid">
       {{ actionLabel }}
     </button>
   </div>

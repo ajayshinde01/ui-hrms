@@ -40,7 +40,7 @@ export class DesignationFormComponent {
   actionLabel: string = 'Save';
   params: HttpParams = new HttpParams();
   errorMessage: string = '';
-  orgCode=sessionStorage.getItem('orgCode')
+  orgCode = sessionStorage.getItem('orgCode');
 
   constructor(
     private _mdr: MatDialogRef<DesignationFormComponent>,
@@ -213,7 +213,7 @@ export class DesignationFormComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.designationService.warn('Credentials already present');
+              this.designationService.warn(error.error.message);
             }
             console.error('PUT Request failed', error);
           }

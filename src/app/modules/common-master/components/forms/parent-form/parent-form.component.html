@@ -153,11 +153,13 @@
                       <mat-form-field appearance="outline" color="primary">
                         <input
                           [class.custom-input]="isEdit"
+                          [disabled]="isDisabled"
                           matInput
                           placeholder=""
-                          class="input-box"
+                          class="input-box FNAME"
                           formControlName="masterName"
                         />
+
                         <div
                           *ngIf="
                             parentForm.controls['masterName']?.invalid &&
@@ -222,6 +224,7 @@
                       <mat-form-field appearance="outline" color="primary">
                         <input
                           [class.custom-input]="isEdit"
+                          [disabled]="isDisabled"
                           matInput
                           placeholder=""
                           class=""
@@ -293,6 +296,7 @@
                       <mat-form-field appearance="outline" color="primary">
                         <input
                           [class.custom-input]="isEdit"
+                          [disabled]="isDisabled"
                           matInput
                           placeholder=""
                           class="input-box"

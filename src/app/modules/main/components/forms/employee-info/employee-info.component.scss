@@ -1,4 +1,4 @@
-.formHeader h2 {
+employee.formHeader h2 {
   margin-top: 25px;
   margin-bottom: 10px;
 }
@@ -138,17 +138,12 @@ img {
 }
 
 #remove-avatar-photo-button {
+  border-radius: 25%;
+  background-color: white;
+  transform: scale(1.4);
   position: absolute;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  top: 10%; //5
-  right: 8%; //5
-  z-index: 3;
-  color: black;
-  background-color: transparent;
-  border-radius: 12px;
+  top: 8%;
+  left: 80%;
 }
 
 #remove-avatar-photo-button:hover {
@@ -157,10 +152,11 @@ img {
 }
 
 .center-positon-absolute {
+  border-radius: 35%;
   position: absolute;
-  top: 50%;
+  top: 85%;
   /* position the top  edge of the element at the middle of the parent */
-  left: 50%;
+  left: 85%;
   /* position the left edge of the element at the middle of the parent */
   transform: translate(-50%, -50%);
   /* This is a shorthand of translateX(-50%) and translateY(-50%) */

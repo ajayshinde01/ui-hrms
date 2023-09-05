@@ -174,7 +174,7 @@ export class RoleFormComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.roleService.warn('Credentials already present');
+              this.roleService.warn(error.error.message);
             }
             console.error('PUT Request failed', error);
           }

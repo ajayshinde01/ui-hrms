@@ -1,7 +1,8 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ValidatorFn,
   Validators,
@@ -45,6 +46,9 @@ export class EmployeePersonalDetailsFormComponent {
   viewAadharFile: any;
   viewPANFile: any;
   todayDate: Date = new Date();
+  validate: boolean;
+  @ViewChild('passportNameInputElement') passportNameInput!: ElementRef;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -227,8 +231,49 @@ export class EmployeePersonalDetailsFormComponent {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
     });
+  }
+
+  //passportNumber = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
+  //passportame = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
+  //this.employeePersonalDetailsForm.value.passportNumber
+  //if(this.employeePersonalDetailsForm.value.passportNumber !== ''){
+  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);
+  // } else {
+  // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();
+  //}
+
+  update(event: any){
+   let value=event.target.value;
+   console.log("value",value);
+    if(value!==''){
+    //  this.employeePersonalDetailsForm.get('passportName').setValidators([Validators.required, Validators.minLength(3)]);;    
+    //this.employeePersonalDetailsForm.get('passportName')?.setValidators([Validators.required,Validators.maxLength(10)])
+    this.employeePersonalDetailsForm.controls["passportName"].addValidators([Validators.required]);
+    this.validate=true;
+    console.log("validate",this.validate);
+   // return {validate:true}
+    }
+    else {                
+     // this.employeePersonalDetailsForm.value.passportName.clearValidators();               
+     this.employeePersonalDetailsForm.controls["passportName"].removeValidators([Validators.required]);
+     this.validate=false;
+     console.log("validateelse",this.validate);
+    // return {validate:false}
+     }
+    // console.log("input",this.passportNameInput);
+     setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      if(this.passportNameInput){
+        this.passportNameInput.nativeElement.focus();
+      }
+  },1000);  
+    
+     this.employeePersonalDetailsForm.controls['passportName'].updateValueAndValidity();
+    // this.employeePersonalDetailsForm.get('passportame').focus();
+   // this.employeePersonalDetailsForm.controls['passportName'].
+
+
   }
 
   validIssueDate(): ValidatorFn {
@@ -308,6 +353,7 @@ export class EmployeePersonalDetailsFormComponent {
   getById(id: string) {
     this.employeeService.searchPersonalDetailsById(this.emp_id).subscribe(
       (response: EmployeePersonalDetails) => {
+        this.employeePersonalDetailsForm.controls['id'].setValue(response.id);
         this.employeePersonalDetailsForm.patchValue(response);
         console.log(response);
         this.employee = response;
@@ -422,11 +468,12 @@ export class EmployeePersonalDetailsFormComponent {
     if (this.employeePersonalDetailsForm.valid) {
       const formData = {
         ...this.employeePersonalDetailsForm.value,
-        confirmationDate: moment(
-          this.employeePersonalDetailsForm.value.passportIssueDate
-        )
-          .utcOffset(0, true)
-          .format('YYYY-MM-DD'),
+        confirmationDate: this.employeePersonalDetailsForm.value
+          .passportIssueDate
+          ? moment(this.employeePersonalDetailsForm.value.passportIssueDate)
+              .utcOffset(0, true)
+              .format('YYYY-MM-DD')
+          : null,
       };
 
       this.employeePersonalDetailsForm.value.passportFile =
@@ -452,7 +499,7 @@ export class EmployeePersonalDetailsFormComponent {
                 error.status == 500
               ) {
                 this.employeeService.warn(
-                  'Employee Personal Details already present'
+                  error.error.message
                 );
               }
             }
@@ -475,7 +522,7 @@ export class EmployeePersonalDetailsFormComponent {
                 error.status == 500
               ) {
                 this.employeeService.warn(
-                  'Employee Personal Details already present'
+                  error.error.message
                 );
               }
             }
