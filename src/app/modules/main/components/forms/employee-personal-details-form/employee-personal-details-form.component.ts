@@ -2,6 +2,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ValidatorFn,
   Validators,
@@ -18,7 +19,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-employee-personal-details-form',
   templateUrl: './employee-personal-details-form.component.html',
-  styleUrls: ['./employee-personal-details-form.component.scss'],
+  styleUrls: ['./employee-personal-details-form.component.scss']
 })
 export class EmployeePersonalDetailsFormComponent {
   employee: EmployeePersonalDetails;
@@ -45,6 +46,8 @@ export class EmployeePersonalDetailsFormComponent {
   viewAadharFile: any;
   viewPANFile: any;
   todayDate: Date = new Date();
+  validate: boolean;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -229,6 +232,36 @@ export class EmployeePersonalDetailsFormComponent {
       updatedAt: [null],
       orgCode: { value: this.orgCode },
     });
+  }
+
+  //passportNumber = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
+  //passportame = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
+//this.employeePersonalDetailsForm.value.passportNumber
+  //if(this.employeePersonalDetailsForm.value.passportNumber !== ''){
+  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);               
+ // } else {                
+   // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();               
+  //}
+
+  update(event: any){
+   let value=event.target.value;
+   console.log("value",value);
+    if(value!==''){
+    //  this.employeePersonalDetailsForm.get('passportName').setValidators([Validators.required, Validators.minLength(3)]);;    
+    //this.employeePersonalDetailsForm.get('passportName')?.setValidators([Validators.required,Validators.maxLength(10)])
+    this.employeePersonalDetailsForm.controls["passportName"].setValidators([Validators.required]);
+    this.validate=true;
+    console.log("validate",this.validate);
+   // return {validate:true}
+    }
+    else {                
+     // this.employeePersonalDetailsForm.value.passportName.clearValidators();               
+     this.employeePersonalDetailsForm.controls["passportName"].clearValidators();
+     this.validate=false;
+     console.log("validateelse",this.validate);
+    // return {validate:false}
+     }
+
   }
 
   validIssueDate(): ValidatorFn {
