@@ -12,25 +12,19 @@
 
 :host ::ng-deep .address-details-save-btn {
   background-color: #534686;
-
   border: #534686;
 }
 
 .inline {
   display: inline;
-
   margin-right: 10px; /* Add some spacing between elements */
 }
 
 .validate-text {
-  font-size: 12px;
-
+  font-size: 9px;
   text-align: left;
-
   color: red;
-
-  position: relative; /* Or absolute or fixed depending on your layout */
-
+  position: relative;
   left: -15px;
 }
 
