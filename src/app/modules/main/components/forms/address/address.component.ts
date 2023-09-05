@@ -84,7 +84,7 @@ export class AddressComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
 
     private http: HttpClient
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -416,8 +416,13 @@ export class AddressComponent implements OnInit, OnChanges {
               this.actionLabel = 'Update';
 
               this.permanentAddressForm.patchValue(response[0]);
+              this.permanentAddressForm.controls['id'].setValue(response[0].id);
+              this.corrId = response[1].id;
 
               this.correspondenceAddressForm.patchValue(response[1]);
+              this.correspondenceAddressForm.controls['id'].setValue(
+                response[1].id
+              );
 
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,

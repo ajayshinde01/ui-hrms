@@ -3,6 +3,10 @@
   border: #534686;
 }
 
+.col-lg-6 {
+  margin-bottom: 4px;
+}
+
 ::ng-deep .mat-mdc-button-touch-target:focus {
   background-color: red !important;
 }
