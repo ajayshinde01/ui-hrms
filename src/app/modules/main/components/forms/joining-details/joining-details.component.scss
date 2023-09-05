@@ -4,7 +4,7 @@
 }
 
 ::ng-deep .mat-mdc-button-touch-target:focus {
- background-color: red!important;
+  background-color: red !important;
 }
 
 mat-label {
@@ -15,6 +15,12 @@ mat-label {
   background-color: #534686;
   border-color: #534686;
   transform: scale(1.05);
+}
+
+.mat-select-value-text.custom-select-value {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: black; /* Adjust the color as needed */
+  font-weight: 450;
 }
 
 .main-div {
@@ -31,5 +37,12 @@ mat-label {
 }
 
 .head-name {
+  color: #534686;
+}
+
+.formHeader {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: larger;
   color: #534686;
 }

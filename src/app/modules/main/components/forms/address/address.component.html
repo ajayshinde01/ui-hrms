@@ -1,9 +1,9 @@
 <div class="main-div">
   <form [formGroup]="permanentAddressForm">
     <br />
-
-    <h2 class="head-name">PERMANENT<span style="color: red">*</span></h2>
-
+    <div class="formHeader">
+      <span>PERMANENT<span style="color: red">*</span></span>
+    </div>
     <div class="row mm">
       <div class="col-lg-4">
         <mat-label>Address 1<span style="color: red">*</span></mat-label>
@@ -198,7 +198,7 @@
     <br />
 
     <div>
-      <h2 class="inline head-name">CORRESPONDENCE</h2>
+      <span class="formHeader">CORRESPONDENCE</span>
 
       <mat-checkbox
         color="primary"
@@ -213,7 +213,7 @@
         <mat-label>Address 1</mat-label>
 
         <mat-form-field appearance="outline">
-          <input matInput formControlName="address1" />
+          <input matInput formControlName="address1" [readonly]="isDisabled" />
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
@@ -230,7 +230,7 @@
         <mat-label>Address 2</mat-label>
 
         <mat-form-field appearance="outline">
-          <input matInput formControlName="address2" />
+          <input matInput formControlName="address2" [readonly]="isDisabled" />
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
@@ -247,7 +247,7 @@
         <mat-label>Landmark</mat-label>
 
         <mat-form-field appearance="outline">
-          <input matInput formControlName="landmark" />
+          <input matInput formControlName="landmark" [readonly]="isDisabled" />
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
@@ -270,7 +270,12 @@
         <mat-label>Years</mat-label>
 
         <mat-form-field appearance="outline">
-          <input type="number" matInput formControlName="tenureYear" />
+          <input
+            type="number"
+            matInput
+            formControlName="tenureYear"
+            [readonly]="isDisabled"
+          />
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
@@ -287,7 +292,12 @@
         <mat-label>Months</mat-label>
 
         <mat-form-field appearance="outline">
-          <input type="number" matInput formControlName="tenureMonth" />
+          <input
+            type="number"
+            matInput
+            formControlName="tenureMonth"
+            [readonly]="isDisabled"
+          />
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
@@ -304,7 +314,7 @@
         <mat-label>Post Code</mat-label>
 
         <mat-form-field appearance="outline">
-          <input matInput formControlName="postcode" />
+          <input matInput formControlName="postcode" [readonly]="isDisabled" />
 
           <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
 
@@ -325,6 +335,7 @@
             formControlName="country"
             placeholder="Select"
             (selectionChange)="onCorrespondenceCountryChange($event)"
+            [disabled]="isDisabled"
           >
             <mat-option [disabled]="true">Select</mat-option>
 
@@ -354,6 +365,7 @@
             formControlName="state"
             placeholder="Select"
             (selectionChange)="onCorrespondenceStatesChange($event)"
+            [disabled]="isDisabled"
           >
             <mat-option [disabled]="true">Select</mat-option>
 
@@ -375,7 +387,11 @@
         <mat-label>City</mat-label>
 
         <mat-form-field appearance="outline" color="primary">
-          <mat-select formControlName="city" placeholder="Select">
+          <mat-select
+            formControlName="city"
+            placeholder="Select"
+            [disabled]="isDisabled"
+          >
             <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option *ngFor="let city of corresCities" [value]="city.code">{{
@@ -396,7 +412,11 @@
         <mat-label>Ownership Status</mat-label>
 
         <mat-form-field appearance="outline" color="primary">
-          <mat-select formControlName="ownershipStatus" placeholder="Select">
+          <mat-select
+            formControlName="ownershipStatus"
+            placeholder="Select"
+            [disabled]="isDisabled"
+          >
             <mat-option [disabled]="true">Select</mat-option>
 
             <mat-option
