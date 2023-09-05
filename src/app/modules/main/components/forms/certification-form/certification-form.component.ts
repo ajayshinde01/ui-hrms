@@ -32,7 +32,7 @@ export class CertificationFormComponent implements OnInit {
     private route: ActivatedRoute,
     private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -122,7 +122,7 @@ export class CertificationFormComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.certificationService.warn('Certification already present');
+                this.certificationService.warn(error.error.message);
               }
 
               console.error('POST Request failed', error);
@@ -142,7 +142,7 @@ export class CertificationFormComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 404) {
-                this.certificationService.warn('Certification already present');
+                this.certificationService.warn(error.error.message);
               }
 
               console.error('PUT Request failed', error);
@@ -153,7 +153,6 @@ export class CertificationFormComponent implements OnInit {
   }
 
   getById(id: number, certificationsId: number) {
-
     this.certificationService.getByEmployeeId(id, certificationsId).subscribe(
       (response) => {
         this.certificationsForm.patchValue(response);

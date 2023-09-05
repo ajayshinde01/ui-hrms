@@ -444,7 +444,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Address already present');
+                this.addressService.warn(error.error.message);
               }
             }
           );
@@ -466,7 +466,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Address already present');
+                this.addressService.warn(error.error.message);
               }
             }
           );

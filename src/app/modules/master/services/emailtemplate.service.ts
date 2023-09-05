@@ -19,6 +19,13 @@ private dataSubject = new BehaviorSubject<string>('');
     );
   }
 
+  // createEmailTemplate(emailtemplate:EmailTemplate): Observable<EmailTemplate> {
+  //   return this.http.post<EmailTemplate>(
+  //     'http://192.168.1.16:7010/email/schedule',
+  //     emailtemplate
+  //   );
+  // }
+
   getEmailTemplateHeaders(): Observable<{
     columnsMetadata: Array<ColumnsMetadata>;
   }> {
