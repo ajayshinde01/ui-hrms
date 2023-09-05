@@ -117,7 +117,7 @@ export class WorkExperienceFormComponent implements OnInit {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLengthOfCompany(50),
+          CustomValidators.maxLength(50),
           CustomValidators.validCompanyFormat(),
         ],
       ],
@@ -129,7 +129,7 @@ export class WorkExperienceFormComponent implements OnInit {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.designationPeriodMaxLength(100),
+          CustomValidators.maxLength(100),
           CustomValidators.validDesignationFormat(),
         ],
       ],
@@ -152,7 +152,7 @@ export class WorkExperienceFormComponent implements OnInit {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLengthOfAddress(250),
+          CustomValidators.maxLength(250),
           CustomValidators.validAddressFormat(),
         ],
       ],
@@ -263,8 +263,8 @@ export class WorkExperienceFormComponent implements OnInit {
 
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';

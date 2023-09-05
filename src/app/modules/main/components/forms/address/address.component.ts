@@ -84,7 +84,7 @@ export class AddressComponent implements OnInit {
     private route: ActivatedRoute,
 
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -122,14 +122,10 @@ export class AddressComponent implements OnInit {
 
         [
           Validators.required,
-
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.noTrailingSpace(),
-
           CustomValidators.maxLength(100),
-
           Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
         ],
       ],
@@ -195,13 +191,9 @@ export class AddressComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.noTrailingSpace(),
-
-          CustomValidators.postCodeMaxLength(6),
-
+          CustomValidators.maxLength(6),
           Validators.pattern('^[0-9]{6}$'),
         ],
       ],
@@ -268,9 +260,7 @@ export class AddressComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.maxLength(2),
-
           Validators.pattern('^[0-9]{1,2}$'),
         ],
       ],
@@ -283,9 +273,7 @@ export class AddressComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.maxLength(2),
-
           Validators.pattern('^(?:0?[0-9]|1[0-1])$'),
         ],
       ],
@@ -302,13 +290,9 @@ export class AddressComponent implements OnInit {
         [
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.noTrailingSpace(),
-
-          CustomValidators.postCodeMaxLength(6),
-
+          CustomValidators.maxLength(6),
           Validators.pattern('^[0-9]{6}$'),
         ],
       ],
@@ -521,8 +505,8 @@ export class AddressComponent implements OnInit {
 
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';
@@ -540,7 +524,8 @@ export class AddressComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';
