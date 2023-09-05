@@ -95,6 +95,10 @@ mat-label {
   margin-right: 4px;
   border: none;
 }
+.custom-placeholder::placeholder {
+  font-weight: 350;
+  color: grey;
+}
 
 .dark {
   width: 60px;

@@ -28,7 +28,7 @@
                 placeholder="DES-001"
                 formControlName="designationId"
                 [disabled]="isDisabled"
-                class=""
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -99,6 +99,7 @@
                 matInput
                 placeholder="Senior-Manager"
                 formControlName="designationName"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -180,6 +181,7 @@
                 matInput
                 placeholder="Sample Description"
                 formControlName="designationDesc"
+                class="form-Control name-field custom-placeholder"
               >
               </textarea>
               <div
@@ -246,14 +248,17 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label
-            >Organization Code<span style="color: red">*</span></mat-label
-          >
+          <mat-label>Organization Code</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="AVI-BHR" formControlName="orgCode" />
+              <input
+                matInput
+                placeholder="AVI-BHR"
+                formControlName="orgCode"
+                class="form-Control name-field custom-placeholder"
+              />
               <div
                 *ngIf="
                   designationForm.controls['orgCode']?.invalid &&

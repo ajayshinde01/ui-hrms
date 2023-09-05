@@ -2,7 +2,6 @@
   opacity: 0.5;
 }
 
-
 .action-btn {
   border: none;
 
@@ -13,6 +12,12 @@
   padding: 2px;
 
   background-color: white;
+}
+
+.master-title {
+  font-size: larger;
+
+  color: #534686;
 }
 
 .action-btn:hover {
@@ -387,7 +392,6 @@ select {
 }
 .card-title {
   color: #534686;
-  
 }
 
 .page-link2 {

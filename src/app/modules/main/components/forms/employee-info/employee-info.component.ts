@@ -73,7 +73,7 @@ export class EmployeeInfoComponent implements OnInit {
     private http: HttpClient,
     private capitalService: FirstLetterCapitalService,
     private dialog: MatDialog
-  ) {}
+  ) { }
   ngOnInit(): void {
     console.log('employee info');
     this.initForm();
@@ -138,8 +138,9 @@ export class EmployeeInfoComponent implements OnInit {
     console.log('controlName' + controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
+      const value = Object.values(control.errors)[0]
 
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';
@@ -196,7 +197,7 @@ export class EmployeeInfoComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(10),
+          CustomValidators.maxLength(5),
           Validators.pattern('^[A-Z0-9\\s\\-]+$'),
         ],
       ],
@@ -282,9 +283,10 @@ export class EmployeeInfoComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.maxLength(50),
+          CustomValidators.maxLength(40),
           Validators.pattern(
-            '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'
+
+            '^(?!.*[._-]{2})[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}$'
           ),
         ],
       ],

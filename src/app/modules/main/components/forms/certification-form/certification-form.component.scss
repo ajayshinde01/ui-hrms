@@ -1,6 +1,9 @@
 .col-md-4 mt-2 {
   margin-right: 50px;
 }
+.col-md-8{
+  margin-bottom: 8px;
+}
 .input {
   width: 140%;
 }
@@ -49,6 +52,12 @@
   // margin-bottom: 30px;
   // padding-bottom: 10px;
 }
+
+.mat-select-value-text.custom-select-value {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: black; /* Adjust the color as needed */
+  font-weight: 450;
+}
 .justify-content-end {
   justify-content: flex-end !important;
   width: 97%;
@@ -70,7 +79,6 @@
   cursor: pointer;
   background-color: blue;
   color: white;
-
 }
 
 .save-btn {
@@ -113,6 +121,8 @@
 }
 
 :host::ng-deep.mat-mdc-form-field-error {
+ margin-block-start: 10pxpx;
+  font-size: 9px;
   display: block;
   width: 271px !important;
 }
