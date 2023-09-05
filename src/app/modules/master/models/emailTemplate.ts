@@ -6,5 +6,9 @@ export interface EmailTemplate{
     createdAt:string ,
     createdBy:string ,
     updatedBy: string,
-    isDeleted: false
+    isDeleted: false,
+    empName:string,
+    companyName:string,
+    team:string,
+    email:string
     }

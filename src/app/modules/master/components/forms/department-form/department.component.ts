@@ -189,7 +189,7 @@ export class DepartmentComponent implements OnInit {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.departmentService.warn('Credentials already present');
+              this.departmentService.warn(error.error.message);
             }
           }
         );

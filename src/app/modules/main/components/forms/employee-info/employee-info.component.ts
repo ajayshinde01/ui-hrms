@@ -418,7 +418,7 @@ export class EmployeeInfoComponent implements OnInit {
           (error: any) => {
             console.log('errormessage' + JSON.stringify(error.error.message));
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Employee Info already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );
@@ -433,7 +433,7 @@ export class EmployeeInfoComponent implements OnInit {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Employee Info already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );

@@ -187,7 +187,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeService.warn('Visa Details already present');
+              this.employeeService.warn(error.error.message);
             }
           }
         );
@@ -202,7 +202,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn('Visa Details already present');
+                this.employeeService.warn(error.error.message);
               }
             }
           );

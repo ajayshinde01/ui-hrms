@@ -48,6 +48,8 @@ export class AddressComponent implements OnInit {
 
   checked: boolean = false;
 
+  isDisabled: boolean = false;
+
   ownershipStatus: CommonMaster[] = [];
 
   corresCountries: CommonMaster[] = [];
@@ -103,6 +105,9 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // this.initForm();
+    this.getAllAddressById(this.queryParams['id']);
+    debugger;
     this.onCopyAddress();
   }
 
@@ -324,11 +329,13 @@ export class AddressComponent implements OnInit {
     this.permanentAddressForm.valueChanges.subscribe((values) => {
       // Automatically uncheck the checkbox when any field changes
       this.checked = false;
+      this.isDisabled = false;
     });
   }
 
   onCopyAddress() {
     this.checked = true;
+    this.isDisabled = true;
     if (this.permanentAddressForm.valid) {
       forkJoin({
         corrStates: this.addressService.getState(
@@ -344,8 +351,10 @@ export class AddressComponent implements OnInit {
       this.correspondenceAddressForm.patchValue(
         this.permanentAddressForm.value
       );
+      this.getAllAddressById(this.queryParams['id']);
       this.correspondenceAddressForm.value.addressType = 'correspondence';
       this.correspondenceAddressForm.value.id = this.corrId;
+      debugger;
     }
   }
 
@@ -435,7 +444,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Address already present');
+                this.addressService.warn(error.error.message);
               }
             }
           );
@@ -457,7 +466,7 @@ export class AddressComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.addressService.warn('Address already present');
+                this.addressService.warn(error.error.message);
               }
             }
           );
@@ -491,7 +500,7 @@ export class AddressComponent implements OnInit {
         this.correspondenceAddressForm.patchValue(response[1]);
 
         this.corrId = response[1].id;
-
+        debugger;
         this.actionLabel = 'Update';
       },
 

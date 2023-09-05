@@ -1,6 +1,6 @@
 <div class="main-div">
   <div class="formHeader">
-    <h2 class="head-name">EMPLOYEE INFO</h2>
+    <span>EMPLOYEE INFO</span>
   </div>
 
   <form [formGroup]="employeeForm">
@@ -324,7 +324,6 @@
               formControlName="status"
               placeholder="Select"
               tabIndex="13"
-              class="custom-select"
             >
               <mat-option [disabled]="true">Select</mat-option>
 
@@ -342,8 +341,8 @@
 
       <mat-divider></mat-divider>
 
-      <h2 class="head-name">USER DETAILS</h2>
-      <div class="row mm">
+      <span class="head-name">USER DETAILS</span>
+      <div class="row mm user-id">
         <div class="col-lg-4">
           <mat-label>User Id</mat-label>
 
