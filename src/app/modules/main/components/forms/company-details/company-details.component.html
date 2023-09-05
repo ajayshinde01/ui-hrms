@@ -8,74 +8,41 @@
         <div class="company-details-form-div">
           <div class="row mm">
             <div class="col-lg-4" formGroupName="designation">
-              <mat-label class="mat-label"
-                >Designation<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Designation<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="id"
-                  placeholder="Select"
-                  tabIndex="16"
-                >
+                <mat-select formControlName="id" placeholder="Select" tabIndex="22">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let designation of designations"
-                    [value]="designation.id"
-                    >{{ designation.designationName }}</mat-option
-                  >
+                  <mat-option *ngFor="let designation of designations" [value]="designation.id">{{
+                    designation.designationName }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('designation.id')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('designation.id')" class="validate-text">
                   Please enter Designation
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4" formGroupName="grade">
-              <mat-label class="mat-label"
-                >Grade<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Grade<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="id"
-                  placeholder="Select"
-                  tabIndex="17"
-                >
+                <mat-select formControlName="id" placeholder="Select" tabIndex="23">
                   <mat-option [disabled]="true">Select</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]="grade.id">{{
                     grade.gradeName
-                  }}</mat-option>
+                    }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('grade.id')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('grade.id')" class="validate-text">
                   Please enter Grade
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4" formGroupName="department">
-              <mat-label class="mat-label"
-                >Department<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Department<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="id"
-                  placeholder="Select"
-                  tabIndex="18"
-                >
+                <mat-select formControlName="id" placeholder="Select" tabIndex="24">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let department of departments"
-                    [value]="department.id"
-                    >{{ department.departmentName }}</mat-option
-                  >
+                  <mat-option *ngFor="let department of departments" [value]="department.id">{{
+                    department.departmentName }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('department.id')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('department.id')" class="validate-text">
                   Please enter Department
                 </mat-error>
               </mat-form-field>
@@ -83,76 +50,43 @@
           </div>
           <div class="row mm">
             <div class="col-lg-4" formGroupName="role">
-              <mat-label class="mat-label"
-                >Role<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Role<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="id"
-                  placeholder="Select"
-                  tabIndex="19"
-                >
+                <mat-select formControlName="id" placeholder="Select" tabIndex="25">
                   <mat-option [disabled]="true">Select</mat-option>
                   <mat-option *ngFor="let role of roles" [value]="role.id">{{
                     role.roleName
-                  }}</mat-option>
+                    }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('role.id')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('role.id')" class="validate-text">
                   Please enter Role
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4">
-              <mat-label class="mat-label"
-                >Reviewer Manager<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Reviewer Manager<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="reviewerManager"
-                  placeholder="Select"
-                  tabIndex="20"
-                >
+                <mat-select formControlName="reviewerManager" placeholder="Select" tabIndex="26">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let employee of employees"
-                    [value]="employee.firstName"
-                  >
+                  <mat-option *ngFor="let employee of employees" [value]="employee.firstName">
                     {{ employee.firstName }} {{ employee.lastName }}
                   </mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('reviewerManager')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('reviewerManager')" class="validate-text">
                   {{ getErrorMessage("reviewerManager") }}
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4">
-              <mat-label class="mat-label"
-                >Reporting Manager<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Reporting Manager<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="reportingManager"
-                  placeholder="Select"
-                  tabIndex="21"
-                >
+                <mat-select formControlName="reportingManager" placeholder="Select" tabIndex="27">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let employee of employees"
-                    [value]="employee.firstName"
-                  >
+                  <mat-option *ngFor="let employee of employees" [value]="employee.firstName">
                     {{ employee.firstName }} {{ employee.lastName }}
                   </mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('reportingManager')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('reportingManager')" class="validate-text">
                   {{ getErrorMessage("reportingManager") }}
                 </mat-error>
               </mat-form-field>
@@ -160,76 +94,40 @@
           </div>
           <div class="row mm">
             <div class="col-lg-4" formGroupName="employeeType">
-              <mat-label class="mat-label"
-                >Employee Type<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Employee Type<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="id"
-                  placeholder="Select"
-                  tabIndex="22"
-                >
+                <mat-select formControlName="id" placeholder="Select" tabIndex="28">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let employeeType of employeeTypes"
-                    [value]="employeeType.id"
-                    >{{ employeeType.type }}</mat-option
-                  >
+                  <mat-option *ngFor="let employeeType of employeeTypes" [value]="employeeType.id">{{ employeeType.type
+                    }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('employeeType.id')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('employeeType.id')" class="validate-text">
                   Please enter Employee Type
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4">
-              <mat-label class="mat-label"
-                >Billable<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Billable<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="billable"
-                  placeholder="Select"
-                  tabIndex="23"
-                >
+                <mat-select formControlName="billable" placeholder="Select" tabIndex="29">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let billable of billables"
-                    [value]="billable.code"
-                    >{{ billable.value }}</mat-option
-                  >
+                  <mat-option *ngFor="let billable of billables" [value]="billable.code">{{ billable.value
+                    }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('billable')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('billable')" class="validate-text">
                   {{ getErrorMessage("billable") }}
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4">
-              <mat-label class="mat-label"
-                >Probation<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Probation<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="probation"
-                  placeholder="Select"
-                  tabIndex="24"
-                >
+                <mat-select formControlName="probation" placeholder="Select" tabIndex="30">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let probation of probations"
-                    [value]="probation.code"
-                    >{{ probation.value }}</mat-option
-                  >
+                  <mat-option *ngFor="let probation of probations" [value]="probation.code">{{ probation.value
+                    }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('probation')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('probation')" class="validate-text">
                   {{ getErrorMessage("probation") }}
                 </mat-error>
               </mat-form-field>
@@ -237,50 +135,36 @@
           </div>
           <div class="row mm">
             <div class="col-lg-4">
-              <mat-label class="mat-label"
-                >Company Email<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Company Email<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline">
-                <input matInput formControlName="companyEmail" tabIndex="25" />
+                <input matInput formControlName="companyEmail" tabIndex="31" />
                 <mat-error *ngIf="isControlInvalid('companyEmail')">
                   <span class="validate-text">{{
                     getErrorMessage("companyEmail")
-                  }}</span>
+                    }}</span>
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4">
               <mat-label class="mat-label">Client Email</mat-label>
               <mat-form-field appearance="outline">
-                <input matInput formControlName="clientEmail" tabIndex="26" />
+                <input matInput formControlName="clientEmail" tabIndex="33" />
                 <mat-error *ngIf="isControlInvalid('clientEmail')">
                   <span class="validate-text">{{
                     getErrorMessage("clientEmail")
-                  }}</span>
+                    }}</span>
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col-lg-4">
-              <mat-label class="mat-label"
-                >Default Shift<span style="color: red">*</span></mat-label
-              >
+              <mat-label class="mat-label">Default Shift<span style="color: red">*</span></mat-label>
               <mat-form-field appearance="outline" color="primary">
-                <mat-select
-                  formControlName="shift"
-                  placeholder="Select"
-                  tabIndex="27"
-                >
+                <mat-select formControlName="shift" placeholder="Select" tabIndex="34">
                   <mat-option [disabled]="true">Select</mat-option>
-                  <mat-option
-                    *ngFor="let defaultShift of defaultShifts"
-                    [value]="defaultShift.code"
-                    >{{ defaultShift.value }}</mat-option
-                  >
+                  <mat-option *ngFor="let defaultShift of defaultShifts" [value]="defaultShift.code">{{
+                    defaultShift.value }}</mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="isControlInvalid('shift')"
-                  class="validate-text"
-                >
+                <mat-error *ngIf="isControlInvalid('shift')" class="validate-text">
                   {{ getErrorMessage("shift") }}
                 </mat-error>
               </mat-form-field>
@@ -288,13 +172,8 @@
           </div>
 
           <div class="form-footer">
-            <button
-              _ngcontent-ng-c812429062=""
-              class="btn btn-primary px-4 float-right company-details-save-btn"
-              (click)="onSubmit()"
-              [disabled]="!companyDetailsForm.valid"
-              tabIndex="28"
-            >
+            <button _ngcontent-ng-c812429062="" class="btn btn-primary px-4 float-right company-details-save-btn"
+              (click)="onSubmit()" [disabled]="!companyDetailsForm.valid" tabIndex="35">
               {{ actionLabel }}
             </button>
           </div>

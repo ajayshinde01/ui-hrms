@@ -230,7 +230,7 @@ export class EmployeePersonalDetailsFormComponent {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
     });
   }
 
@@ -456,11 +456,12 @@ export class EmployeePersonalDetailsFormComponent {
     if (this.employeePersonalDetailsForm.valid) {
       const formData = {
         ...this.employeePersonalDetailsForm.value,
-        confirmationDate: moment(
-          this.employeePersonalDetailsForm.value.passportIssueDate
-        )
-          .utcOffset(0, true)
-          .format('YYYY-MM-DD'),
+        confirmationDate: this.employeePersonalDetailsForm.value
+          .passportIssueDate
+          ? moment(this.employeePersonalDetailsForm.value.passportIssueDate)
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
+          : null,
       };
 
       this.employeePersonalDetailsForm.value.passportFile =

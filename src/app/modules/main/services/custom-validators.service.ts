@@ -555,7 +555,7 @@ export class CustomValidators {
       issuedByMaxLength: `Issued By should not exceed 100 characters`,
       certificationMaxLength: `Certification should not exceed 100 characters`,
       maxLengthOfAddress: `Maximum 50 character are allowed`,
-      passportIssueDate: `Date Of Issue should be a past date`,
+      passportIssueDate: `Date of Issue should be a past date`,
       valdiationOfPassport: `Valid Dateshould be a future date`,
       ageLessThan18: `${fieldNames[fieldName]} should be greater or equal to 18 years `,
       clientEmailMaxLength: `Client Email should not exceed 40 characters`,
