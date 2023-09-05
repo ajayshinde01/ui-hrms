@@ -6,6 +6,11 @@
 mat-label {
   font-weight: 550;
 }
+.mat-select-value-text.custom-select-value {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: black; /* Adjust the color as needed */
+  font-weight: 450;
+}
 
 .company-details-save-btn:hover {
   background-color: #534686;

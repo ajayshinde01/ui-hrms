@@ -26,6 +26,7 @@
                 placeholder="FIN"
                 formControlName="departmentId"
                 [disabled]="isDisabled"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -91,6 +92,7 @@
                 matInput
                 placeholder="Finance"
                 formControlName="departmentName"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -168,6 +170,7 @@
                 matInput
                 placeholder="Finance Department"
                 formControlName="departmentDescription"
+                class="form-Control name-field custom-placeholder"
               >
               </textarea>
               <div
@@ -234,7 +237,12 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="AVI-BHR" formControlName="orgCode" />
+              <input
+                matInput
+                placeholder="AVI-BHR"
+                formControlName="orgCode"
+                class="form-Control name-field custom-placeholder"
+              />
               <div
                 *ngIf="
                   departmentForm.controls['orgCode']?.invalid &&

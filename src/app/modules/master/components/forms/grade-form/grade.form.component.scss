@@ -84,6 +84,16 @@ mat-label {
   color: white;
   margin-right: 3px;
 }
+.custom-placeholder::placeholder {
+  font-weight: 350;
+  color: grey;
+}
+
+.mat-select-value-text.custom-select-value {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: black; /* Adjust the color as needed */
+  font-weight: 450;
+}
 
 .save-btn {
   width: 60px;
