@@ -75,6 +75,7 @@
     background-color: #534686;
     color: white;
     margin-right: 4px;
+  border:none;
     
   }
   
@@ -85,7 +86,10 @@
     cursor: pointer;
     background-color: #534686;
     color: white;
+    border:none;
   }
+
+ 
   
   :host ::ng-deep .mat-mdc-text-field-wrapper {
 

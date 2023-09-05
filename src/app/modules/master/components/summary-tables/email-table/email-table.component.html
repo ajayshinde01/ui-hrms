@@ -3,7 +3,7 @@
   (buttonFunction)="action($event)"
   (deleteFunction)="action($event)" 
   (paginationParams)="searchFunction($event)"
-  [dataSource]="emailMetaData"
+  [dataSource]="emailMetaData.content"
   [headers]="emailHeaders.columnsMetadata"
   [totalRecord]="emailMetaData.totalElements"
   [masterName]="masterName"
