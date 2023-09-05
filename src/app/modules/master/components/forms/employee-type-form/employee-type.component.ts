@@ -28,7 +28,6 @@ import { nameMaxLength } from '../Validations/nameMaxLength.validator';
   selector: 'app-employee-type',
   templateUrl: './employee-type.component.html',
   styleUrls: ['./employee-type.component.scss'],
-
 })
 export class EmployeeTypeComponent {
   employeeTypeForm!: FormGroup;
@@ -38,7 +37,7 @@ export class EmployeeTypeComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
-  orgCode=sessionStorage.getItem('orgCode')
+  orgCode = sessionStorage.getItem('orgCode');
 
   constructor(
     private _mdr: MatDialogRef<EmployeeTypeComponent>,
@@ -192,7 +191,7 @@ export class EmployeeTypeComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.employeeTypeService.warn('Credentials already present');
+              this.employeeTypeService.warn(error.error.message);
             }
             console.error('PUT Request failed', error);
           }

@@ -129,9 +129,7 @@ export class EducationalQualificationFormComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.educationalQualificationService.warn(
-                  'Educational Qualification already present'
-                );
+                this.educationalQualificationService.warn(error.error.message);
               }
 
               console.error('POST Request failed', error);
@@ -153,9 +151,7 @@ export class EducationalQualificationFormComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 404) {
-                this.educationalQualificationService.warn(
-                  'Educational Qualification already present'
-                );
+                this.educationalQualificationService.warn(error.error.message);
               }
 
               console.error('PUT Request failed', error);

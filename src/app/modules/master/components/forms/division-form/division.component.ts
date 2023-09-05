@@ -31,8 +31,6 @@ import { blankValidator } from '../Validations/blankData.validator';
   selector: 'app-division',
   templateUrl: './division.component.html',
   styleUrls: ['./division.component.scss'],
-
-
 })
 export class DivisionComponent {
   divisionForm!: FormGroup;
@@ -42,7 +40,7 @@ export class DivisionComponent {
   actionLabel: string = 'Save';
   isDisabled: boolean = false;
   errorMessage: string = '';
-  orgCode=sessionStorage.getItem('orgCode')
+  orgCode = sessionStorage.getItem('orgCode');
 
   constructor(
     private _mdr: MatDialogRef<DivisionComponent>,
@@ -186,7 +184,7 @@ export class DivisionComponent {
           },
           (error: any) => {
             if (error.status == 400) {
-              this.divisionService.warn('Division Id already present');
+              this.divisionService.warn(error.error.message);
             }
           }
         );

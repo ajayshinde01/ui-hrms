@@ -19,7 +19,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-employee-personal-details-form',
   templateUrl: './employee-personal-details-form.component.html',
-  styleUrls: ['./employee-personal-details-form.component.scss']
+  styleUrls: ['./employee-personal-details-form.component.scss'],
 })
 export class EmployeePersonalDetailsFormComponent {
   employee: EmployeePersonalDetails;
@@ -231,17 +231,17 @@ export class EmployeePersonalDetailsFormComponent {
       updatedBy: ['Admin'],
       createdAt: [null],
       updatedAt: [null],
-      orgCode: { value: this.orgCode },
+      orgCode: this.orgCode,
     });
   }
 
   //passportNumber = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
   //passportame = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
-//this.employeePersonalDetailsForm.value.passportNumber
+  //this.employeePersonalDetailsForm.value.passportNumber
   //if(this.employeePersonalDetailsForm.value.passportNumber !== ''){
-  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);               
- // } else {                
-   // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();               
+  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);
+  // } else {
+  // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();
   //}
 
   update(event: any){
@@ -353,6 +353,7 @@ export class EmployeePersonalDetailsFormComponent {
   getById(id: string) {
     this.employeeService.searchPersonalDetailsById(this.emp_id).subscribe(
       (response: EmployeePersonalDetails) => {
+        this.employeePersonalDetailsForm.controls['id'].setValue(response.id);
         this.employeePersonalDetailsForm.patchValue(response);
         console.log(response);
         this.employee = response;
@@ -467,11 +468,12 @@ export class EmployeePersonalDetailsFormComponent {
     if (this.employeePersonalDetailsForm.valid) {
       const formData = {
         ...this.employeePersonalDetailsForm.value,
-        confirmationDate: moment(
-          this.employeePersonalDetailsForm.value.passportIssueDate
-        )
-          .utcOffset(0, true)
-          .format('YYYY-MM-DD'),
+        confirmationDate: this.employeePersonalDetailsForm.value
+          .passportIssueDate
+          ? moment(this.employeePersonalDetailsForm.value.passportIssueDate)
+              .utcOffset(0, true)
+              .format('YYYY-MM-DD')
+          : null,
       };
 
       this.employeePersonalDetailsForm.value.passportFile =

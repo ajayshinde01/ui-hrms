@@ -131,7 +131,7 @@ export class EmergencyContactComponent implements OnInit {
 
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.contactService.warn('Emergency Contact already present');
+                this.contactService.warn(error.error.message);
               }
 
               console.error('POST Request failed', error);
@@ -153,7 +153,7 @@ export class EmergencyContactComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 404) {
-                this.contactService.warn('Emergency Contact already present');
+                this.contactService.warn(error.error.message);
               }
 
               console.error('PUT Request failed', error);

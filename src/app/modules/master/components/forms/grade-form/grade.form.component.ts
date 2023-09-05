@@ -22,7 +22,6 @@ import { blankValidator } from '../Validations/blankData.validator';
   selector: 'app-grade-form',
   templateUrl: './grade.form.component.html',
   styleUrls: ['./grade.form.component.scss'],
-
 })
 export class GradeFormComponent {
   gradeForm!: FormGroup;
@@ -32,7 +31,7 @@ export class GradeFormComponent {
   actionLabel: string = 'Save';
   button: boolean = false;
   isDisabled: boolean = false;
-  orgCode=sessionStorage.getItem('orgCode')
+  orgCode = sessionStorage.getItem('orgCode');
   gradeTypeOptions: { gradeType: Array<GradeType> } = {
     gradeType: [],
   };
@@ -187,7 +186,7 @@ export class GradeFormComponent {
           },
           (error: any) => {
             if (error.status == 400 || error.status == 404) {
-              this.gradeService.warn('Credentials already present');
+              this.gradeService.warn(error.error.message);
             }
             console.error('PUT Request failed', error);
           }

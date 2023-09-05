@@ -269,3 +269,15 @@ h4 {
 :host ::ng-deep.mat-mdc-text-field-wrapper:disabled {
   background-color: lightgrey !important;
 }
+:host
+  .disabled-background
+  ::ng-deep.mdc-text-field--outlined
+  .mdc-notched-outline {
+  z-index: 1;
+  background-color: rgb(250, 245, 245);
+  color: black;
+}
+.non-disabled {
+  z-index: 1;
+  background-color: #fff;
+}
