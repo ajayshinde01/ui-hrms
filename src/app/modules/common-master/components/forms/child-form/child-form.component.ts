@@ -63,7 +63,7 @@ export class ChildFormComponent {
       id: [''],
       masterName: [this.data.masterName],
       code: [
-        { value: '', disabled: true },
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,

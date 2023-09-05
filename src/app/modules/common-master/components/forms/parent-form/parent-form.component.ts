@@ -113,7 +113,7 @@ export class ParentFormComponent {
         ],
       ],
       code: [
-        { value: '', disabled: true },
+        { value: '', disabled: this.isDisabled },
         [
           Validators.required,
           leadingSpaceValidator,
