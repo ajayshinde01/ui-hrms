@@ -1,4 +1,4 @@
-.save-reset-button-container{
+.save-reset-button-container {
   padding-right: 15px;
 }
 .col-md-4 mt-2 {
@@ -54,7 +54,6 @@
 }
 .justify-content-end {
   justify-content: flex-end !important;
- 
 }
 .action-btn {
   margin: 3px;
@@ -83,6 +82,7 @@
   background-color: #534686;
   color: white;
   margin-right: 8px;
+  border: none;
 }
 
 .dark {
@@ -92,6 +92,7 @@
   cursor: pointer;
   background-color: #534686;
   color: white;
+  border: none;
 }
 
 :host::ng-deep .mat-mdc-text-field-wrapper {

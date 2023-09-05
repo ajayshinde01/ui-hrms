@@ -196,7 +196,7 @@ export class CompanyDetailsComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.employeeService.warn('Company Details already present');
+                this.employeeService.warn(error.error.message);
               }
             }
           );
@@ -218,9 +218,7 @@ export class CompanyDetailsComponent implements OnInit {
             },
             (error: any) => {
               if (error.status == 400 || error.status == 404) {
-                this.companyDetailsService.warn(
-                  'Company Details already present'
-                );
+                this.companyDetailsService.warn(error.error.message);
               }
             }
           );

@@ -19,7 +19,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-employee-personal-details-form',
   templateUrl: './employee-personal-details-form.component.html',
-  styleUrls: ['./employee-personal-details-form.component.scss']
+  styleUrls: ['./employee-personal-details-form.component.scss'],
 })
 export class EmployeePersonalDetailsFormComponent {
   employee: EmployeePersonalDetails;
@@ -236,32 +236,34 @@ export class EmployeePersonalDetailsFormComponent {
 
   //passportNumber = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
   //passportame = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
-//this.employeePersonalDetailsForm.value.passportNumber
+  //this.employeePersonalDetailsForm.value.passportNumber
   //if(this.employeePersonalDetailsForm.value.passportNumber !== ''){
-  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);               
- // } else {                
-   // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();               
+  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);
+  // } else {
+  // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();
   //}
 
-  update(event: any){
-   let value=event.target.value;
-   console.log("value",value);
-    if(value!==''){
-    //  this.employeePersonalDetailsForm.get('passportName').setValidators([Validators.required, Validators.minLength(3)]);;    
-    //this.employeePersonalDetailsForm.get('passportName')?.setValidators([Validators.required,Validators.maxLength(10)])
-    this.employeePersonalDetailsForm.controls["passportName"].setValidators([Validators.required]);
-    this.validate=true;
-    console.log("validate",this.validate);
-   // return {validate:true}
+  update(event: any) {
+    let value = event.target.value;
+    console.log('value', value);
+    if (value !== '') {
+      //  this.employeePersonalDetailsForm.get('passportName').setValidators([Validators.required, Validators.minLength(3)]);;
+      //this.employeePersonalDetailsForm.get('passportName')?.setValidators([Validators.required,Validators.maxLength(10)])
+      this.employeePersonalDetailsForm.controls['passportName'].setValidators([
+        Validators.required,
+      ]);
+      this.validate = true;
+      console.log('validate', this.validate);
+      // return {validate:true}
+    } else {
+      // this.employeePersonalDetailsForm.value.passportName.clearValidators();
+      this.employeePersonalDetailsForm.controls[
+        'passportName'
+      ].clearValidators();
+      this.validate = false;
+      console.log('validateelse', this.validate);
+      // return {validate:false}
     }
-    else {                
-     // this.employeePersonalDetailsForm.value.passportName.clearValidators();               
-     this.employeePersonalDetailsForm.controls["passportName"].clearValidators();
-     this.validate=false;
-     console.log("validateelse",this.validate);
-    // return {validate:false}
-     }
-
   }
 
   validIssueDate(): ValidatorFn {
@@ -484,9 +486,7 @@ export class EmployeePersonalDetailsFormComponent {
                 error.status == 404 ||
                 error.status == 500
               ) {
-                this.employeeService.warn(
-                  'Employee Personal Details already present'
-                );
+                this.employeeService.warn(error.error.message);
               }
             }
           );
@@ -507,9 +507,7 @@ export class EmployeePersonalDetailsFormComponent {
                 error.status == 404 ||
                 error.status == 500
               ) {
-                this.employeeService.warn(
-                  'Employee Personal Details already present'
-                );
+                this.employeeService.warn(error.error.message);
               }
             }
           );
