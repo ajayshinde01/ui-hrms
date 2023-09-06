@@ -48,6 +48,18 @@ export class EmployeePersonalDetailsFormComponent {
   todayDate: Date = new Date();
   validate: boolean;
   @ViewChild('passportNameInputElement') passportNameInput!: ElementRef;
+  warningMessage: boolean;
+  passportFileError: boolean;
+  AadharFileSizeError: string;
+  aadharFileError: boolean;
+  PANFleSizeError: string;
+  panFileError: boolean;
+  warningMessageForPersonalDetails: boolean;
+  warningMessageForPassport: boolean;
+  warningMessageForAadhar: boolean;
+  warningMessageForPAN: boolean;
+  warningMessageForPF: boolean;
+  warningMessageForBank: boolean;
 
   constructor(
     private router: Router,
@@ -72,8 +84,8 @@ export class EmployeePersonalDetailsFormComponent {
       id: [''],
       maritalStatus: [''],
       bloodGroup: [''],
-      familyBackground: [''],
-      healthDetails: [''],
+      familyBackground: ['',[Validators.maxLength(100), Validators.pattern('^[A-Za-z.,]*$'),]],
+      healthDetails: ['',[Validators.maxLength(100), Validators.pattern('^[A-Za-z.,]*$'),]],
       cprNumber: [
         '',
         [
@@ -83,6 +95,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noTrailingSpace(),
           //  CustomValidators.maxLength(10),
           Validators.maxLength(10),
+          Validators.pattern('^[0-9]*$'),
           // Validators.pattern('^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$')
         ],
       ], //1610721012
@@ -106,7 +119,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           //CustomValidators.maxLength(16),
-          Validators.maxLength(16),
+          Validators.maxLength(12),
           Validators.pattern('^[0-9]{12}$'),
         ],
       ],
@@ -117,6 +130,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          Validators.maxLength(100),
+          Validators.pattern('^[A-Za-z]*$'),
         ],
       ],
       passportNumber: [
@@ -138,6 +153,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          Validators.maxLength(100),
+          Validators.pattern('^[A-Za-z]*$'),
         ],
       ],
       passportIssueDate: [
@@ -156,6 +173,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
+          Validators.maxLength(50),
+          Validators.pattern('^[A-Za-z]*$'),
         ],
       ],
       panCardNumber: [
@@ -176,6 +195,8 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
+          Validators.maxLength(100),
+          Validators.pattern('^[A-Za-z]*$'),
         ],
       ],
       panCardFile: [''],
@@ -191,7 +212,8 @@ export class EmployeePersonalDetailsFormComponent {
           Validators.pattern('^[0-9]{9,18}$'),
         ],
       ],
-      bankName: [''],
+      bankName: ['',
+      [Validators.maxLength(100),Validators.pattern('^[A-Za-z]*$'),]],
       ifscCode: [
         '',
         [
@@ -213,6 +235,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noTrailingSpace(),
           // CustomValidators.maxLength(12),
           Validators.maxLength(12),
+          Validators.pattern('^[0-9]*$'),
         ],
       ],
       pfNumber: [
@@ -224,6 +247,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noTrailingSpace(),
           //CustomValidators.maxLength(22),
           Validators.maxLength(22),
+          Validators.pattern('^[A-Za-z0-9]*$'),
           //  Validators.pattern('^[A-Z]{2}[\s\/]?[A-Z]{3}[\s\/]?[0-9]{7}[\s\/]?[0-9]{3}[\s\/]?[0-9]{7}$')
         ],
       ],
@@ -244,28 +268,74 @@ export class EmployeePersonalDetailsFormComponent {
   // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();
   //}
 
-  update(event: any){
+  addValidationForPersonalFields(event:any){
+    let value=event.value;
+     if(value!==''){
+     this.employeePersonalDetailsForm.controls["bloodGroup"].addValidators([Validators.required]);
+     this.employeePersonalDetailsForm.controls["familyBackground"].addValidators([Validators.required]);
+     this.employeePersonalDetailsForm.controls["healthDetails"].addValidators([Validators.required]);
+     this.employeePersonalDetailsForm.controls["cprNumber"].addValidators([Validators.required]);
+     this.employeePersonalDetailsForm.controls["gosi"].addValidators([Validators.required]);
+
+     if(!this.warningMessageForPersonalDetails){
+       this.warningMessageForPersonalDetails=true;
+       this.employeeService.warn(
+         'Please enter Blood Group, Family Background, Health Details, CPR Number, GOSI'
+       );
+     }
+     }
+     else {                
+      this.warningMessageForPersonalDetails=false;
+      this.employeePersonalDetailsForm.controls["bloodGroup"].removeValidators([Validators.required]);
+      this.employeePersonalDetailsForm.controls["familyBackground"].removeValidators([Validators.required]);
+      this.employeePersonalDetailsForm.controls["healthDetails"].removeValidators([Validators.required]);
+      this.employeePersonalDetailsForm.controls["cprNumber"].removeValidators([Validators.required]);
+      this.employeePersonalDetailsForm.controls["gosi"].removeValidators([Validators.required]);
+      }
+     
+      this.employeePersonalDetailsForm.controls['bloodGroup'].updateValueAndValidity();
+      this.employeePersonalDetailsForm.controls['familyBackground'].updateValueAndValidity();
+      this.employeePersonalDetailsForm.controls['healthDetails'].updateValueAndValidity();
+      this.employeePersonalDetailsForm.controls['cprNumber'].updateValueAndValidity();
+      this.employeePersonalDetailsForm.controls['gosi'].updateValueAndValidity();
+
+  }
+
+
+
+  addValidationForPassportFields(event: any){
    let value=event.target.value;
-   console.log("value",value);
     if(value!==''){
     //  this.employeePersonalDetailsForm.get('passportName').setValidators([Validators.required, Validators.minLength(3)]);;    
     //this.employeePersonalDetailsForm.get('passportName')?.setValidators([Validators.required,Validators.maxLength(10)])
     this.employeePersonalDetailsForm.controls["passportName"].addValidators([Validators.required]);
-    this.validate=true;
-    console.log("validate",this.validate);
-   // return {validate:true}
+    this.employeePersonalDetailsForm.controls["passportIssueDate"].addValidators([Validators.required]);
+    this.employeePersonalDetailsForm.controls["passportValidity"].addValidators([Validators.required]);
+    this.employeePersonalDetailsForm.controls["placeOfIssue"].addValidators([Validators.required]);
+    if(!this.viewPassportFile){
+      this.passportFileError=true;
+    }else{
+      this.passportFileError=false;
+    }
+
+    if(!this.warningMessageForPassport){
+      this.warningMessageForPassport=true;
+      this.employeeService.warn(
+        'Please enter Passport Name, Date Of Issue, Valid Upto, Place Of Issue'
+      );
+    }
     }
     else {                
      // this.employeePersonalDetailsForm.value.passportName.clearValidators();               
+     this.warningMessageForPassport=false;
      this.employeePersonalDetailsForm.controls["passportName"].removeValidators([Validators.required]);
-     this.validate=false;
-     console.log("validateelse",this.validate);
-    // return {validate:false}
+     this.employeePersonalDetailsForm.controls["passportIssueDate"].removeValidators([Validators.required]);
+    this.employeePersonalDetailsForm.controls["passportValidity"].removeValidators([Validators.required]);
+    this.employeePersonalDetailsForm.controls["placeOfIssue"].removeValidators([Validators.required]);
      }
-    // console.log("input",this.passportNameInput);
      setTimeout(()=>{ // this will make the execution after the above boolean has changed
       if(this.passportNameInput){
-        this.passportNameInput.nativeElement.focus();
+     //   this.passportNameInput.nativeElement.focus();
       }
   },1000);  
     
@@ -275,6 +345,96 @@ export class EmployeePersonalDetailsFormComponent {
 
 
   }
+
+  addValidationForAadharFields(event:any){
+    let value=event.target.value;
+     if(value!==''){
+     this.employeePersonalDetailsForm.controls["aadhaarName"].addValidators([Validators.required]);
+     if(!this.viewAadharFile){
+       this.aadharFileError=true;
+     }else{
+       this.aadharFileError=false;
+     }
+ 
+     if(!this.warningMessageForAadhar){
+       this.warningMessageForAadhar=true;
+       this.employeeService.warn(
+         'Please enter Aadhar Name and Aadhar Document'
+       );
+     }
+     }
+     else {                
+      this.warningMessageForAadhar=false;
+      this.employeePersonalDetailsForm.controls["aadhaarName"].removeValidators([Validators.required]);
+      }
+     
+      this.employeePersonalDetailsForm.controls['aadhaarName'].updateValueAndValidity();
+  }
+
+  addValidationForPANFields(event:any){
+    let value=event.target.value;
+     if(value!==''){
+     this.employeePersonalDetailsForm.controls["panCardName"].addValidators([Validators.required]);
+
+ 
+     if(!this.warningMessageForPAN){
+       this.warningMessageForPAN=true;
+       this.employeeService.warn(
+         'Please enter PAN card Name and PAN Document'
+       );
+     }
+     }
+     else {                
+      this.warningMessageForPAN=false;
+      this.employeePersonalDetailsForm.controls["panCardName"].removeValidators([Validators.required]);
+      }
+     
+      this.employeePersonalDetailsForm.controls['panCardName'].updateValueAndValidity();
+  }
+
+  addValidationForPFFields(event:any){
+    let value=event.target.value;
+     if(value!==''){
+     this.employeePersonalDetailsForm.controls["pfNumber"].addValidators([Validators.required]);
+ 
+     if(!this.warningMessageForPF){
+       this.warningMessageForPF=true;
+       this.employeeService.warn(
+         'Please enter PF Number'
+       );
+     }
+     }
+     else {                
+      this.warningMessageForPF=false;
+      this.employeePersonalDetailsForm.controls["pfNumber"].removeValidators([Validators.required]);
+      }
+     
+      this.employeePersonalDetailsForm.controls['pfNumber'].updateValueAndValidity();
+  }
+
+  addValidationForBankFields(event:any){
+    let value=event.target.value;
+     if(value!==''){
+     this.employeePersonalDetailsForm.controls["bankName"].addValidators([Validators.required]);
+     this.employeePersonalDetailsForm.controls["ifscCode"].addValidators([Validators.required]);
+     
+     if(!this.warningMessageForBank){
+       this.warningMessageForBank=true;
+       this.employeeService.warn(
+         'Please enter PF Number'
+       );
+     }
+     }
+     else {                
+      this.warningMessageForBank=false;
+      this.employeePersonalDetailsForm.controls["bankName"].removeValidators([Validators.required]);
+      this.employeePersonalDetailsForm.controls["ifscCode"].removeValidators([Validators.required]);
+      }
+     
+      this.employeePersonalDetailsForm.controls['bankName'].updateValueAndValidity();
+      this.employeePersonalDetailsForm.controls['ifscCode'].updateValueAndValidity();
+  }
+
 
   validIssueDate(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -404,7 +564,7 @@ export class EmployeePersonalDetailsFormComponent {
       console.log('size', panfile.size);
       console.log('type', panfile.type);
       if (panfile.size > 2e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 2MB';
+        this.PANFleSizeError = 'File is too large should not exceed Over 2MB';
         console.log('File is too large. Over 2MB');
       }
 
@@ -413,6 +573,11 @@ export class EmployeePersonalDetailsFormComponent {
           console.log('received response', res);
           this.aadhar_file_url = res['message'];
           this.viewPANFile = res['message'];
+          if(this.viewPANFile){
+            this.panFileError=false;
+          }else{
+            this.panFileError=true;
+          }
         });
       }
     }
@@ -436,7 +601,13 @@ export class EmployeePersonalDetailsFormComponent {
           this.passport_file_url = res['message'];
           this.file_name = res['message'];
           this.viewPassportFile = res['message'];
+          if(this.viewPassportFile!=''){
+            this.passportFileError=false;
+          }else{
+            this.passportFileError=true;
+          }
         });
+        
       }
     }
   }
@@ -450,7 +621,7 @@ export class EmployeePersonalDetailsFormComponent {
       this.files = event.target.files[0];
       const aadharfile = event.target.files[0];
       if (aadharfile.size > 2e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 2MB';
+        this.AadharFileSizeError = 'File is too large should not exceed Over 2MB';
       }
 
       if (aadharfile) {
@@ -458,6 +629,11 @@ export class EmployeePersonalDetailsFormComponent {
           this.aadhar_file_url = res['message'];
           // this.file_name = res['message'];
           this.viewAadharFile = res['message'];
+          if(this.viewAadharFile){
+            this.aadharFileError=false;
+          }else{
+            this.aadharFileError=true;
+          }
         });
       }
     }
