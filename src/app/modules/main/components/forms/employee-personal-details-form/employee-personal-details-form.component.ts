@@ -563,9 +563,9 @@ export class EmployeePersonalDetailsFormComponent {
       const panfile = event.target.files[0];
       console.log('size', panfile.size);
       console.log('type', panfile.type);
-      if (panfile.size > 2e6) {
-        this.PANFleSizeError = 'File is too large should not exceed Over 2MB';
-        console.log('File is too large. Over 2MB');
+      if (panfile.size > 1e6) {
+        this.PANFleSizeError = 'File is too large should not exceed Over 1MB';
+        console.log('File is too large. Over 1MB');
       }
 
       if (panfile) {
@@ -591,9 +591,9 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const file = event.target.files[0];
-      if (file.size > 2e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 2MB';
-        console.log('File is too large. Over 2MB');
+      if (file.size > 1e6) {
+        this.FleSizeError = 'File is too large should not exceed Over 1MB';
+        console.log('File is too large. Over 1MB');
       }
 
       if (file) {
@@ -620,8 +620,8 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const aadharfile = event.target.files[0];
-      if (aadharfile.size > 2e6) {
-        this.AadharFileSizeError = 'File is too large should not exceed Over 2MB';
+      if (aadharfile.size > 1e6) {
+        this.AadharFileSizeError = 'File is too large should not exceed Over 1MB';
       }
 
       if (aadharfile) {
