@@ -1,5 +1,10 @@
-
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -53,11 +58,10 @@ export class EmailFormComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
   ngOnInit(): void {
     this.collectQueryParams();
     this.initForm();
-
   }
 
   collectQueryParams() {
@@ -65,12 +69,10 @@ export class EmailFormComponent implements OnInit {
       this.queryParams = params;
 
       if (this.queryParams['id'] != undefined) {
-
         this.getById(this.queryParams['id']);
         // this.isDisabled=true;
       } else {
         this.actionLabel = 'Send';
-
       }
     });
   }
@@ -90,69 +92,62 @@ export class EmailFormComponent implements OnInit {
 
   createEmail(event: any) {
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile, "sioudfygshuid089syudvhn ")
+    console.log(this.selectedFile, 'sioudfygshuid089syudvhn ');
   }
 
   initForm() {
     this.emailForm = this.formBuilder.group({
       id: [''],
-      to: ['',
+      to: [
+        '',
 
         [
-
-          Validators.required,
-          blankValidator,
-          leadingSpaceValidator,
-          trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern(
-            '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
-          )
-
-
-        ],],
-      cc: ['',
-        [Validators.required,
-          leadingSpaceValidator,
-          trailingSpaceValidator,
-          whitespaceValidator,
-          Validators.pattern(
-            '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
-          )
-        ]]
-      ,
-      subject: ['',
+          // Validators.required,
+          // blankValidator,
+          // leadingSpaceValidator,
+          // trailingSpaceValidator,
+          // whitespaceValidator,
+          // Validators.pattern(
+          //   '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
+          // )
+        ],
+      ],
+      cc: [
+        '',
         [
-          Validators.required,
-          leadingSpaceValidator,
-          trailingSpaceValidator,
-          nameMaxLength,
-          blankValidator,
-          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
-        ]],
+          //Validators.required,
+          //   leadingSpaceValidator,
+          //   trailingSpaceValidator,
+          //   whitespaceValidator,
+          //   Validators.pattern(
+          //     '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
+          //   )
+        ],
+      ],
+      subject: ['', [Validators.required]],
       dateTime: ['', Validators.required],
       timeZone: ['Asia/Kolkata', Validators.required],
       body: ['', Validators.required],
       file: [''],
-      startTime: ['']
+      startTime: [''],
       // name:[this.data.name]
     });
   }
 
-
   onSubmit() {
     if (this.emailForm.valid) {
-      console.log(this.emailForm)
+      console.log(this.emailForm);
       const formData = new FormData();
       const value = { ...this.emailForm.getRawValue() };
       value.to = value.to.split(',');
       value.cc = value.cc.split(',');
       formData.append('file', this.selectedFile);
-      let blob = new Blob([JSON.stringify(value)], { type: 'application/json' });
+      let blob = new Blob([JSON.stringify(value)], {
+        type: 'application/json',
+      });
       formData.append('mailRequest', blob);
 
       if (this.actionLabel === 'Send') {
-
         this.emailService.createEmail(formData).subscribe(
           (response: Email) => {
             this.emailService.notify('Email added successfully');
@@ -166,7 +161,6 @@ export class EmailFormComponent implements OnInit {
           }
         );
       }
-
     }
   }
 
@@ -174,23 +168,19 @@ export class EmailFormComponent implements OnInit {
     this.isReadOnly = true;
     this.recordSelected = true;
     //this.emailForm.get('body')?.disable();
-    this.emailService
-      .searchEmailById(id)
-      .subscribe((response: Email) => {
-        console.log(response);
+    this.emailService.searchEmailById(id).subscribe((response: Email) => {
+      console.log(response);
 
+      this.emailForm.get('to')?.setValue(response.to);
+      this.emailForm.get('subject')?.setValue(response.subject);
+      this.emailForm.get('cc')?.setValue(response.cc[0]);
+      this.emailForm.get('body')?.setValue(response.body);
+      console.log('cc from form', this.emailForm.get('cc')?.getRawValue());
 
-        this.emailForm.get('to')?.setValue(response.to);
-        this.emailForm.get('subject')?.setValue(response.subject);
-        this.emailForm.get('cc')?.setValue(response.cc[0]);
-        this.emailForm.get('body')?.setValue(response.body);
-        console.log('cc from form', this.emailForm.get('cc')?.getRawValue());
+      this.emailForm.patchValue(response);
 
-        this.emailForm.patchValue(response);
-
-        this.email = response;
-
-      });
+      this.email = response;
+    });
   }
 
   Close(isUpdate: boolean) {
@@ -202,6 +192,4 @@ export class EmailFormComponent implements OnInit {
     this.collectQueryParams();
     this.initForm();
   }
-
 }
-
