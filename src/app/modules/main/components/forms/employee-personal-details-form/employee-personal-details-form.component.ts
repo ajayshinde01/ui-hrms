@@ -19,7 +19,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-employee-personal-details-form',
   templateUrl: './employee-personal-details-form.component.html',
-  styleUrls: ['./employee-personal-details-form.component.scss'],
+  styleUrls: ['./employee-personal-details-form.component.scss']
 })
 export class EmployeePersonalDetailsFormComponent {
   employee: EmployeePersonalDetails;
@@ -67,7 +67,7 @@ export class EmployeePersonalDetailsFormComponent {
     public employeeService: EmployeeService,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id'); // Replace 'paramName' with the actual query parameter name
@@ -84,8 +84,8 @@ export class EmployeePersonalDetailsFormComponent {
       id: [''],
       maritalStatus: [''],
       bloodGroup: [''],
-      familyBackground: ['',[Validators.maxLength(100), Validators.pattern('^[A-Za-z.,]*$'),]],
-      healthDetails: ['',[Validators.maxLength(100), Validators.pattern('^[A-Za-z.,]*$'),]],
+      familyBackground: ['',[Validators.maxLength(100), Validators.pattern('^[A-Za-z., ]*$'),]],
+      healthDetails: ['',[Validators.maxLength(100), Validators.pattern('^[A-Za-z., ]*$'),]],
       cprNumber: [
         '',
         [
@@ -131,7 +131,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           Validators.maxLength(100),
-          Validators.pattern('^[A-Za-z]*$'),
+          Validators.pattern('^[A-Za-z ]*$'),
         ],
       ],
       passportNumber: [
@@ -154,7 +154,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           Validators.maxLength(100),
-          Validators.pattern('^[A-Za-z]*$'),
+          Validators.pattern('^[A-Za-z ]*$'),
         ],
       ],
       passportIssueDate: [
@@ -174,7 +174,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           Validators.maxLength(50),
-          Validators.pattern('^[A-Za-z]*$'),
+          Validators.pattern('^[A-Za-z ]*$'),
         ],
       ],
       panCardNumber: [
@@ -196,7 +196,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           Validators.maxLength(100),
-          Validators.pattern('^[A-Za-z]*$'),
+          Validators.pattern('^[A-Za-z ]*$'),
         ],
       ],
       panCardFile: [''],
@@ -263,13 +263,12 @@ export class EmployeePersonalDetailsFormComponent {
   //passportame = <FormControl>this.employeePersonalDetailsForm.get('passportNumber');
   //this.employeePersonalDetailsForm.value.passportNumber
   //if(this.employeePersonalDetailsForm.value.passportNumber !== ''){
-  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);
-  // } else {
-  // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();
+  //  this.employeePersonalDetailsForm.value.passportNumber.addValidators(Validators.required);               
+  // } else {                
+  // <FormControl>this.employeePersonalDetailsForm.get('passportame').clearValidators();               
   //}
 
-  addValidationForPersonalFields(event:any){
-    let value=event.value;
+  addValidationForPersonalFields(value:any){
      if(value!==''){
      this.employeePersonalDetailsForm.controls["bloodGroup"].addValidators([Validators.required]);
      this.employeePersonalDetailsForm.controls["familyBackground"].addValidators([Validators.required]);
@@ -280,7 +279,7 @@ export class EmployeePersonalDetailsFormComponent {
      if(!this.warningMessageForPersonalDetails){
        this.warningMessageForPersonalDetails=true;
        this.employeeService.warn(
-         'Please enter Blood Group, Family Background, Health Details, CPR Number, GOSI'
+         'Please enter all details for personal'
        );
      }
      }
@@ -303,8 +302,7 @@ export class EmployeePersonalDetailsFormComponent {
 
 
 
-  addValidationForPassportFields(event: any){
-   let value=event.target.value;
+  addValidationForPassportFields(value: any){
     if(value!==''){
     //  this.employeePersonalDetailsForm.get('passportName').setValidators([Validators.required, Validators.minLength(3)]);;    
     //this.employeePersonalDetailsForm.get('passportName')?.setValidators([Validators.required,Validators.maxLength(10)])
@@ -321,7 +319,7 @@ export class EmployeePersonalDetailsFormComponent {
     if(!this.warningMessageForPassport){
       this.warningMessageForPassport=true;
       this.employeeService.warn(
-        'Please enter Passport Name, Date Of Issue, Valid Upto, Place Of Issue'
+        'Please enter all details for Passport'
       );
     }
     }
@@ -346,8 +344,7 @@ export class EmployeePersonalDetailsFormComponent {
 
   }
 
-  addValidationForAadharFields(event:any){
-    let value=event.target.value;
+  addValidationForAadharFields(value:any){//event:any
      if(value!==''){
      this.employeePersonalDetailsForm.controls["aadhaarName"].addValidators([Validators.required]);
      if(!this.viewAadharFile){
@@ -359,7 +356,7 @@ export class EmployeePersonalDetailsFormComponent {
      if(!this.warningMessageForAadhar){
        this.warningMessageForAadhar=true;
        this.employeeService.warn(
-         'Please enter Aadhar Name and Aadhar Document'
+         'Please enter all details for Aadhar'
        );
      }
      }
@@ -371,8 +368,7 @@ export class EmployeePersonalDetailsFormComponent {
       this.employeePersonalDetailsForm.controls['aadhaarName'].updateValueAndValidity();
   }
 
-  addValidationForPANFields(event:any){
-    let value=event.target.value;
+  addValidationForPANFields(value:any){
      if(value!==''){
      this.employeePersonalDetailsForm.controls["panCardName"].addValidators([Validators.required]);
 
@@ -380,7 +376,7 @@ export class EmployeePersonalDetailsFormComponent {
      if(!this.warningMessageForPAN){
        this.warningMessageForPAN=true;
        this.employeeService.warn(
-         'Please enter PAN card Name and PAN Document'
+         'Please enter all details for PAN'
        );
      }
      }
@@ -392,15 +388,14 @@ export class EmployeePersonalDetailsFormComponent {
       this.employeePersonalDetailsForm.controls['panCardName'].updateValueAndValidity();
   }
 
-  addValidationForPFFields(event:any){
-    let value=event.target.value;
+  addValidationForPFFields(value:any){
      if(value!==''){
      this.employeePersonalDetailsForm.controls["pfNumber"].addValidators([Validators.required]);
  
      if(!this.warningMessageForPF){
        this.warningMessageForPF=true;
        this.employeeService.warn(
-         'Please enter PF Number'
+         'Please enter all details for PF'
        );
      }
      }
@@ -412,8 +407,7 @@ export class EmployeePersonalDetailsFormComponent {
       this.employeePersonalDetailsForm.controls['pfNumber'].updateValueAndValidity();
   }
 
-  addValidationForBankFields(event:any){
-    let value=event.target.value;
+  addValidationForBankFields(value:any){
      if(value!==''){
      this.employeePersonalDetailsForm.controls["bankName"].addValidators([Validators.required]);
      this.employeePersonalDetailsForm.controls["ifscCode"].addValidators([Validators.required]);
@@ -421,7 +415,7 @@ export class EmployeePersonalDetailsFormComponent {
      if(!this.warningMessageForBank){
        this.warningMessageForBank=true;
        this.employeeService.warn(
-         'Please enter PF Number'
+        'Please enter all details for Bank'
        );
      }
      }
@@ -481,6 +475,7 @@ export class EmployeePersonalDetailsFormComponent {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
+      const value = Object.values(control.errors)[0];
       return CustomValidators.getErrorMessage(errorKey, controlName);
     }
 
@@ -513,7 +508,6 @@ export class EmployeePersonalDetailsFormComponent {
   getById(id: string) {
     this.employeeService.searchPersonalDetailsById(this.emp_id).subscribe(
       (response: EmployeePersonalDetails) => {
-        this.employeePersonalDetailsForm.controls['id'].setValue(response.id);
         this.employeePersonalDetailsForm.patchValue(response);
         console.log(response);
         this.employee = response;
@@ -561,18 +555,25 @@ export class EmployeePersonalDetailsFormComponent {
       this.files = event.target.files[0];
       console.log(this.files);
       const panfile = event.target.files[0];
-      console.log('size', panfile.size);
-      console.log('type', panfile.type);
-      if (panfile.size > 2e6) {
-        this.PANFleSizeError = 'File is too large should not exceed Over 2MB';
-        console.log('File is too large. Over 2MB');
+      if (panfile.size > 1e6) {
+        this.PANFleSizeError = 'File is too large should not exceed Over 1MB';
+        console.log('File is too large. Over 1MB');
       }
 
       if (panfile) {
+        if(this.viewPANFile){
+          const lastEqualSignIndex = this.viewPANFile.lastIndexOf('=');
+          const filename = this.viewPANFile.substr(lastEqualSignIndex + 1);
+          
+          this.fileUploadService.removeImage(filename).subscribe((res) => {
+            console.log("pan file removed");
+          });
+        }
         this.fileUploadService.uploadImage(panfile).subscribe((res) => {
           console.log('received response', res);
           this.aadhar_file_url = res['message'];
           this.viewPANFile = res['message'];
+
           if(this.viewPANFile){
             this.panFileError=false;
           }else{
@@ -591,12 +592,20 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const file = event.target.files[0];
-      if (file.size > 2e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 2MB';
-        console.log('File is too large. Over 2MB');
+      if (file.size > 1e6) {
+        this.FleSizeError = 'File is too large should not exceed Over 1MB';
+        console.log('File is too large. Over 1MB');
       }
 
       if (file) {
+        if(this.viewPassportFile){
+          const lastEqualSignIndex = this.viewPassportFile.lastIndexOf('=');
+          const filename = this.viewPassportFile.substr(lastEqualSignIndex + 1);
+          
+          this.fileUploadService.removeImage(filename).subscribe((res) => {
+            console.log("passport file removed");
+          });
+        }
         this.fileUploadService.uploadImage(file).subscribe((res) => {
           this.passport_file_url = res['message'];
           this.file_name = res['message'];
@@ -620,11 +629,19 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const aadharfile = event.target.files[0];
-      if (aadharfile.size > 2e6) {
-        this.AadharFileSizeError = 'File is too large should not exceed Over 2MB';
+      if (aadharfile.size > 1e6) {
+        this.AadharFileSizeError = 'File is too large should not exceed Over 1MB';
       }
 
       if (aadharfile) {
+        if(this.viewAadharFile){
+          const lastEqualSignIndex = this.viewAadharFile.lastIndexOf('=');
+          const filename = this.viewAadharFile.substr(lastEqualSignIndex + 1);
+          
+          this.fileUploadService.removeImage(filename).subscribe((res) => {
+            console.log("aadhar file removed");
+          });
+        }
         this.fileUploadService.uploadImage(aadharfile).subscribe((res) => {
           this.aadhar_file_url = res['message'];
           // this.file_name = res['message'];
@@ -640,22 +657,39 @@ export class EmployeePersonalDetailsFormComponent {
   }
 
   onSubmit() {
-    // console.log("dfd",this.inputFromParent);
+   //  console.log("dfd",this.inputFromParent);
+    if(this.employeePersonalDetailsForm.value.maritalStatus!=''){
+      this.addValidationForPersonalFields(this.employeePersonalDetailsForm.value.maritalStatus);     
+    }
+    if(this.employeePersonalDetailsForm.value.passportNumber!=''){
+      this.addValidationForPassportFields(this.employeePersonalDetailsForm.value.passportNumber);     
+    }
+    if(this.employeePersonalDetailsForm.value.aadhaarNumber!=''){
+      this.addValidationForAadharFields(this.employeePersonalDetailsForm.value.aadhaarNumber);     
+    }
+    if(this.employeePersonalDetailsForm.value.panCardNumber!=''){
+      this.addValidationForPANFields(this.employeePersonalDetailsForm.value.panCardNumber);     
+    }
+    if(this.employeePersonalDetailsForm.value.uanNumber!=''){
+      this.addValidationForPFFields(this.employeePersonalDetailsForm.value.uanNumber);     
+    }
+    if(this.employeePersonalDetailsForm.value.bankAccountNumber!=''){
+      this.addValidationForBankFields(this.employeePersonalDetailsForm.value.bankAccountNumber);     
+    }
     if (this.employeePersonalDetailsForm.valid) {
+      this.employeePersonalDetailsForm.value.passportFile =
+      this.passport_file_url;
+      this.employeePersonalDetailsForm.value.aadhaarFile = this.aadhar_file_url;
+      this.employeePersonalDetailsForm.value.panCardFile = this.aadhar_file_url;
       const formData = {
         ...this.employeePersonalDetailsForm.value,
         confirmationDate: this.employeePersonalDetailsForm.value
           .passportIssueDate
           ? moment(this.employeePersonalDetailsForm.value.passportIssueDate)
-              .utcOffset(0, true)
-              .format('YYYY-MM-DD')
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
           : null,
-      };
-
-      this.employeePersonalDetailsForm.value.passportFile =
-        this.passport_file_url;
-      this.employeePersonalDetailsForm.value.aadhaarFile = this.aadhar_file_url;
-      this.employeePersonalDetailsForm.value.panCardFile = this.aadhar_file_url;
+      };     
 
       if (this.actionLabel === 'Save') {
         this.employeeService
@@ -675,7 +709,7 @@ export class EmployeePersonalDetailsFormComponent {
                 error.status == 500
               ) {
                 this.employeeService.warn(
-                  error.error.message
+                  'Employee Personal Details already present'
                 );
               }
             }
@@ -698,7 +732,7 @@ export class EmployeePersonalDetailsFormComponent {
                 error.status == 500
               ) {
                 this.employeeService.warn(
-                  error.error.message
+                  'Employee Personal Details already present'
                 );
               }
             }

@@ -3,7 +3,10 @@
   color: #ffffff;
   height: 35px;
   width: 100px;
-  margin-top: 10px;
+  margin-top: 0px;
+}
+.col-md-8{
+  margin-bottom: 8px;
 }
 
 .view_file {
@@ -12,6 +15,12 @@
 
 .save-btn:hover {
   transform: scale(1.1);
+}
+
+.mat-select-value-text.custom-select-value {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: black; /* Adjust the color as needed */
+  font-weight: 450;
 }
 
 .dark:hover {
@@ -137,11 +146,7 @@ mat-label {
 }
 
 .validate-text {
-  font-size: 12px;
-  text-align: left;
-  color: red;
-  position: relative; /* Or absolute or fixed depending on your layout */
-  left: -19px;
+  padding: 0px !important;
 }
 
 .dialog-action-btn {
@@ -154,3 +159,8 @@ mat-label {
 .host::ng-deep .card-title b {
   font-weight: normal !important;
 }
+
+:host::ng-deep .mat-mdc-form-field-error-wrapper{
+  padding: 0px !important;
+}
+

@@ -19,6 +19,7 @@ import { CommonMaster } from '../../../models/common-master.model';
 import { CustomValidators } from '../../../services/custom-validators.service';
 import { FileUploadService } from '../../../services/file-upload.service';
 import { ColumnsMetadata } from 'src/app/modules/master/models/columnMetaData';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-employee-visa-details-form',
@@ -45,6 +46,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
   url: any;
   file_name: any;
   viewFile: any;
+  todayDate: Date = new Date();
 
   constructor(
     private _mdr: MatDialogRef<EmployeeVisaDetailsFormComponent>,
@@ -55,7 +57,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private fileUploadService: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.emp_id = this.route.snapshot.queryParamMap.get('id');
@@ -84,7 +86,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         ],
       ],
       visaFile: [''],
-      validDate: ['', [Validators.required]],
+      validIssueDate: ['', [Validators.required, CustomValidators.valdiationOfPassport(this.todayDate)]],
     });
   }
 
@@ -92,6 +94,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     const control = this.employeeVisaDetailsForm.get(controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
+      const value = Object.values(control.errors)[0];
       return CustomValidators.getErrorMessage(errorKey, controlName);
     }
     return '';

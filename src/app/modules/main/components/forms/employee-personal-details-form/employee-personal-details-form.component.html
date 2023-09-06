@@ -4,7 +4,7 @@
     <div class="col-lg-4">
       <mat-label>Marital Status</mat-label>
       <mat-form-field appearance="outline" color="primary">
-        <mat-select formControlName="maritalStatus" placeholder="Select" (selectionChange)="addValidationForPersonalFields($event)">
+        <mat-select formControlName="maritalStatus" placeholder="Select">
           <mat-option [disabled]="true">Select</mat-option>
           <mat-option *ngFor="let marital_status of marital_statuses" [value]="marital_status.value">
             {{ marital_status.value }}
@@ -33,10 +33,20 @@
       <mat-label>CPR Number</mat-label>
       <mat-form-field appearance="outline" color="primary">
         <input matInput formControlName="cprNumber" placeholder="1234567890" />
-        <mat-error *ngIf="isControlInvalid('cprNumber') && !employeePersonalDetailsForm.controls['cprNumber'].hasError('maxlength')" class="validate-text">
+        <mat-error *ngIf="
+            isControlInvalid('cprNumber') &&
+            !employeePersonalDetailsForm.controls['cprNumber'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("cprNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['cprNumber'].touched && employeePersonalDetailsForm.controls['cprNumber'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['cprNumber'].touched &&
+            employeePersonalDetailsForm.controls['cprNumber'].hasError(
+              'maxlength'
+            )
+          ">
           CPR Number should not exceed 10 characters
         </mat-error>
       </mat-form-field>
@@ -48,10 +58,13 @@
       <mat-label>Family Background</mat-label>
       <mat-form-field appearance="outline" color="primary">
         <textarea matInput rows="4" formControlName="familyBackground"></textarea>
-        <mat-error *ngIf="isControlInvalid('familyBackground') && !employeePersonalDetailsForm.controls['familyBackground'].hasError('maxlength')" class="validate-text">
+        <mat-error
+          *ngIf="isControlInvalid('familyBackground') && !employeePersonalDetailsForm.controls['familyBackground'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("familyBackground") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['familyBackground'].touched && employeePersonalDetailsForm.controls['familyBackground'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['familyBackground'].touched && employeePersonalDetailsForm.controls['familyBackground'].hasError('maxlength')">
           Family Background should not exceed 100 characters
         </mat-error>
       </mat-form-field>
@@ -60,10 +73,13 @@
       <mat-label>Health Details</mat-label>
       <mat-form-field appearance="outline">
         <textarea matInput rows="4" formControlName="healthDetails"></textarea>
-        <mat-error *ngIf="isControlInvalid('healthDetails') && !employeePersonalDetailsForm.controls['healthDetails'].hasError('maxlength')" class="validate-text">
+        <mat-error
+          *ngIf="isControlInvalid('healthDetails') && !employeePersonalDetailsForm.controls['healthDetails'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("healthDetails") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['healthDetails'].touched && employeePersonalDetailsForm.controls['healthDetails'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['healthDetails'].touched && employeePersonalDetailsForm.controls['healthDetails'].hasError('maxlength')">
           Health Details should not exceed 100 characters
         </mat-error>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
@@ -73,10 +89,20 @@
       <mat-label>GOSI</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="gosi" placeholder="123456789" />
-        <mat-error *ngIf="isControlInvalid('gosi') && !employeePersonalDetailsForm.controls['cprNumber'].hasError('maxlength')" class="validate-text">
+        <mat-error *ngIf="
+            isControlInvalid('gosi') &&
+            !employeePersonalDetailsForm.controls['gosi'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("gosi") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['cprNumber'].touched && employeePersonalDetailsForm.controls['cprNumber'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['gosi'].touched &&
+            employeePersonalDetailsForm.controls['gosi'].hasError(
+              'maxlength'
+            )
+          ">
           GOSI should not exceed 9 characters
         </mat-error>
       </mat-form-field>
@@ -88,18 +114,22 @@
     <div class="col-lg-4">
       <mat-label>Passport Number</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="passportNumber"
-          placeholder="A2096457" (input)="addValidationForPassportFields($event)"
-        />
-        <mat-error
-          *ngIf="isControlInvalid('passportNumber')  && !employeePersonalDetailsForm.controls['passportNumber'].hasError('maxlength')"
-          class="validate-text"
-        >
+        <input matInput formControlName="passportNumber" placeholder="A2096457"
+           />
+        <mat-error *ngIf="
+            isControlInvalid('passportNumber') &&
+            !employeePersonalDetailsForm.controls['passportNumber'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("passportNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['passportNumber'].touched && employeePersonalDetailsForm.controls['passportNumber'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['passportNumber'].touched &&
+            employeePersonalDetailsForm.controls['passportNumber'].hasError(
+              'maxlength'
+            )
+          ">
           Passport Number should not exceed 20 characters
         </mat-error>
       </mat-form-field>
@@ -107,14 +137,17 @@
     <div class="col-lg-4">
       <mat-label>Passport Name</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="passportName" #passportNameInputElement/>
-        <mat-error *ngIf="isControlInvalid('passportName') && !employeePersonalDetailsForm.controls['passportName'].hasError('maxlength')" class="validate-text">
+        <input matInput formControlName="passportName" #passportNameInputElement />
+        <mat-error
+          *ngIf="isControlInvalid('passportName') && !employeePersonalDetailsForm.controls['passportName'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("passportName") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['passportName'].touched && employeePersonalDetailsForm.controls['passportName'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['passportName'].touched && employeePersonalDetailsForm.controls['passportName'].hasError('maxlength')">
           Passport Name should not exceed 100 characters
         </mat-error>
-        
+
       </mat-form-field>
     </div>
     <div class="col-lg-4">
@@ -135,17 +168,9 @@
     <div class="col-lg-4">
       <mat-label>Valid Upto</mat-label>
       <mat-form-field appearance="outline" class="">
-        <input
-          matInput
-          formControlName="passportValidity"
-          [matDatepicker]="picker1"
-          placeholder="DD/MM/YYYY"
-          readonly
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker1"
-        ></mat-datepicker-toggle>
+        <input matInput formControlName="passportValidity" [matDatepicker]="picker1" placeholder="DD/MM/YYYY"
+          readonly />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
         <mat-error *ngIf="isControlInvalid('passportValidity')" class="validate-text">
           {{ getErrorMessage("passportValidity") }}
@@ -157,10 +182,13 @@
       <mat-label>Place Of Issue</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="placeOfIssue" />
-        <mat-error *ngIf="isControlInvalid('placeOfIssue') && !employeePersonalDetailsForm.controls['placeOfIssue'].hasError('maxlength')" class="validate-text">
+        <mat-error
+          *ngIf="isControlInvalid('placeOfIssue') && !employeePersonalDetailsForm.controls['placeOfIssue'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("placeOfIssue") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['placeOfIssue'].touched && employeePersonalDetailsForm.controls['placeOfIssue'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['placeOfIssue'].touched && employeePersonalDetailsForm.controls['placeOfIssue'].hasError('maxlength')">
           Place Of Issue should not exceed 50 characters
         </mat-error>
       </mat-form-field>
@@ -168,7 +196,7 @@
 
     <div class="col-lg-4 mt-2">
       <!--<mat-form-field>  -->
-      <mat-label>File Upload</mat-label>
+      <mat-label>File</mat-label>
       <!--</mat-form-field> -->
 
       <div class="passport-file-upload">
@@ -185,7 +213,7 @@
         <mat-error *ngIf="FleSizeError" class="validate-text">{{
           FleSizeError
           }}</mat-error>
-          <mat-error *ngIf="passportFileError">Please upload Passport document</mat-error>
+        <mat-error *ngIf="passportFileError" class="validate-text">Please upload Passport document</mat-error>
       </div>
     </div>
   </div>
@@ -197,14 +225,18 @@
     <div class="col-lg-4">
       <mat-label>Aadhar Number</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="aadhaarNumber" (input)="addValidationForAadharFields($event)" />
-        <mat-error
-          *ngIf="isControlInvalid('aadhaarNumber') && !employeePersonalDetailsForm.controls['aadhaarNumber'].hasError('maxlength')"
-          class="validate-text"
-        >
+        <input matInput formControlName="aadhaarNumber" placeholder="662223509284
+        " />
+        <mat-error *ngIf="
+            isControlInvalid('aadhaarNumber') &&
+            !employeePersonalDetailsForm.controls['aadhaarNumber'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("aadhaarNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['aadhaarNumber'].touched && employeePersonalDetailsForm.controls['aadhaarNumber'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['aadhaarNumber'].touched && employeePersonalDetailsForm.controls['aadhaarNumber'].hasError('maxlength')">
           Aadhar Number should not exceed 12 characters
         </mat-error>
       </mat-form-field>
@@ -213,16 +245,19 @@
       <mat-label>Aadhar Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="aadhaarName" />
-        <mat-error *ngIf="isControlInvalid('aadhaarName') && !employeePersonalDetailsForm.controls['aadhaarName'].hasError('maxlength')" class="validate-text">
+        <mat-error
+          *ngIf="isControlInvalid('aadhaarName') && !employeePersonalDetailsForm.controls['aadhaarName'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("aadhaarName") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['aadhaarName'].touched && employeePersonalDetailsForm.controls['aadhaarName'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['aadhaarName'].touched && employeePersonalDetailsForm.controls['aadhaarName'].hasError('maxlength')">
           Aadhar Name should not exceed 100 characters
         </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4 mt-2">
-      <mat-label>File Upload</mat-label>
+      <mat-label>File</mat-label>
       <!--</mat-form-field> -->
       <div class="aadhar-file-upload">
         <button id="add-passport-doc-btn" class="center-positon-absolute upload-doc-btn" mat-icon-button
@@ -235,10 +270,10 @@
             mat-button class="upload-doc-btn">
             View File
           </button></a>
-          <mat-error *ngIf="AadharFileSizeError" class="validate-text">{{
-            AadharFileSizeError
-            }}</mat-error>
-            <mat-error *ngIf="aadharFileError">Please upload Aadhar document</mat-error>
+        <mat-error *ngIf="AadharFileSizeError" class="validate-text">{{
+          AadharFileSizeError
+          }}</mat-error>
+        <mat-error *ngIf="aadharFileError" class="validate-text">Please upload Aadhar document</mat-error>
       </div>
     </div>
   </div>
@@ -249,14 +284,18 @@
     <div class="col-lg-4">
       <mat-label>Pan Number</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="panCardNumber" placeholder="AAAPZ1234C" (input)="addValidationForPANFields($event)" />
+        <input matInput formControlName="panCardNumber" placeholder="AAAPZ1234C" />
         <mat-error
           *ngIf="isControlInvalid('panCardNumber') && !employeePersonalDetailsForm.controls['panCardNumber'].hasError('maxlength')"
-          class="validate-text"
-        >
+          class="validate-text">
           {{ getErrorMessage("panCardNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['panCardNumber'].touched && employeePersonalDetailsForm.controls['panCardNumber'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['panCardNumber'].touched &&
+            employeePersonalDetailsForm.controls['panCardNumber'].hasError(
+              'maxlength'
+            )
+          ">
           PAN Number should not exceed 10 characters
         </mat-error>
       </mat-form-field>
@@ -265,17 +304,20 @@
       <mat-label>PAN Card Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="panCardName" />
-        <mat-error *ngIf="isControlInvalid('panCardName') && !employeePersonalDetailsForm.controls['panCardName'].hasError('maxlength')" class="validate-text">
+        <mat-error
+          *ngIf="isControlInvalid('panCardName') && !employeePersonalDetailsForm.controls['panCardName'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("panCardName") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['panCardName'].touched && employeePersonalDetailsForm.controls['panCardName'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['panCardName'].touched && employeePersonalDetailsForm.controls['panCardName'].hasError('maxlength')">
           PAN Card Name should not exceed 100 characters
         </mat-error>
-        
+
       </mat-form-field>
     </div>
     <div class="col-lg-4 mt-2">
-      <mat-label>File Upload</mat-label>
+      <mat-label>File</mat-label>
       <!--</mat-form-field> -->
       <div class="aadhar-file-upload">
         <button id="add-passport-doc-btn" class="center-positon-absolute upload-doc-btn" mat-icon-button
@@ -288,10 +330,10 @@
             class="upload-doc-btn">
             View File
           </button></a>
-          <mat-error *ngIf="PANFleSizeError" class="validate-text">{{
-            PANFleSizeError
-            }}</mat-error>
-            <mat-error *ngIf="panFileError">Please upload PAN document</mat-error>
+        <mat-error *ngIf="PANFleSizeError" class="validate-text">{{
+          PANFleSizeError
+          }}</mat-error>
+        <mat-error *ngIf="panFileError" class="validate-text">Please upload PAN document</mat-error>
       </div>
     </div>
   </div>
@@ -301,11 +343,18 @@
     <div class="col-lg-4">
       <mat-label>UAN Number</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="uanNumber" placeholder="100904319456" (input)="addValidationForPFFields($event)" />
-        <mat-error *ngIf="isControlInvalid('uanNumber') && !employeePersonalDetailsForm.controls['uanNumber'].hasError('maxlength')" class="validate-text">
+        <input matInput formControlName="uanNumber" placeholder="100904319456" />
+        <mat-error
+          *ngIf="isControlInvalid('uanNumber') && !employeePersonalDetailsForm.controls['uanNumber'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("uanNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['uanNumber'].touched && employeePersonalDetailsForm.controls['uanNumber'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['uanNumber'].touched &&
+            employeePersonalDetailsForm.controls['uanNumber'].hasError(
+              'maxlength'
+            )
+          ">
           UAN Number should not exceed 12 characters
         </mat-error>
       </mat-form-field>
@@ -313,15 +362,21 @@
     <div class="col-lg-4">
       <mat-label>PF Number</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="pfNumber"
-          placeholder="TNMAS12071991231234567"
-        />
-        <mat-error *ngIf="isControlInvalid('pfNumber') && !employeePersonalDetailsForm.controls['pfNumber'].hasError('maxlength')" class="validate-text">
+        <input matInput formControlName="pfNumber" placeholder="TNMAS12071991231234567" />
+        <mat-error *ngIf="
+            isControlInvalid('pfNumber') &&
+            !employeePersonalDetailsForm.controls['pfNumber'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("pfNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['pfNumber'].touched && employeePersonalDetailsForm.controls['pfNumber'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['pfNumber'].touched &&
+            employeePersonalDetailsForm.controls['pfNumber'].hasError(
+              'maxlength'
+            )
+          ">
           PF Number should not exceed 22 characters
         </mat-error>
       </mat-form-field>
@@ -334,19 +389,17 @@
     <div class="col-lg-4">
       <mat-label>Bank Account Number</mat-label>
       <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="bankAccountNumber"
-          placeholder="635802010014976"
-          (input)="addValidationForBankFields($event)"
-        />
-        <mat-error
-          *ngIf="isControlInvalid('bankAccountNumber') && !employeePersonalDetailsForm.controls['bankAccountNumber'].hasError('maxlength')"
-          class="validate-text"
-        >
+        <input matInput formControlName="bankAccountNumber" placeholder="635802010014976" />
+        <mat-error *ngIf="
+            isControlInvalid('bankAccountNumber') &&
+            !employeePersonalDetailsForm.controls['bankAccountNumber'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("bankAccountNumber") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['bankAccountNumber'].touched && employeePersonalDetailsForm.controls['bankAccountNumber'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['bankAccountNumber'].touched && employeePersonalDetailsForm.controls['bankAccountNumber'].hasError('maxlength')">
           Bank Account Number should not exceed 17 characters
         </mat-error>
       </mat-form-field>
@@ -355,10 +408,20 @@
       <mat-label>IFSC Code / IBAN Code</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="ifscCode" placeholder="SBIN0125620" />
-        <mat-error *ngIf="isControlInvalid('ifscCode') && !employeePersonalDetailsForm.controls['ifscCode'].hasError('maxlength')" class="validate-text">
+        <mat-error *ngIf="
+            isControlInvalid('ifscCode') &&
+            !employeePersonalDetailsForm.controls['ifscCode'].hasError(
+              'maxlength'
+            )
+          " class="validate-text">
           {{ getErrorMessage("ifscCode") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['ifscCode'].touched && employeePersonalDetailsForm.controls['ifscCode'].hasError('maxlength')">
+        <mat-error *ngIf="
+            employeePersonalDetailsForm.controls['ifscCode'].touched &&
+            employeePersonalDetailsForm.controls['ifscCode'].hasError(
+              'maxlength'
+            )
+          ">
           IFSC Code / IBAN Number should not exceed 10 characters
         </mat-error>
       </mat-form-field>
@@ -368,17 +431,21 @@
       <mat-label>Bank Name</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="bankName" />
-        <mat-error *ngIf="isControlInvalid('bankName') && !employeePersonalDetailsForm.controls['bankName'].hasError('maxlength')" class="validate-text">
+        <mat-error
+          *ngIf="isControlInvalid('bankName') && !employeePersonalDetailsForm.controls['bankName'].hasError('maxlength')"
+          class="validate-text">
           {{ getErrorMessage("bankName") }}
         </mat-error>
-        <mat-error *ngIf="employeePersonalDetailsForm.controls['bankName'].touched && employeePersonalDetailsForm.controls['bankName'].hasError('maxlength')">
+        <mat-error
+          *ngIf="employeePersonalDetailsForm.controls['bankName'].touched && employeePersonalDetailsForm.controls['bankName'].hasError('maxlength')">
           Bank Name should not exceed 100 characters
         </mat-error>
       </mat-form-field>
     </div>
   </div>
   <div class="form-footer">
-    <button mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn" (click)="onSubmit()" [disabled]="!employeePersonalDetailsForm.valid">
+    <button mat-button class="btn btn-primary px-4 float-right profile-save-btn visa-btn" (click)="onSubmit()"
+      [disabled]="!employeePersonalDetailsForm.valid">
       {{ actionLabel }}
     </button>
   </div>
