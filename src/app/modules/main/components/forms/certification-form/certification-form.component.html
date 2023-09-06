@@ -23,7 +23,10 @@
             <div class="form-controls">
               <input matInput formControlName="certification" />
             </div>
-            <mat-error *ngIf="isControlInvalid('certification')">
+            <mat-error
+              *ngIf="isControlInvalid('certification')"
+              class="validate-text"
+            >
               {{ getErrorMessage("certification") }}
             </mat-error>
           </mat-form-field>
@@ -41,7 +44,10 @@
             <div class="form-controls">
               <input matInput formControlName="issuedBy" />
             </div>
-            <mat-error *ngIf="isControlInvalid('issuedBy')">
+            <mat-error
+              *ngIf="isControlInvalid('issuedBy')"
+              class="validate-text"
+            >
               {{ getErrorMessage("issuedBy") }}
             </mat-error>
           </mat-form-field>
@@ -52,14 +58,27 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Date Of Certification<span style="color: red">*</span></mat-label>
+          <mat-label
+            >Date Of Certification<span style="color: red">*</span></mat-label
+          >
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" class="">
-            <input matInput formControlName="dateOfCertification" [matDatepicker]="picker" placeholder="DD/MM/YYYY" />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <input
+              matInput
+              formControlName="dateOfCertification"
+              [matDatepicker]="picker"
+              placeholder="DD/MM/YYYY"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="isControlInvalid('dateOfCertification')">
+            <mat-error
+              *ngIf="isControlInvalid('dateOfCertification')"
+              class="validate-text"
+            >
               {{ getErrorMessage("dateOfCertification") }}
             </mat-error>
           </mat-form-field>
@@ -67,19 +86,28 @@
       </div>
     </div>
 
-
     <div _ngcontent-ng-c812429062="" class="form-footer">
       <mat-dialog-actions>
         <div class="container">
           <div class="row">
             <div class="col">
-              <div class="d-flex justify-content-end save-reset-button-container">
-                <button _ngcontent-ng-c812429062="" class="save-btn" (click)="onSubmit()"
-                  [disabled]="!certificationsForm.valid">
+              <div
+                class="d-flex justify-content-end save-reset-button-container"
+              >
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="save-btn"
+                  (click)="onSubmit()"
+                  [disabled]="!certificationsForm.valid"
+                >
                   {{ actionLabel }}
                 </button>
 
-                <button _ngcontent-ng-c812429062="" class="profile-save-btn dark" (click)="resetForm()">
+                <button
+                  _ngcontent-ng-c812429062=""
+                  class="profile-save-btn dark"
+                  (click)="resetForm()"
+                >
                   Reset
                 </button>
               </div>
@@ -88,6 +116,5 @@
         </div>
       </mat-dialog-actions>
     </div>
-
   </div>
 </form>

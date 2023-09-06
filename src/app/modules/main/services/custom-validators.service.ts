@@ -31,7 +31,7 @@ export class CustomValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
       const val = value.trim();
-      if (typeof value === 'string' && value && val.includes(' ')) {
+      if (typeof value && value && val.includes(' ')) {
         return { whitespace: true };
       }
       return null;
@@ -58,12 +58,8 @@ export class CustomValidators {
   static maxLength(maxLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value as string;
-      if (
-        typeof value === 'string' &&
-        value &&
-        value.toString().length > maxLength
-      ) {
-        return { maxLength: `Maximum ${maxLength} characters are allowed.` };
+      if (value && value.toString().length > maxLength) {
+        return { maxLength: `${maxLength}` };
       }
       return null;
     };
@@ -209,7 +205,7 @@ export class CustomValidators {
       const value = control.value as string;
       if (value && value.toString().length > maxLength) {
         return {
-          noticePeriodMaxLength: `Maximum ${maxLength} characters are allowed.`,
+          noticePeriodMaxLength: `${maxLength}`,
         };
       }
 
@@ -425,7 +421,9 @@ export class CustomValidators {
     };
   }
 
-  static getErrorMessage(errorKey: string, fieldName: string): string {
+  static getErrorMessage(errorKey: string, fieldName: string, value: string): string {
+    console.log(errorKey);
+    console.log(errorKey);
     const fieldNames: { [key: string]: string } = {
       confirmationDate: 'Confirmation Date',
       mobile: 'Mobile Number',
@@ -532,7 +530,7 @@ export class CustomValidators {
       leadingTrailingSpace: `Trailing, Leading spaces not allowed`,
       leadingSpace: `Leading spaces not allowed`,
       trailingSpace: `Trailing spaces not allowed`,
-      maxLength: `${fieldNames[fieldName]} should not exceed limit.`,
+      maxLength: `${fieldNames[fieldName]} should not exceed ${value} characters`,
       whitespace: `No whitespaces allowed`,
       validDateFormat: `${fieldNames[fieldName]} should be in DD/MM/YYYY format`,
       futureDate: `Please enter a future date for ${fieldNames[fieldName]}`,
@@ -542,7 +540,7 @@ export class CustomValidators {
       validRelievingDate: `Relieving Date should be a future date`,
       validEmailFormat: `Please enter valid email format`,
       validVisaDate: `should be grater than today`,
-      noticePeriodMaxLength: `Maximum 2 number are allowed`,
+      noticePeriodMaxLength: `Notice Period should not exceed ${value} digits`,
       graterWorkExperince: `To Date should be greater than From Date`,
       maxLengthOfCompany: `Maximum 50 character are allowed`,
       designationPeriodMaxLength: `Maximum 50 number are allowed`,
@@ -557,7 +555,7 @@ export class CustomValidators {
       issuedByMaxLength: `Issued By should not exceed 100 characters`,
       certificationMaxLength: `Certification should not exceed 100 characters`,
       maxLengthOfAddress: `Maximum 50 character are allowed`,
-      passportIssueDate: `Date Of Issue should be a past date`,
+      passportIssueDate: `Date of Issue should be a past date`,
       valdiationOfPassport: `Valid Dateshould be a future date`,
       ageLessThan18: `${fieldNames[fieldName]} should be greater or equal to 18 years `,
       clientEmailMaxLength: `Client Email should not exceed 40 characters`,

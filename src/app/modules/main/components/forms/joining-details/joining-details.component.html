@@ -1,79 +1,81 @@
-<form *ngIf="joiningForm" [formGroup]="joiningForm" class="main-div">
-  <div class="row mt-4">
-    <h2 class="head-name">JOINING DETAILS</h2>
-
-    <div class="row mm 4">
-      <div class="col-lg-6">
-        <mat-label>Confirmation Date<span style="color: red">*</span></mat-label>
-
-        <mat-form-field appearance="outline" class="">
-          <input matInput formControlName="confirmationDate" [matDatepicker]="confirmationDatePicker"
-            placeholder="DD/MM/YYYY" readonly tabIndex="29" />
-
-          <mat-datepicker-toggle matSuffix [for]="confirmationDatePicker"></mat-datepicker-toggle>
-
-          <mat-datepicker #confirmationDatePicker class="joining-date-picker" tabIndex="30"></mat-datepicker>
-
-          <mat-error *ngIf="isControlInvalid('confirmationDate')" class="validate-text">
-            {{ getErrorMessage("confirmationDate") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="col-lg-6">
-        <mat-label>Notice Period<span style="color: red">*</span></mat-label>
-
-        <mat-form-field appearance="outline" class="">
-          <input matInput type="number" formControlName="noticePeriod" tabIndex="31" />
-
-          <mat-error *ngIf="isControlInvalid('noticePeriod')" class="validate-text">
-            {{ getErrorMessage("noticePeriod") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="row mm">
-      <div class="col-lg-6">
-        <mat-label>Resignation Date</mat-label>
-
-        <mat-form-field appearance="outline" class="">
-          <input matInput formControlName="resignationDate" [matDatepicker]="resignationDatePicker"
-            placeholder="DD/MM/YYYY" readonly />
-
-          <mat-datepicker-toggle matSuffix [for]="resignationDatePicker"></mat-datepicker-toggle>
-
-          <mat-datepicker #resignationDatePicker></mat-datepicker>
-
-          <mat-error *ngIf="isControlInvalid('resignationDate')" class="validate-text">
-            {{ getErrorMessage("resignationDate") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="col-lg-6">
-        <mat-label>Relieving Date</mat-label>
-
-        <mat-form-field appearance="outline" class="">
-          <input matInput formControlName="relievingDate" [matDatepicker]="relievingDatePicker" placeholder="DD/MM/YYYY"
-            readonly />
-
-          <mat-datepicker-toggle matSuffix [for]="relievingDatePicker"></mat-datepicker-toggle>
-
-          <mat-datepicker #relievingDatePicker></mat-datepicker>
-
-          <mat-error *ngIf="isControlInvalid('relievingDate')" class="validate-text">
-            {{ getErrorMessage("relievingDate") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="form-footer">
-      <button _ngcontent-ng-c812429062="" class="btn btn-primary px-4 float-right joining-details-save-btn"
-        (click)="onSubmit()" [disabled]="!joiningForm.valid">
-        {{ actionLabel }}
-      </button>
-    </div>
+<div class="main-div">
+  <div class="formHeader">
+    <span>JOINING DETAILS</span>
   </div>
-</form>
+  <form *ngIf="joiningForm" [formGroup]="joiningForm">
+    <div class="row mt-4">
+      <div class="row mm 4">
+        <div class="col-lg-6">
+          <mat-label>Confirmation Date<span style="color: red">*</span></mat-label>
+          <mat-form-field appearance="outline" class="">
+            <input matInput formControlName="confirmationDate" [matDatepicker]="confirmationDatePicker"
+              placeholder="DD/MM/YYYY" readonly tabIndex="36" />
+
+            <mat-datepicker-toggle matSuffix [for]="confirmationDatePicker"></mat-datepicker-toggle>
+
+            <mat-datepicker #confirmationDatePicker class="joining-date-picker" tabIndex="37"></mat-datepicker>
+
+            <mat-error *ngIf="isControlInvalid('confirmationDate')" class="validate-text">
+              {{ getErrorMessage("confirmationDate") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-label>Notice Period<span style="color: red">*</span></mat-label>
+
+          <mat-form-field appearance="outline" class="">
+            <input matInput type="number" formControlName="noticePeriod" tabIndex="38" />
+
+            <mat-error *ngIf="isControlInvalid('noticePeriod')" class="validate-text">
+              {{ getErrorMessage("noticePeriod") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mm">
+        <div class="col-lg-6">
+          <mat-label>Resignation Date</mat-label>
+
+          <mat-form-field appearance="outline" class="">
+            <input matInput formControlName="resignationDate" [matDatepicker]="resignationDatePicker"
+              placeholder="DD/MM/YYYY" readonly tabIndex="39" />
+
+            <mat-datepicker-toggle matSuffix [for]="resignationDatePicker"></mat-datepicker-toggle>
+
+            <mat-datepicker #resignationDatePicker tabIndex="40"></mat-datepicker>
+
+            <mat-error *ngIf="isControlInvalid('resignationDate')" class="validate-text">
+              {{ getErrorMessage("resignationDate") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-label>Relieving Date</mat-label>
+
+          <mat-form-field appearance="outline" class="">
+            <input matInput formControlName="relievingDate" [matDatepicker]="relievingDatePicker"
+              placeholder="DD/MM/YYYY" readonly tabIndex="41" />
+
+            <mat-datepicker-toggle matSuffix [for]="relievingDatePicker"></mat-datepicker-toggle>
+
+            <mat-datepicker #relievingDatePicker tabIndex="42"></mat-datepicker>
+
+            <mat-error *ngIf="isControlInvalid('relievingDate')" class="validate-text">
+              {{ getErrorMessage("relievingDate") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button _ngcontent-ng-c812429062="" class="btn btn-primary px-4 float-right joining-details-save-btn"
+          (click)="onSubmit()" [disabled]="!joiningForm.valid" tabIndex="43">
+          {{ actionLabel }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -32,7 +32,7 @@ export class CertificationFormComponent implements OnInit {
     private route: ActivatedRoute,
     private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -71,7 +71,7 @@ export class CertificationFormComponent implements OnInit {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.certificationMaxLength(100),
+          CustomValidators.maxLength(100),
           Validators.pattern('^[A-Za-z0-9\\s.-]{1,100}'),
         ],
       ],
@@ -82,7 +82,7 @@ export class CertificationFormComponent implements OnInit {
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
-          CustomValidators.issuedByMaxLength(100),
+          CustomValidators.maxLength(100),
           Validators.pattern('^[A-Za-z0-9\\s.-]{1,100}'),
         ],
       ],
@@ -182,7 +182,8 @@ export class CertificationFormComponent implements OnInit {
     const control = this.certificationsForm.get(controlName);
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
     return '';
   }

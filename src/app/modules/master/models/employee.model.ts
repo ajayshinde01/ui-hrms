@@ -7,5 +7,6 @@ export interface Employee {
     updatedBy:string;
     createdAt:string;
     updatedAt:string;
+   
 
 }

@@ -47,7 +47,7 @@ export class JoiningDetailsComponent implements OnInit {
     private joiningDetailsService: JoiningDetailsService,
 
     private employeeService: EmployeeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -91,9 +91,10 @@ export class JoiningDetailsComponent implements OnInit {
       noticePeriod: [
         '',
         [
-          CustomValidators.noticePeriodMaxLength(2),
           CustomValidators.validNoticePeriod(),
-          Validators.required,
+          CustomValidators.noticePeriodMaxLength(2),
+          Validators.required
+
         ],
       ],
 
@@ -167,7 +168,8 @@ export class JoiningDetailsComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';
@@ -182,13 +184,13 @@ export class JoiningDetailsComponent implements OnInit {
           .format('YYYY-MM-DD'),
         resignationDate: this.joiningForm.value.resignationDate
           ? moment(this.joiningForm.value.resignationDate)
-              .utcOffset(0, true)
-              .format('YYYY-MM-DD')
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
         relievingDate: this.joiningForm.value.relievingDate
           ? moment(this.joiningForm.value.relievingDate)
-              .utcOffset(0, true)
-              .format('YYYY-MM-DD')
+            .utcOffset(0, true)
+            .format('YYYY-MM-DD')
           : null, // Replace with your desired invalid date format
       };
 

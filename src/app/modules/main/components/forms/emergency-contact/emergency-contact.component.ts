@@ -35,7 +35,7 @@ export class EmergencyContactComponent implements OnInit {
     private route: ActivatedRoute,
     private capitalService: FirstLetterCapitalService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -91,6 +91,7 @@ export class EmergencyContactComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
+          CustomValidators.maxLength(15),
           Validators.pattern('^[0-9]{10,15}$'),
         ],
       ],
@@ -175,7 +176,8 @@ export class EmergencyContactComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';

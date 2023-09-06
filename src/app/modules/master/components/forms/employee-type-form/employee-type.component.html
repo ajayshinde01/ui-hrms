@@ -28,6 +28,7 @@
                 placeholder="PER"
                 formControlName="employeeTypeId"
                 [disabled]="isDisabled"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -86,7 +87,12 @@
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
-              <input matInput placeholder="Permanant" formControlName="type" />
+              <input
+                matInput
+                placeholder="Permanant"
+                formControlName="type"
+                class="form-Control name-field custom-placeholder"
+              />
               <div
                 *ngIf="
                   employeeTypeForm.controls['type']?.invalid &&
@@ -154,7 +160,7 @@
             <div class="form-controls">
               <input
                 matInput
-                class="form-Control name-field"
+                class="form-Control name-field custom-placeholder"
                 placeholder="AVI-BHR"
                 formControlName="orgCode"
               />
