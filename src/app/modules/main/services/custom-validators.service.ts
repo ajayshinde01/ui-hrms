@@ -460,7 +460,7 @@ export class CustomValidators {
       //employee Visa Form
       countryCode: 'Country Code',
       visaNumber: 'Visa Number',
-      validIssueDate: 'Date Of Issue',
+      validDate: 'Date Of Issue',
 
       //employee person details form
       maritalStatus: 'Marital Status',

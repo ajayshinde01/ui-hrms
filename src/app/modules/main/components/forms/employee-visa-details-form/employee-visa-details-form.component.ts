@@ -82,7 +82,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
           CustomValidators.noTrailingSpace(),
         //  CustomValidators.maxLength(20),
           Validators.maxLength(20),
-          Validators.pattern('^[0-9]*$'),
+          Validators.pattern('^[0-9]{20}$'),
         ],
       ],
       visaFile: [''],

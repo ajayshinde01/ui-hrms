@@ -60,6 +60,7 @@ export class EmployeePersonalDetailsFormComponent {
   warningMessageForPAN: boolean;
   warningMessageForPF: boolean;
   warningMessageForBank: boolean;
+  allowedFileExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
 
   constructor(
     private router: Router,
@@ -95,7 +96,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noTrailingSpace(),
           //  CustomValidators.maxLength(10),
           Validators.maxLength(10),
-          Validators.pattern('^[0-9]*$'),
+          Validators.pattern('^[0-9]{10}$'),
           // Validators.pattern('^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$')
         ],
       ], //1610721012
@@ -107,8 +108,9 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noWhiteSpace(),
           CustomValidators.noTrailingSpace(),
           // CustomValidators.maxLength(9),
+          Validators.pattern('^[0-9]{9}$'),
           Validators.maxLength(9),
-          Validators.pattern('^[0-9]*$'),
+          
         ],
       ],
       aadhaarNumber: [
@@ -235,7 +237,7 @@ export class EmployeePersonalDetailsFormComponent {
           CustomValidators.noTrailingSpace(),
           // CustomValidators.maxLength(12),
           Validators.maxLength(12),
-          Validators.pattern('^[0-9]*$'),
+          Validators.pattern('^[0-9]{12}$'),
         ],
       ],
       pfNumber: [
@@ -276,10 +278,14 @@ export class EmployeePersonalDetailsFormComponent {
      this.employeePersonalDetailsForm.controls["cprNumber"].addValidators([Validators.required]);
      this.employeePersonalDetailsForm.controls["gosi"].addValidators([Validators.required]);
 
-     if(!this.warningMessageForPersonalDetails){
+     if(!this.warningMessageForPersonalDetails && this.employeePersonalDetailsForm.controls["bloodGroup"].value=='' 
+     || this.employeePersonalDetailsForm.controls["familyBackground"].value==''
+     || this.employeePersonalDetailsForm.controls["healthDetails"].value==''
+     || this.employeePersonalDetailsForm.controls["cprNumber"].value==''
+     || this.employeePersonalDetailsForm.controls["gosi"].value==''){
        this.warningMessageForPersonalDetails=true;
        this.employeeService.warn(
-         'Please enter all details for personal'
+         'Please enter all personal details'
        );
      }
      }
@@ -316,7 +322,10 @@ export class EmployeePersonalDetailsFormComponent {
       this.passportFileError=false;
     }
 
-    if(!this.warningMessageForPassport){
+    if(!this.warningMessageForPassport && this.employeePersonalDetailsForm.controls["passportName"].value==''
+    || this.employeePersonalDetailsForm.controls["passportIssueDate"].value==''
+    || this.employeePersonalDetailsForm.controls["passportValidity"].value==''
+    || this.employeePersonalDetailsForm.controls["placeOfIssue"].value==''){
       this.warningMessageForPassport=true;
       this.employeeService.warn(
         'Please enter all details for Passport'
@@ -338,6 +347,9 @@ export class EmployeePersonalDetailsFormComponent {
   },1000);  
     
      this.employeePersonalDetailsForm.controls['passportName'].updateValueAndValidity();
+     this.employeePersonalDetailsForm.controls['passportIssueDate'].updateValueAndValidity();
+     this.employeePersonalDetailsForm.controls['passportValidity'].updateValueAndValidity();
+     this.employeePersonalDetailsForm.controls['placeOfIssue'].updateValueAndValidity();
     // this.employeePersonalDetailsForm.get('passportame').focus();
    // this.employeePersonalDetailsForm.controls['passportName'].
 
@@ -353,7 +365,7 @@ export class EmployeePersonalDetailsFormComponent {
        this.aadharFileError=false;
      }
  
-     if(!this.warningMessageForAadhar){
+     if(!this.warningMessageForAadhar && this.employeePersonalDetailsForm.controls["aadhaarName"].value==''){
        this.warningMessageForAadhar=true;
        this.employeeService.warn(
          'Please enter all details for Aadhar'
@@ -373,7 +385,7 @@ export class EmployeePersonalDetailsFormComponent {
      this.employeePersonalDetailsForm.controls["panCardName"].addValidators([Validators.required]);
 
  
-     if(!this.warningMessageForPAN){
+     if(!this.warningMessageForPAN  && this.employeePersonalDetailsForm.controls["panCardName"].value==''){
        this.warningMessageForPAN=true;
        this.employeeService.warn(
          'Please enter all details for PAN'
@@ -392,7 +404,7 @@ export class EmployeePersonalDetailsFormComponent {
      if(value!==''){
      this.employeePersonalDetailsForm.controls["pfNumber"].addValidators([Validators.required]);
  
-     if(!this.warningMessageForPF){
+     if(!this.warningMessageForPF && this.employeePersonalDetailsForm.controls["pfNumber"].value==''){
        this.warningMessageForPF=true;
        this.employeeService.warn(
          'Please enter all details for PF'
@@ -412,7 +424,7 @@ export class EmployeePersonalDetailsFormComponent {
      this.employeePersonalDetailsForm.controls["bankName"].addValidators([Validators.required]);
      this.employeePersonalDetailsForm.controls["ifscCode"].addValidators([Validators.required]);
      
-     if(!this.warningMessageForBank){
+     if(!this.warningMessageForBank && this.employeePersonalDetailsForm.controls["bankName"].value==''){
        this.warningMessageForBank=true;
        this.employeeService.warn(
         'Please enter all details for Bank'
@@ -556,8 +568,7 @@ export class EmployeePersonalDetailsFormComponent {
       console.log(this.files);
       const panfile = event.target.files[0];
       if (panfile.size > 1e6) {
-        this.PANFleSizeError = 'File is too large should not exceed Over 1MB';
-        console.log('File is too large. Over 1MB');
+        this.PANFleSizeError = 'File size should be less than 1MB';
       }
 
       if (panfile) {
@@ -593,8 +604,7 @@ export class EmployeePersonalDetailsFormComponent {
       this.files = event.target.files[0];
       const file = event.target.files[0];
       if (file.size > 1e6) {
-        this.FleSizeError = 'File is too large should not exceed Over 1MB';
-        console.log('File is too large. Over 1MB');
+        this.FleSizeError = 'File size should be less than 1MB';
       }
 
       if (file) {
@@ -629,8 +639,16 @@ export class EmployeePersonalDetailsFormComponent {
     if (event.target.files.length > 0) {
       this.files = event.target.files[0];
       const aadharfile = event.target.files[0];
+      const file_type=aadharfile.type;
+      console.log(aadharfile);
+      const ext = file_type.substring(file_type.lastIndexOf('.') + 1);
       if (aadharfile.size > 1e6) {
-        this.AadharFileSizeError = 'File is too large should not exceed Over 1MB';
+        this.AadharFileSizeError = 'File size should be less than 1MB';
+      }
+
+      if (this.allowedFileExtensions.includes(ext.toLowerCase())) {
+      } else {
+        //this.AadharFileSizeError = 'File size should be less than 1MB';
       }
 
       if (aadharfile) {
