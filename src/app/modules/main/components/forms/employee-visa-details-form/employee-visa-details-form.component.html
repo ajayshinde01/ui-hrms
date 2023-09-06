@@ -65,13 +65,13 @@
             <div class="col-md-8">
               <div class="form-controls">
               <mat-form-field appearance="outline" class="">
-                <input matInput formControlName="validIssueDate" [matDatepicker]="validDatepicker" placeholder="DD/MM/YYYY"
+                <input matInput formControlName="validDate" [matDatepicker]="validDatepicker" placeholder="DD/MM/YYYY"
                   readonly />
 
                 <mat-datepicker-toggle matIconSuffix [for]="validDatepicker"></mat-datepicker-toggle>
                 <mat-datepicker #validDatepicker></mat-datepicker>
-                <mat-error *ngIf="isControlInvalid('validIssueDate')" class="validate-text">
-                  {{ getErrorMessage("validIssueDate") }}
+                <mat-error *ngIf="isControlInvalid('validDate')" class="validate-text">
+                  {{ getErrorMessage("validDate") }}
                 </mat-error>
               </mat-form-field>
             </div>

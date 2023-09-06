@@ -115,7 +115,7 @@
       <mat-label>Passport Number</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="passportNumber" placeholder="A2096457"
-           />
+          (input)="addValidationForPassportFields($event)" />
         <mat-error *ngIf="
             isControlInvalid('passportNumber') &&
             !employeePersonalDetailsForm.controls['passportNumber'].hasError(

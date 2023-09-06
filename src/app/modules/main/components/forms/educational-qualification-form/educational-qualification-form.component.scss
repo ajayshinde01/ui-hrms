@@ -30,6 +30,12 @@
   margin-left: -11px;
   margin-top: 10px;
 }
+
+.mat-select-value-text.custom-select-value {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: black; /* Adjust the color as needed */
+  font-weight: 450;
+}
 .close-btn {
   width: 25px;
   height: 20px;
@@ -123,10 +129,21 @@
 
 :host::ng-deep.mat-mdc-form-field-error {
   display: block;
-  margin-left: -17px;
   width: 336px !important;
 }
 
 mat-label {
   font-weight: 550;
+}
+
+.validate-text {
+  font-size: 9px;
+
+  text-align: left;
+
+  color: red;
+
+  position: relative; /* Or absolute or fixed depending on your layout */
+
+  left: -15px;
 }

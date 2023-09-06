@@ -28,7 +28,7 @@
                 placeholder="AVI-INDIA"
                 formControlName="organizationCode"
                 [disabled]="isDisabled"
-                class=""
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -99,6 +99,7 @@
                 matInput
                 placeholder="Avisys India"
                 formControlName="organizationName"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -163,11 +164,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 field-one">
-          <mat-label class="desc-label"
-            >Organization Description<span style="color: red"
-              >*</span
-            ></mat-label
-          >
+          <mat-label class="desc-label">Organization Description</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
@@ -176,6 +173,7 @@
                 matInput
                 placeholder="Avisys India region"
                 formControlName="organizationDesc"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="

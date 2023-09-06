@@ -26,6 +26,7 @@
                 placeholder="GR001"
                 formControlName="gradeId"
                 [disabled]="isDisabled"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -94,6 +95,7 @@
                 matInput
                 placeholder="Grade-Name"
                 formControlName="gradeName"
+                class="form-Control name-field custom-placeholder"
               />
               <div
                 *ngIf="
@@ -167,6 +169,7 @@
                 placeholder="Select Grade Type"
                 id="selectGrade"
                 formControlName="gradeType"
+                class="form-Control name-field custom-placeholder"
               >
                 <!-- <mat-option
                   *ngFor="let gradeType of gradeTypeOptions.gradeType"
@@ -201,14 +204,14 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-4 mt-2">
-          <mat-label>Organization Code<span style="color: red">*</span></mat-label>
+          <mat-label>Organization Code</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline" color="primary">
             <div class="form-controls">
               <input
                 matInput
-                class="form-Control name-field"
+                class="form-Control name-field custom-placeholder"
                 placeholder="AVI-BHR"
                 formControlName="orgCode"
               />

@@ -86,7 +86,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
         ],
       ],
       visaFile: [''],
-      validIssueDate: ['', [Validators.required, CustomValidators.valdiationOfPassport(this.todayDate)]],
+      validDate: ['', [Validators.required, CustomValidators.valdiationOfPassport(this.todayDate)]],
     });
   }
 
@@ -95,7 +95,7 @@ export class EmployeeVisaDetailsFormComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
       const value = Object.values(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
     return '';
   }

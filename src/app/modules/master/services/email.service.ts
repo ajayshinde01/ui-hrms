@@ -36,13 +36,6 @@ export class EmailService {
       'http://192.168.1.16:7010/email/get?id=' + id
     );
   }
-
-  // updateEmail(id: string): Observable<Email> {
-  //   return this.http.put<Email>(
-  //     'http://192.168.1.16:7010/employee/division/update',
-  //     id
-  //   );
-  // }
       createEmail(formData:FormData): Observable<any> {
  
         const httpOptions = {
@@ -53,17 +46,8 @@ export class EmailService {
         };
   
     return this.http.post('http://192.168.1.16:7010/email/send', formData);
-    // return this.http.post('http://192.168.1.16:7010/email/schedule', formData);
+   
   }
-  
-  
-  // deleteEmail(id: number): Observable<ApiResponse> {
-  //   return this.http.delete<ApiResponse>(
-  //     'http://192.168.1.16:7010/template/' +
-  //       id +
-  //       '?updatedBy=Admin'
-  //   );
-  // }
 
   notify(message: string) {
     const toastrConfig: Partial<IndividualConfig> = {

@@ -18,7 +18,7 @@ import { Email } from '../../../models/email';
 import { EmailService } from '../../../services/email.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { whitespaceValidator } from '../Validations/whiteSpace.validator';
-import { emailMaxLength } from 'src/app/modules/user/components/forms/Validations/emailMaxLength.validator';
+
 @Component({
   selector: 'app-email-form',
   templateUrl: './email-form.component.html',
@@ -36,9 +36,9 @@ export class EmailFormComponent implements OnInit {
   isReadOnly: boolean = false;
   recordSelected: boolean = false;
 
-// data:any={
-// name:''
-// }
+  // data:any={
+  // name:''
+  // }
 
   errorMessage: string = '';
   isFieldHidden: boolean = false;
@@ -84,37 +84,55 @@ export class EmailFormComponent implements OnInit {
 
     return iconMap[fileType] || 'fas fa-file';
   }
-  fileUpload(fileInput:any)
-  {
-    fileInput.click(); 
+  fileUpload(fileInput: any) {
+    fileInput.click();
   }
 
   createEmail(event: any) {
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile,"sioudfygshuid089syudvhn ")
+    console.log(this.selectedFile, "sioudfygshuid089syudvhn ")
   }
 
   initForm() {
     this.emailForm = this.formBuilder.group({
       id: [''],
       to: ['',
-      
-        [
-          Validators.required,
 
-          
+        [
+
+          Validators.required,
+          blankValidator,
+          leadingSpaceValidator,
+          trailingSpaceValidator,
+          whitespaceValidator,
+          Validators.pattern(
+            '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
+          )
+
+
         ],],
       cc: ['',
-        [
-          Validators.required
-        ]],
+        [Validators.required,
+          leadingSpaceValidator,
+          trailingSpaceValidator,
+          whitespaceValidator,
+          Validators.pattern(
+            '^([a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,3}(?:,\\s*|$))*$'
+          )
+        ]]
+      ,
       subject: ['',
         [
-          Validators.required
+          Validators.required,
+          leadingSpaceValidator,
+          trailingSpaceValidator,
+          nameMaxLength,
+          blankValidator,
+          Validators.pattern('^[a-zA-Z0-9\\s\\-._]+$'),
         ]],
-      dateTime: ['',Validators.required],
-      timeZone: ['Asia/Kolkata',Validators.required],
-      body: ['',Validators.required],
+      dateTime: ['', Validators.required],
+      timeZone: ['Asia/Kolkata', Validators.required],
+      body: ['', Validators.required],
       file: [''],
       startTime: ['']
       // name:[this.data.name]
@@ -155,11 +173,21 @@ export class EmailFormComponent implements OnInit {
   getById(id: string) {
     this.isReadOnly = true;
     this.recordSelected = true;
-  //this.emailForm.get('body')?.disable();
+    //this.emailForm.get('body')?.disable();
     this.emailService
       .searchEmailById(id)
       .subscribe((response: Email) => {
+        console.log(response);
+
+
+        this.emailForm.get('to')?.setValue(response.to);
+        this.emailForm.get('subject')?.setValue(response.subject);
+        this.emailForm.get('cc')?.setValue(response.cc[0]);
+        this.emailForm.get('body')?.setValue(response.body);
+        console.log('cc from form', this.emailForm.get('cc')?.getRawValue());
+
         this.emailForm.patchValue(response);
+
         this.email = response;
 
       });
@@ -176,3 +204,4 @@ export class EmailFormComponent implements OnInit {
   }
 
 }
+

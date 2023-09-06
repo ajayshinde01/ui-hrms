@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 import { CommonMaster } from '../../../models/common-master.model';
 
@@ -31,7 +31,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
   styleUrls: ['./address.component.scss'],
 })
-export class AddressComponent implements OnInit {
+export class AddressComponent implements OnInit, OnChanges {
   permanentAddressForm!: FormGroup;
 
   correspondenceAddressForm!: FormGroup;
@@ -47,6 +47,8 @@ export class AddressComponent implements OnInit {
   corrId: number;
 
   checked: boolean = false;
+
+  isDisabled: boolean = false;
 
   ownershipStatus: CommonMaster[] = [];
 
@@ -95,15 +97,16 @@ export class AddressComponent implements OnInit {
 
     this.route.queryParams.subscribe((params: any) => {
       this.queryParams = params;
+      this.checked = false;
 
       // this.getByIdAndAddressType(this.queryParams['id'], this.addressType);
 
       this.getAllAddressById(this.queryParams['id']);
     });
   }
-
   ngOnChanges(changes: SimpleChanges): void {
-    this.onCopyAddress();
+    console.log('on change met');
+    this.getAllAddressById(this.queryParams['id']);
   }
 
   initForm() {
@@ -117,14 +120,10 @@ export class AddressComponent implements OnInit {
 
         [
           Validators.required,
-
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.noTrailingSpace(),
-
           CustomValidators.maxLength(100),
-
           Validators.pattern('^[A-Za-z0-9.,-/#+ ]+$'),
         ],
       ],
@@ -190,13 +189,9 @@ export class AddressComponent implements OnInit {
           Validators.required,
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.noTrailingSpace(),
-
-          CustomValidators.postCodeMaxLength(6),
-
+          CustomValidators.maxLength(6),
           Validators.pattern('^[0-9]{6}$'),
         ],
       ],
@@ -263,9 +258,7 @@ export class AddressComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.maxLength(2),
-
           Validators.pattern('^[0-9]{1,2}$'),
         ],
       ],
@@ -278,9 +271,7 @@ export class AddressComponent implements OnInit {
           CustomValidators.noLeadingSpace(),
           CustomValidators.noTrailingSpace(),
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.maxLength(2),
-
           Validators.pattern('^(?:0?[0-9]|1[0-1])$'),
         ],
       ],
@@ -297,13 +288,9 @@ export class AddressComponent implements OnInit {
         [
           CustomValidators.noLeadingTrailingSpace(),
           CustomValidators.noLeadingSpace(),
-
           CustomValidators.whitespaceValidator(),
-
           CustomValidators.noTrailingSpace(),
-
-          CustomValidators.postCodeMaxLength(6),
-
+          CustomValidators.maxLength(6),
           Validators.pattern('^[0-9]{6}$'),
         ],
       ],
@@ -324,11 +311,13 @@ export class AddressComponent implements OnInit {
     this.permanentAddressForm.valueChanges.subscribe((values) => {
       // Automatically uncheck the checkbox when any field changes
       this.checked = false;
+      this.isDisabled = false;
     });
   }
 
   onCopyAddress() {
     this.checked = true;
+    this.isDisabled = !this.isDisabled;
     if (this.permanentAddressForm.valid) {
       forkJoin({
         corrStates: this.addressService.getState(
@@ -344,8 +333,10 @@ export class AddressComponent implements OnInit {
       this.correspondenceAddressForm.patchValue(
         this.permanentAddressForm.value
       );
+      // this.getAllAddressById(this.queryParams['id']);
       this.correspondenceAddressForm.value.addressType = 'correspondence';
       this.correspondenceAddressForm.value.id = this.corrId;
+      debugger;
     }
   }
 
@@ -425,8 +416,13 @@ export class AddressComponent implements OnInit {
               this.actionLabel = 'Update';
 
               this.permanentAddressForm.patchValue(response[0]);
+              this.permanentAddressForm.controls['id'].setValue(response[0].id);
+              this.corrId = response[1].id;
 
               this.correspondenceAddressForm.patchValue(response[1]);
+              this.correspondenceAddressForm.controls['id'].setValue(
+                response[1].id
+              );
 
               this.router.navigate(['/main/employee-info'], {
                 queryParams: this.queryParams,
@@ -491,7 +487,7 @@ export class AddressComponent implements OnInit {
         this.correspondenceAddressForm.patchValue(response[1]);
 
         this.corrId = response[1].id;
-
+        debugger;
         this.actionLabel = 'Update';
       },
 
@@ -512,8 +508,8 @@ export class AddressComponent implements OnInit {
 
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
-
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';
@@ -531,7 +527,8 @@ export class AddressComponent implements OnInit {
     if (control && control.errors) {
       const errorKey = Object.keys(control.errors)[0];
 
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      const value = Object.values(control.errors)[0];
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';

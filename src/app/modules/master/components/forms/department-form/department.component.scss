@@ -5,6 +5,7 @@
   position: relative; /* Or absolute or fixed depending on your layout */
   left: -15px;
 }
+
 .validate-text-description {
   font-size: 9px;
   text-align: left;
@@ -13,6 +14,7 @@
   left: -15px;
   bottom: -20px;
 }
+
 mat-label {
   font-weight: 550;
 }
@@ -81,6 +83,11 @@ mat-label {
 
 .field-one {
   margin-top: 3px;
+}
+
+.custom-placeholder::placeholder {
+  font-weight: 350;
+  color: grey;
 }
 
 .save-btn {

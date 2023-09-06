@@ -476,7 +476,7 @@ export class EmployeePersonalDetailsFormComponent {
       const errorKey = Object.keys(control.errors)[0];
 
       const value = Object.values(control.errors)[0];
-      return CustomValidators.getErrorMessage(errorKey, controlName);
+      return CustomValidators.getErrorMessage(errorKey, controlName, value);
     }
 
     return '';

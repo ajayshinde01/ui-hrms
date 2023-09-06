@@ -129,7 +129,7 @@
     <div class="form-group">
       <div class="row row-section">
         <div class="col-md-2 mt-2">
-          <mat-label>CC<span style="color: red">*</span></mat-label>
+          <mat-label>CC</mat-label>
         </div>
         <div class="col-md-8">
           <mat-form-field appearance="outline">
@@ -177,11 +177,11 @@
               *ngIf="emailForm?.errors?.['trailingSpace'] && !emailForm?.errors?.['pattern'] && emailForm?.errors?.['leadingSpace']"
               >Trailing, Leading spaces not allowed</span
             >
-            <span
+            <!-- <span
               class="validate-text"
               *ngIf="emailForm?.errors?.['emailMaxLength'] && !emailForm?.errors?.['pattern'] && !emailForm?.errors?.['leadingSpace']"
               >Email id should not exceed 40 characters</span
-            >
+            > -->
           </div>
 
 
@@ -209,12 +209,13 @@
             >
               <span
                 class="validate-text"
-                *ngIf="emailForm.controls['subject']?.errors?.['required']"
+                *ngIf="emailForm.controls['subject']?.errors?.['required'] && !emailForm.controls['subject']?.errors?.['required']"
                 >Please enter subject
               </span>
+              
               <span
                 class="validate-text"
-                *ngIf="emailForm.controls['subject'].errors?.['pattern']"
+                *ngIf="emailForm.controls['subject'].errors?.['pattern'] && !emailForm.controls['subject']?.errors?.['required']"
                 >Please enter valid subject</span
               >
 
